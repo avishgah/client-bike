@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "GFdWPab3QjrnnOSAkPNQdEuoAwhXSImpSnPiipTVZyg=",
+  "Source": "serverCsharp",
+  "BasePath": "_content/serverCsharp",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

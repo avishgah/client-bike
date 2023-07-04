@@ -1,0 +1,12 @@
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\bin\Debug\net6.0\Dal.deps.json
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\bin\Debug\net6.0\Dal.dll
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\bin\Debug\net6.0\Dal.pdb
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\obj\Debug\net6.0\Dal.csproj.AssemblyReference.cache
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\obj\Debug\net6.0\Dal.GeneratedMSBuildEditorConfig.editorconfig
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\obj\Debug\net6.0\Dal.AssemblyInfoInputs.cache
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\obj\Debug\net6.0\Dal.AssemblyInfo.cs
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\obj\Debug\net6.0\Dal.csproj.CoreCompileInputs.cache
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\obj\Debug\net6.0\Dal.dll
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\obj\Debug\net6.0\refint\Dal.dll
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\obj\Debug\net6.0\Dal.pdb
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Dal\obj\Debug\net6.0\ref\Dal.dll

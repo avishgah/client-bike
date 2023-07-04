@@ -1,0 +1,12 @@
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\bin\Debug\net6.0\Bll.deps.json
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\bin\Debug\net6.0\Bll.dll
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\bin\Debug\net6.0\Bll.pdb
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\obj\Debug\net6.0\Bll.csproj.AssemblyReference.cache
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\obj\Debug\net6.0\Bll.GeneratedMSBuildEditorConfig.editorconfig
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\obj\Debug\net6.0\Bll.AssemblyInfoInputs.cache
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\obj\Debug\net6.0\Bll.AssemblyInfo.cs
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\obj\Debug\net6.0\Bll.csproj.CoreCompileInputs.cache
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\obj\Debug\net6.0\Bll.dll
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\obj\Debug\net6.0\refint\Bll.dll
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\obj\Debug\net6.0\Bll.pdb
+U:\כיתה ו6\אבישג אהרן\פרויקט גמר רבקה ואבישג\serverCsharp\Bll\obj\Debug\net6.0\ref\Bll.dll
