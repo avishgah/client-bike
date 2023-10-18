@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-
 import Maps from './components/Maps/Maps';
 import Manager from './components/Manager/Manager';
 import About from './components/About/About';
@@ -14,6 +13,7 @@ import AddUser from './components/AddUser/AddUser';
 import Home from './components/Home/Home';
 import AddOption from './components/AddOpinion/AddOption';
 import Jj from './components/AddUser/Jj';
+import AddStation from './components/AddStation/AddStation';
 function App() {
   return (<>
 
@@ -23,7 +23,9 @@ function App() {
     <NavBar />
 
     <Routes>
+    <Route path="" element={<NavBar />}></Route>
       <Route path='home' element={<Home />} />
+      <Route path='app' element={<App />} />
       <Route path='navbar' element={<NavBar />} />
       <Route path='maps' element={<Maps />} />
       <Route path='logIn' element={<LogIn />} />
@@ -34,6 +36,7 @@ function App() {
       <Route path='addbike' element={<AddBike />} />
       <Route path='addUser' element={<AddUser />} />
       <Route path='addOption' element={<AddOption />} />
+      <Route path='addStation' element={<AddStation />} />
       <Route path='Addjj' element={<Jj />} />
     </Routes>
 

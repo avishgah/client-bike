@@ -57,28 +57,18 @@ const AddBike = () => {
         axios.post(`https://localhost:7207/api/Bike`, bike).then(res => {
 
             console.log(res.data + ";;;;;;");
-            document.getElementById("addMore").style.display="inline";
-            //איך להסתיר ןלהראות לחצנים 
-            <>
-                <h1>נוסף בהצלחה 👍</h1>
-                <Button variant="contained" id="addR" onClick={() => (nav('/addbike'))}>
-                    להוספת אפניים נוסף
-                </Button>
-                <Button variant="contained" id="addR" onClick={() => (nav('/navbar'))}>
-                    סיום
-                </Button>
-            </>
+            document.getElementById("addMore").style.display = "inline";
+            document.getElementById("end").style.display = "inline";
 
             if (res.data == null) {
                 alert("error")
                 setDisabled(false);
-                if (isDisabled) alert("enter")
                 return null;
             }
-        })
+        }).catch(console.log("err"))
     }
 
-    return (
+    return (<>
 
         <form id="formLoginR" onSubmit={handleSubmit(submit)}>
 
@@ -100,8 +90,11 @@ const AddBike = () => {
 
             </Box>
             {/* endIcon={<SendIcon />}  */}
-            <Button type="button" onClick={handleSubmits} id="addMore">
-                Submit
+            <Button type="button" id="addMore" onClick={() => (nav('/addbike'))}>
+                הוסף עוד אפנים
+            </Button>
+            <Button type="button" id="end" onClick={() => (nav('/'))}>
+                סיום
             </Button>
             <Stack direction="row" spacing={2}>
 
@@ -111,7 +104,7 @@ const AddBike = () => {
 
             </Stack>
         </form>
-    )
+    </>)
 
 }
 

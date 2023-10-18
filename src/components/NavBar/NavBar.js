@@ -23,6 +23,11 @@ const NavBar = () => {
                         <Link to="addOption"> הוספת חוות דעת </Link>
                     </li>
                 </ul>
+                <ul>
+                    <li>
+                        <Link to="addStation">הופסת תחנה </Link>
+                    </li>
+                </ul>
 
             </div>
         }</>)
