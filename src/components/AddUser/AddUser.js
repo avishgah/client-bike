@@ -31,6 +31,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { useNavigate } from 'react-router-dom';
 
 import './AddUser.scss';
+import axios from 'axios';
 
 
 // ,, כתובת, , , עיר, , , תאריך לידה, תצלום תעודת זהות, סוג לקוח(לקוח, מנהל), לא פעיל, אישור קריאת תקנון
@@ -64,37 +65,51 @@ const AddUser = () => {
         console.log(details);
         console.log(value.$D+"/"+value.$M+"/"+value.$y)
 
-        const user = {
-            name: details.Name,
-            phon: details.Phon,
-            password: details.password,
-            email: details.email
-        }
-        // axios.post(`http://localhost:8080/User/addUser`, user).then(res => {
+        // const user = {
+        //     name: details.name,
+        //     Phon: details.Phon,
+        //     Password: details.password,
+        //     Mail: details.email,
+      
+        // }\\
+        const user=  {"name": "אבישג               ",
+        "address": "ברק",
+        "mail": "avi@gmail.com",
+        "password": "d3d3d3    ",
+        "toun": "ראשון לציון",
+        "phon": "0987654321",
+        "tz": "432432432",
+        "dateBirth": "2003-11-21T00:00:00",
+        "pic": "טעטע                                              ",
+        "isManager": false,
+        "status": true,
+        "readTerms": true
+    }
+        axios.post(`https://localhost:7207/api/user`, user).then(res => {
 
-        //  console.log(res.data+";;;;;;");
+         console.log(res.data+";;;;;;");
 
-        // if (res.data == null) {
-        //         alert("error")
-        //         return null;
+        if (res.data == null) {
+                alert("error")
+                return null;
 
-        //     }
+            }
 
 
-        //     else {
-        //         //לשגר לסטייט הכללי
-        //         // console.log( res.data.user)
+            else {
+                //לשגר לסטייט הכללי
+                // console.log( res.data.user)
 
-        //         dispatch({
-        //             type: type.CURRENT_USER,
-        //             payload: res.data
-        //         })
+                // dispatch({
+                //     type: type.CURRENT_USER,
+                //     payload: res.data
+                // })
 
-        //         // nav("/ToDo")
-        //         nav("/ToDo")
+                // nav("/ToDo")
+                nav("/ToDo")
 
-        //     } 
-        // })
+            } 
+        })
 
 
 
@@ -117,14 +132,14 @@ const AddUser = () => {
                     <TextField
                         helperText="Please enter your name"
                         id="demo-helper-text-aligned"
-                        label="Name"
-                        {...register("Name", {})}
+                        label="name"
+                        {...register("name", {})}
                     />
                     <TextField
                         helperText="Please enter your phon"
                         id="demo-helper-text-aligned"
                         label="Phon"
-                        {...register("Phon", {})}
+                        {...register("phon", {})}
                     />
                     <br></br>
                     <TextField id="outlined-basic" label="mail" variant="outlined"  {...register("email", { required: true, pattern: /^[0-9A-Za-z]{1,}@gmail.com$/ })} />

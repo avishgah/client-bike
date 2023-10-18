@@ -24,13 +24,14 @@ function App() {
 
     <Routes>
       <Route path='home' element={<Home />} />
+      <Route path='navbar' element={<NavBar />} />
       <Route path='maps' element={<Maps />} />
       <Route path='logIn' element={<LogIn />} />
       <Route path='manager' element={<Manager />} />
       <Route path='about' element={<About />} />
       <Route path='rejister' element={<Rejister />} />
       <Route path='contect' element={<Contect/>} />
-      <Route path='bike' element={<AddBike />} />
+      <Route path='addbike' element={<AddBike />} />
       <Route path='addUser' element={<AddUser />} />
       <Route path='addOption' element={<AddOption />} />
       <Route path='Addjj' element={<Jj />} />

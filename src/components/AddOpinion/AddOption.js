@@ -53,19 +53,48 @@ const AddOption = () => {
 
     const nav = useNavigate();
 
-
+//חסר תאריך
     const submit = (details) => {
         // login=(details);
         console.log(details + "jjj")
         const task = {
-            // id:0,
-            desk: details.task,
-            date: new Date().toLocaleDateString(),
-            ranks: details.level,
-            did: false,
-            userId: ""
-        
+            "id": 8,
+            "idCust": 3,
+            "idStation": 2,
+            "caption": ",,                                                                                                  ",
+            "satisfactionLeve": 2,
+            "idNavigation": null,
+            "idStationNavigation": null
+
+
+            // "id": 0,
+            // desk: details.task,
+            // date: new Date(),
+            // ranks: details.level,
+            // did: false,
+            // userId: ""
         }
+
+        axios.post(`https://localhost:7207/api/Opinion`, task).then(res => {
+
+            console.log(res.data + ";;;;;;");
+            <>
+                <h1>נוסף בהצלחה 👍</h1>
+                <Button variant="contained" id="addR" onClick={() => (nav('/addbike'))}>
+                    להוספת אפניים נוסף
+                </Button>
+                <Button variant="contained" id="addR" onClick={() => (nav('/navbar'))}>
+                    סיום
+                </Button>
+            </>
+
+            if (res.data == null) {
+                alert("error")
+                return null;
+
+            }
+        })
+
         alert(task.desk)
         console.log(task + "task");
 
@@ -139,7 +168,7 @@ const AddOption = () => {
                 <Button variant="contained" endIcon={<SendIcon />} id="add" type="submit">
                     הוסף
                 </Button>
-                
+
             </Stack>
         </form>
 
