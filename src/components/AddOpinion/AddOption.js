@@ -56,38 +56,45 @@ const AddOption = () => {
 //חסר תאריך
     const submit = (details) => {
         // login=(details);
+        console.log(value)
         console.log(details + "jjj")
+
+       
+
+
         const task = {
-            "id": 8,
+            "id": 0,
             "idCust": 3,
             "idStation": 2,
-            "caption": ",,                                                                                                  ",
-            "satisfactionLeve": 2,
-            "idNavigation": null,
-            "idStationNavigation": null
-
-
-            // "id": 0,
-            // desk: details.task,
-            // date: new Date(),
-            // ranks: details.level,
-            // did: false,
-            // userId: ""
+            "caption": details.task,                                                                                                 
+            "satisfactionLeve": value,
+            "idNavigation": {
+                "id": 0,
+                "name": "string",
+                "address": "string",
+                "mail": "string",
+                "password": "string",
+                "toun": "string",
+                "phon": "string",
+                "tz": "string",
+                "dateBirth": "2023-10-26T22:25:44.931Z",
+                "pic": "string",
+                "isManager": true,
+                "status": true,
+                "readTerms": true
+              },
+              "idStationNavigation": {
+                "id": 0,
+                "location": "string",
+                "name": "string",
+                "status": true
+              }
         }
 
         axios.post(`https://localhost:7207/api/Opinion`, task).then(res => {
 
             console.log(res.data + ";;;;;;");
-            <>
-                <h1>נוסף בהצלחה 👍</h1>
-                <Button variant="contained" id="addR" onClick={() => (nav('/addbike'))}>
-                    להוספת אפניים נוסף
-                </Button>
-                <Button variant="contained" id="addR" onClick={() => (nav('/navbar'))}>
-                    סיום
-                </Button>
-            </>
-
+          
             if (res.data == null) {
                 alert("error")
                 return null;
@@ -95,11 +102,7 @@ const AddOption = () => {
             }
         })
 
-        alert(task.desk)
         console.log(task + "task");
-
-
-
     }
 
     return (
