@@ -1,3 +1,17 @@
 #addMore,#end{
 display: none;
 }
+.nav{
+    background-color: white !important;
+}
+.css-1e4e1qc-MuiButtonBase-root-MuiButton-root:hover{
+    border-style: black solid  !important;
+    
+}
+.private-area {
+    background-color: rgb(78, 26, 175) !important;
+    padding: 6px !important;
+    border-radius:50px !important;
+    color: white !important;
+    width: 104px !important;
+}

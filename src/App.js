@@ -14,16 +14,13 @@ import Home from './components/Home/Home';
 import AddOption from './components/AddOpinion/AddOption';
 import Jj from './components/AddUser/Jj';
 import AddStation from './components/AddStation/AddStation';
+import ResponsiveAppBar from './Ex';
 function App() {
   return (<>
 
-  <button class="ui circular google plus icon button">
-    <i class="google plus icon"></i>
-  </button>
-    <NavBar />
-
+    <ResponsiveAppBar />
     <Routes>
-    <Route path="" element={<NavBar />}></Route>
+      <Route path="" element={<Home />}></Route>
       <Route path='home' element={<Home />} />
       <Route path='app' element={<App />} />
       <Route path='navbar' element={<NavBar />} />
@@ -32,7 +29,7 @@ function App() {
       <Route path='manager' element={<Manager />} />
       <Route path='about' element={<About />} />
       <Route path='rejister' element={<Rejister />} />
-      <Route path='contect' element={<Contect/>} />
+      <Route path='contect' element={<Contect />} />
       <Route path='addbike' element={<AddBike />} />
       <Route path='addUser' element={<AddUser />} />
       <Route path='addOption' element={<AddOption />} />
