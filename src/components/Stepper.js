@@ -10,34 +10,22 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { Maximize } from '@mui/icons-material';
-
+import './AddBike/AddBike.css';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
   {
-    label: 'a',
-      
+    label: '! שימו לב, עמדות ההשכרה הפזורות בעיר אינן פעילות עוד, השימוש באופניים באמצעות אפליקציית מטרופאן החדשה					'
   },
   {
-    label: 'b',
-  
+    label: ' חדש בפדאל! טעינת ארנק עם בונוסים'
   },
   {
-    label: 'c',
-  
+    label: '! עידכנו מחירים לכל המנויים! תעריפים מוזלים למחזיקי כרטיס "דיגי-תל"		'
   },
   {
-    label: 'd',
- 
-  },
-  {
-    label: 'e',
-
-  },
-  {
-    label: 'f',
- 
-  },
+    label: ':) פדאל חוסכים לכם ** , אצלינו ניתן להזמין אפניים מראש ותוכלו לבוא ולקחת '
+  }
 ];
 
 function SwipeableTextMobileStepper() {
@@ -58,8 +46,9 @@ function SwipeableTextMobileStepper() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-     
+
+  
+<div className="divBox">
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
@@ -68,24 +57,52 @@ function SwipeableTextMobileStepper() {
       >
         {images.map((step, index) => (
           <div key={step.label}>
+            {console.log(Math.abs(activeStep - index))}
+
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
                 component="div"
                 sx={{
-                  height: 4,
+                  height: 7,
+                  display: 'none',
+                  width: '200px',
+                  overflow: 'hidden',
+                  backgroundColor: 'red',
+                }}
+
+              />
+            ) : null}<br></br>{step.label}
+          </div>
+        ))}
+      </AutoPlaySwipeableViews>
+      {/* <AutoPlaySwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={activeStep}
+        onChangeIndex={handleStepChange}
+        enableMouseEvents
+      >
+        {images.map((step, index) => (
+          <div key={step.label}>
+            {console.log(Math.abs(activeStep - index) + "looo")}
+
+            {Math.abs(activeStep - index) <= 2 ? (
+              <Box
+                component="div"
+                sx={{
+                  height: 7,
+                  width: '200px',
                   display: 'block',
                   overflow: 'hidden',
-                  width: '100%',
-                  backgroundColor:'blue'
+                  backgroundColor: 'blue'
                 }}
-                
+
               />
             ) : null}{step.label}
           </div>
         ))}
-      </AutoPlaySwipeableViews>
+      </AutoPlaySwipeableViews> */}
+</div>
 
-    </Box>
   );
 }
 

@@ -1,17 +1,33 @@
-#addMore,#end{
-display: none;
+#addMore,
+#end {
+    display: none;
 }
-.nav{
+
+.nav {
     background-color: white !important;
 }
-.css-1e4e1qc-MuiButtonBase-root-MuiButton-root:hover{
-    border-style: black solid  !important;
-    
+
+.css-1e4e1qc-MuiButtonBase-root-MuiButton-root:hover {
+    border-style: black solid !important;
+
 }
+
 .private-area {
     background-color: rgb(78, 26, 175) !important;
     padding: 6px !important;
-    border-radius:50px !important;
+    border-radius: 50px !important;
     color: white !important;
     width: 104px !important;
+}
+
+.divBox {
+    width: 100%;
+    flex: 0;
+    display: flex;
+    flex-wrap: wrap;
+    height: 70px;
+    background-color: #0f39ad;
+    color:white;
+    direction: rtl;
+    text-align: right;
 }
