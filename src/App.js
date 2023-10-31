@@ -17,10 +17,12 @@ import AddStation from './components/AddStation/AddStation';
 import ResponsiveAppBar from './Ex';
 import How from './components/how-work/How';
 import Pay from './components/payds/Pay';
+import Out from './components/Maps/out';
 function App() {
   return (<>
-
-    <ResponsiveAppBar />
+    {/* <Maps /> */}
+    <Out/>
+    {/* <ResponsiveAppBar />
     <Routes>
       <Route path="" element={<Home />}></Route>
       <Route path='home' element={<Home />} />
@@ -40,7 +42,7 @@ function App() {
       <Route path='How' element={<How />} />
       <Route path='Pay' element={<Pay />} />
 
-    </Routes>
+    </Routes> */}
 
 
 

@@ -7,11 +7,11 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
+// import SwipeableViews from 'react-swipeable-views';
+// import { autoPlay } from 'react-swipeable-views-utils';
 import { Maximize } from '@mui/icons-material';
 import './AddBike/AddBike.css';
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+// const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
   {
@@ -46,10 +46,8 @@ function SwipeableTextMobileStepper() {
   };
 
   return (
-
-  
-<div className="divBox">
-      <AutoPlaySwipeableViews
+    <div className="divBox">
+      {/*  <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
@@ -74,7 +72,7 @@ function SwipeableTextMobileStepper() {
             ) : null}<br></br>{step.label}
           </div>
         ))}
-      </AutoPlaySwipeableViews>
+              </AutoPlaySwipeableViews>*/}
       {/* <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
@@ -101,7 +99,7 @@ function SwipeableTextMobileStepper() {
           </div>
         ))}
       </AutoPlaySwipeableViews> */}
-</div>
+    </div>
 
   );
 }

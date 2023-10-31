@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import Home from './components/Home/Home';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Stepper from './components/Stepper';
-// import {logo} from '../public/Images/1.jpg';
+// import logo from './Images/1.jpg';
 import './components/AddBike/AddBike.css';
 import PersonIcon from '@mui/icons-material/Person';
 import { Icon } from '@mui/material';
@@ -43,7 +43,7 @@ function ResponsiveAppBar() {
     };
 
     return (<>
-{/* 
+
         <Box
             component="img"
             sx={{
@@ -53,9 +53,10 @@ function ResponsiveAppBar() {
                 overflow: 'hidden',
                 width: '100%',
             }}
-            src={logo}
-        /> */}
-    
+            // src={logo}
+            src="./Images/1.jpg"
+        />
+
 
         <AppBar position="static" className='nav'>
 
@@ -65,7 +66,7 @@ function ResponsiveAppBar() {
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
-                            <Button onClick={handleOpenUserMenu} startIcon={<PersonIcon />}  className='private-area' sx={{ p: 0 }}>איזור אישי</Button>
+                            <Button onClick={handleOpenUserMenu} startIcon={<PersonIcon />} className='private-area' sx={{ p: 0 }}>איזור אישי</Button>
                         </Tooltip>
                         <Menu
                             sx={{ mt: '45px' }}
@@ -95,7 +96,7 @@ function ResponsiveAppBar() {
 
                     <Box sx={{ flexGrow: 40, display: { xs: 'flex' } }}>
                         <Menu
-                        className='buttonNav' 
+                            className='buttonNav'
                             id="menu-appbar"
                             anchorEl={anchorElNav}
                             anchorOrigin={{
@@ -154,7 +155,7 @@ function ResponsiveAppBar() {
                             </Button>
                         ))}
                     </Box>
-                  
+
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h6"
@@ -179,7 +180,7 @@ function ResponsiveAppBar() {
         </AppBar>
 
 
-        <Stepper/>
+        <Stepper />
     </>);
 }
 export default ResponsiveAppBar;
