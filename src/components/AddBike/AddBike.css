@@ -8,8 +8,9 @@
 }
 
 .css-1e4e1qc-MuiButtonBase-root-MuiButton-root:hover {
-    border-style: black solid !important;
-
+    border-radius: 0% !important;
+    border-bottom: 2px solid blue !important;
+    background-color: white !important;
 }
 
 .private-area {
@@ -27,7 +28,7 @@
     flex-wrap: wrap;
     height: 70px;
     background-color: #0f39ad;
-    color:white;
+    color: white;
     direction: rtl;
     text-align: right;
 }

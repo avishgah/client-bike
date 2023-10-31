@@ -15,6 +15,8 @@ import AddOption from './components/AddOpinion/AddOption';
 import Jj from './components/AddUser/Jj';
 import AddStation from './components/AddStation/AddStation';
 import ResponsiveAppBar from './Ex';
+import How from './components/how-work/How';
+import Pay from './components/payds/Pay';
 function App() {
   return (<>
 
@@ -35,6 +37,9 @@ function App() {
       <Route path='addOption' element={<AddOption />} />
       <Route path='addStation' element={<AddStation />} />
       <Route path='Addjj' element={<Jj />} />
+      <Route path='How' element={<How />} />
+      <Route path='Pay' element={<Pay />} />
+
     </Routes>
 
 
