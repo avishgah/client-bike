@@ -35,6 +35,7 @@ function ResponsiveAppBar() {
     };
 
     const handleCloseNavMenu = () => {
+        alert("jj")
         setAnchorElNav(null);
     };
 
@@ -44,18 +45,6 @@ function ResponsiveAppBar() {
 
     return (<>
 
-        <Box
-            component="img"
-            sx={{
-                height: 255,
-                display: 'block',
-                maxWidth: 400,
-                overflow: 'hidden',
-                width: '100%',
-            }}
-            // src={logo}
-            src="./Images/1.jpg"
-        />
 
 
         <AppBar position="static" className='nav'>
@@ -172,7 +161,19 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        PEDAL
+
+                        <Box
+                            component="img"
+                            sx={{
+                                height: 45,
+                                display: 'block',
+                                maxWidth: 100,
+                                overflow: 'hidden',
+                                width: '80px',
+                            }}
+                            // src={logo}
+                            src="./Images/1.jpg"
+                        />
                     </Typography>
 
                 </Toolbar>

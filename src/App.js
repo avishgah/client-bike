@@ -20,9 +20,9 @@ import Pay from './components/payds/Pay';
 import Out from './components/Maps/out';
 function App() {
   return (<>
-    {/* <Maps /> */}
-    <Out/>
-    {/* <ResponsiveAppBar />
+    <Maps />
+    {/* <Out/> */}
+    <ResponsiveAppBar />
     <Routes>
       <Route path="" element={<Home />}></Route>
       <Route path='home' element={<Home />} />
@@ -42,7 +42,7 @@ function App() {
       <Route path='How' element={<How />} />
       <Route path='Pay' element={<Pay />} />
 
-    </Routes> */}
+    </Routes>
 
 
 

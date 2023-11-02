@@ -1,30 +1,34 @@
 import React from 'react'
-import { GoogleMap, useJsApiLoader,Marker } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '400px',
-  height: '600px'
+  width: '100%',
+  height: '440px',
+  border: "solid",
+  filter: "grayscale(0%) !important"
 };
 
 const center = {
   lat: 31.77,
   lng: 35.168
 };
-const markers=[{PointName:"bbbbb", lat:31.8, lng:35.10},{PointName:"ccc", lat:31.2, lng:35.7}];
+const markers = [{ PointName: "bbbbb", lat: 31.8, lng: 35.10 }, { PointName: "ccc", lat: 31.2, lng: 35.7 }];
 
 const AnyReactComponent = ({ text, lat, lng, deletePoint }) => {
   return (
-    <Marker position={{lat:lat ? lat : 31.772561767303255,
-      lng:lng ? lng : 35.16862111683302}} 
+    <Marker position={{
+      lat: lat ? lat : 31.772561767303255,
+      lng: lng ? lng : 35.16862111683302
+    }}
       title={text}
       label={text}
       className='marker-data' type="button"
-      
-      style={{ border: "none" }} />
-      /* <img src={'marker.png'} alt="marker" onClick={() => deletePoint()} /> */
-      // {text}
+
+      style={{ border: "none", }} />
+    /* <img src={'marker.png'} alt="marker" onClick={() => deletePoint()} /> */
+    // {text}
     // </div>
-    )
+  )
 }
 
 function MyComponent() {
@@ -52,9 +56,9 @@ function MyComponent() {
       mapContainerStyle={containerStyle}
       center={center}
       zoom={10}
-      onClick={(e)=>console.log(e.latLng.lat(),e.latLng.lng())}
-      // onLoad={onLoad}
-      // onUnmount={onUnmount}
+      onClick={(e) => console.log(e.latLng.lat(), e.latLng.lng())}
+    // onLoad={onLoad}
+    // onUnmount={onUnmount}
     >
       {
         markers.map(marker => <AnyReactComponent key={marker.Id ? marker.Id : 0} text={marker.PointName}
@@ -64,7 +68,8 @@ function MyComponent() {
       { /* Child components, such as markers, info windows, etc. */}
       <></>
     </GoogleMap>
-  ) : <></>
+  ) : <>
+  </>
 }
 
 export default React.memo(MyComponent)
