@@ -20,7 +20,6 @@ import Pay from './components/payds/Pay';
 import Out from './components/Maps/out';
 function App() {
   return (<>
-    <Maps />
     {/* <Out/> */}
     <ResponsiveAppBar />
     <Routes>

@@ -19,6 +19,7 @@ import Stepper from './components/Stepper';
 import './components/AddBike/AddBike.css';
 import PersonIcon from '@mui/icons-material/Person';
 import { Icon } from '@mui/material';
+import Maps from './components/Maps/Maps';
 
 const pages = ['יצירת קשר', 'שאלות ותשובות', 'סוגי מינויים', 'מפת תחנות', 'בית'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -169,7 +170,7 @@ function ResponsiveAppBar() {
                                 display: 'block',
                                 maxWidth: 100,
                                 overflow: 'hidden',
-                                width: '80px',
+                                width: '100px',
                             }}
                             // src={logo}
                             src="./Images/1.jpg"
@@ -182,6 +183,8 @@ function ResponsiveAppBar() {
 
 
         <Stepper />
+
+
     </>);
 }
 export default ResponsiveAppBar;

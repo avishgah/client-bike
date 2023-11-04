@@ -10,6 +10,7 @@ import PedalBikeIcon from '@mui/icons-material/PedalBike';
 import How from '../how-work/How';
 import { useNavigate } from 'react-router';
 import Table from '../Tables.js';
+import Maps from '../Maps/Maps';
 
 const Home = () => {
     const nav = useNavigate();
@@ -91,6 +92,7 @@ const Home = () => {
                 </Typography>
             </CardContent>
         </div>
+        <Maps/>
     </>)
 }
 export default Home;
