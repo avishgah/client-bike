@@ -183,6 +183,7 @@ function ResponsiveAppBar() {
 
 
         <Stepper />
+<Home/>
 
 
     </>);

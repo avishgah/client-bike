@@ -95,19 +95,20 @@ const AddStation = () => {
                 return null;
             }
         }).catch(console.log("err"))
-
+        //איך לרענן את הסקיואל
         //get the last station
         axios.get('https://localhost:7207/api/Station').then(res => {
             console.log(res.data.length);
-           
 
+            var d = res.data.length + 1;
             // add bikes num details
             for (var i = 0; i < details.bike; i++) {
+                console.log(d)
                 const bike = {
                     "id": 0,
                     "code": "hh",
                     "battery": 0,
-                    "idStation": res.data.length + 1,
+                    "idStation": d,
                     "dateStart": new Date()
                 }
                 console.log(details);
