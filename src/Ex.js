@@ -20,11 +20,14 @@ import './components/AddBike/AddBike.css';
 import PersonIcon from '@mui/icons-material/Person';
 import { Icon } from '@mui/material';
 import Maps from './components/Maps/Maps';
+import { useNavigate } from 'react-router';
 
 const pages = ['יצירת קשר', 'שאלות ותשובות', 'סוגי מינויים', 'מפת תחנות', 'בית'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
+    const nav = useNavigate();
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -35,8 +38,12 @@ function ResponsiveAppBar() {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
-        alert("jj")
+    const handleCloseNavMenu = (page) => {
+        console.log(page.target.innerText)
+        if (page.target.innerText == 'בית')
+            nav('/Home')
+        if (page.target.innerText == 'מפת תחנות')
+            nav('/Maps')
         setAnchorElNav(null);
     };
 
@@ -105,7 +112,7 @@ function ResponsiveAppBar() {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page} onClick={() => (handleCloseNavMenu({ page }))}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -180,11 +187,23 @@ function ResponsiveAppBar() {
                 </Toolbar>
             </Container>
         </AppBar>
-
+        <br></br><br></br><br></br>
+        {/* <br></br><br></br><br></br>
+        <br></br><br></br><br></br> */}
+        {/* <Box
+            component="img"
+            sx={{
+                height: 400,
+                display: 'block',
+                maxWidth: 1500,
+                overflow: 'hidden',
+                width: '100%',
+            }}
+            // src={logo}
+            src="./Images/כ.jpg"
+        /> */}
 
         <Stepper />
-<Home/>
-
 
     </>);
 }

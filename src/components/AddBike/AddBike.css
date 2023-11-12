@@ -5,6 +5,11 @@
 
 .nav {
     background-color: white !important;
+    position: fixed;
+}
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+    position: fixed !important;
 }
 
 .css-1e4e1qc-MuiButtonBase-root-MuiButton-root:hover {

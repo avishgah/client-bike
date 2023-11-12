@@ -87,6 +87,8 @@ function MyComponent() {
   };
 
   return isLoaded ? (<>
+    <br></br><br></br>
+
     <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
       {({ TransitionProps }) => (
         <Fade {...TransitionProps} timeout={350}>

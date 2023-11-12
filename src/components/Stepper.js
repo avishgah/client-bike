@@ -7,11 +7,11 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-// import SwipeableViews from 'react-swipeable-views';
-// import { autoPlay } from 'react-swipeable-views-utils';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
 import { Maximize } from '@mui/icons-material';
 import './AddBike/AddBike.css';
-// const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
   {
@@ -47,7 +47,7 @@ function SwipeableTextMobileStepper() {
 
   return (
     <div className="divBox">
-      {/*  <AutoPlaySwipeableViews
+       {/* <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
@@ -72,33 +72,8 @@ function SwipeableTextMobileStepper() {
             ) : null}<br></br>{step.label}
           </div>
         ))}
-              </AutoPlaySwipeableViews>*/}
-      {/* <AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {images.map((step, index) => (
-          <div key={step.label}>
-            {console.log(Math.abs(activeStep - index) + "looo")}
-
-            {Math.abs(activeStep - index) <= 2 ? (
-              <Box
-                component="div"
-                sx={{
-                  height: 7,
-                  width: '200px',
-                  display: 'block',
-                  overflow: 'hidden',
-                  backgroundColor: 'blue'
-                }}
-
-              />
-            ) : null}{step.label}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews> */}
+              </AutoPlaySwipeableViews>
+      */}
     </div>
 
   );

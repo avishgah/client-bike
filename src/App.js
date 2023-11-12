@@ -26,7 +26,7 @@ function App() {
     {/* <Maps /> */}
     
     <Routes>
-      {/* <Route path="" element={<Home />}></Route> */}
+      <Route path="" element={<Home />}></Route>
       <Route path='home' element={<Home />} />
       <Route path='app' element={<App />} />
       <Route path='navbar' element={<NavBar />} />
@@ -42,7 +42,9 @@ function App() {
       <Route path='addStation' element={<AddStation />} />
       <Route path='Addjj' element={<Jj />} />
       <Route path='How' element={<How />} />
+      <Route path='Home/How' element={<How />} />
       <Route path='Pay' element={<Pay />} />
+      <Route path='Home/Pay' element={<Pay />} />
 
     </Routes>
 

@@ -16,7 +16,7 @@ const Home = () => {
     const nav = useNavigate();
     return (<>
         {/* img */}
-        <h1>כדאי לדעת</h1>
+        <h1 id="l">כדאי לדעת</h1>
 
         <div className='ss' onClick={() => nav('./How')}  >
             {/* {<PedalBikeIcon fontSize='large' />} */}
@@ -92,7 +92,7 @@ const Home = () => {
                 </Typography>
             </CardContent>
         </div>
-        <Maps/>
+        <Maps id="k"/>
     </>)
 }
 export default Home;
