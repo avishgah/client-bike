@@ -19,9 +19,7 @@ const center = {
   lat: 31.77,
   lng: 35.168
 };
-const mapers =
-  [{ PointName: "bbbbb", lat: 31.8, lng: 35.10 },
-  { PointName: "ccc", lat: 31.2, lng: 35.7 }];
+
 
 const AnyReactComponent = ({ text, lat, lng, deletePoint }) => {
   return (
@@ -41,55 +39,31 @@ const AnyReactComponent = ({ text, lat, lng, deletePoint }) => {
 }
 
 function MyComponent() {
-  // const [mark, setMark] = React.useState([]);
-  // useEffect(() => {
-  //   // Update the document title using the browser API
-  //   markers =
-  //     axios.get('https://localhost:7207/api/Station').then(res => {
-  //       console.log("lldl")
-  //     })
-  // });
-  // setMark(markers);
+
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyDd2yrRfnh88OiKs8yCiH-8uK5aASNgve8"
   })
 
-  const [map, setMap] = React.useState(null)
-  const getAllMarkers = () => {
-    mapers =
-      axios.get('https://localhost:7207/api/Station').then(res => {
-        console.log("lldl")
-      })
-  }
-  const onLoad = React.useCallback(function callback(map) {
-
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
-    setMap(map)
-  }, [])
-
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
+  const [mapers, setMapers] = React.useState([])
+  useEffect(() => {
+   axios.get('https://localhost:7207/api/Station')
+    .then(res => {
+      console.log(res)
+      setMapers(res.data)
+    }).catch(err => console.log(err))
   }, [])
 
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
-  const [placement, setPlacement] = React.useState();
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  // const [open, setOpen] = React.useState(false);
+  // const [placement, setPlacement] = React.useState();
 
-  const handleClick = (newPlacement) => (event) => {
-    setAnchorEl(event.currentTarget);
-    setOpen((prev) => placement !== newPlacement || !prev);
-    setPlacement(newPlacement);
-  };
 
   return isLoaded ? (<>
     <br></br><br></br>
 
-    <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
+    {/* <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
       {({ TransitionProps }) => (
         <Fade {...TransitionProps} timeout={350}>
           <Paper>
@@ -97,7 +71,7 @@ function MyComponent() {
           </Paper>
         </Fade>
       )}
-    </Popper>
+    </Popper> */}
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
@@ -107,11 +81,17 @@ function MyComponent() {
     // onUnmount={onUnmount}
     >
 
+
       {
-        mapers.map((marker) => <AnyReactComponent key={marker.Id ? marker.Id : 0} text={marker.PointName}
+        mapers.map((marker) =><AnyReactComponent key={marker.Id ? marker.Id : 0} text={marker.PointName}
           // deletePoint={() => deleteMarker(marker)}
-          title={marker.PointName} lat={marker.lat} lng={marker.lng} />)
+          title={marker.PointName} lat={marker.lat} lng={marker.lng} />,
+          console.log("l")
+          
+          )
       }
+    <select>{mapers.map(x=><option>{x.PointName}</option>)}</select>
+
       { /* Child components, such as markers, info windows, etc. */}
       <></>
     </GoogleMap>
