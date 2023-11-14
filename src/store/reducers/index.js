@@ -3,13 +3,12 @@ import * as type from "../actions/actionType";
 const initialState = {
     // currentUser: null,
     user: null,
-    tasks: [],
     Flag: false,
     // users:[]
 
 }
 
-const Reducer = (state = initialState, action) => {
+const UserReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case type.CURRENT_USER:
@@ -82,4 +81,4 @@ const Reducer = (state = initialState, action) => {
 }
 
 
-export default Reducer;
+export default UserReducer;

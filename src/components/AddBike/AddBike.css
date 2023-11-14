@@ -45,3 +45,7 @@
 .css-1x51dt5-MuiInputBase-input-MuiInput-input {
     text-align: right !important;
 }
+
+#alert{
+    visibility: hidden;
+}

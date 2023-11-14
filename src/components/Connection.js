@@ -11,12 +11,15 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 import { Stack } from '@mui/material';
+import Link from '@mui/material/Link';
+
 
 // count
 import ButtonGroup from '@mui/material/ButtonGroup';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
+import Alert from '@mui/material/Alert';
 
 
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import * as type from "../store/actions/actionType";
 
 
 import Button from '@mui/material/Button';
@@ -61,6 +65,10 @@ import CardContent from '@mui/material/CardContent';
 
 
 const Connection = () => {
+
+
+    let currentUser = useSelector(state => state.ur.user);
+    let dispatch = useDispatch();
 
     // count
     const [count, setCount] = React.useState(1);
@@ -97,6 +105,8 @@ const Connection = () => {
     // step
     const [activeStep, setActiveStep] = React.useState(0);
 
+    // const [currentUser, setCurrentUser] = React.useState([]);
+
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -121,12 +131,23 @@ const Connection = () => {
 
 
     const submit = (details) => {
+        let flag = 0;
         console.log("hi")
         for (var i = 0; i < users.length; i++) {
             if (users[i].mail == details.email) {
                 console.log("hellow")
-                
+                flag = 1;
+                alert(users[i].name);
+                dispatch({
+                    type: type.CURRENT_USER,
+                    payload: users[i]
+                })
+                // setCurrentUser(users[i])
+
             }
+        }
+        if (flag == 0) {
+            document.getElementById('alert').style.visibility = "visible";
         }
     }
 
@@ -157,43 +178,11 @@ const Connection = () => {
                     <br></br><br></br>
 
 
+                    <Alert id="alert" severity="error">משתמש לא נמצא</Alert>
 
-                    {/* password */}
-
-
-                    {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" fullWidth id="fullWidth" >
-                        <InputLabel htmlFor="outlined-adornment-password">סיסמא</InputLabel>
-                        <OutlinedInput
-
-                            fullWidth
-                            id="fullWidth"
-                            type={showPassword ? 'text' : 'password'}
-                            {...register("password", {
-                                required: "Password is required.",
-                                minLength: {
-                                    value: 6,
-                                    message: "Password should be at-least 6 characters."
-                                }
-                            })}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label="סיסמא"
-                        />
-                        {errors.password && <p className="errorMsg">{errors.password.message}</p>} 
-                    </FormControl>*/}
-                    {/* save */}
 
                 </CardContent>
+
                 <CardActions>
                     <Stack direction="row" spacing={2}>
 
@@ -201,7 +190,9 @@ const Connection = () => {
                         <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">
                             התחבר
                         </Button>
-
+                        <Link href='stepper' underline="hover">
+                            {'להרשמה - לחץ כאן'}
+                        </Link>
                     </Stack>
                 </CardActions>
             </Card>

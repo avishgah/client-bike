@@ -21,8 +21,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import { Icon } from '@mui/material';
 import Maps from './components/Maps/Maps';
 
+import * as type from "../src/store/actions/actionType";
+
 import Connection from './components/Connection';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const pages = ['יצירת קשר', 'שאלות ותשובות', 'סוגי מינויים', 'מפת תחנות', 'בית'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -32,6 +35,7 @@ function ResponsiveAppBar() {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const currentUser = useSelector(state => state.ur.user);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -190,6 +194,7 @@ function ResponsiveAppBar() {
             </Container>
         </AppBar>
         <br></br><br></br><br></br>
+        {console.log(currentUser)}
         {/* <br></br><br></br><br></br>
         <br></br><br></br><br></br> */}
         {/* <Box
