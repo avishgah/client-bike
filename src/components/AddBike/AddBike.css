@@ -37,3 +37,11 @@
     direction: rtl;
     text-align: right;
 }
+
+#standard-basic{
+    text-align: right;
+    label: right !important;
+}
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+    text-align: right !important;
+}

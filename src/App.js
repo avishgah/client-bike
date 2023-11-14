@@ -18,6 +18,7 @@ import ResponsiveAppBar from './Ex';
 import How from './components/how-work/How';
 import Pay from './components/payds/Pay';
 import Out from './components/Maps/out';
+import Connection from './components/Connection';
 function App() {
   return (<>
     {/* <Out/> */}
@@ -40,6 +41,7 @@ function App() {
       <Route path='addUser' element={<AddUser />} />
       <Route path='addOption' element={<AddOption />} />
       <Route path='addStation' element={<AddStation />} />
+      <Route path='Connection' element={<Connection />} />
       <Route path='Addjj' element={<Jj />} />
       <Route path='How' element={<How />} />
       <Route path='Home/How' element={<How />} />

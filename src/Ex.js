@@ -20,6 +20,8 @@ import './components/AddBike/AddBike.css';
 import PersonIcon from '@mui/icons-material/Person';
 import { Icon } from '@mui/material';
 import Maps from './components/Maps/Maps';
+
+import Connection from './components/Connection';
 import { useNavigate } from 'react-router';
 
 const pages = ['יצירת קשר', 'שאלות ותשובות', 'סוגי מינויים', 'מפת תחנות', 'בית'];
@@ -63,7 +65,7 @@ function ResponsiveAppBar() {
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
-                            <Button onClick={handleOpenUserMenu} startIcon={<PersonIcon />} className='private-area' sx={{ p: 0 }}>איזור אישי</Button>
+                            <Button onClick={()=>nav('/Connection')} startIcon={<PersonIcon />} className='private-area' sx={{ p: 0 }}>איזור אישי</Button>
                         </Tooltip>
                         <Menu
                             sx={{ mt: '45px' }}
