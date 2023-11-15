@@ -1,7 +1,22 @@
 // import './Payment2.css';
 import AttachmentIcon from '@mui/icons-material/Attachment';
 import Box from '@mui/material/Box';
+
+import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+});
 
 
 let namePic;
@@ -21,32 +36,20 @@ const Change = () => {
 const PicId = () => {
 
     return (<>
-        <h1>תצלום תעודת זהות / דרכון</h1>
+        <h5>תצלום תעודת זהות / דרכון</h5>
 
         <div id="div-pic">
-            <Box
-                component="img"
-                sx={{
-                    height: 255,
-                    display: 'block',
-                    maxWidth: 400,
-                    overflow: 'hidden',
-                    width: '100%',
-                }}
-                src={r}
-            />
-            
+          
             <Button
-            endIcon={ <AttachmentIcon /> }
+                endIcon={<AttachmentIcon />}
                 variant="contained"
                 component="label"
                 id="pid-button"
             >
-                בחירת קובץ 
-                  
                 <input
+
                     type="file"
-                    hidden
+                // hidden
                 />
             </Button>
 

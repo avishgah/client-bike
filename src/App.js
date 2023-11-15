@@ -21,6 +21,10 @@ import Connection from './components/Connection';
 import StepperNav from './components/Rejister/StepperNav';
 import PicId from './components/Rejister/PicId';
 import Payment2 from './components/Rejister/Payment2';
+import Register from './components/Rejister/Register';
+
+
+
 function App() {
   return (<>
     {/* <Out/> */}
@@ -53,6 +57,8 @@ function App() {
 
       <Route path='PicId' element={<PicId />} />
       <Route path='Payment2' element={<Payment2 />} />
+      <Route path='Register' element={<Register />} />
+
 
 
 

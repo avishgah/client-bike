@@ -11,6 +11,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 import { Link, Stack } from '@mui/material';
+import AttachmentIcon from '@mui/icons-material/Attachment';
+
 
 // count
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -58,7 +60,9 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import PicId from './PicId';
 
+import Checkbox from '@mui/material/Checkbox';
 
 
 // import './Payment2.css';
@@ -123,6 +127,12 @@ const Register = () => {
     setActiveStep(0);
   };
 
+  //checkbox
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
 
   // let currentUser = useSelector(state => state.tr.user);
   // let arr = useSelector(state => state.tr.tasks);
@@ -155,7 +165,7 @@ const Register = () => {
       "phon": details.phon,
       "tz": details.id,
       "dateBirth": new Date(),
-      "pic": " ",
+      "pic": l,
       "isManager": false,
       "status": true,
       "readTerms": true
@@ -174,34 +184,14 @@ const Register = () => {
       else {
       }
     }).catch(alert("משתמש קיים"))
-
-    const order = {
-      "id": count,
-      "datePay": "2023-10-23T21:47:49.242Z",
-      "idStation": 2,
-      "dateOrder": new Date(),
-      "code": "string",
-      // צריכה לשמור אותו בסטייט כללי
-      "idCust": 3,
-      "endSum": 0,
-      "isPay": true,
-      "custName": "string"
-
-    }
-    axios.post(`https://localhost:7207/api/Order`, order).then(res => {
-
-      console.log(res + "kkkk");
-      alert("add")
-      if (res.data == null) {
-        alert("error")
-        return null;
-
-      }
-
-    })
+    nav('/Payment2')
+  }
 
 
-
+  var l = '';
+  const func = () => {
+    l = document.getElementById("k").value;
+    console.log(l)
   }
 
   return <>
@@ -271,7 +261,7 @@ const Register = () => {
           <TextField fullWidth id="fullWidth" label="מייל" variant="outlined"  {...register("email", {
             required: "email is required",
             pattern: {
-              value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+              value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               message: "Invalid email"
             }
           })}
@@ -323,8 +313,9 @@ const Register = () => {
           </LocalizationProvider> */}
 
           <br></br><br></br>
+          {/*           
           <div><b>מספר אופניים להשכרה </b></div><br></br>
-          {/* count */}
+          {/* count 
 
           <Box>
             <div>
@@ -351,14 +342,43 @@ const Register = () => {
               </ButtonGroup>
             </div>
 
-          </Box>
+          </Box> */}
 
 
 
           {/* save */}
+          <h5>תצלום תעודת זהות / דרכון</h5>
 
+          <div id="div-pic">
+
+            <Button
+              endIcon={<AttachmentIcon />}
+              variant="contained"
+              component="label"
+              id="pid-button"
+            >
+              <input
+                id="k"
+                type="file"
+                onChange={func}
+              // hidden
+              />
+            </Button>
+            <p></p>
+          </div>
+          <a href='/page.txt' download>תקנון שימוש</a>
+          <Checkbox
+            checked={checked}
+            onChange={handleChange}
+            inputProps={{ 'aria-label': 'controlled' }}
+            required="lll"
+          />
+
+          <br></br>
+          {console.log(checked)}
         </CardContent>
         <CardActions>
+
           {/* <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">שמור</Button> */}
           <Stack direction="row" spacing={2}>
 
@@ -367,15 +387,7 @@ const Register = () => {
             </Button>
 
           </Stack><br></br>
-          <Link
-            component="button"
-            variant="body2"
-            onClick={() => {
-              nav('/Connection')
-            }}
-          >
-            ? משתמש רשום
-          </Link>
+
         </CardActions>
       </Card>
 

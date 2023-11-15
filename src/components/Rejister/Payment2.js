@@ -12,6 +12,7 @@ import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 import { Stack } from '@mui/material';
 
+import Link from '@mui/material/Link';
 
 
 
@@ -232,7 +233,9 @@ const Payment2 = () => {
         </CardContent>
 
         {/* save */}
-
+        <Link href='Register' underline="hover">
+          {'יותר מאוחר'}
+        </Link>
         <CardActions>
           <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">שמור</Button>
         </CardActions>

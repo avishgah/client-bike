@@ -190,7 +190,7 @@ const Connection = () => {
                         <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">
                             התחבר
                         </Button>
-                        <Link href='stepper' underline="hover">
+                        <Link href='Register' underline="hover">
                             {'להרשמה - לחץ כאן'}
                         </Link>
                     </Stack>
