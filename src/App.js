@@ -26,18 +26,26 @@ import Register from './components/Rejister/Register';
 import History from './components/PrivteArea/History';
 import Navb from './components/PrivteArea/Navb';
 import Price from './components/PrivteArea/Price';
+import Profile from './components/PrivteArea/Profil';
+import { useSelector } from 'react-redux';
 
 function App() {
+  let currentUser = useSelector(state => state.ur.user);
+
+
   return (<>
+
     {/* <Out/> */}
-    {/* <ResponsiveAppBar /> */}
+    <ResponsiveAppBar />
     {/* <AddStation/> */}
     {/* <Maps /> */}
 
-    <Navb/>
-    
+    {/* <Navb/> */}
+    {currentUser != null ? <Navb /> : null}
+
+
     <Routes>
-      {/* <Route path="" element={<Home />}></Route> */}
+      <Route path="" element={<Home />}></Route>
       <Route path='home' element={<Home />} />
       <Route path='app' element={<App />} />
       <Route path='navbar' element={<NavBar />} />
@@ -66,6 +74,8 @@ function App() {
 
       <Route path='History' element={<History />} />
       <Route path='Navb' element={<Navb />} />
+      <Route path='Navb/Profil' element={<Profile />} />
+      <Route path='Profil' element={<Profile />} />
       <Route path='Price' element={<Price />} />
 
 

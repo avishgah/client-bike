@@ -1,31 +1,58 @@
+import { useDispatch } from 'react-redux';
 import './Adit.css';
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import * as type from "../../store/actions/actionType";
+import LogoutIcon from '@mui/icons-material/Logout';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 
 const NavBar = () => {
 
+    const nav = useNavigate();
+
+    const dispatch = useDispatch();
+    const Exit = () => {
+
+        dispatch({
+            type: type.LOG_OUT,
+
+        })
+
+        // nav("/App");
+    }
+    let id = 0;
+    const changeColor = (id) => {
+        console.log(id);
+        // document.getElementById(id).style.li.Link.color = "red";
+    }
     return (<>
         {
             <div className='home'>
 
                 <ul>
-                    <li>
+                    <li id='1' onClick={() => (changeColor(1))}>
                         <Link to="History"> היסטוריית נסיעות</Link><br></br> <br></br>
                     </li>
-                    <li>
+                    <li id='2'onClick={() => (changeColor(2))}>
                         <Link to="Price">הסטוריית חיובים </Link>
                     </li>
-                    <li>
+                    <li id='3'onClick={() => (changeColor(3))}>
                         <Link to="addOption"> הוספת חוות דעת </Link>
                     </li>
-                    <li>
-                        <Link to="addStation">פרופיל</Link>
+                    <li id='4'onClick={() => (changeColor(4))}>
+                        <Link to="Profil">פרופיל</Link>
                     </li>
                     <li>
-                        <Link to="addStation">יציאה מהמערכת</Link>
+
+                        <Button variant="contained" endIcon={<LogoutIcon />} id="out" type="submit" onClick={() => Exit()} >
+
+                        </Button>
+
+
                     </li>
                 </ul>
-
+                <br></br>
             </div>
         }</>)
 

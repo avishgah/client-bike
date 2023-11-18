@@ -7,33 +7,84 @@ img{
   } */
 
 
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgb(36, 36, 52) !important;
+  margin-top: 1%;
 
-    /* background-color: #333; */
-  }
-  
-  li {
-    float: right !important;
-    margin-left: 7%;
+  /* background-color: #333; */
+}
 
+li {
+  float: right !important;
+  margin-left: 11%;
 
-  }
-  
-  li a {
-    /* display: block; */
-    color: rgb(41, 41, 165);
-    text-align: center;
-    padding: 10px 10px;
-    text-decoration: none;
-  }
-  
-  li :hover {
-    border-radius: 0% !important;
-    background-color: white !important;
-    border-bottom: 2px solid rgb(36, 36, 52) !important;
+  font-size: smaller;
+}
 
-  }
+li a {
+  /* display: block; */
+  color: rgb(19, 19, 48);
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+}
+
+li :hover {
+  border-radius: 2% !important;
+  background-color: rgb(236, 235, 242) !important;
+  /* border-bottom: 2px solid rgb(36, 36, 52) !important; */
+
+}
+
+#out {
+  margin-top: 10%;
+  text-align: center;
+  background-color: white;
+  color: rgb(9, 4, 4);
+  /* font-size:200%;*/
+  /* margin-left: 100%;  */
+  padding: 2%;
+  /* margin-left: 90%; */
+}
+
+#formLoginR {
+  /* background-color:rgb(236, 235, 242); */
+  text-align: center;
+  margin-left: 25%;
+  padding: -5%;
+  border: none !important;
+}
+/* 
+.css-46bh2p-MuiCardContent-root {
+  padding: 0px !important;
+} */
+
+label {
+  margin-left: 85%;
+  /* float: left; */
+  font-size: smaller;
+  color: gray;
+}
+
+#ll {
+  margin-left: 60%;
+
+}
+/* 
+.css-v4u5dn-MuiInputBase-root-MuiInput-root {
+  width: 180% !important;
+} */
+
+#addR {
+  margin-left: 40% !important;
+  width: 180% !important;
+  background-color: rgb(27, 139, 77);
+}
+
+#div-pic {
+  margin-left: 40%;
+}

@@ -125,7 +125,7 @@ const Connection = () => {
             .then(res => {
                 console.log(res.data)
                 setUsers(res.data)
-                nav('/NavB')
+                // nav('/NavB')
             }).catch(err => console.log(err))
     }, [])
 
@@ -144,7 +144,6 @@ const Connection = () => {
                     payload: users[i]
                 })
                 // setCurrentUser(users[i])
-
             }
         }
         if (flag == 0) {
