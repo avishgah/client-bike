@@ -1,4 +1,5 @@
 import './Home.css'
+
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -11,10 +12,15 @@ import How from '../how-work/How';
 import { useNavigate } from 'react-router';
 import Table from '../Tables.js';
 import Maps from '../Maps/Maps';
+import { RampRight } from '@mui/icons-material';
+
 
 const Home = () => {
     const nav = useNavigate();
     return (<>
+    <div style={{ backgroundImage: `url('./Images/22.jpg')`, backgroundRepeat:'no-repeat',backgroundSize:600,backgroundPosition:'100% 10%'
+     }}>
+
         {/* img */}
         <h1 id="l">כדאי לדעת</h1>
 
@@ -93,6 +99,8 @@ const Home = () => {
             </CardContent>
         </div>
         <Maps id="k"/>
-    </>)
+        </div> 
+        
+        </>)
 }
 export default Home;

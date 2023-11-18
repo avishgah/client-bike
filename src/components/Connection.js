@@ -125,6 +125,7 @@ const Connection = () => {
             .then(res => {
                 console.log(res.data)
                 setUsers(res.data)
+                nav('/NavB')
             }).catch(err => console.log(err))
     }, [])
 

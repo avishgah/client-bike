@@ -1,15 +1,21 @@
-#l{
+#l {
     text-align: left !important;
     margin-left: 38%;
     color: blueviolet;
 }
-.ss{
+
+.ss {
     background-color: white;
     text-align: right;
     width: 50%;
     margin-right: 0;
     direction: ltr;
 }
-.ss:hover{
+
+.ss:hover {
     box-shadow: 0 4px 8px 0 rgba(96, 137, 226, 0.19), 0 2px 20px 0 rgba(96, 137, 226, 0.19);
+}
+
+body {
+    /* background-image: url({background}); */
 }
