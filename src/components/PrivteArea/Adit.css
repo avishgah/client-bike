@@ -1,12 +1,4 @@
-/* ul{
-    display: flex;
-}
-img{
-    width: 100%;
-    height: 100%;
-  } */
-
-
+ 
 ul {
   list-style-type: none;
   margin: 0;
@@ -14,8 +6,6 @@ ul {
   overflow: hidden;
   border-bottom: 1px solid rgb(36, 36, 52) !important;
   margin-top: 1%;
-
-  /* background-color: #333; */
 }
 
 li {
@@ -26,7 +16,6 @@ li {
 }
 
 li a {
-  /* display: block; */
   color: rgb(19, 19, 48);
   text-align: center;
   padding: 10px 10px;
@@ -36,7 +25,6 @@ li a {
 li :hover {
   border-radius: 2% !important;
   background-color: rgb(236, 235, 242) !important;
-  /* border-bottom: 2px solid rgb(36, 36, 52) !important; */
 
 }
 
@@ -45,44 +33,21 @@ li :hover {
   text-align: center;
   background-color: white;
   color: rgb(9, 4, 4);
-  /* font-size:200%;*/
-  /* margin-left: 100%;  */
   padding: 2%;
-  /* margin-left: 90%; */
 }
 
-#formLoginR {
-  /* background-color:rgb(236, 235, 242); */
-  text-align: right;
-  margin-right: 40%;
-  padding: -5%;
-  border: none !important;
-}
-/* 
-.css-46bh2p-MuiCardContent-root {
-  padding: 0px !important;
-} */
 
-label {
-  margin-left: 20%;
-  /* float: left; */
-  font-size: smaller;
-  color: gray;
-}
+
 
 #ll {
   margin-left: 60%;
 
 }
-/* 
-.css-v4u5dn-MuiInputBase-root-MuiInput-root {
- 
-  margin-left:30px !important;
-}  */
+
 
 #addR {
   text-align: right;
-  margin-left:0 !important;
+  margin-left: 0 !important;
   width: 300px !important;
   background-color: rgb(27, 139, 77);
 }
@@ -91,6 +56,43 @@ label {
   margin-left: 40%;
 }
 
-.css-1x51dt5-MuiInputBase-input-MuiInput-input{
-width: 300px !important;
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+  width: 300px !important;
+}
+
+
+
+#h1 {
+  font-size: larger;
+}
+
+
+
+ #formLoginR {
+  text-align: right;
+  margin-right: 40%;
+  padding: -5%;
+  border: none !important;
+}
+#select {
+  width: 40%;
+  float: right !important;
+  border: none;
+  border-bottom: 1px solid black !important;
+  padding: 10px;
+}
+
+label {
+  /* margin-left: 20%; */
+  font-size: smaller;
+  color: gray;
+}
+
+.showStetion {
+  /* visibility: hidden; */
+  display: none;
+}
+
+#outlined-multiline-static{
+  width:250px !important;
 }
