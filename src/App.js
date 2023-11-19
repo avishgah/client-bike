@@ -28,6 +28,7 @@ import Navb from './components/PrivteArea/Navb';
 import Price from './components/PrivteArea/Price';
 import Profile from './components/PrivteArea/Profil';
 import { useSelector } from 'react-redux';
+import Problems from './components/PrivteArea/Problems';
 
 function App() {
   let currentUser = useSelector(state => state.ur.user);
@@ -77,6 +78,7 @@ function App() {
       <Route path='Navb/Profil' element={<Profile />} />
       <Route path='Profil' element={<Profile />} />
       <Route path='Price' element={<Price />} />
+      <Route path='Problems' element={<Problems />} />
 
 
 

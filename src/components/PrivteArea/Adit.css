@@ -53,8 +53,8 @@ li :hover {
 
 #formLoginR {
   /* background-color:rgb(236, 235, 242); */
-  text-align: center;
-  margin-left: 25%;
+  text-align: right;
+  margin-right: 40%;
   padding: -5%;
   border: none !important;
 }
@@ -64,7 +64,7 @@ li :hover {
 } */
 
 label {
-  margin-left: 85%;
+  margin-left: 20%;
   /* float: left; */
   font-size: smaller;
   color: gray;
@@ -76,15 +76,21 @@ label {
 }
 /* 
 .css-v4u5dn-MuiInputBase-root-MuiInput-root {
-  width: 180% !important;
-} */
+ 
+  margin-left:30px !important;
+}  */
 
 #addR {
-  margin-left: 40% !important;
-  width: 180% !important;
+  text-align: right;
+  margin-left:0 !important;
+  width: 300px !important;
   background-color: rgb(27, 139, 77);
 }
 
 #div-pic {
   margin-left: 40%;
+}
+
+.css-1x51dt5-MuiInputBase-input-MuiInput-input{
+width: 300px !important;
 }

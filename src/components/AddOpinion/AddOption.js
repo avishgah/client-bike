@@ -19,7 +19,7 @@ import Typography from '@mui/material/Typography';
 import { useEffect } from "react";
 
 import { useNavigate } from 'react-router-dom';
-import './AddOption.scss'
+import './AddOption.css'
 
 function getLabelText(value) {
     return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;

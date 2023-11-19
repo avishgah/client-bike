@@ -9,7 +9,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import '../Maps/Maps.css';
 
-
+// count
+import ButtonGroup from '@mui/material/ButtonGroup';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const containerStyle = {
   width: '100%',
@@ -47,6 +50,7 @@ const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
 
 function MyComponent() {
   const [age, setAge] = React.useState('');
+  const [count, setCount] = React.useState(0);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -92,15 +96,40 @@ function MyComponent() {
   return (<>
     <br />
 
-    <form id="formLoginR" >
+    <form id="formLoginRG" >
       <h8><b>הזמנה מראש</b></h8>
-      <p>הכנס מספר אופניים ותחנה רצויה</p>
-      <br></br>
-      <TextField
-        label="מספר אפנים "
-        id="demo-helper-text-aligned"
-      // {...register("bike", {})}
-      />
+      <br></br><br></br>
+          <div id="hazen">הזן מספר אפניים ותחנה רצויה</div><br></br>
+          {/* count */}
+
+          <Box>
+            <div>
+              <ButtonGroup>
+                <Button
+                  aria-label="reduce"
+                  onClick={() => {
+                    setCount(Math.max(count - 1, 0));
+                  }}
+                >
+                  <RemoveIcon fontSize="small" />
+                </Button>
+
+                <div id="p2">{count}</div>
+
+                <Button
+                  aria-label="increase"
+                  onClick={() => {
+                    setCount(count + 1);
+                  }}
+                >
+                  <AddIcon fontSize="small" />
+                </Button>
+              </ButtonGroup>
+            </div>
+
+          </Box>
+
+
       <br></br>
       <select
         onChange={({ target }) => setSlectedPoint(target.value)}>
@@ -108,25 +137,12 @@ function MyComponent() {
       </select>
       <br></br>
       <br></br>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          label="Age"
-          onChange={({ target }) => setSlectedPoint(target.value)}
-        >
-          {/* {mapers.map(marker => <MenuItem selected={selectPoin === marker.id} value={marker.Id}>{marker.name}{marker.location}{<br></br>}</MenuItem>)} */}
-
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-      <Button variant="contained" id="addR" type="submit">
+     
+      <Button variant="contained" id="addRs" type="submit">
         התחבר
       </Button>
 
+      <br></br>
       <br></br>
     </form>
     <br />

@@ -1,6 +1,19 @@
-#formLoginR{
-    border: solid grey 1px;
-    border-radius: 3%;
-    width: 40%;
+#formLoginRG{
+    border: solid rgb(128, 128, 128) 1px;
+    /* border-radius: 3%;*/
+    width: 30%;
     text-align: center;
+    line-height: 1;
+    margin-left: 55%;
+} 
+
+#hazen{
+    font-size: smaller;
+}
+
+#p2{
+    padding: 10px;
+}
+.css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-firstButton, .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-middleButton{
+    border-right-color: rgba(25, 118, 210, 0.5) !important;
 }

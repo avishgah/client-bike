@@ -146,21 +146,13 @@ const Profil = () => {
     // }
     const submit = (details) => {
         console.log(details);
-        //     console.log(value.$D + "/" + value.$M + "/" + value.$y)
 
-        //     // const user = {
-        //     //     name: details.name,
-        //     //     Phon: details.Phon,
-        //     //     Password: details.password,
-        //     //     Mail: details.email,
-
-        //     // }\\
         const user =
         {
             "name": details.name,
-            "address": details.adress,
-            "mail": details.email,
-            "password": details.password,
+            "address": currentUser.address,
+            "mail": currentUser.mail,
+            "password": currentUser.password,
             "toun": details.toun,
             "phon": details.phon,
             "tz": details.id,
@@ -170,7 +162,7 @@ const Profil = () => {
             "status": true,
             "readTerms": true
         }
-
+        console.log(currentUser.id)
         axios.put(`https://localhost:7207/api/User/${currentUser.id}`, user).then(res => {
 
             console.log(res + "kkkk");
@@ -216,7 +208,7 @@ const Profil = () => {
                 <label>תעודת זהות</label>
                 <br></br>
                 <TextField id="standard-basic" variant="standard"
-defaultValue={currentUser == null ? ' ' : currentUser.tz}
+                    defaultValue={currentUser == null ? ' ' : currentUser.tz}
                     {...register("id", {
                         required: "id is required",
                         pattern: {
@@ -232,7 +224,7 @@ defaultValue={currentUser == null ? ' ' : currentUser.tz}
                 <label>טלפון</label>
                 <br></br>
                 <TextField id="standard-basic" variant="standard"
-                defaultValue={currentUser == null ? ' ' : currentUser.phon}
+                    defaultValue={currentUser == null ? ' ' : currentUser.phon}
                     {...register("phon", {
                         required: "phon is required",
                         pattern: {
@@ -248,8 +240,8 @@ defaultValue={currentUser == null ? ' ' : currentUser.tz}
                 <label>כתובת</label>
                 <br></br>
                 <TextField id="standard-basic" variant="standard"
-                defaultValue={currentUser == null ? ' ' : currentUser.toun}
-                    {...register("adress", {})}
+                    defaultValue={currentUser == null ? ' ' : currentUser.toun}
+                    {...register("toun", {})}
 
                 /><br></br><br></br>
 
@@ -257,7 +249,7 @@ defaultValue={currentUser == null ? ' ' : currentUser.tz}
                 <label>מייל</label>
                 <br></br>
                 <TextField disabled id="standard-basic" variant="standard"
-                defaultValue={currentUser == null ? ' ' : currentUser.mail}
+                    defaultValue={currentUser == null ? ' ' : currentUser.mail}
                     {...register("email", {
                         pattern: {
                             value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -270,10 +262,10 @@ defaultValue={currentUser == null ? ' ' : currentUser.tz}
 
                 {/* password */}
 
-                <label>סיסמא</label>
+                {/* <label>סיסמא</label> */}
                 <br></br>
 
-{/* 
+                {/* 
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
                     <InputLabel htmlFor="standard-adornment-password"></InputLabel>
                     <Input
@@ -310,20 +302,22 @@ defaultValue={currentUser == null ? ' ' : currentUser.tz}
                 {/* save  */}
                 <label id="ll">תצלום תעודת זהות / דרכון</label>
                 <br></br>
-                <div id="div-pic">
+                <div id="div-pic"   >
 
                     <Button
                         endIcon={<AttachmentIcon />}
                         variant="contained"
                         component="label"
                         id="pid-button"
-                        defaultValue={currentUser == null ? ' ' : currentUser.pic}
+                        defaultValue={currentUser == null ? 'kk' : currentUser.pic}
 
                     >
                         <input
+                            // name="ll"
                             id="k"
                             type="file"
                             onChange={func}
+
                         // hidden
                         />
                     </Button>
@@ -340,19 +334,13 @@ defaultValue={currentUser == null ? ' ' : currentUser.tz}
 
 
                 <br></br>
-                {console.log(checked)}
-            </CardContent>
-            <CardActions>
-
-                {/* <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">שמור</Button> */}
-
                 <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">
                     עדכון
                 </Button>
 
-                <br></br>
+                {console.log(checked)}
+            </CardContent>
 
-            </CardActions>
 
 
         </form >

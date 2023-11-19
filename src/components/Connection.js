@@ -62,7 +62,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 
-
+import '../components/AddBike/AddBike.css';
 
 const Connection = () => {
 
@@ -144,6 +144,7 @@ const Connection = () => {
                     payload: users[i]
                 })
                 // setCurrentUser(users[i])
+                nav('/Profil')
             }
         }
         if (flag == 0) {
@@ -153,8 +154,8 @@ const Connection = () => {
 
     return <>
 
-        <form id="formLoginR" onSubmit={handleSubmit(submit)}>
-            <Card sx={{ minWidth: 80 }}>
+        <form id="formLoginRC" onSubmit={handleSubmit(submit)}>
+
                 <CardContent>
 
                     <h2>ברוכים הבאים-התחברות</h2>
@@ -166,7 +167,7 @@ const Connection = () => {
 
                     {/* id */}
 
-                    <TextField fullWidth id="standard-basic" variant="standard" {...register("email", {
+                    <TextField  id="standard-basic" variant="standard" {...register("email", {
                         required: "email is required",
                         pattern: {
                             value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
@@ -187,7 +188,7 @@ const Connection = () => {
                     <Stack direction="row" spacing={2}>
 
 
-                        <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">
+                        <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
                             התחבר
                         </Button>
                         <Link href='Register' underline="hover">
@@ -195,8 +196,6 @@ const Connection = () => {
                         </Link>
                     </Stack>
                 </CardActions>
-            </Card>
-
         </form >
 
 

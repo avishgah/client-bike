@@ -38,7 +38,7 @@ const NavBar = () => {
                         <Link to="Price">הסטוריית חיובים </Link>
                     </li>
                     <li id='3'onClick={() => (changeColor(3))}>
-                        <Link to="addOption"> הוספת חוות דעת </Link>
+                        <Link to="Problems"> הוספת חוות דעת </Link>
                     </li>
                     <li id='4'onClick={() => (changeColor(4))}>
                         <Link to="Profil">פרופיל</Link>
