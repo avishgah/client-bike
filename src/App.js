@@ -39,8 +39,8 @@ function App() {
     {/* <Out/> */}
     {/* <ResponsiveAppBar /> */}
 
-    <Problems/>
-    
+    {/* <Problems/> */}
+    <NavBar/>
     {/* <AddStation/> */}
     {/* <Maps /> */}
 
