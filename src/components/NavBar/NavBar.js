@@ -5,6 +5,7 @@ import { AppBar, Tabs, Tab, Toolbar, Typography, useMediaQuery, useTheme } from 
 import { useState } from 'react';
 import Drawer from './DrawerComponnent';
 import DrawerComponnent from './DrawerComponnent';
+import DrawerComp from './DrawerComp';
 
 const NavBar = () => {
     const [value, setValue] = useState();
@@ -18,10 +19,10 @@ const NavBar = () => {
 
 
     const handleCloseNavMenu = (page) => {
-        console.log(page.target.innerText)
-        if (page.target.innerText == 'בית')
+        console.log(page.page)
+        if (page.page == 'בית')
             nav('/Home')
-        if (page.target.innerText == 'מפת תחנות')
+        if (page.page == 'מפת תחנות')
             nav('/Maps')
         // setAnchorElNav(null);
     };
@@ -38,18 +39,17 @@ const NavBar = () => {
 
                     </>) : (<>
 
-                        <Tabs textColor='inherit' value={value} onChange={(e, value) => setValue(value)} indicatorColor='secondary'>
+                        <Tabs sx={{marginLeft:'auto'}} textColor='inherit' value={value} onChange={(e, value) => setValue(value)} indicatorColor='secondary'>
 
-                            {/* {pages.map((page) => (
-                                <Tab key={page} onClick={() => (handleCloseNavMenu({ page }))}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </Tab>
-                            ))} */}
-
+                            {pages.map((page,index) => (
+                                <Tab key={page} label={page} onClick={() => (handleCloseNavMenu({ page }))}/>
+                                
+                            ))}
+{/* 
 
                             {pages.map((page,index)=>(
                                 <Tab key={index} label={page}/>
-                            ))}
+                            ))} */}
                         </Tabs>
 
                     </>)
