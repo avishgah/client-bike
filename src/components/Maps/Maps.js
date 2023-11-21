@@ -49,17 +49,11 @@ const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
 
 
 function MyComponent() {
-  const [age, setAge] = React.useState('');
   const [count, setCount] = React.useState(0);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+ 
 
-  // const { isLoaded } = useJsApiLoader({
-  //   id: 'google-map-script',
-  //   googleMapsApiKey: "AIzaSyDd2yrRfnh88OiKs8yCiH-8uK5aASNgve8"
-  // })
+
   const [selectPoin, setSlectedPoint] = useState(null)
   const [mapers, setMapers] = React.useState([])
   useEffect(() => {
@@ -92,52 +86,63 @@ function MyComponent() {
   // const [open, setOpen] = React.useState(false);
   // const [placement, setPlacement] = React.useState();
 
+  const Submit = (e) => {
+    e.preventDefault()
+    console.log(count,selectPoin)
+    const order={
+      count,
+      //userId:curentUser,
+      idStatuon:selectPoin
+    }
+    // axios.post("",{count, })
+  }
+
   console.log(selectPoin)
   return (<>
     <br />
 
-    <form id="formLoginRG" >
+    <form id="formLoginRG" onSubmit={Submit}>
       <h8><b>הזמנה מראש</b></h8>
       <br></br><br></br>
-          <div id="hazen">הזן מספר אפניים ותחנה רצויה</div><br></br>
-          {/* count */}
+      <div id="hazen">הזן מספר אפניים ותחנה רצויה</div><br></br>
+      {/* count */}
 
-          <Box>
-            <div>
-              <ButtonGroup>
-                <Button
-                  aria-label="reduce"
-                  onClick={() => {
-                    setCount(Math.max(count - 1, 0));
-                  }}
-                >
-                  <RemoveIcon fontSize="small" />
-                </Button>
+      <Box>
+        <div>
+          <ButtonGroup>
+            <Button
+              aria-label="reduce"
+              onClick={() => {
+                setCount(Math.max(count - 1, 0));
+              }}
+            >
+              <RemoveIcon fontSize="small" />
+            </Button>
 
-                <div id="p2">{count}</div>
+            <div id="p2">{count}</div>
 
-                <Button
-                  aria-label="increase"
-                  onClick={() => {
-                    setCount(count + 1);
-                  }}
-                >
-                  <AddIcon fontSize="small" />
-                </Button>
-              </ButtonGroup>
-            </div>
+            <Button
+              aria-label="increase"
+              onClick={() => {
+                setCount(count + 1);
+              }}
+            >
+              <AddIcon fontSize="small" />
+            </Button>
+          </ButtonGroup>
+        </div>
 
-          </Box>
+      </Box>
 
 
       <br></br>
       <select
         onChange={({ target }) => setSlectedPoint(target.value)}>
-          {mapers.map(marker => <option selected={selectPoin === marker.id} value={marker.Id}>{marker.name} {marker.location}</option>)}
+        {mapers.map(marker => <option selected={selectPoin === marker.id} value={marker.Id}>{marker.name} {marker.location}</option>)}
       </select>
       <br></br>
       <br></br>
-     
+
       <Button variant="contained" id="addRs" type="submit">
         התחבר
       </Button>

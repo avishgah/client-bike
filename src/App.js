@@ -37,10 +37,10 @@ function App() {
   return (<>
 
     {/* <Out/> */}
-    {/* <ResponsiveAppBar /> */}
+    <ResponsiveAppBar />
 
     {/* <Problems/> */}
-    <NavBar/>
+    {/* <NavBar/> */}
     {/* <AddStation/> */}
     {/* <Maps /> */}
 
@@ -49,7 +49,7 @@ function App() {
 
 
     <Routes>
-      {/* <Route path="" element={<Home />}></Route> */}
+      <Route path="" element={<Home />}></Route>
       <Route path='home' element={<Home />} />
       <Route path='app' element={<App />} />
       <Route path='navbar' element={<NavBar />} />
