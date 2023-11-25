@@ -17,6 +17,7 @@
 }
 .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-firstButton, .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-middleButton{
     border-right-color: rgba(25, 118, 210, 0.5) !important;
+    color: bl;
 }
 #h8{
     font-size: larger;

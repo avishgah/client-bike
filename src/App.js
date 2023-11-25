@@ -38,10 +38,10 @@ function App() {
   return (<>
 
     {/* <Out/> */}
-    {/* <ResponsiveAppBar /> */}
+    <ResponsiveAppBar />
 
     {/* <Problems/> */}
-    <NavBar/>
+    {/* <NavBar/> */}
     {/* <AddStation/> */}
     {/* <Maps /> */}
 

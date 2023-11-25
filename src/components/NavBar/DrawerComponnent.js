@@ -3,8 +3,8 @@ import { Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText } 
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from "react-router";
 
-const pages = ['יצירת קשר'
-    , 'שאלות ותשובות', 'סוגי מינויים', 'מפת תחנות', 'בית'];
+const pages = ['יצירת קשר',
+    'איזור אישי', 'שאלות ותשובות', 'סוגי מינויים', 'מפת תחנות', 'בית'];
 
 const DrawerComponnent = () => {
     const [OpenDrawer, setOpenD] = useState(false);
@@ -15,6 +15,8 @@ const DrawerComponnent = () => {
             nav('/Home')
         if (page == 'מפת תחנות')
             nav('/Maps')
+        if (page == 'איזור אישי')
+            nav('/NavB')
     }
     return (<>
 
@@ -31,7 +33,7 @@ const DrawerComponnent = () => {
                     }
                 </List>
             </Drawer>
-            <IconButton sx={{ color: 'white', marginLeft: 'auto' }} onClick={() => setOpenD(!OpenDrawer)}>
+            <IconButton sx={{ color: 'black', marginLeft: 'auto' }} onClick={() => setOpenD(!OpenDrawer)}>
                 <MenuIcon />
             </IconButton>
         </React.Fragment>
