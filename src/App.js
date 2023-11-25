@@ -29,6 +29,7 @@ import Price from './components/PrivteArea/Price';
 import Profile from './components/PrivteArea/Profil';
 import { useSelector } from 'react-redux';
 import Problems from './components/PrivteArea/Problems';
+import Order from './components/PrivteArea/Orders/Order';
 
 function App() {
   let currentUser = useSelector(state => state.ur.user);
@@ -37,10 +38,10 @@ function App() {
   return (<>
 
     {/* <Out/> */}
-    <ResponsiveAppBar />
+    {/* <ResponsiveAppBar /> */}
 
     {/* <Problems/> */}
-    {/* <NavBar/> */}
+    <NavBar/>
     {/* <AddStation/> */}
     {/* <Maps /> */}
 
@@ -49,7 +50,7 @@ function App() {
 
 
     <Routes>
-      <Route path="" element={<Home />}></Route>
+      {/* <Route path="" element={<Home />}></Route> */}
       <Route path='home' element={<Home />} />
       <Route path='app' element={<App />} />
       <Route path='navbar' element={<NavBar />} />
@@ -77,6 +78,7 @@ function App() {
 
 
       <Route path='History' element={<History />} />
+      <Route path='Order' element={<Order />} />
       <Route path='Navb' element={<Navb />} />
       <Route path='Navb/Profil' element={<Profile />} />
       <Route path='Profil' element={<Profile />} />

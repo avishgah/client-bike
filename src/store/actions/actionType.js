@@ -7,11 +7,11 @@ export const LOG_OUT="LOG_OUT";
 
 //task
 
-export const DELETE_TASK="DELETE_TASK";
-export const UPDATE_TASK="UPDATE_TASK";
-export const SELECT_TASKS="SELECT_TASKS";
-export const ADD_TASKS="ADD_TASKS";
-export const HISTORY_TASKS="HISTORY_TASKS";
+export const DELETE_DRIVE="DELETE_DRIVE";
+export const UPDATE_DRIVE="UPDATE_DRIVE";
+export const SELECT_DRIVES="SELECT_DRIVES";
+export const ADD_DRIVES="ADD_DRIVES";
+export const HISTORY_DRIVES="HISTORY_DRIVES";
 
 
 export const CHANGE_FLAG_TRUE="CHANGE_FLAG_TRUE";

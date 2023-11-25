@@ -1,14 +1,15 @@
-#formLoginRFFG{
-    border: solid rgb(128, 128, 128) 1px;
+#formLoginRG{
+    /* border: solid rgb(128, 128, 128) 1px; */
     /* border-radius: 3%;*/
-    width: 30%;
+    width: 20%;
     text-align: center;
-    line-height: 1;
-    margin-left: 55%;
+    line-height: 1.5;
+    margin-left: 40%;
 } 
 
 #hazen{
-    font-size: smaller;
+    font-size: medium;
+    text-align: right;
 }
 
 #p2{
@@ -16,4 +17,9 @@
 }
 .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-firstButton, .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-middleButton{
     border-right-color: rgba(25, 118, 210, 0.5) !important;
+}
+#h8{
+    font-size: larger;
+    text-align: right !important;
+
 }

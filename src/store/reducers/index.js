@@ -1,7 +1,8 @@
 import * as type from "../actions/actionType";
 
 const initialState = {
-    // currentUser: null,
+    currentUser: null,
+    drives:[],
     user: null,
     Flag: false,
     // users:[]
@@ -17,25 +18,25 @@ const UserReducer = (state = initialState, action) => {
                 user: action.payload
             }
 
-        case type.SELECT_TASKS:
+        case type.SELECT_DRIVES:
             return {
                 ...state,
-                tasks: action.payload
+                drives: action.payload
             }
 
-        case type.ADD_TASKS:
+        case type.ADD_DRIVES:
             return {
                 ...state,
-                tasks: [...state.tasks, action.payload]
+                drives: [...state.drives, action.payload]
             }
-        case type.DELETE_TASK:
-            let arr = [...state.tasks].filter(x => x.id != action.payload);
+        case type.DELETE_DRIVE:
+            let arr = [...state.drives].filter(x => x.id != action.payload);
 
             return {
                 ...state,
-                tasks: arr
+                drives: arr
             }
-        case type.UPDATE_TASK:
+        case type.UPDATE_DRIVE:
             return {
                 ...state
             }
@@ -43,20 +44,20 @@ const UserReducer = (state = initialState, action) => {
         //     return{
         //         ...state,
         //         user:action.payload,
-        //         // tasks:[],
+        //         // drives:[],
         //       //  users:[...state.users,action.payload]
         //     }
         case type.LOG_OUT:
             return {
                 ...state,
                 user: null,
-                tasks: []
+                drives: []
             }
 
-        case type.HISTORY_TASKS:
+        case type.HISTORY_DRIVES:
             return {
                 ...state,
-                tasks: [...action.payload]
+                drives: [...action.payload]
             }
 
         case type.CHANGE_FLAG_TRUE:

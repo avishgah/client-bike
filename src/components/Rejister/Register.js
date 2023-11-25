@@ -135,7 +135,7 @@ const Register = () => {
   };
 
   // let currentUser = useSelector(state => state.tr.user);
-  // let arr = useSelector(state => state.tr.tasks);
+  // let arr = useSelector(state => state.tr.drives);
 
   // const submit = (details) => {
 

@@ -35,7 +35,7 @@ const NavBar = () => {
                         <Link to="History"> היסטוריית נסיעות</Link><br></br> <br></br>
                     </li>
                     <li id='2'onClick={() => (changeColor(2))}>
-                        <Link to="Price">הסטוריית חיובים </Link>
+                        <Link to="Order"> הזמנה מראש </Link>
                     </li>
                     <li id='3'onClick={() => (changeColor(3))}>
                         <Link to="Problems"> הוספת חוות דעת </Link>
