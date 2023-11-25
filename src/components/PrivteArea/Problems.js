@@ -81,7 +81,7 @@ const Problems = () => {
             "numBike": details.bike
         }
 
-        axios.post(`https://localhost:7207/api/Opinion`, task).then(res => {
+        axios.put(`https://localhost:7207/api/Opinion`, task).then(res => {
 
             console.log(res.data + ";;;;;;");
 

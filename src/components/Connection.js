@@ -156,46 +156,46 @@ const Connection = () => {
 
         <form id="formLoginRC" onSubmit={handleSubmit(submit)}>
 
-                <CardContent>
+            <CardContent>
 
-                    <h2>ברוכים הבאים-התחברות</h2>
-                    <Typography variant="h5" component="div">
-                        היי, אנחנו שמחים לראות אותך!
-                        להתחברות לאיזור האישי, יש להזין כתובת מייל                    </Typography>
-                    <br></br>
-
-
-                    {/* id */}
-
-                    <TextField  id="standard-basic" variant="standard" {...register("email", {
-                        required: "email is required",
-                        pattern: {
-                            value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                            message: "Invalid email"
-                        }
-                    })}
-                    />
-                    {errors.email && <p className="errorMsg">{errors.email.message}</p>}
-                    <br></br><br></br>
+                <h2>ברוכים הבאים-התחברות</h2>
+                <Typography variant="h5" component="div">
+                    היי, אנחנו שמחים לראות אותך!
+                    להתחברות לאיזור האישי, יש להזין כתובת מייל                    </Typography>
+                <br></br>
 
 
-                    <Alert id="alert" severity="error">משתמש לא נמצא</Alert>
+                {/* id */}
+
+                <TextField id="standard-basic" variant="standard" {...register("email", {
+                    required: "email is required",
+                    pattern: {
+                        value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        message: "Invalid email"
+                    }
+                })}
+                />
+                {errors.email && <p className="errorMsg">{errors.email.message}</p>}
+                <br></br><br></br>
 
 
-                </CardContent>
-
-                <CardActions>
-                    <Stack direction="row" spacing={2}>
+                <Alert id="alert" severity="error">משתמש לא נמצא</Alert>
 
 
-                        <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
-                            התחבר
-                        </Button>
-                        <Link href='Register' underline="hover">
-                            {'להרשמה - לחץ כאן'}
-                        </Link>
-                    </Stack>
-                </CardActions>
+            </CardContent>
+
+            <CardActions>
+                <Stack direction="row" spacing={2}>
+
+
+                    <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
+                        התחבר
+                    </Button>
+                    <Link href='Register' underline="hover">
+                        {'להרשמה - לחץ כאן'}
+                    </Link>
+                </Stack>
+            </CardActions>
         </form >
 
 

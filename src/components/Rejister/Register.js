@@ -306,11 +306,11 @@ const Register = () => {
 
           </FormControl>
           {/* זמן עושה בעיות */}
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs} >
+          <LocalizationProvider dateAdapter={AdapterDayjs} >
             <DemoContainer components={['DatePicker']} {...register("date", { required: true })}>
               <DatePicker value={value} onChange={(newValue) => setValue(newValue)} />
             </DemoContainer>
-          </LocalizationProvider> */}
+          </LocalizationProvider>
 
           <br></br><br></br>
           {/*           
