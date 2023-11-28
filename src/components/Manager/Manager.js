@@ -1,9 +1,10 @@
-import './Manager.scss'
+import './Manager.css'
 
-const Manager=()=>{
-    return(<>
-    
-    <h1>מנהל</h1>
+const Manager = () => {
+    return (<>
+
+        <h1>מנהל</h1>
+        
     </>)
 }
 

@@ -31,6 +31,12 @@ import { useSelector } from 'react-redux';
 import Problems from './components/PrivteArea/Problems';
 import Order from './components/PrivteArea/Orders/Order';
 
+import F from './components/Manager/List_Bikes';
+
+import G from '../src/components/Manager/G';
+import List_Station from './components/Manager/List_Station';
+import List_Users from './components/Manager/List_Users';
+
 function App() {
   let currentUser = useSelector(state => state.ur.user);
 
@@ -38,13 +44,14 @@ function App() {
   return (<>
 
     {/* <Out/> */}
-    <ResponsiveAppBar />
-
+    {/* <ResponsiveAppBar /> */}
+    {/* <F /> */}
     {/* <Problems/> */}
     {/* <NavBar/> */}
     {/* <AddStation/> */}
+<List_Users/>
     {/* <Maps /> */}
-
+    {/* <Order /> */}
     {/* <Navb/> */}
     {currentUser != null ? <Navb /> : null}
 
@@ -56,7 +63,7 @@ function App() {
       <Route path='navbar' element={<NavBar />} />
       <Route path='maps' element={<Maps />} />
       <Route path='logIn' element={<LogIn />} />
-      <Route path='manager' element={<Manager />} />
+      <Route path='Manager' element={<Manager />} />
       <Route path='about' element={<About />} />
       <Route path='contect' element={<Contect />} />
       <Route path='addbike' element={<AddBike />} />

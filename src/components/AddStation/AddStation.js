@@ -14,6 +14,7 @@ import '../AddBike/AddBike.css';
 
 import { useState } from "react";
 import ReactGoogleAutocomplete from 'react-google-autocomplete';
+import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 
 
 
@@ -70,7 +71,54 @@ const AddStation = () => {
 
 
     }
+    const postStation = async (station) => {
+        const x = await axios.post(`https://localhost:7207/api/Station`, station).then(res => {
 
+            console.log(res.data + ";;;;;;");
+            document.getElementById("addMore").style.display = "inline";
+            document.getElementById("end").style.display = "inline";
+
+            if (res.data == null) {
+                alert("error")
+                setDisabled(false);
+                return null;
+            }
+        }).catch(console.log("err"))
+
+    }
+
+    const getStation = async () => {
+        const x = await axios.get('https://localhost:7207/api/Station').then(res => {
+            console.log(res.data.length);
+            console.log(res.data)
+            var d = res.data.length + 1;
+            // add bikes num details
+            // for (var i = 0; i < details.bike; i++) {
+            //     console.log(d)
+            //     const bike = {
+            //         "id": 0,
+            //         "code": "hh",
+            //         "battery": 0,
+            //         "idStation": d,
+            //         "dateStart": new Date()
+            //     }
+            //     console.log(details);
+            //     axios.post(`https://localhost:7207/api/Bike`, bike).then(res => {
+
+
+            //         // document.getElementById("addMore").style.display = "inline";
+            //         // document.getElementById("end").style.display = "inline";
+
+            //         if (res.data == null) {
+            //             alert("error")
+            //             setDisabled(false);
+            //             return null;
+            //         }
+            //     }).catch(console.log("err"))
+            // }
+        })
+
+    }
     //הוספת אפנים עובד - בעיה - הקוד לא ייחודי 
     const submit = (details) => {
         const station = {
@@ -83,49 +131,14 @@ const AddStation = () => {
         }
         console.log(details);
         //add station
-        axios.post(`https://localhost:7207/api/Station`, station).then(res => {
 
-            console.log(res.data + ";;;;;;");
-            document.getElementById("addMore").style.display = "inline";
-            document.getElementById("end").style.display = "inline";
-
-            if (res.data == null) {
-                alert("error")
-                setDisabled(false);
-                return null;
-            }
-        }).catch(console.log("err"))
+        postStation(station);
+        getStation();
         //איך לרענן את הסקיואל
         //get the last station
-        axios.get('https://localhost:7207/api/Station').then(res => {
-            console.log(res.data.length);
-
-            var d = res.data.length + 1;
-            // add bikes num details
-            for (var i = 0; i < details.bike; i++) {
-                console.log(d)
-                const bike = {
-                    "id": 0,
-                    "code": "hh",
-                    "battery": 0,
-                    "idStation": d,
-                    "dateStart": new Date()
-                }
-                console.log(details);
-                axios.post(`https://localhost:7207/api/Bike`, bike).then(res => {
+        // window.location.reload(true);
 
 
-                    // document.getElementById("addMore").style.display = "inline";
-                    // document.getElementById("end").style.display = "inline";
-
-                    if (res.data == null) {
-                        alert("error")
-                        setDisabled(false);
-                        return null;
-                    }
-                }).catch(console.log("err"))
-            }
-        })
 
 
 

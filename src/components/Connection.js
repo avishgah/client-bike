@@ -10,7 +10,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
-import { Stack } from '@mui/material';
+import { Input, Stack } from '@mui/material';
 import Link from '@mui/material/Link';
 
 
@@ -135,7 +135,7 @@ const Connection = () => {
         let flag = 0;
         console.log("hi")
         for (var i = 0; i < users.length; i++) {
-            if (users[i].mail == details.email) {
+            if (users[i].mail == details.email && users[i].password == details.password) {
                 console.log("hellow")
                 flag = 1;
                 alert(users[i].name);
@@ -144,7 +144,10 @@ const Connection = () => {
                     payload: users[i]
                 })
                 // setCurrentUser(users[i])
-                nav('/Profil')
+                if (users[i].isManager == false)
+                    nav('/Profil')
+                else
+                    nav('/Manager')
             }
         }
         if (flag == 0) {
@@ -179,8 +182,35 @@ const Connection = () => {
                 <br></br><br></br>
 
 
-                <Alert id="alert" severity="error">משתמש לא נמצא</Alert>
+                <Alert id="alert" severity="error">מייל או סיסמא שגויים</Alert>
 
+                <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+                    <InputLabel htmlFor="standard-adornment-password"></InputLabel>
+                    <Input
+                        id="standard-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        {...register("password", {
+                            required: "Password is required.",
+                            minLength: {
+                                value: 6,
+                                message: "Password should be at-least 6 characters."
+                            }
+                        })}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                    {errors.password && <p className="errorMsg">{errors.password.message}</p>}
+
+                </FormControl>
 
             </CardContent>
 

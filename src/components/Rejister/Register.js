@@ -148,13 +148,6 @@ const Register = () => {
     console.log(details);
     //     console.log(value.$D + "/" + value.$M + "/" + value.$y)
 
-    //     // const user = {
-    //     //     name: details.name,
-    //     //     Phon: details.Phon,
-    //     //     Password: details.password,
-    //     //     Mail: details.email,
-
-    //     // }\\
     const user =
     {
       "name": details.name,

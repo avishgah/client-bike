@@ -1,0 +1,26 @@
+table{
+    width: 40% !important;
+    margin-left: 35% !important;
+    border: black solid !important;
+}
+#table{
+    width: 20% !important;
+    margin-left: 15% !important;
+    border: black solid !important;
+}
+
+
+/* #icon:hover{
+    display: none;
+   
+}
+#icon2:hover{ 
+    display: block;
+}
+
+#icon2{
+    display: none;
+}
+#icon{
+    display: block;
+} */

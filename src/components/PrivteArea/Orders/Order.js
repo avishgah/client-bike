@@ -52,15 +52,18 @@ const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
 function MyComponent() {
   const [count, setCount] = React.useState(0);
 
- 
+
 
 
   const [selectPoin, setSlectedPoint] = useState(null)
   const [mapers, setMapers] = React.useState([])
+
+
   useEffect(() => {
     axios.get('https://localhost:7207/api/Station')
       .then(res => {
         console.log(res)
+        console.log(selectPoin)
         setMapers(res.data)
         let homePos = {}
         res.data.filter(x => x.count > 0).forEach((element, i) => {
@@ -80,6 +83,7 @@ function MyComponent() {
           }
         });
       }).catch(err => console.log(err))
+
   }, [])
 
 
@@ -87,21 +91,37 @@ function MyComponent() {
   // const [open, setOpen] = React.useState(false);
   // const [placement, setPlacement] = React.useState();
 
-
   let currentUser = useSelector(state => state.ur.user);
 
   const Submit = (e) => {
     e.preventDefault()
-    console.log(count,selectPoin)
-    const order={
-      count,
-      userId:currentUser.id,
-      idStatuon:selectPoin
+    console.log(selectPoin)
+    console.log(count, selectPoin)
+
+
+    const order = {
+      "id": 0,
+      "datePay": null,
+      "idStation": selectPoin,
+      "dateOrder": Date.now(),
+      "code": "string",
+      "idCust": 31,
+      "endSum": 0,
+      "isPay": false,
+      "custName": "string",
+      "count": count
     }
-    // axios.post("",{count, })
+    //send empty
+
+    axios.post(`https://localhost:7207/api/Order`, {order,count}).then(res => {
+
+      console.log(res)
+      console.log(res.data)
+
+    })
   }
 
-  console.log(selectPoin)
+
   return (<>
     <br />
 
@@ -142,7 +162,7 @@ function MyComponent() {
       <br></br>
       <select
         onChange={({ target }) => setSlectedPoint(target.value)}>
-        {mapers.map(marker => <option selected={selectPoin === marker.id} value={marker.Id}>{marker.name} {marker.location}</option>)}
+        {mapers.map(marker => <option selected={selectPoin === marker.id} value={marker.id}>{marker.name} {marker.location}</option>)}
       </select>
       <br></br>
       <br></br>
