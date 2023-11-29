@@ -58,3 +58,27 @@
     text-align: right;
     margin-left: 25%;
 }
+#formLoginRBike{
+    /* width: 50%; */
+    text-align: center;
+    /* margin-left: 50%; */
+    /* background-color:white; */
+    border-radius: 5px;
+}
+
+#smallP{
+    font-size: small;
+    text-align: center;
+}
+
+body{
+    text-align: center;
+}
+
+
+#addRB{
+    text-align: center;
+    margin-left: 0 !important;
+    width: 223px !important;
+    background-color: rgb(27, 139, 77);
+}

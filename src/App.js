@@ -31,12 +31,15 @@ import { useSelector } from 'react-redux';
 import Problems from './components/PrivteArea/Problems';
 import Order from './components/PrivteArea/Orders/Order';
 
-import F from './components/Manager/List_Bikes';
+import List_Bikes from './components/Manager/List_Bikes';
 
 import G from '../src/components/Manager/G';
 import List_Station from './components/Manager/List_Station';
 import List_Users from './components/Manager/List_Users';
 
+
+import NavManger from './components/Manager/NavManger';
+import RegisterAdd from './components/Manager/RegisterAdd';
 function App() {
   let currentUser = useSelector(state => state.ur.user);
 
@@ -45,14 +48,21 @@ function App() {
 
     {/* <Out/> */}
     {/* <ResponsiveAppBar /> */}
-    {/* <F /> */}
+    {/* <List_Station/> */}
+    {/* <List_Bikes /> */}
+
+    {/* <NavManger/> */}
     {/* <Problems/> */}
     {/* <NavBar/> */}
     {/* <AddStation/> */}
-<List_Users/>
+    {/* <List_Users/> */}
     {/* <Maps /> */}
     {/* <Order /> */}
     {/* <Navb/> */}
+    <RegisterAdd />
+    {/* <Register/> */}
+    {/* <AddUser/> */}
+    
     {currentUser != null ? <Navb /> : null}
 
 
@@ -94,8 +104,11 @@ function App() {
 
 
 
-
-
+      {/* managaer */}
+      <Route path='lBike' element={<List_Bikes />} />
+      <Route path='lStation' element={<List_Station />} />
+      <Route path='lUser' element={<List_Users />} />
+      <Route path='navM' element={<NavManger />} />
 
     </Routes>
 

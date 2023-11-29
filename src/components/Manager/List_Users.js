@@ -24,12 +24,58 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, IconButton, Tooltip } from '@mui/material';
 import { Switch, switchClasses } from '@mui/joy';
 
+import AddUser from '../AddUser/AddUser';
+import Register from '../Rejister/Register';
+import RegisterAdd from './RegisterAdd';
 export default function AccessibleTable() {
 
 
     const [listUsers, setlistUsers] = useState([]);
 
+
     const [checked, setChecked] = React.useState(false);
+
+    // const [u, setuseru] = useState(null);
+    const change = (id, status) => {
+
+        if (window.confirm("האם אתה בטוח שברצונך לשנות את סטטוס המשתמש ")) {
+
+            console.log(id);
+            var u = null;
+            axios.get(`https://localhost:7207/api/User/${id}`).then(res => {
+                console.log(res.data)
+                u = res.data;
+                console.log(u)
+
+                const user =
+                {
+                    "name": u.name,
+                    "address": u.address,
+                    "mail": u.mail,
+                    "password": u.password,
+                    "toun": u.toun,
+                    "phon": u.phon,
+                    "tz": u.tz,
+                    "dateBirth": u.dateBirth,
+                    "pic": u.pic,
+                    "isManager": false,
+                    "status": !status,
+                    "readTerms": true
+                }
+
+                console.log(user)
+                axios.put(`https://localhost:7207/api/User/${id}`, user).then(res => {
+                    console.log("kk");
+                })
+                window.location.reload(true);
+
+            }).catch(err => console.log(err))
+        }
+        else {
+            console.log("exit")
+        }
+
+    }
 
     useEffect(() => {
         axios.get('https://localhost:7207/api/User')
@@ -58,15 +104,17 @@ export default function AccessibleTable() {
         }
     }
     return (
+        <div class="flex-container">
+    <div class="flex-item-left">
         <TableContainer component={Paper}>
             <Table id="table" aria-label="caption table">
-                <caption>A basic table example with a caption</caption>
+                <caption>End list of users</caption>
                 <TableHead>
                     <TableRow>
 
-                        <TableCell><b></b></TableCell>
+                        {/* <TableCell><b></b></TableCell> */}
                         <TableCell ><b>קוד</b></TableCell>
-                      
+
                         <TableCell align="right"><b>    שם מלא</b></TableCell>
                         <TableCell align="right"><b>תעודת זהות</b></TableCell>
                         <TableCell align="right"><b>טלפון</b></TableCell>
@@ -87,12 +135,6 @@ export default function AccessibleTable() {
                         <TableRow key={row.id}>
                             {/* <DeleteOutlineIcon id="icon2"/> */}
 
-                            <TableCell>
-                                <Tooltip title="מחק" placement="left-end">
-                                    <DeleteIcon id="icon" onClick={() => myFunction(row.id)} />
-                                </Tooltip>
-                            </TableCell>
-
                             <TableCell component="th" scope="row">
                                 {row.id}
                             </TableCell>
@@ -106,17 +148,23 @@ export default function AccessibleTable() {
                             <TableCell align="right">{row.addres}</TableCell>
                             <TableCell align="right">{row.dateBirth}</TableCell>
                             <TableCell align="right">{row.pic}</TableCell>
-                            <TableCell  align="right">{row.status == true ? <CheckIcon/> : <CloseIcon/>}
-                                
-                                {/* <Checkbox
-                                    checked={checked}
-                                    id={row.id}
-                           
-                                    onChange={(event,id)=> setChecked(event.target.id==row.id ? true : false)}
-                                    inputProps={{ 'aria-label': 'controlled' }}
-                                    required="lll"
-                                /> */}
-                                
+                            <TableCell align="left">
+                                {row.status == true ?
+                                    <Tooltip title="פעיל" placement="left-end">
+                                        <Switch
+                                            checked={row.status}
+                                            onChange={() => change(row.id, row.status)}
+                                            inputProps={{ 'aria-label': 'controlled' }}
+                                        />
+                                    </Tooltip> : <Tooltip title="לא פעיל" placement="left-end">
+                                        <Switch
+                                            checked={row.status}
+                                            onChange={() => change(row.id, row.status)}
+                                            inputProps={{ 'aria-label': 'controlled' }}
+                                        />
+                                    </Tooltip>}
+
+
                             </TableCell>
 
                             {/* <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
@@ -127,7 +175,17 @@ export default function AccessibleTable() {
                     ))}
                 </TableBody>
             </Table>
-            <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">עדכון</Button>
         </TableContainer>
+
+        </div>
+            <div class="flex-item-right">
+                <br></br>
+                <b>  הוסף משתמש </b><br></br><br></br>
+
+                <RegisterAdd />
+
+
+            </div>
+        </div>
     );
 }

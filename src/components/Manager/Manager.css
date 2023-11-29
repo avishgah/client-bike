@@ -1,12 +1,13 @@
-table{
-    width: 40% !important;
-    margin-left: 35% !important;
-    border: black solid !important;
+table {
+    /* width: 80% !important; */
+   /*  margin-left: 35% !important;
+    border: black solid !important; */
 }
-#table{
-    width: 20% !important;
-    margin-left: 15% !important;
-    border: black solid !important;
+
+#table {
+    /* width: 20% !important; */
+    /* margin-left: 10% !important; */
+    /* border: black solid !important; */
 }
 
 
@@ -24,3 +25,46 @@ table{
 #icon{
     display: block;
 } */
+
+
+#ftime{
+margin-left: 20%;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    text-align: center;
+}
+
+.flex-item-left {
+    border: black 2px solid;
+    background-color: #f1f1f1;
+    padding: 10px;
+    flex: 70%;
+}
+
+.flex-item-right {
+    border: black 2px solid;
+    background-color:  #f1f1f1;
+    padding: 10px;
+    text-align: center;
+    flex: 30%;
+    font-size: large;
+}
+
+/* Responsive layout - makes a one column-layout instead of two-column layout */
+@media (max-width: 800px) {
+    .flex-container {
+        flex-direction: column;
+    }
+    #ftime{
+        margin-left: 34%;
+    }
+}

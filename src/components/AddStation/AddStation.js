@@ -10,6 +10,8 @@ import axios from 'axios';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+
+
 import '../AddBike/AddBike.css';
 
 import { useState } from "react";
@@ -49,10 +51,10 @@ const AddStation = () => {
         event.preventDefault();
     };
 
+   
     const restasrt = () => {
-
+        window.location.reload(true);
     }
-
     const getDetails = (x, y, z, m) => {
         console.log(x)
         if (x.address_components.length > 4) {
@@ -119,6 +121,8 @@ const AddStation = () => {
         })
 
     }
+
+
     //הוספת אפנים עובד - בעיה - הקוד לא ייחודי 
     const submit = (details) => {
         const station = {
@@ -147,33 +151,22 @@ const AddStation = () => {
     return (<>
 
 
-        <form id="formLoginR" onSubmit={handleSubmit(submit)}>
+        <form id="formLoginRBike" onSubmit={handleSubmit(submit)}>
+
+            <p id="smallP">הכנס מספר אופניים שברצונך להוסיף אליה</p>
             <TextField
                 label="מספר אפנים "
+                sx={{ backgroundColor: "white",textAlign:"right" }}
+
                 id="demo-helper-text-aligned"
                 {...register("bike", {})}
-            /><br></br>
-            {/* <Box
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    '& > :not(style)': { m: 1 },
-                }}
-            >
-                <Stack>
-                  
-                    <TextField
-                        label="כתובת "
-                        id="demo-helper-text-aligned"
-                        {...register("adress", {})}
-                    />
-                </Stack>
+            /><br></br><br></br>
 
-            </Box>
-            {/* endIcon={<SendIcon />}  */}
+            <p id="smallP">הכנס מיקום התחנה לבחירתך</p>
             <ReactGoogleAutocomplete
-                __
-                style={{ padding: 10, borderColor: "rgb(30, 75, 199)", borderRadius: 10 }}
+                
+                id="demo-helper-text-aligned"
+                style={{ padding: 10, borderInlineEndColor:"grey", borderBottomColor:"grey", borderRadius: 3,width:220,padding:17}}
                 apiKey={"AIzaSyDd2yrRfnh88OiKs8yCiH-8uK5aASNgve8"}
                 onPlaceSelected={(place) => getDetails(place, { formatted_address: place.formatted_address.toString() }, { lat: place.geometry.location.lat() }, { lng: place.geometry.location.lng() })}
 
@@ -183,21 +176,22 @@ const AddStation = () => {
                 }
                 }
 
-            />
+            /><br></br><br></br>
+
             {console.log(places + "ll")}
             <Button type="button" id="addMore" onClick={() => (nav('/addStation'))}>
                 הוסף עוד תחנה
             </Button>
-            <Button type="button" id="end" onClick={() => (nav('/'))}>
+            <Button type="button" id="end" onClick={() => (restasrt())}>
                 סיום
             </Button>
-            <Stack direction="row" spacing={2}>
+            <br></br><br></br>
 
-                <Button variant="contained" id="addR" type="submit">
-                    התחבר
-                </Button>
 
-            </Stack>
+            <Button variant="contained" id="addRB" type="submit">
+                התחבר
+            </Button>
+
         </form>
     </>)
 

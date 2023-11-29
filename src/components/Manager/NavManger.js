@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import './Adit.css';
+import './Manager.css';
 import { Link, useNavigate } from "react-router-dom";
 import * as type from "../../store/actions/actionType";
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 
-const NavBar = () => {
+const NavManger = () => {
 
     const nav = useNavigate();
 
@@ -35,13 +35,13 @@ const NavBar = () => {
                         <Link to="History">  רשימת נסיעות</Link><br></br> <br></br>
                     </li>
                     <li id='2'onClick={() => (changeColor(2))}>
-                        <Link to="Order">רשימת משתמשים </Link>
+                        <Link to="lUser">רשימת משתמשים </Link>
                     </li>      
                          <li id='2'onClick={() => (changeColor(2))}>
-                        <Link to="Order">רשימת תחנות </Link>
+                        <Link to="lStation">רשימת תחנות </Link>
                     </li>
                     <li id='2'onClick={() => (changeColor(2))}>
-                        <Link to="Order">רשימת אפניים </Link>
+                        <Link to="lBike">רשימת אפניים </Link>
                     </li>
                     <li id='2'onClick={() => (changeColor(2))}>
                         <Link to="Order">רשימת דיווחים </Link>
@@ -65,4 +65,4 @@ const NavBar = () => {
 
 }
 
-export default NavBar;
+export default NavManger;

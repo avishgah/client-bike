@@ -41,8 +41,9 @@ const AddBike = () => {
     };
 
     const restasrt = () => {
-
+        window.location.reload(true);
     }
+
 
     //הוספת אפנים עובד - בעיה - הקוד לא ייחודי 
     const submit = (details) => {
@@ -70,40 +71,34 @@ const AddBike = () => {
 
     return (<>
 
-        <form id="formLoginR" onSubmit={handleSubmit(submit)}>
+        <form id="formLoginRBike" onSubmit={handleSubmit(submit)}>
 
-            <Box
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    '& > :not(style)': { m: 1 },
-                }}
-            >
-                <Stack>
-                    <TextField
-                        helperText="Please enter your name"
-                        id="demo-helper-text-aligned"
-                        label="IdSte"
-                        {...register("idStation", {})}
-                    />
-                </Stack>
 
-            </Box>
+
+            <p id="smallP">הכנס מספר תחנה שברצונך להוסיף אליה</p>
+            <TextField
+                sx={{ backgroundColor: "white",textAlign:"right" }}
+
+                id="demo-helper-text-aligned"
+                label="קוד-תחנה"
+                {...register("idStation", {})}
+            />
+            <br></br>
+            <br></br>
             {/* endIcon={<SendIcon />}  */}
-            <Button type="button" id="addMore" onClick={() => (nav('/addbike'))}>
+            <Button type="button" id="addMore" onClick={() => (nav('/lBike'))}>
                 הוסף עוד אפנים
             </Button>
-            <Button type="button" id="end" onClick={() => (nav('/'))}>
+            <Button type="button" id="end" onClick={() => (restasrt())}>
                 סיום
             </Button>
-            <Stack direction="row" spacing={2}>
 
-                <Button variant="contained" id="addR" type="submit">
-                    התחבר
+                <Button variant="contained" id="addRB" type="submit">
+                    הוסף
                 </Button>
 
-            </Stack>
         </form>
+
     </>)
 
 }

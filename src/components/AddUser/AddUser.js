@@ -11,8 +11,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 import { Stack } from '@mui/material';
-import './AddUser.scss'
-
 
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { LocalizationProvider } from '@mui/x-date-pickers-pro/LocalizationProvider';
@@ -30,14 +28,14 @@ import SendIcon from '@mui/icons-material/Send';
 
 import { useNavigate } from 'react-router-dom';
 
-import './AddUser.scss';
+import './AddUser.css';
 import axios from 'axios';
 
 
 // ,, כתובת, , , עיר, , , תאריך לידה, תצלום תעודת זהות, סוג לקוח(לקוח, מנהל), לא פעיל, אישור קריאת תקנון
 
 const AddUser = () => {
-    
+
     const [value, setValue] = React.useState(null);
 
     const { register, handleSubmit, getValues, formState: { isValid, errors, dirtyFields, touchedFields, isDirty } } = useForm({
@@ -63,33 +61,34 @@ const AddUser = () => {
     const submit = (details) => {
 
         console.log(details);
-        console.log(value.$D+"/"+value.$M+"/"+value.$y)
+        console.log(value.$D + "/" + value.$M + "/" + value.$y)
 
         // const user = {
         //     name: details.name,
         //     Phon: details.Phon,
         //     Password: details.password,
         //     Mail: details.email,
-      
+
         // }\\
-        const user=  {"name": "אבישג               ",
-        "address": "ברק",
-        "mail": "avi@gmail.com",
-        "password": "d3d3d3    ",
-        "toun": "ראשון לציון",
-        "phon": "0987654321",
-        "tz": "432432432",
-        "dateBirth": "2003-11-21T00:00:00",
-        "pic": "טעטע                                              ",
-        "isManager": false,
-        "status": true,
-        "readTerms": true
-    }
+        const user = {
+            "name": "אבישג               ",
+            "address": "ברק",
+            "mail": "avi@gmail.com",
+            "password": "d3d3d3    ",
+            "toun": "ראשון לציון",
+            "phon": "0987654321",
+            "tz": "432432432",
+            "dateBirth": "2003-11-21T00:00:00",
+            "pic": "טעטע                                              ",
+            "isManager": false,
+            "status": true,
+            "readTerms": true
+        }
         axios.post(`https://localhost:7207/api/user`, user).then(res => {
 
-         console.log(res.data+";;;;;;");
+            console.log(res.data + ";;;;;;");
 
-        if (res.data == null) {
+            if (res.data == null) {
                 alert("error")
                 return null;
 
@@ -108,7 +107,7 @@ const AddUser = () => {
                 // nav("/ToDo")
                 nav("/ToDo")
 
-            } 
+            }
         })
 
 
@@ -117,56 +116,48 @@ const AddUser = () => {
     }
 
     return <>
-        <h1>register</h1>
 
         {/* name */}
-        <form id="formLoginR" onSubmit={handleSubmit(submit)}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    '& > :not(style)': { m: 1 },
-                }}
-            >
-                <Stack>
-                    <TextField
-                        helperText="Please enter your name"
-                        id="demo-helper-text-aligned"
-                        label="name"
-                        {...register("name", {})}
-                    />
-                    <TextField
-                        helperText="Please enter your phon"
-                        id="demo-helper-text-aligned"
-                        label="Phon"
-                        {...register("phon", {})}
-                    />
-                    <br></br>
-                    <TextField id="outlined-basic" label="mail" variant="outlined"  {...register("email", { required: true, pattern: /^[0-9A-Za-z]{1,}@gmail.com$/ })} />
-                    {errors.email?.type == "pattern" && <div className="error">
-                        מייל לא בתבנית הנכונה
-                    </div>}
-                    {errors.email?.type == "required" &&
-                        <div className="error">
-                            שדה חובה
-                        </div>}
-                    <br></br>
+        <form id="formLoginRU" onSubmit={handleSubmit(submit)}>
+
+            <TextField
+                helperText="Please enter your name"
+                id="demo-helper-text-aligned"
+                label="name"
+                {...register("name", {})}
+            />
+            <TextField
+                helperText="Please enter your phon"
+                id="demo-helper-text-aligned"
+                label="Phon"
+                {...register("phon", {})}
+            />
+            <br></br>
+            <TextField id="outlined-basic" label="mail" variant="outlined"  {...register("email", { required: true, pattern: /^[0-9A-Za-z]{1,}@gmail.com$/ })} />
+            {errors.email?.type == "pattern" && <div className="error">
+                מייל לא בתבנית הנכונה
+            </div>}
+            {errors.email?.type == "required" &&
+                <div className="error">
+                    שדה חובה
+                </div>}
+            <br></br>
 
 
 
-                    <TextField id="outlined-basic" label="id" variant="outlined"  {...register("ID", { required: true, pattern: /^[0-9]{1,9}/ })} />
-                    {errors.ID?.type == "pattern" && <div className="error">
-                        תעודת זהות לא תקינה
-                    </div>}
-                    {errors.ID?.type == "required" &&
-                        <div className="error">
-                            שדה חובה
-                        </div>}
-                    <br></br>
+            <TextField id="outlined-basic" label="id" variant="outlined"  {...register("ID", { required: true, pattern: /^[0-9]{1,9}/ })} />
+            {errors.ID?.type == "pattern" && <div className="error">
+                תעודת זהות לא תקינה
+            </div>}
+            {errors.ID?.type == "required" &&
+                <div className="error">
+                    שדה חובה
+                </div>}
+            <br></br>
 
-                    {/* calender */}
+            {/* calender */}
 
-                    {/* <TextField id="outlined-basic" label="calender" variant="outlined"  {...register("calender", { required: true, pattern: /^[0-9]{1,9}/ })} />
+            {/* <TextField id="outlined-basic" label="calender" variant="outlined"  {...register("calender", { required: true, pattern: /^[0-9]{1,9}/ })} />
                     {errors.calender?.type == "pattern" && <div className="error">
 
                     </div>}
@@ -175,59 +166,57 @@ const AddUser = () => {
                             שדה חובה
                         </div>} */}
 
-                    <br></br>
+            <br></br>
 
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer components={['DatePicker']}>
-                            <DatePicker value={value} onChange={(newValue) => setValue(newValue)} />
-                        </DemoContainer>
-                    </LocalizationProvider>
- 
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['DatePicker']}>
+                    <DatePicker value={value} onChange={(newValue) => setValue(newValue)} />
+                </DemoContainer>
+            </LocalizationProvider>
 
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                        <OutlinedInput
 
-                            {...register("password", { required: true })}
+            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                <OutlinedInput
 
-                            id="outlined-adornment-password"
-                            type={showPassword ? 'text' : 'password'}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label="Password"
-                        />
-                        {errors.password?.type == "pattern" &&
-                            <div className="error">
-                                סיסמא לא תקינה
-                            </div>}
-                        {errors.password?.type == "required" &&
-                            <div className="error">
-                                שדה חובה
-                            </div>}
+                    {...register("password", { required: true })}
 
-                    </FormControl>
-                    <br></br>
-                </Stack>
-            </Box>
+                    id="outlined-adornment-password"
+                    type={showPassword ? 'text' : 'password'}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                            >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                    label="Password"
+                />
+                {errors.password?.type == "pattern" &&
+                    <div className="error">
+                        סיסמא לא תקינה
+                    </div>}
+                {errors.password?.type == "required" &&
+                    <div className="error">
+                        שדה חובה
+                    </div>}
+
+            </FormControl>
+            <br></br>
+
             <input aria-invalid="false" autocomplete="off" id=":r1:" placeholder="DD/MM/YYYY" type="text" inputmode="tel" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-nxo287-MuiInputBase-input-MuiOutlinedInput-input" value="05/04/2023" />
 
-            <Stack direction="row" spacing={2}>
 
-                <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">
-                    התחבר
-                </Button>
 
-            </Stack>
+            <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">
+                התחבר
+            </Button>
+
         </form>
         {/* {document.getElementById("formLogin").style.display = "none"} */}
     </>

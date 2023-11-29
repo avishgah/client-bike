@@ -23,9 +23,45 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { Button, IconButton, Tooltip } from '@mui/material';
 import { Switch, switchClasses } from '@mui/joy';
+import AddStation from '../AddStation/AddStation';
 
 export default function AccessibleTable() {
 
+    const change = (id, status) => {
+        console.log(id)
+
+        if (window.confirm("האם אתה בטוח שברצונך לשנות את סטטוס המשתמש ")) {
+
+            console.log(id);
+            var u = null;
+            axios.get(`https://localhost:7207/api/Station/${id}`).then(res => {
+                console.log(res.data)
+                u = res.data;
+                console.log(u)
+
+                const station =
+                {
+                    "location": u.location,
+                    "name": u.name,
+                    "status": !status,
+                    "lat": u.lat,
+                    "lng": u.lng
+
+                }
+
+                console.log(station)
+                axios.put(`https://localhost:7207/api/Station/${id}`, station).then(res => {
+                    console.log("kk");
+                })
+                window.location.reload(true);
+
+            }).catch(err => console.log(err))
+        }
+        else {
+            console.log("exit")
+        }
+
+    }
 
     const [listStation, setlistStation] = useState([]);
 
@@ -58,63 +94,78 @@ export default function AccessibleTable() {
         }
     }
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 100 }} aria-label="caption table">
-                <caption>A basic table example with a caption</caption>
-                <TableHead>
-                    <TableRow>
+        <div class="flex-container">
+            <div class="flex-item-left">
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 100 }} aria-label="caption table">
+                        <caption>A basic table example with a caption</caption>
+                        <TableHead>
+                            <TableRow>
 
-                        <TableCell><b></b></TableCell>
-                        <TableCell ><b>קוד</b></TableCell>
-                        <TableCell align="right"><b>עיר</b></TableCell>
-                        <TableCell align="right"><b>שם תחנה</b></TableCell>
-                        <TableCell align="right"><b>סטטוס</b></TableCell>
+                                {/* <TableCell><b></b></TableCell> */}
+                                <TableCell ><b>קוד</b></TableCell>
+                                <TableCell align="center"><b>עיר</b></TableCell>
+                                <TableCell align="center"><b>שם תחנה</b></TableCell>
+                                <TableCell align="center"><b>סטטוס</b></TableCell>
 
-                    </TableRow>
-                </TableHead>
-                <TableBody>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
 
 
-                    {listStation.map((row) => (
-                        <TableRow key={row.id}>
-                            {/* <DeleteOutlineIcon id="icon2"/> */}
-
+                            {listStation.map((row) => (
+                                <TableRow key={row.id}>
+                                    {/* <DeleteOutlineIcon id="icon2"/> */}
+                                    {/* 
                             <TableCell>
                                 <Tooltip title="מחק" placement="left-end">
                                     <DeleteIcon id="icon" onClick={() => myFunction(row.id)} />
                                 </Tooltip>
-                            </TableCell>
+                            </TableCell> */}
 
-                            <TableCell component="th" scope="row">
-                                {row.id}
-                            </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {row.id}
+                                    </TableCell>
 
-                            <TableCell align="right">{row.location}</TableCell>
-                            <TableCell align="right">{row.name}</TableCell>
-                            <TableCell  align="right">{row.status == true ? <CheckIcon/> : <CloseIcon/>}
-                                
-                                {/* <Checkbox
-                                    checked={checked}
-                                    id={row.id}
-                           
-                                    onChange={(event,id)=> setChecked(event.target.id==row.id ? true : false)}
-                                    inputProps={{ 'aria-label': 'controlled' }}
-                                    required="lll"
-                                /> */}
-                                
-                            </TableCell>
+                                    <TableCell align="center">{row.location}</TableCell>
+                                    <TableCell align="center">{row.name}</TableCell>
+                                    <TableCell align="center">
+                                        {row.status == true ?
+                                            <Tooltip title="פעילה" placement="left-end">
+                                                <Switch
+                                                    checked={row.status}
+                                                    onChange={() => change(row.id, row.status)}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                />
+                                            </Tooltip> : <Tooltip title="לא פעילה" placement="left-end">
+                                                <Switch
+                                                    checked={row.status}
+                                                    onChange={() => change(row.id, row.status)}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                />
+                                            </Tooltip>}
 
-                            <TableCell align="right">{row.status}</TableCell>
 
-                            {/* <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
+                                    </TableCell>
+
+                                    {/* <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
                         
                     </Button>
               <IconButton >{DeleteIcon}</IconButton> */}
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-            <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">עדכון</Button>
-        </TableContainer>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+            <div class="flex-item-right">
+                <br></br>
+                <b>  הוסף תחנה </b><br></br><br></br>
+
+                <AddStation />
+
+
+            </div>
+        </div>
     );
 }
