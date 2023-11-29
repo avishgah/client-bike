@@ -88,10 +88,10 @@ label {
   color: gray;
 }
 
-.showStetion {
-  /* visibility: hidden; */
+/* .showStetion {
+  visibility: hidden;
   display: none;
-}
+} */
 
 #outlined-multiline-static{
   width:250px !important;

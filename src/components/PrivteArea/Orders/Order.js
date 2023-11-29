@@ -60,7 +60,7 @@ function MyComponent() {
 
 
   useEffect(() => {
-    axios.get('https://localhost:7207/api/Station')
+    axios.get('https://localhost:7207/api/Station/Get')
       .then(res => {
         console.log(res)
         console.log(selectPoin)
@@ -112,8 +112,8 @@ function MyComponent() {
       "count": count
     }
     //send empty
-
-    axios.post(`https://localhost:7207/api/Order`, {order,count}).then(res => {
+  const IsPay=false;
+    axios.post(`https://localhost:7207/api/Order`, {count, IsPay, id:0, datePay:null, IdCust:31,idStation:selectPoin,dateOrder:new Date()}).then(res => {
 
       console.log(res)
       console.log(res.data)

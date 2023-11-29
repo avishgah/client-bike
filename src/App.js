@@ -36,10 +36,11 @@ import List_Bikes from './components/Manager/List_Bikes';
 import G from '../src/components/Manager/G';
 import List_Station from './components/Manager/List_Station';
 import List_Users from './components/Manager/List_Users';
-
-
+import List_Opinion from './components/Manager/List_Opinion';
 import NavManger from './components/Manager/NavManger';
 import RegisterAdd from './components/Manager/RegisterAdd';
+
+import CardOpinion from './components/Manager/CardOpinion';
 function App() {
   let currentUser = useSelector(state => state.ur.user);
 
@@ -51,18 +52,25 @@ function App() {
     {/* <List_Station/> */}
     {/* <List_Bikes /> */}
 
+
+    {/* <List_Opinion /> */}
+
+    {/* <CardOpinion/> */}
+
     {/* <NavManger/> */}
+
+
     {/* <Problems/> */}
     {/* <NavBar/> */}
     {/* <AddStation/> */}
     {/* <List_Users/> */}
     {/* <Maps /> */}
-    {/* <Order /> */}
+    <Order />
     {/* <Navb/> */}
-    <RegisterAdd />
+    {/* <RegisterAdd /> */}
     {/* <Register/> */}
     {/* <AddUser/> */}
-    
+
     {currentUser != null ? <Navb /> : null}
 
 

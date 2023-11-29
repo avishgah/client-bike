@@ -51,7 +51,7 @@ const AddStation = () => {
         event.preventDefault();
     };
 
-   
+
     const restasrt = () => {
         window.location.reload(true);
     }
@@ -88,43 +88,47 @@ const AddStation = () => {
         }).catch(console.log("err"))
 
     }
+    const AddBike = async(bike)=>{
+        const o= await axios.post(`https://localhost:7207/api/Bike`, bike).then(res => {
+            console.log(res.data)
 
-    const getStation = async () => {
-        const x = await axios.get('https://localhost:7207/api/Station').then(res => {
+            // document.getElementById("addMore").style.display = "inline";
+            // document.getElementById("end").style.display = "inline";
+
+            if (res.data == null) {
+                alert("error")
+                setDisabled(false);
+                return null;
+            }
+        }).catch(console.log("err"))
+    }
+
+    const getStation = async (details) => {
+        const x = await axios.get('https://localhost:7207/api/Station/Get').then(res => {
             console.log(res.data.length);
             console.log(res.data)
-            var d = res.data.length + 1;
-            // add bikes num details
-            // for (var i = 0; i < details.bike; i++) {
-            //     console.log(d)
-            //     const bike = {
-            //         "id": 0,
-            //         "code": "hh",
-            //         "battery": 0,
-            //         "idStation": d,
-            //         "dateStart": new Date()
-            //     }
-            //     console.log(details);
-            //     axios.post(`https://localhost:7207/api/Bike`, bike).then(res => {
-
-
-            //         // document.getElementById("addMore").style.display = "inline";
-            //         // document.getElementById("end").style.display = "inline";
-
-            //         if (res.data == null) {
-            //             alert("error")
-            //             setDisabled(false);
-            //             return null;
-            //         }
-            //     }).catch(console.log("err"))
-            // }
+            var d = res.data[res.data.length-1].id;
+            console.log(details)
+            for (var i = 0; i < details.bike; i++) {
+                console.log(d)
+                const bike = {
+                    "id": 0,
+                    "code": "hh",
+                    "battery": 0,
+                    "idStation": d,
+                    "dateStart": new Date()
+                }
+                console.log(details);
+                AddBike(bike);
+            }
         })
 
     }
 
 
     //הוספת אפנים עובד - בעיה - הקוד לא ייחודי 
-    const submit = (details) => {
+    const submit = async (details) => {
+        console.log(places, "ppppppppppppppppppppp")
         const station = {
             "id": 0,
             "location": city,
@@ -136,8 +140,8 @@ const AddStation = () => {
         console.log(details);
         //add station
 
-        postStation(station);
-        getStation();
+        await postStation(station);
+        await getStation(details);
         //איך לרענן את הסקיואל
         //get the last station
         // window.location.reload(true);
@@ -156,7 +160,7 @@ const AddStation = () => {
             <p id="smallP">הכנס מספר אופניים שברצונך להוסיף אליה</p>
             <TextField
                 label="מספר אפנים "
-                sx={{ backgroundColor: "white",textAlign:"right" }}
+                sx={{ backgroundColor: "white", textAlign: "right" }}
 
                 id="demo-helper-text-aligned"
                 {...register("bike", {})}
@@ -164,9 +168,9 @@ const AddStation = () => {
 
             <p id="smallP">הכנס מיקום התחנה לבחירתך</p>
             <ReactGoogleAutocomplete
-                
+
                 id="demo-helper-text-aligned"
-                style={{ padding: 10, borderInlineEndColor:"grey", borderBottomColor:"grey", borderRadius: 3,width:220,padding:17}}
+                style={{ padding: 10, borderInlineEndColor: "grey", borderBottomColor: "grey", borderRadius: 3, width: 220, padding: 17 }}
                 apiKey={"AIzaSyDd2yrRfnh88OiKs8yCiH-8uK5aASNgve8"}
                 onPlaceSelected={(place) => getDetails(place, { formatted_address: place.formatted_address.toString() }, { lat: place.geometry.location.lat() }, { lng: place.geometry.location.lng() })}
 

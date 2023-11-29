@@ -57,7 +57,7 @@ function MyComponent() {
   const [selectPoin, setSlectedPoint] = useState(null)
   const [mapers, setMapers] = React.useState([])
   useEffect(() => {
-    axios.get('https://localhost:7207/api/Station')
+    axios.get('https://localhost:7207/api/Station/GetStationListWhereTrue')
       .then(res => {
         console.log(res)
         setMapers(res.data)

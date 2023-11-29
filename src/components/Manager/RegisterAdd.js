@@ -318,16 +318,15 @@ const RegisterAdd = () => {
       {errors.password && <p className="errorMsg">{errors.password.message}</p>}
 
       {/* date */}
-      {/* זמן עושה בעיות */}
 
-      <input type='button' onClick={funcDate()}>ddddddd</input>
-
-      <input type="date" onChange={(newValue) => (setValue(newValue),funcDate())}
+      {/* <input type="date" onChange={(newValue) => (setValue(newValue),funcDate())}
       {...register("datezz", {
           required: "phon is required",
       
 
-        })}></input>
+        })}></input> */}
+
+
       <div id="ftime" >
         <LocalizationProvider dateAdapter={AdapterDayjs} >
           <DemoContainer components={['DatePicker']} >

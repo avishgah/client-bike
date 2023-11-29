@@ -25,7 +25,9 @@ table {
 #icon{
     display: block;
 } */
-
+body{
+    background-color: #f1f1f1;
+}
 
 #ftime{
 margin-left: 20%;
@@ -67,4 +69,21 @@ margin-left: 20%;
     #ftime{
         margin-left: 34%;
     }
+}
+
+
+#cardFlex{
+    display: flex;  
+  flex-wrap: wrap;
+  padding: 10px;
+  background-color: #f1f1f1;
+    /* font-size: 30px;
+    text-align: center; */
+}
+
+#opinB{
+    background-color: #f1f1f1;
+    width: 150px;
+    margin-left: 30px;
+    color: black;
 }
