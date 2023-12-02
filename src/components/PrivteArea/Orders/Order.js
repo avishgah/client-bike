@@ -105,7 +105,7 @@ function MyComponent() {
       "idStation": selectPoin,
       "dateOrder": Date.now(),
       "code": "string",
-      "idCust": 31,
+      "idCust": 15,
       "endSum": 0,
       "isPay": false,
       "custName": "string",
@@ -113,7 +113,7 @@ function MyComponent() {
     }
     //send empty
   const IsPay=false;
-    axios.post(`https://localhost:7207/api/Order`, {count, IsPay, id:0, datePay:null, IdCust:31,idStation:selectPoin,dateOrder:new Date()}).then(res => {
+    axios.post(`https://localhost:7207/api/Order`, {count, IsPay, id:0, datePay:null, IdCust:15,idStation:selectPoin,dateOrder:new Date()}).then(res => {
 
       console.log(res)
       console.log(res.data)

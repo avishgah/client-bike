@@ -17,6 +17,7 @@ import '../AddBike/AddBike.css';
 import { useState } from "react";
 import ReactGoogleAutocomplete from 'react-google-autocomplete';
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
+import { TRUE } from 'sass';
 
 
 
@@ -116,7 +117,8 @@ const AddStation = () => {
                     "code": "hh",
                     "battery": 0,
                     "idStation": d,
-                    "dateStart": new Date()
+                    "dateStart": new Date(),
+                    "status":TRUE
                 }
                 console.log(details);
                 AddBike(bike);
@@ -142,14 +144,6 @@ const AddStation = () => {
 
         await postStation(station);
         await getStation(details);
-        //איך לרענן את הסקיואל
-        //get the last station
-        // window.location.reload(true);
-
-
-
-
-
     }
 
     return (<>
