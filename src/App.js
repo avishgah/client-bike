@@ -48,7 +48,7 @@ function App() {
   return (<>
 
     {/* <Out/> */}
-    {/* <ResponsiveAppBar /> */}
+    <ResponsiveAppBar />
 
     {/* <List_Station/> */}
 
@@ -60,14 +60,14 @@ function App() {
     {/* <CardOpinion/> */}
 
     {/* <NavManger/> */}
-
+    {/* <Contect /> */}
 
     {/* <Problems/> */}
     {/* <NavBar/> */}
     {/* <AddStation/> */}
     {/* <List_Users/> */}
     {/* <Maps /> */}
-    <Order />
+    {/* <Order /> */}
     {/* <Navb/> */}
     {/* <RegisterAdd /> */}
     {/* <Register/> */}
@@ -77,7 +77,7 @@ function App() {
 
 
     <Routes>
-      {/* <Route path="" element={<Home />}></Route> */}
+      <Route path="" element={<Home />}></Route>
       <Route path='home' element={<Home />} />
       <Route path='app' element={<App />} />
       <Route path='navbar' element={<NavBar />} />

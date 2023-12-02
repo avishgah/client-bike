@@ -17,6 +17,8 @@ const DrawerComponnent = () => {
             nav('/Maps')
         if (page == 'איזור אישי')
             nav('/NavB')
+        if (page == 'יצירת קשר')
+            nav('/contect')
     }
     return (<>
 

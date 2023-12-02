@@ -18,7 +18,7 @@ import { RampRight } from '@mui/icons-material';
 const Home = () => {
     const nav = useNavigate();
     return (<>
-    <div style={{ backgroundImage: `url('./Images/22.jpg')`, backgroundRepeat:'no-repeat',backgroundSize:600,backgroundPosition:'100% 10%'
+    <div  style={{ backgroundImage: `url('./Images/logo2.jpg')`,backgroundRepeat:"no-repeat",backgroundSize:600,backgroundPosition:'10% 10%'
      }}>
 
         {/* img */}
@@ -27,7 +27,7 @@ const Home = () => {
         <div className='ss' onClick={() => nav('./How')}  >
             {/* {<PedalBikeIcon fontSize='large' />} */}
             <CardContent >
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" fontSize={'20px'} component="div">
                     <b>     ?כיצד פועל השירות </b>
                 </Typography>
 
@@ -43,7 +43,7 @@ const Home = () => {
         <div className='ss' onClick={() => nav('./Pay')}  >
             {/* {<PedalBikeIcon fontSize='large' />} */}
             <CardContent >
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" fontSize={'20px'} component="div">
                     <b>תעריפים וחישוב עלויות השכרה</b>
                 </Typography>
 
@@ -58,7 +58,7 @@ const Home = () => {
         <div className='ss' onClick={() => nav('./Pay')}  >
             {/* {<PedalBikeIcon fontSize='large' />} */}
             <CardContent >
-                <Typography variant="h5" component="div">
+                <Typography variant="h5"  fontSize={'20px'}component="div">
                     <b>רכיבה עם ערך מוסף</b>
                 </Typography>
 
@@ -73,7 +73,7 @@ const Home = () => {
         <div className='ss' onClick={() => nav('./Pay')}  >
             {/* {<PedalBikeIcon fontSize='large' />} */}
             <CardContent >
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" fontSize={'20px'} component="div">
                     <b>רכיבה בטוחה</b>
                 </Typography>
 
@@ -88,7 +88,7 @@ const Home = () => {
         <div className='ss' onClick={() => nav('./Pay')}  >
             {/* {<PedalBikeIcon fontSize='large' />} */}
             <CardContent >
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" fontSize={'20px'} component="div">
                     <b>עשה ואל תעשה</b>
                 </Typography>
 
@@ -99,8 +99,7 @@ const Home = () => {
             </CardContent>
         </div>
         <Maps id="k"/>
-        </div> 
-        
+        </div>
         </>)
 }
 export default Home;

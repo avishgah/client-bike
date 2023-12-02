@@ -1,14 +1,18 @@
 #l {
-    text-align: left !important;
-    margin-left: 38%;
+    text-align: right !important;
+    /* margin-left: 38%; */
     color: blueviolet;
+    font-size: 30px;
+    margin-right: 2%;
 }
 
 .ss {
     background-color: white;
     text-align: right;
-    width: 50%;
-    margin-right: 0;
+    width: 40vw;
+    margin-left: 55vw;
+    /* margin-right: 0; */
+    /* font-size: small; */
     direction: ltr;
 }
 

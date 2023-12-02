@@ -5,11 +5,12 @@
 
 .nav {
     background-color: white !important;
-    position: fixed;
+    /* position: fixed; */
 }
 
 .css-hip9hq-MuiPaper-root-MuiAppBar-root {
     position: fixed !important;
+    padding: 5px !important;
 }
 
 .css-1e4e1qc-MuiButtonBase-root-MuiButton-root:hover {
@@ -19,7 +20,7 @@
 }
 
 .private-area {
-    background-color: rgb(78, 26, 175) !important;
+    background-color: #bb6566!important;
     padding: 6px !important;
     border-radius: 50px !important;
     color: white !important;
@@ -32,7 +33,7 @@
     display: flex;
     flex-wrap: wrap;
     height: 70px;
-    background-color: #0f39ad;
+    background-color: #612021;
     color: white;
     direction: rtl;
     text-align: right;
@@ -72,7 +73,7 @@
 }
 
 body{
-    text-align: center;
+    /* text-align: center; */
 }
 
 

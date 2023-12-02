@@ -72,10 +72,11 @@ function ResponsiveAppBar() {
     return (<>
 
 
+        {/* position="static" */}
+        <AppBar className='nav'>
+            <h1 style={{ textAlign: 'center', fontSize: "30px" }}>PEDAL</h1>
 
-        <AppBar position="static" className='nav'>
-
-            <Container maxWidth="xl">
+            <Container maxWidth="">
                 <Toolbar disableGutters>
 
 
@@ -184,8 +185,8 @@ function ResponsiveAppBar() {
                             ))}
                         </Box>
 
-                        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                        <Typography
+                        {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+                        {/* <Typography
                             variant="h6"
                             noWrap
                             component="a"
@@ -201,25 +202,26 @@ function ResponsiveAppBar() {
                             }}
                         >
 
-                            <Box
+                            {/* <Box
                                 component="img"
                                 sx={{
-                                    height: 45,
+                                    height: 60,
                                     display: 'block',
-                                    maxWidth: 100,
+                                    // maxWidth: 100,
                                     overflow: 'hidden',
-                                    width: '100px',
+                                    width: '150px',
                                 }}
                                 // src={logo}
-                                src="./Images/1.jpg"
-                            />
-                        </Typography>
+                                src="./Images/logo.jpg"
+                            /> 
+                        </Typography> */}
                     </>)}
 
                 </Toolbar>
             </Container>
         </AppBar>
-        <br></br><br></br><br></br>
+        <br></br><br></br><br>
+        </br><br></br><br></br><br></br><br></br>
         {console.log(currentUser)}
         {/* <br></br><br></br><br></br>
         <br></br><br></br><br></br> */}
@@ -237,6 +239,7 @@ function ResponsiveAppBar() {
         /> */}
 
         <Stepper />
+
 
     </>);
 }
