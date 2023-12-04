@@ -23,6 +23,9 @@ import PicId from './components/Rejister/PicId';
 import Payment2 from './components/Rejister/Payment2';
 import Register from './components/Rejister/Register';
 
+import Footer from './Footer';
+
+
 import History from './components/PrivteArea/History';
 import Navb from './components/PrivteArea/Navb';
 import Price from './components/PrivteArea/Price';
@@ -41,87 +44,95 @@ import NavManger from './components/Manager/NavManger';
 import RegisterAdd from './components/Manager/RegisterAdd';
 
 import CardOpinion from './components/Manager/CardOpinion';
+import { Fragment } from 'react';
 function App() {
   let currentUser = useSelector(state => state.ur.user);
 
 
   return (<>
+    <div className='wrapper'>
+      {/* <Out/> */}
+      <ResponsiveAppBar />
 
-    {/* <Out/> */}
-    <ResponsiveAppBar />
+      {/* <List_Station/> */}
 
-    {/* <List_Station/> */}
-
-    {/* <List_Bikes /> */}
-
-
-    {/* <List_Opinion /> */}
-
-    {/* <CardOpinion/> */}
-
-    {/* <NavManger/> */}
-    {/* <Contect /> */}
-
-    {/* <Problems/> */}
-    {/* <NavBar/> */}
-    {/* <AddStation/> */}
-    {/* <List_Users/> */}
-    {/* <Maps /> */}
-    {/* <Order /> */}
-    {/* <Navb/> */}
-    {/* <RegisterAdd /> */}
-    {/* <Register/> */}
-    {/* <AddUser/> */}
-
-    {currentUser != null ? <Navb /> : null}
+      {/* <List_Bikes /> */}
 
 
-    <Routes>
-      <Route path="" element={<Home />}></Route>
-      <Route path='home' element={<Home />} />
-      <Route path='app' element={<App />} />
-      <Route path='navbar' element={<NavBar />} />
-      <Route path='maps' element={<Maps />} />
-      <Route path='logIn' element={<LogIn />} />
-      <Route path='Manager' element={<Manager />} />
-      <Route path='about' element={<About />} />
-      <Route path='contect' element={<Contect />} />
-      <Route path='addbike' element={<AddBike />} />
-      <Route path='addUser' element={<AddUser />} />
-      <Route path='addOption' element={<AddOption />} />
-      <Route path='addStation' element={<AddStation />} />
-      <Route path='Connection' element={<Connection />} />
-      <Route path='Stepper' element={<StepperNav />} />
-      <Route path='Addjj' element={<Jj />} />
-      <Route path='How' element={<How />} />
-      <Route path='Home/How' element={<How />} />
-      <Route path='Pay' element={<Pay />} />
-      <Route path='Home/Pay' element={<Pay />} />
+      {/* <List_Opinion /> */}
+
+      {/* <CardOpinion/> */}
+
+      {/* <NavManger/> */}
+      {/* <Contect /> */}
+
+      {/* <Problems/> */}
+      {/* <NavBar/> */}
+      {/* <AddStation/> */}
+      {/* <List_Users/> */}
+      {/* <Maps /> */}
+      {/* <Order /> */}
+      {/* <Navb/> */}
+      {/* <RegisterAdd /> */}
+      {/* <Register/> */}
+      {/* <AddUser/> */}
+
+      {currentUser != null ? <Navb /> : null}
 
 
-      <Route path='PicId' element={<PicId />} />
-      <Route path='Payment2' element={<Payment2 />} />
-      <Route path='Register' element={<Register />} />
+      <Routes>
+        <Route path="" element={<Home />}></Route>
+        <Route path='home' element={<Home />} />
+        <Route path='app' element={<App />} />
+        <Route path='navbar' element={<NavBar />} />
+        <Route path='maps' element={<Maps />} />
+        <Route path='logIn' element={<LogIn />} />
+        <Route path='Manager' element={<Manager />} />
+        <Route path='about' element={<About />} />
+        <Route path='contect' element={<Contect />} />
+        <Route path='addbike' element={<AddBike />} />
+        <Route path='addUser' element={<AddUser />} />
+        <Route path='addOption' element={<AddOption />} />
+        <Route path='addStation' element={<AddStation />} />
+        <Route path='Connection' element={<Connection />} />
+        <Route path='Stepper' element={<StepperNav />} />
+        <Route path='Addjj' element={<Jj />} />
+        <Route path='How' element={<How />} />
+        <Route path='Home/How' element={<How />} />
+        <Route path='Pay' element={<Pay />} />
+        <Route path='Home/Pay' element={<Pay />} />
 
 
-      <Route path='History' element={<History />} />
-      <Route path='Order' element={<Order />} />
-      <Route path='Navb' element={<Navb />} />
-      <Route path='Navb/Profil' element={<Profile />} />
-      <Route path='Profil' element={<Profile />} />
-      <Route path='Price' element={<Price />} />
-      <Route path='Problems' element={<Problems />} />
+        <Route path='PicId' element={<PicId />} />
+        <Route path='Payment2' element={<Payment2 />} />
+        <Route path='Register' element={<Register />} />
+
+
+        <Route path='History' element={<History />} />
+        <Route path='Order' element={<Order />} />
+        <Route path='Navb' element={<Navb />} />
+        <Route path='Navb/Profil' element={<Profile />} />
+        <Route path='Profil' element={<Profile />} />
+        <Route path='Price' element={<Price />} />
+        <Route path='Problems' element={<Problems />} />
 
 
 
-      {/* managaer */}
-      <Route path='lBike' element={<List_Bikes />} />
-      <Route path='lStation' element={<List_Station />} />
-      <Route path='lUser' element={<List_Users />} />
-      <Route path='navM' element={<NavManger />} />
+        {/* managaer */}
+        <Route path='lBike' element={<List_Bikes />} />
+        <Route path='lStation' element={<List_Station />} />
+        <Route path='lUser' element={<List_Users />} />
+        <Route path='navM' element={<NavManger />} />
 
-    </Routes>
+      </Routes>
+    </div>
 
+    <Fragment>
+      <div  className="footer">
+
+      <Footer />
+      </div>
+    </Fragment>
 
 
 
