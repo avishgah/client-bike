@@ -18,17 +18,33 @@ body {
     flex-shrink: 0;
     background-color: #bb6566;
 }
-#ul-footer,#div-contect,#whatever{
- display: flex;
- flex-direction: column;
- text-align: right;
- margin-right: 20%;
- line-height: 2.0;
- padding: 30px;
+
+#ul-footer,
+#div-contect,
+#whatever {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    margin-right: 20%;
+    line-height: 2.0;
+    padding: 30px;
+    border-bottom: none;
 }
 
-.li-footer{
- color:aliceblue ;
-text-align: right;
-/* flex-wrap: nowrap; */
+.li-footer {
+    color: aliceblue;
+    text-align: right;
+    /* flex-wrap: nowrap; */
+}
+
+.li-footer a {
+    color: rgb(19, 19, 48);
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+}
+
+#div-nav {
+
+    width: 17vw;
 }

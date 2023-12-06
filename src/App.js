@@ -45,6 +45,8 @@ import RegisterAdd from './components/Manager/RegisterAdd';
 
 import CardOpinion from './components/Manager/CardOpinion';
 import { Fragment } from 'react';
+import Private from './Private';
+import Terms from './Terms';
 function App() {
   let currentUser = useSelector(state => state.ur.user);
 
@@ -52,7 +54,7 @@ function App() {
   return (<>
     <div className='wrapper'>
       {/* <Out/> */}
-      <ResponsiveAppBar />
+      {/* <ResponsiveAppBar /> */}
 
       {/* <List_Station/> */}
 
@@ -63,7 +65,7 @@ function App() {
 
       {/* <CardOpinion/> */}
 
-      {/* <NavManger/> */}
+      <NavManger/>
       {/* <Contect /> */}
 
       {/* <Problems/> */}
@@ -81,7 +83,7 @@ function App() {
 
 
       <Routes>
-        <Route path="" element={<Home />}></Route>
+        {/* <Route path="" element={<Home />}></Route> */}
         <Route path='home' element={<Home />} />
         <Route path='app' element={<App />} />
         <Route path='navbar' element={<NavBar />} />
@@ -123,6 +125,12 @@ function App() {
         <Route path='lStation' element={<List_Station />} />
         <Route path='lUser' element={<List_Users />} />
         <Route path='navM' element={<NavManger />} />
+
+
+
+
+        <Route path='Private' element={<Private />} />
+        <Route path='Terms' element={<Terms />} />
 
       </Routes>
     </div>

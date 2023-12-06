@@ -4,13 +4,13 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  border-bottom: 1px solid rgb(36, 36, 52) !important;
+  border-bottom: 1px solid rgb(36, 36, 52) ;
   margin-top: 1%;
 }
 
 li {
-  float: right !important;
-  margin-left: 11%;
+  /* float: right ; */
+  margin-left: 7%;
   font-size: smaller;
 }
 
@@ -22,9 +22,8 @@ li a {
 }
 
 li :hover {
-  border-radius: 2% !important;
-  background-color: rgb(236, 235, 242) !important;
-
+  border-radius: 2% ;
+  background-color: rgb(236, 235, 242) ;
 }
 
 #out {

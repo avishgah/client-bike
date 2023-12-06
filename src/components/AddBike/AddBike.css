@@ -20,7 +20,7 @@
 }
 
 .private-area {
-    background-color: #bb6566!important;
+    background-color: rgb(249, 192, 87)!important;
     padding: 6px !important;
     border-radius: 50px !important;
     color: white !important;
@@ -33,7 +33,8 @@
     display: flex;
     flex-wrap: wrap;
     height: 70px;
-    background-color: #612021;
+    background-color: orange;
+    /* background-color: #612021; */
     color: white;
     direction: rtl;
     text-align: right;

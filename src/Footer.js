@@ -24,7 +24,7 @@ const Footer = () => {
         <div id="div-nav">
             <ul id="ul-footer">
                 <li className='li-footer'>
-                    <Link to="Home"> מדיניות פרטיות</Link>
+                    <Link to="Private"> מדיניות פרטיות</Link>
                 </li>
                 <li className='li-footer'>
                     <Link to="Contect"> צור קשר</Link>
@@ -33,9 +33,11 @@ const Footer = () => {
                     <Link to="Problems">שאלות ותשובות  </Link>
                 </li>
                 <li className='li-footer'>
-                    <Link to="Profil">תקנון</Link>
+                    <Link to="Terms">תקנון</Link>
                 </li>
-
+                <li className='li-footer'>
+                    <Link to="Profil">סרטון הסברה</Link>
+                </li>
             </ul>
         </div>
 
