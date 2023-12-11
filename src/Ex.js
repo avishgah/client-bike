@@ -93,6 +93,7 @@ function ResponsiveAppBar() {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <Button onClick={() => nav('/Connection')} startIcon={<PersonIcon />} className='private-area' sx={{ p: 0 }}>איזור אישי</Button>
+                                <Button onClick={() => nav('/Regist')} startIcon={<PersonIcon color='orange' />} className='private-area2' sx={{ p: 0,marginLeft:'10px' }}>הצטרפות</Button>
                             </Tooltip>
                             <Menu
                                 sx={{ mt: '45px' }}
@@ -225,20 +226,7 @@ function ResponsiveAppBar() {
         {console.log(currentUser)}
         {/* <br></br><br></br><br></br>
         <br></br><br></br><br></br> */}
-        {/* <Box
-            component="img"
-            sx={{
-                height: 400,
-                display: 'block',
-                maxWidth: 1500,
-                overflow: 'hidden',
-                width: '100%',
-            }}
-            // src={logo}
-            src="./Images/כ.jpg"
-        /> */}
 
-        <Stepper />
 
 
     </>);

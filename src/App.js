@@ -47,6 +47,7 @@ import CardOpinion from './components/Manager/CardOpinion';
 import { Fragment } from 'react';
 import Private from './Private';
 import Terms from './Terms';
+import Regist from './components/Rejister/Regist';
 function App() {
   let currentUser = useSelector(state => state.ur.user);
 
@@ -54,7 +55,7 @@ function App() {
   return (<>
     <div className='wrapper'>
       {/* <Out/> */}
-      {/* <ResponsiveAppBar /> */}
+      <ResponsiveAppBar />
 
       {/* <List_Station/> */}
 
@@ -65,7 +66,7 @@ function App() {
 
       {/* <CardOpinion/> */}
 
-      <NavManger/>
+      {/* <NavManger/> */}
       {/* <Contect /> */}
 
       {/* <Problems/> */}
@@ -83,7 +84,7 @@ function App() {
 
 
       <Routes>
-        {/* <Route path="" element={<Home />}></Route> */}
+        <Route path="" element={<Home />}></Route>
         <Route path='home' element={<Home />} />
         <Route path='app' element={<App />} />
         <Route path='navbar' element={<NavBar />} />
@@ -108,6 +109,7 @@ function App() {
         <Route path='PicId' element={<PicId />} />
         <Route path='Payment2' element={<Payment2 />} />
         <Route path='Register' element={<Register />} />
+        <Route path='Regist' element={<Regist />} />
 
 
         <Route path='History' element={<History />} />

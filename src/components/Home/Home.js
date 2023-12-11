@@ -15,18 +15,21 @@ import Maps from '../Maps/Maps';
 import { RampRight } from '@mui/icons-material';
 
 
+import Stepper from '../Stepper.js';
 const Home = () => {
     const nav = useNavigate();
     return (<>
+        <Stepper />
+
         <div className='father' style={{
             // backgroundImage: `url('./Images/logo2.jpg')`, backgroundRepeat: "no-repeat", backgroundSize: 600, backgroundPosition: '10% 10%',
             // display:"flex",flexWrap:"wrap"
         }}>
             <div className='son'>
                 <br></br>
-                <div style={{ marginLeft:"30px", backgroundColor: "orange", borderRadius: "100px" ,height:"100px",width:"100px"}}></div>
+                <div style={{ marginLeft:"30px", backgroundColor: "#4c809e", borderRadius: "100px" ,height:"100px",width:"100px"}}></div>
 
-                <Card id="div-video" sx={{marginLeft:"100px", width:"13.7vw", height:"14vw", border:"white "}}>
+                <Card id="div-video" sx={{marginLeft:"100px", width:"13.7vw", height:"14vw", border:"white ",boxShadow:"none" }}>
                     <video
                         autoPlay
                         loop
@@ -39,7 +42,7 @@ const Home = () => {
                         />
                     </video>
                 </Card>
-                <div style={{ marginLeft:"30px", backgroundColor: "orange", borderRadius: "150px" ,height:"150px",width:"150px"}}></div>
+                <div style={{ marginLeft:"30px", backgroundColor: "#4c809e", borderRadius: "150px" ,height:"150px",width:"150px"}}></div>
 
             </div>
 
@@ -49,8 +52,9 @@ const Home = () => {
                 <h1 id="l" style={{width:"96vw"}}>כדאי לדעת</h1>
 
                 <div className='ss' onClick={() => nav('./How')}  >
+                    <CardContent endIcon={<PedalBikeIcon/>}>
                     {/* {<PedalBikeIcon fontSize='large' />} */}
-                    <CardContent >
+
                         <Typography variant="h5" fontSize={'20px'} component="div">
                             <b>     ?כיצד פועל השירות </b>
                         </Typography>

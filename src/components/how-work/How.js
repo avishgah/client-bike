@@ -7,7 +7,7 @@ const How = () => {
         <br></br>
         <br></br>
             <h1>פעילות השירות</h1>
-            <div className="textH">
+            <div className="textH" style={{direction:"rtl"}}>
                 <p className='p'><b>.שירות פדאל זמין 24 שעות ביממה, בכל ימות השנה בתחנות העגינה הפרוסות ברחבי העיר והארץ</b></p>
                 <p>
                     <strong>1</strong>

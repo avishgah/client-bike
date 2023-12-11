@@ -45,9 +45,21 @@ function SwipeableTextMobileStepper() {
     setActiveStep(step);
   };
 
-  return (
+  return (<>
+    <Box
+      component="img"
+      sx={{
+        height: 700,
+        display: 'block',
+        // maxWidth: 1500,
+        overflow: 'hidden',
+        width: '100%',
+      }}
+      // src={logo}
+      src="../Images/pic2.jpg"
+    />
     <div className="divBox">
-       {/* <AutoPlaySwipeableViews
+      <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
@@ -72,11 +84,11 @@ function SwipeableTextMobileStepper() {
             ) : null}<br></br>{step.label}
           </div>
         ))}
-              </AutoPlaySwipeableViews>
-      */}
+      </AutoPlaySwipeableViews>
+
     </div>
 
-  );
+  </>);
 }
 
 export default SwipeableTextMobileStepper;

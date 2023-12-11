@@ -15,15 +15,23 @@
 
 .css-1e4e1qc-MuiButtonBase-root-MuiButton-root:hover {
     border-radius: 0% !important;
-    border-bottom: 2px solid blue !important;
+    border-bottom: 2px solid rgb(43, 125, 43) !important;
     background-color: white !important;
 }
 
 .private-area {
-    background-color: rgb(249, 192, 87)!important;
+    background-color: #024369!important;
     padding: 6px !important;
     border-radius: 50px !important;
     color: white !important;
+    width: 104px !important;
+}
+.private-area2{
+    background-color:white;
+    border: solid 2px #024369 !important;
+    padding: 6px !important;
+    border-radius: 50px !important;
+    color: #024369!important;
     width: 104px !important;
 }
 
@@ -33,7 +41,7 @@
     display: flex;
     flex-wrap: wrap;
     height: 70px;
-    background-color: orange;
+    background-color: #024369;
     /* background-color: #612021; */
     color: white;
     direction: rtl;
@@ -83,4 +91,10 @@ body{
     margin-left: 0 !important;
     width: 223px !important;
     background-color: rgb(27, 139, 77);
+}
+
+
+.css-11b3ww9-MuiPaper-root-MuiAppBar-root{
+    box-shadow: none !important;
+    /* border-bottom: 1px solid #7ACCF0; צבע ועובי של הקו */
 }

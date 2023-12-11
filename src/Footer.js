@@ -10,7 +10,7 @@ const Footer = () => {
         <div id="whatever">
             <b> ! יוצאים לרכיבה ? קדימה</b>
             <p>{(<KeyboardDoubleArrowDownIcon style={{fontSize:'18px'}}/>)}  הרשמו כאן למטה</p>
-            <Button style={{backgroundColor:'white', color:"#bb6566",border:"solid", borderColor:"#612021"}} onClick={()=> nav('/Connection')}>הרשמה</Button>
+            <Button style={{backgroundColor:'white', color:"orange",border:"solid", borderColor:"orange"}} onClick={()=> nav('/Connection')}>הרשמה</Button>
             
         </div>
         <div id="div-contect">

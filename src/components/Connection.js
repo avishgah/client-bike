@@ -221,7 +221,7 @@ const Connection = () => {
                     <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
                         התחבר
                     </Button>
-                    <Link href='Register' underline="hover">
+                    <Link href='Profil' underline="hover">
                         {'להרשמה - לחץ כאן'}
                     </Link>
                 </Stack>
