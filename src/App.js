@@ -48,6 +48,8 @@ import { Fragment } from 'react';
 import Private from './Private';
 import Terms from './Terms';
 import Regist from './components/Rejister/Regist';
+import Question from './components/Question/Quastion';
+import Video from './components/Video';
 function App() {
   let currentUser = useSelector(state => state.ur.user);
 
@@ -86,6 +88,8 @@ function App() {
       <Routes>
         <Route path="" element={<Home />}></Route>
         <Route path='home' element={<Home />} />
+        <Route path='Question' element={<Question />} />
+        <Route path='Video' element={<Video />} />
         <Route path='app' element={<App />} />
         <Route path='navbar' element={<NavBar />} />
         <Route path='maps' element={<Maps />} />

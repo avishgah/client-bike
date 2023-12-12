@@ -31,7 +31,7 @@ import { Tabs, Tab, useMediaQuery, useTheme } from '@mui/material';
 import DrawerComponnent from './components/NavBar/DrawerComponnent';
 
 
-const pages = ['יצירת קשר', 'שאלות ותשובות', 'סוגי מינויים', 'מפת תחנות', 'בית'];
+const pages = ['יצירת קשר', 'שאלות ותשובות', 'סרטון הדרכה', 'מפת תחנות', 'בית'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -62,6 +62,10 @@ function ResponsiveAppBar() {
 
         if (page.target.innerText == 'יצירת קשר')
             nav('/contect')
+        if (page.target.innerText == 'שאלות ותשובות')
+            nav('/Question')
+        if (page.target.innerText == 'סרטון הדרכה')
+            nav('/Video')
         setAnchorElNav(null);
     };
 
@@ -74,7 +78,7 @@ function ResponsiveAppBar() {
 
         {/* position="static" */}
         <AppBar className='nav'>
-            <h1 style={{ textAlign: 'center', fontSize: "30px" }}>PEDAL</h1>
+            <h1 style={{ textAlign: 'center', fontSize: "30px"}}>PEDAL</h1>
 
             <Container maxWidth="">
                 <Toolbar disableGutters>
@@ -93,7 +97,7 @@ function ResponsiveAppBar() {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <Button onClick={() => nav('/Connection')} startIcon={<PersonIcon />} className='private-area' sx={{ p: 0 }}>איזור אישי</Button>
-                                <Button onClick={() => nav('/Regist')} startIcon={<PersonIcon color='orange' />} className='private-area2' sx={{ p: 0,marginLeft:'10px' }}>הצטרפות</Button>
+                                <Button onClick={() => nav('/Regist')} startIcon={<PersonIcon color='orange' />} className='private-area2' sx={{ p: 0, marginLeft: '10px' }}>הצטרפות</Button>
                             </Tooltip>
                             <Menu
                                 sx={{ mt: '45px' }}

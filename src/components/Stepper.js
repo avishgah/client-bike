@@ -46,7 +46,7 @@ function SwipeableTextMobileStepper() {
   };
 
   return (<>
-    <Box
+    {/* <Box
       component="img"
       sx={{
         height: 700,
@@ -57,7 +57,7 @@ function SwipeableTextMobileStepper() {
       }}
       // src={logo}
       src="../Images/pic2.jpg"
-    />
+    /> */}
     <div className="divBox">
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}

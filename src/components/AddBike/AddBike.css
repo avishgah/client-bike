@@ -96,5 +96,11 @@ body{
 
 .css-11b3ww9-MuiPaper-root-MuiAppBar-root{
     box-shadow: none !important;
-    /* border-bottom: 1px solid #7ACCF0; צבע ועובי של הקו */
+    border-bottom: 1px solid black; 
+}
+
+#tyQuestion{
+    font-size:"20px" !important;
+    color:"#4c809e" !important;
+    font-weight:"bold" !important;
 }

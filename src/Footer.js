@@ -36,7 +36,7 @@ const Footer = () => {
                     <Link to="Terms">תקנון</Link>
                 </li>
                 <li className='li-footer'>
-                    <Link to="Profil">סרטון הסברה</Link>
+                    <Link to="Video">סרטון הסברה</Link>
                 </li>
             </ul>
         </div>

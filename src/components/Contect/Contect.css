@@ -21,10 +21,11 @@
 
 #outlined-multiline-staticC{
     width:26vw !important;
+    margin-left: 1vw;
 }
 
 #standard-basicC{
-    width:7vw !important;
+    width:6.3vw !important;
     padding: 10px;
     margin-right: 10px;
 }
@@ -57,7 +58,7 @@
 }
 
 #alertC{
-    /* visibility: hidden; */
+    visibility: hidden;
     width: 30vw;
     text-align: right;
     margin-left: 35vw;
