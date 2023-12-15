@@ -74,7 +74,21 @@ import { useState } from 'react';
 
 // ,, כתובת, , , עיר, , , תאריך לידה, תצלום תעודת זהות, סוג לקוח(לקוח, מנהל), לא פעיל, אישור קריאת תקנון
 
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import CloseIcon from '@mui/icons-material/Close';
 
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+        padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+        padding: theme.spacing(1),
+    },
+}));
 
 
 
@@ -153,7 +167,31 @@ const Contect = () => {
         console.log(details);
         //     console.log(value.$D + "/" + value.$M + "/" + value.$y)
 
-        document.getElementById('alert').style.visibility = "visible";
+        const contact = {
+            "id": 0,
+            "name": details.name,
+            "email": details.email,
+            "phon": details.phon,
+            "type": placeProblem,
+            "cuption": details.caption,
+            "status": true
+        }
+
+        axios.post(`https://localhost:7207/api/Contact`, contact).then(res => {
+
+            console.log(res.data + ";;;;;;");
+
+            if (res.data == null) {
+                alert("error")
+                return null;
+            }
+        }).catch(console.log("err"))
+
+        console.log(contact);
+
+        document.getElementById('alertC').style.visibility = "visible";
+
+        handleClickOpen();
     }
 
 
@@ -162,6 +200,16 @@ const Contect = () => {
         l = document.getElementById("k").value;
         console.log(l)
     }
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+        nav('/Home');
+    };
 
     return <>
 
@@ -233,7 +281,50 @@ const Contect = () => {
             <br></br><br></br>
             <Alert id="alertC" severity="success">! ההודעה נשלחה בהצלחה </Alert>
         </form >
-
+        <React.Fragment>
+            {/* <Button variant="outlined" onClick={handleClickOpen}>
+                Open dialog
+            </Button> */}
+            <BootstrapDialog
+                onClose={handleClose}
+                aria-labelledby="customized-dialog-title"
+                open={open}
+                 style={{direction:"rtl"}}
+            >
+                <DialogTitle sx={{ m: 0, p: 2,color:"rgb(26, 87, 53)" }} id="customized-dialog-title">
+                    ההודעה התקבלה בהצלחה
+                </DialogTitle>
+                <IconButton
+                    aria-label="close"
+                    onClick={handleClose}
+                    sx={{
+                        position: 'absolute',
+                        // right:0,
+                        left:8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
+                <DialogContent dividers>
+                    <Typography gutterBottom>
+                        שלום,
+                    </Typography>
+                    <Typography gutterBottom>
+                        אנו מצטערים אם חווית חוויה לא נעימה ונשתדל לחזור אליך בהקדם
+                    </Typography>
+                    <Typography gutterBottom>
+                        תודה שבחרת להשתמש ברשת פדאל.
+                    </Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={handleClose}>
+                        סגור
+                    </Button>
+                </DialogActions>
+            </BootstrapDialog>
+        </React.Fragment>
     </>
 }
 
