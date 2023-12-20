@@ -91,7 +91,7 @@ function MyComponent() {
   // const [open, setOpen] = React.useState(false);
   // const [placement, setPlacement] = React.useState();
 
-  let currentUser = useSelector(state => state.ur.user);
+  const currentUser = useSelector(state => state.ur.user);
 
   const Submit = (e) => {
     e.preventDefault()
@@ -113,7 +113,7 @@ function MyComponent() {
     }
     //send empty
   const IsPay=false;
-    axios.post(`https://localhost:7207/api/Order`, {count, IsPay, id:0, datePay:null, IdCust:15,idStation:selectPoin,dateOrder:new Date()}).then(res => {
+    axios.post(`https://localhost:7207/api/Order`, {count, IsPay, id:0, datePay:null, IdCust:currentUser.id,idStation:selectPoin,dateOrder:new Date()}).then(res => {
 
       console.log(res)
       console.log(res.data)

@@ -77,7 +77,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 
 const Profil = () => {
-    let currentUser = useSelector(state => state.ur.user);
+    const currentUser = useSelector(state => state.ur.user);
 
     // count
     const [count, setCount] = React.useState(1);
