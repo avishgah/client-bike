@@ -78,7 +78,7 @@ function ResponsiveAppBar() {
 
         {/* position="static" */}
         <AppBar className='nav'>
-            <h1 style={{ textAlign: 'center', fontSize: "30px"}}>PEDAL</h1>
+            <h1 style={{ textAlign: 'center', fontSize: "30px" }}>PEDAL</h1>
 
             <Container maxWidth="">
                 <Toolbar disableGutters>
@@ -191,7 +191,7 @@ function ResponsiveAppBar() {
                         </Box>
 
                         {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-                        {/* <Typography
+                         <Typography
                             variant="h6"
                             noWrap
                             component="a"
@@ -207,29 +207,30 @@ function ResponsiveAppBar() {
                             }}
                         >
 
-                            {/* <Box
+                             <Box
                                 component="img"
                                 sx={{
-                                    height: 60,
+                                    height: 80,
                                     display: 'block',
                                     // maxWidth: 100,
                                     overflow: 'hidden',
                                     width: '150px',
                                 }}
                                 // src={logo}
-                                src="./Images/logo.jpg"
+                            src='/logo2.png'
                             /> 
-                        </Typography> */}
+                        </Typography> 
+
                     </>)}
 
                 </Toolbar>
             </Container>
         </AppBar>
-        <br></br><br></br><br>
-        </br><br></br><br></br><br></br><br></br>
+
+        
         {console.log(currentUser)}
-        {/* <br></br><br></br><br></br>
-        <br></br><br></br><br></br> */}
+        <br></br><br></br><br></br><br></br>
+        <br></br><br></br><br></br>
 
 
 

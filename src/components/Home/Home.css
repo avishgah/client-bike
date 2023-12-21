@@ -11,9 +11,10 @@
     text-align: right;
     width: 40vw;
     margin-left: 55vw;
+    margin-right: 100px;
     /* margin-right: 0; */
     /* font-size: small; */
-    direction: ltr;
+    direction: rtl;
 }
 
 .ss:hover {

@@ -20,7 +20,7 @@
 }
 
 .private-area {
-    background-color: #024369!important;
+    background-color: #602424!important;
     padding: 6px !important;
     border-radius: 50px !important;
     color: white !important;
@@ -28,10 +28,10 @@
 }
 .private-area2{
     background-color:white;
-    border: solid 2px #024369 !important;
+    border: solid 2px #602424 !important;
     padding: 6px !important;
     border-radius: 50px !important;
-    color: #024369!important;
+    color: #602424!important;
     width: 104px !important;
 }
 
@@ -41,7 +41,7 @@
     display: flex;
     flex-wrap: wrap;
     height: 70px;
-    background-color: #024369;
+    background-color: #854545;
     /* background-color: #612021; */
     color: white;
     direction: rtl;
@@ -60,13 +60,20 @@
 } */
 
 #alert{
+    /* visibility: hidden; */
     visibility: hidden;
+    background-color: rgb(255 199 199);
+    width: 28vw;
+    margin-right: 21%;
+    padding: 10px;
+    font-size: medium
 }
 
 #formLoginRC{
     width: 50%;
-    text-align: right;
+    text-align: center;
     margin-left: 25%;
+    direction: rtl;
 }
 #formLoginRBike{
     /* width: 50%; */

@@ -14,8 +14,8 @@ import AddOption from './components/AddOpinion/AddOption';
 import Jj from './components/AddUser/Jj';
 import AddStation from './components/AddStation/AddStation';
 import ResponsiveAppBar from './Ex';
-import How from './components/how-work/How';
-import Pay from './components/payds/Pay';
+import How from './components/Home/how-work/How';
+import Pay from './components/Home/payds/Pay';
 import Out from './components/Maps/out';
 import Connection from './components/Connection';
 import StepperNav from './components/Rejister/StepperNav';
@@ -50,17 +50,31 @@ import Terms from './Terms';
 import Regist from './components/Rejister/Regist';
 import Question from './components/Question/Quastion';
 import Video from './components/Video';
+import ForgetPassword from './components/ForgetPassword/ForgetPass';
+import PasswordReset from './components/ForgetPassword/PasswordResset';
+import { useState } from 'react';
+import Sae from './components/Home/Sae';
+import Do from './components/Home/Do';
+import Pae from './components/Home/Pae';
 function App() {
-  let currentUser = useSelector(state => state.ur.user);
+
+  const currentUser = useSelector(state => state.ur.user);
+
+  const [mail, setMail] = useState("avi@gmail.com");
+  const [open, setOpen] = useState(false);
 
 
   return (<>
     <div className='wrapper'>
       {/* <Out/> */}
-      <ResponsiveAppBar />
+      {/* <ResponsiveAppBar /> */}
+
+      <Maps/>
+      {/* <History /> */}
 
       {/* <List_Station/> */}
-
+      {/* <ForgetPassword email={mail} setOpen={setOpen} />  */}
+     
       {/* <List_Bikes /> */}
 
 
@@ -108,6 +122,12 @@ function App() {
         <Route path='Home/How' element={<How />} />
         <Route path='Pay' element={<Pay />} />
         <Route path='Home/Pay' element={<Pay />} />
+        <Route path='ForgetPass' element={<ForgetPassword />} />
+        <Route path='PasswordReset' element={<PasswordReset />} />
+
+        <Route path='Sae' element={<Sae />} />
+        <Route path='Do' element={<Do />} />
+        <Route path='Pae' element={<Pae />} />
 
 
         <Route path='PicId' element={<PicId />} />
@@ -142,10 +162,7 @@ function App() {
     </div>
 
     <Fragment>
-      <div  className="footer">
-
-      <Footer />
-      </div>
+        <Footer />
     </Fragment>
 
 

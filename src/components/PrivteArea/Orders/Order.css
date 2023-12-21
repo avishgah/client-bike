@@ -8,19 +8,34 @@
 } 
 
 #hazen{
-    font-size: medium;
+    font-size: large;
     text-align: right;
 }
 
 #p2{
-    padding: 10px;
+    /* padding: 10px; */
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-firstButton, .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-middleButton{
     border-right-color: rgba(25, 118, 210, 0.5) !important;
     color: bl;
+    width: 5vw !important;
+    height: 3vw !important;
+
+}
+.css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-lastButton{
+    width: 5vw !important;
+    height: 3vw !important;
 }
 #h8{
-    font-size: larger;
+    font-size: 20px;
     text-align: right !important;
 
+}
+#selected{
+    padding:5px;
+    font-size: larger;
+    /* margin-left: 500px !important; */
 }

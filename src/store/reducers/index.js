@@ -51,7 +51,6 @@ const UserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: null,
-                drives: []
             }
 
         case type.HISTORY_DRIVES:

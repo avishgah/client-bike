@@ -43,17 +43,18 @@
 #addRC{
     text-align: center;
     margin-left: 0 !important;
-    width: 28vw !important;
+    width: 28vw;
     padding: 10px;
     font-size: large;
     font-weight: bold;
     border-radius: 30px;
-    background-color: rgb(27, 139, 77);
+    background-color: orange;
+    /* background-color: rgb(27, 139, 77); */
 }
 #app{
     font-size: xx-large;
     font-weight: bold;
-    color:rgb(26, 87, 53)
+    color:rgb(147, 98, 6)
 
 }
 

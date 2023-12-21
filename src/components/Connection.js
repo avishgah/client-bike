@@ -162,13 +162,14 @@ const Connection = () => {
             <CardContent>
 
                 <h2>ברוכים הבאים-התחברות</h2>
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" component="div" style={{ textAlign: "right" }}>
                     היי, אנחנו שמחים לראות אותך!
-                    להתחברות לאיזור האישי, יש להזין כתובת מייל                    </Typography>
+                    להתחברות לאיזור האישי, יש להזין כתובת מייל וסיסמא                   </Typography>
                 <br></br>
 
 
                 {/* id */}
+                <label>מייל</label><br></br>
 
                 <TextField id="standard-basic" variant="standard" {...register("email", {
                     required: "email is required",
@@ -182,9 +183,9 @@ const Connection = () => {
                 <br></br><br></br>
 
 
-                <Alert id="alert" severity="error">מייל או סיסמא שגויים</Alert>
+                <label>סיסמא</label><br></br>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+                <FormControl sx={{ m: 1, width: '40ch' }} variant="standard">
                     <InputLabel htmlFor="standard-adornment-password"></InputLabel>
                     <Input
                         id="standard-adornment-password"
@@ -210,25 +211,26 @@ const Connection = () => {
                     />
                     {errors.password && <p className="errorMsg">{errors.password.message}</p>}
 
-                </FormControl>
+                </FormControl><br></br>
+                <Alert id="alert" severity="error">מייל או סיסמא שגויים</Alert><br></br>
 
+                <Button variant="contained" startIcon={<SendIcon style={{marginLeft:"20px"}} />} id="addRC" type="submit">
+                    התחבר
+                </Button>
             </CardContent>
 
+            <Link href='Profil' style={{textAlign:"right"}} underline="hover">
+                {'להרשמה - לחץ כאן'}
+            </Link>
+
             <CardActions>
-                <Stack direction="row" spacing={2}>
 
 
-                    <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
-                        התחבר
-                    </Button>
-                    <Link href='Profil' underline="hover">
-                        {'להרשמה - לחץ כאן'}
-                    </Link>
-                </Stack>
+
             </CardActions>
         </form >
 
-
+        =
     </>
 }
 

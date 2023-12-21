@@ -8,7 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
-import How from '../how-work/How';
+import How from './how-work/How';
 import { useNavigate } from 'react-router';
 import Table from '../Tables.js';
 import Maps from '../Maps/Maps';
@@ -19,6 +19,7 @@ import Stepper from '../Stepper.js';
 const Home = () => {
     const nav = useNavigate();
     return (<>
+    
         <Stepper />
 
         <div className='father' style={{
@@ -27,7 +28,7 @@ const Home = () => {
         }}>
             <div className='son'>
                 <br></br>
-                <div style={{ marginLeft:"30px", backgroundColor: "#4c809e", borderRadius: "100px" ,height:"100px",width:"100px"}}></div>
+                <div style={{ marginLeft:"30px", backgroundColor: "#602424", borderRadius: "100px" ,height:"100px",width:"100px"}}></div>
 
                 <Card id="div-video" sx={{marginLeft:"100px", width:"13.7vw", height:"14vw", border:"white ",boxShadow:"none" }}>
                     <video
@@ -42,7 +43,7 @@ const Home = () => {
                         />
                     </video>
                 </Card>
-                <div style={{ marginLeft:"30px", backgroundColor: "#4c809e", borderRadius: "150px" ,height:"150px",width:"150px"}}></div>
+                <div style={{ marginLeft:"30px", backgroundColor: "#602424", borderRadius: "150px" ,height:"150px",width:"150px"}}></div>
 
             </div>
 
@@ -83,7 +84,7 @@ const Home = () => {
                 </div>
 
 
-                <div className='ss' onClick={() => nav('./Pay')}  >
+                <div className='ss' onClick={() => nav('/Pae')}  >
                     {/* {<PedalBikeIcon fontSize='large' />} */}
                     <CardContent >
                         <Typography variant="h5" fontSize={'20px'} component="div">
@@ -98,7 +99,7 @@ const Home = () => {
                 </div>
 
 
-                <div className='ss' onClick={() => nav('./Pay')}  >
+                <div className='ss' onClick={() => nav('/Sae')}  >
                     {/* {<PedalBikeIcon fontSize='large' />} */}
                     <CardContent >
                         <Typography variant="h5" fontSize={'20px'} component="div">
@@ -113,7 +114,7 @@ const Home = () => {
                 </div>
 
 
-                <div className='ss' onClick={() => nav('./Pay')}  >
+                <div className='ss' onClick={() => nav('/Do')}  >
                     {/* {<PedalBikeIcon fontSize='large' />} */}
                     <CardContent >
                         <Typography variant="h5" fontSize={'20px'} component="div">

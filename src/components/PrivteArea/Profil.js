@@ -305,6 +305,7 @@ const Profil = () => {
                 <div id="div-pic"   >
 
                     <Button
+                        style={{ backgroundColor: "#905e03",width:"22vw" }}
                         endIcon={<AttachmentIcon />}
                         variant="contained"
                         component="label"
@@ -334,8 +335,8 @@ const Profil = () => {
 
 
                 <br></br>
-                <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">
-                    עדכון
+                <Button variant="contained" style={{ width: "22vw" }} id="addRC" type="submit">
+                    עדכון פרטים
                 </Button>
 
                 {console.log(checked)}

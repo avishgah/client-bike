@@ -58,7 +58,7 @@ function SwipeableTextMobileStepper() {
       // src={logo}
       src="../Images/pic2.jpg"
     /> */}
-    <div className="divBox">
+    <div className="divBox" >
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}

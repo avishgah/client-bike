@@ -1,5 +1,5 @@
  
-ul {
+.ulOfPrivate {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -8,20 +8,20 @@ ul {
   margin-top: 1%;
 }
 
-li {
+.liOfPrivate {
   /* float: right ; */
-  margin-left: 7%;
+  margin-left: 10%;
   font-size: smaller;
 }
 
-li a {
+.liOfPrivate a {
   color: rgb(19, 19, 48);
   text-align: center;
   padding: 10px 10px;
   text-decoration: none;
 }
 
-li :hover {
+.liOfPrivate :hover {
   border-radius: 2% ;
   background-color: rgb(236, 235, 242) ;
 }
@@ -93,4 +93,9 @@ label {
 
 #outlined-multiline-static{
   width:250px !important;
+}
+
+
+.css-sghohy-MuiButtonBase-root-MuiButton-root {
+  /* background-color:#905e03 !important ; */
 }

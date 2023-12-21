@@ -275,7 +275,7 @@ const Contect = () => {
                 defaultValue=""
                 {...register("caption")}
             /><br></br><br></br>
-            <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
+            <Button variant="contained"  endIcon={<SendIcon />} id="addRC" type="submit">
                 שליחה
             </Button>
             <br></br><br></br>

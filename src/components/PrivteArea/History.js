@@ -19,100 +19,77 @@ import DoneIcon from '@mui/icons-material/Done';
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
 
-// import "./ToDoScss.scss";
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import { ExitToApp } from "@mui/icons-material";
+import { useState } from "react";
 
 const History = () => {
 
+    const [listHistory, setlistHistory] = useState([]);
+    const [listDate, setlistCalcDate] = useState([]);
+
+    useEffect(() => {
+        axios.get(`https://localhost:7207/api/orderBike/HistoryDrive/${currentUser.tz}`)
+            .then(res => {
+
+                console.log(res.data);
+                let list = res.data;
+                setlistHistory(res.data);
+                // nav('/NavB')
+            }).catch(err => console.log(err))
+
+        axios.get(`https://localhost:7207/api/orderBike/GetListDateOfUse/${currentUser.tz}`)
+            .then(res => {
+
+                console.log(res.data);
+                setlistCalcDate(res.data);
+                // nav('/NavB')
+            }).catch(err => console.log(err))
+
+    }, [])
 
     const dispatch = useDispatch();
 
-    let currentUser = useSelector(state => state.ur.user);
-    let arr = useSelector(state => state.ur.drives);
-
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8080/Task/getTaskDoneByUserId/${currentUser.id}`).then(res => {
-
-    //         console.log(arr + "arr");
-    //         console.log(res.data + "res")
-
-    //         dispatch({
-    //             type: type.HISTORY_DRIVES,
-    //             payload: res.data
-    //         })
-
-    //     }).catch(err => { console.log(err); alert("התרחשה שגיאה בקבלת המאמרים") })
-    // }, [])
-
-    
-    const deletet = (id) => {
-        axios.delete(`http://localhost:8080/Task/deleteTask/${id}`).then(res => {
-
-            dispatch({
-                type: type.DELETE_DRIVE,
-                payload: id
-            }).catch(err => { console.log(err) })
-        })
-
-    }
-
-
-
-    // let arr = useSelector(state => state.tr.drives);
+    const currentUser = useSelector(state => state.ur.user);
 
     return (<>
-        {arr.length == 0 ? <h1>אין היסטוריה </h1> : <>
-            {arr.map((task, index) => <div id="taskS">{<>
-                <Card sx={{ minWidth: 275 }}>
-                    <CardContent>
-                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                            משימה מספר: {task.id}
-                        </Typography>
-                        <Typography variant="h5" component="div">
-                            {task.desk}
-                        </Typography>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            דחיפות: {task.ranks}
-                        </Typography>
-                        <Typography variant="body2">
-                            {task.date}
-                            <br />
-                        </Typography>
-                        <Typography variant="body2">
-                            <br />{
-                                task.did.data[0] == 0 ? "the task are not complet!!" : "the task are complet!!"
-                            }
-                        </Typography>
-                    </CardContent>
+        {listHistory.length == 0 ? <h1>אין היסטוריה </h1> : <>
+            <TableContainer component={Paper} sx={{ width: "60vw", marginLeft: "20vw", marginTop: "1vw", boxShadow: "none" }}>
+                <Table id="table" aria-label="caption table" sx={{ direction: "rtl" }}>
+                    <caption>היסטורית נסיעות</caption>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="right"><b>  תאריך התחלה</b></TableCell>
+                            <TableCell align="right"><b>תאריך סיום</b></TableCell>
+                            <TableCell align="right"><b>משך זמן</b></TableCell>
+                            <TableCell align="right"><b>עלות</b></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
 
 
-                    <Stack direction="row" alignItems="center" spacing={1}>
+                        {listHistory.map((row, index) => (
+                            <TableRow>
+                                <TableCell align="right">{row.dateStart}</TableCell>
+                                <TableCell align="right">{row.dateEnd}</TableCell>
+                                <TableCell align="right">{listDate[index]}</TableCell>
+                                <TableCell align="right">{" ₪ " + row.sum}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
 
-                        <IconButton aria-label="delete" size="large" onClick={() => { deletet(task.id) }}>
-                            <DeleteIcon fontSize="inherit" />
-                        </IconButton>
-
-
-                    </Stack>
-
-
-
-
-
-                </Card>
-                <br></br>
-
-
-            </>
-            }
-
-
-            </div>)}</>}
-
+           </>}
     </>
-
     )
-
 }
 
 export default History;

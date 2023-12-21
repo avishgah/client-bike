@@ -77,7 +77,7 @@ const Problems = () => {
     const submit = (details) => {
         console.log("connect");
         console.log(placeProblem)
-        var task=null;
+        var task = null;
         if (placeProblem == 'תקלה באופניים') {
             task =
             {
@@ -155,21 +155,22 @@ const Problems = () => {
             />
 
             <br ></br><br ></br>
-          <div id="div-pic"   >
-    
-            <label>כאן ניתן להרחיב על הנושא, ונעשה מאמצים להשיב בהקדם</label><br></br><br></br>
-            <TextField
-                id="outlined-multiline-static"
-                multiline
-                rows={4}
-                defaultValue=""
-                {...register("caption")}
-            />
+            <div id="div-pic"   >
+
+                <label>כאן ניתן להרחיב על הנושא, ונעשה מאמצים להשיב בהקדם</label><br></br><br></br>
+                <TextField
+                    id="outlined-multiline-static"
+                    multiline
+                    rows={4}
+                    defaultValue=""
+                    {...register("caption")}
+                />
 
 
-            <label id="ll">תמונה של התקלה</label>
-            <br></br>
-              <Button
+                <label id="ll">תמונה של התקלה</label>
+                <br></br>
+                <Button
+                    style={{ backgroundColor: "#905e03", width: "22vw" }}
                     endIcon={<AttachmentIcon />}
                     variant="contained"
                     component="label"
@@ -193,8 +194,8 @@ const Problems = () => {
 
 
             <br></br><br></br>
-            <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">
-                עדכון
+            <Button variant="contained" style={{ width: "22vw" }} id="addRC" type="submit">
+                שלח
             </Button>
         </form>
     </>)
