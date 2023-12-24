@@ -20,7 +20,7 @@ const Home = () => {
     const nav = useNavigate();
     return (<>
     
-        <Stepper />
+        {/* <Stepper /> */}
 
         <div className='father' style={{
             // backgroundImage: `url('./Images/logo2.jpg')`, backgroundRepeat: "no-repeat", backgroundSize: 600, backgroundPosition: '10% 10%',

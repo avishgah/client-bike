@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { Box, Button, Fade, Paper, Popper, Stack, TextField, Typography } from '@mui/material';
 import axios from 'axios';
@@ -16,6 +16,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 
 
 import Grid from '@mui/material/Grid';
+import { Card, Input } from '@material-ui/core';
+import PedalBikeIcon from '@mui/icons-material/PedalBike';
 
 const containerStyle = {
   width: '100%',
@@ -35,37 +37,57 @@ const OpenMe = (marker) => {
 }
 
 const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
+
+  useEffect(() => {
+    console.log({ text } + "use effect");
+  }, [])
+
+
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [placement, setPlacement] = React.useState();
 
   const handleClick = (newPlacement) => (event) => {
     setAnchorEl(event.currentTarget);
+
+    console.log(open + "befor")
+    console.log(newPlacement);
     setOpen((prev) => placement !== newPlacement || !prev);
+
     setPlacement(newPlacement);
-    console.log("kkk")
-    document.getElementById("boxStation").value = document.getElementById("boxStation").defaultValue;
-   
+
+    console.log(open + "after")
+
+    const elements = document.getElementsByClassName("css-1ljnme7-MuiPopper-root");
+
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].innerText = "";
+    }
+
   };
 
   return (<>
+
     <Marker position={{
       lat: lat ? lat : 31.772561767303255,
       lng: lng ? lng : 35.16862111683302
     }}
-      title={text}
-      label={text}
+      // title={text}
+      // label={text}
+      // label={"aaaaaaaaaaaaaaaaaaaaaaaa"}
+      title='bbbbbbbb'
       opacity={opacity}
       className='marker-data' type="button"
       clickable={true}
       onDblClick={selectedPoint}
-      onClick={handleClick('top-right')}
-      style={{ border: "none", }} />
+    // onClick={handleClick('top')}
+    // style={{ border: "none", }}
+    />
 
 
-
-
-    <Box sx={{ width: 600 }} id="boxStation">
+    {/* 
+    <div sx={{ maxWidth: 600 }} id="boxStation">
       <Popper
         // Note: The following zIndex style is specifically for documentation purposes and may not be necessary in your application.
         sx={{ zIndex: 1200 }}
@@ -83,72 +105,194 @@ const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
           </Fade>
         )}
       </Popper>
-    
-    </Box>
+
+    </div> */}
   </>)
 }
 
 
 function MyComponent() {
-  const [count, setCount] = React.useState(0);
   const [selectPoin, setSlectedPoint] = useState(null)
-  const [mapers, setMapers] = React.useState([])
+  const [maps, setMaps] = useState(null)
+  const [mapers, setMapers] = useState([])
+  const [stations, setStations] = useState([]);
+  const [stationsMostClosde, setstationsMostClosde] = useState([]);
 
+  const google = window.google;
+  let map;
   useEffect(() => {
+
+    const defaultLocation = { lat: -34.397, lng: 150.644 };
+
+    // יצירת אובייקט מפה חדש
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: defaultLocation, // המיקום המרכזי של המפה בתחילת הטעינה
+      zoom: 10, // רמת הזום בתחילת הטעינה
+    });
+    setMaps(maps)
+
+
     axios.get('https://localhost:7207/api/StationViewControllers')
       .then(res => {
         console.log(res)
         setMapers(res.data)
-        let homePos = {}
-        res.data.filter(x => x.count > 0).forEach((element, i) => {
-          const google = window.google;
-          console.log(element)
-          const markerPos = { lat: element.lat, lng: element.lng };
-          console.log(markerPos)
-          if (i == 0) {
 
-            homePos = markerPos;
-          }
-          else {
+        navigator.geolocation.getCurrentPosition(x => {
+          console.log(x, "x");
+          const homePos = { lat: x.coords.latitude, lng: x.coords.longitude };
+          console.log(homePos, "homePos");
+
+
+          const data = res.data.filter(x => x.cun > 0).map((element, i) => {
+            const markerPos = { lat: element.lat, lng: element.lng };
+            console.log(markerPos)
+
             if (homePos && markerPos) {
               const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(homePos, markerPos);
               console.log(distanceInMeters, "distanceInMeters");
+              element.distanc = distanceInMeters
             }
-          }
-        });
+            return element
+          });
+          console.log(data, "ll");
+          setStations(data);
+          let arr = data
+          // console.log(stations.distanc.min(),"min");
+          // מיון המערך לפי המרחק מהנמוך לגבוה
+          arr.sort((a, b) => a.distanc - b.distanc);
+
+          // לקחת את שלושת האיברים הראשונים מהמערך הממוין
+          let closestThree = arr.slice(0, 3);
+          setstationsMostClosde(closestThree);
+
+        })
       }).catch(err => console.log(err))
   }, [])
 
+  const [place, setplace] = useState('דיווח על תקלה')
 
+
+
+
+  const [searchText, setSearchText] = useState('');
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [currentPoint, setCurrentPoint] = useState(null);
+
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target);
+  };
+
+  const filteredOptions = stations.filter((option) =>
+    option.location.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+
+  const mapRef = useRef(null); // Ref למפה שבה תעשה זום
+
+  // פונקציה לזום לנקודה שנבחרה
+  const zoomToSelectedPoint = () => {
+    const selectedPoint = selectedOption; // נקודה שנבחרה
+    const map = mapRef.current; // מקבל את מפת הגוגל
+    let c = null;
+    // אם קיימת מפה ויש נקודה שנבחרה
+    console.log(selectedOption, "llll")
+    if (selectedOption != null) {
+      if (typeof selectedOption === 'object') {
+        console.log(selectedOption)
+        map.panTo({ lat: selectedOption.lat, lng: selectedOption.lng }); // מעביר את המפה לנקודה שנבחרה
+        map.setZoom(18);
+      }
+      else {
+        if (map && selectedOption) {
+          for (var i = 0; i < filteredOptions.length; i++) {
+            if (filteredOptions[i].id == selectedOption) {
+              setCurrentPoint(filteredOptions[i])
+              c = filteredOptions[i];
+            }
+          }
+          console.log(c);
+          console.log(selectedOption)
+          map.panTo({ lat: c.lat, lng: c.lng }); // מעביר את המפה לנקודה שנבחרה
+          map.setZoom(18);
+        }
+      }
+    }
+  };
+
+  // כאשר משתנה הנקודה הנבחרת ב־Select משתנה, עדכן את הזום
+  useEffect(() => {
+    zoomToSelectedPoint();
+  }, [selectedOption]);
 
   console.log(selectPoin)
   return (<>
     <br />
+    <div id="map"></div>
 
+    <Card id="searchCard" >
+      <p style={{ fontWeight: "bold", fontSize: "19px" }}>חיפוש תחנה</p>
+
+      <input
+        id='search'
+        type="text"
+        placeholder="חיפוש..."
+        value={searchText}
+        onChange={handleSearch}
+      /><br></br><br></br>
+
+
+      <select id='selectS' onClick={({ target }) => (setSelectedOption(target.value))}>
+        {filteredOptions.map(marker => <option selected={selectedOption == marker} value={marker.id}>{marker.name} {marker.location}</option>)}
+      </select><br></br><br></br>
+
+
+      <p style={{ fontWeight: "bold", fontSize: "19px" }}> הכי קרובות אלי</p>
+      <div style={{ display: "flex", textAlign: "center", lineHeight: "30px" }}>
+        {stationsMostClosde.map(marker => <Card onClick={({ target }) => (setSelectedOption(marker))} id="cardStation" style={{
+          borderRadius: "3px", height: "25%",
+          width: "35%", marginLeft: "5px", direction: "rtl", fontSize: "15px"
+        }} selected={selectedOption == marker} value={marker}>
+          {marker.name} {marker.location} <br></br>  <PedalBikeIcon style={{ fontSize: '20px', verticalAlign: 'text-top', color: "#602424" }} />  {marker.cun + " "}</Card>)}
+      </div>
+      {/* <input type='text' value="ooooooo" /> */}
+      <br></br>
+    </Card>
     <br />
-
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
       zoom={10}
       onClick={(e) => console.log(e.latLng.lat(), e.latLng.lng())}
+      onLoad={(map) => (mapRef.current = map)} // שימור מפה ב־ref
     // onLoad={onLoad}
     // onUnmount={onUnmount}
     >
 
-
       {
-        mapers.map((marker) => <AnyReactComponent key={marker.id ? marker.id : 0}
-          // opacity={selectPoin === marker.id ? 1 : 0.5}
-          selectedPoint={() => setSlectedPoint(marker)}
-          onClick={() => OpenMe(marker)}
-          text={marker}
-          title={marker.name} lat={marker.lat} lng={marker.lng} />
+        mapers.map((marker) =>
+          <AnyReactComponent
+            key={marker.id ? marker.id : 0}
+
+            // key={shouldResetMap ? 'mapResetKey' : 'mapKey'}
+            // opacity={selectPoin === marker.id ? 1 : 0.5}
+            selectedPoint={() => setSlectedPoint(marker)}
+            onClick={() => OpenMe(marker)}
+            text={marker}
+
+            title={`${marker.name} (${marker.cun})`}
+            lat={marker.lat}
+            lng={marker.lng} />
         )
       }
 
       { /* Child components, such as markers, info windows, etc. */}
       <></>
+
+
     </GoogleMap>
 
   </>)

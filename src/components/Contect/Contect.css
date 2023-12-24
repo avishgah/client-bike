@@ -10,14 +10,6 @@
     text-align: center;
 }
 
-#selectC{
-    width: 27.5%;
-    /* float: right !important; */
-    border: none;
-    border-bottom: 1px solid black !important;
-    padding: 10px;
-    font-size: medium;
-}
 
 #outlined-multiline-staticC{
     width:26vw !important;
@@ -48,13 +40,13 @@
     font-size: large;
     font-weight: bold;
     border-radius: 30px;
-    background-color: orange;
+    background-color: rgba(0, 0, 0, 0.87) ;
     /* background-color: rgb(27, 139, 77); */
 }
 #app{
     font-size: xx-large;
     font-weight: bold;
-    color:rgb(147, 98, 6)
+    color:rgb(16, 25, 49);
 
 }
 
@@ -65,3 +57,56 @@
     margin-left: 35vw;
     font-weight: bolder;
 }
+
+
+/* maps */
+
+#selectC{
+    width: 27.5%;
+    /* float: right !important; */
+    border: none;
+    border-bottom: 1px solid black !important;
+    padding: 10px;
+    font-size: medium;
+}
+#cardStation:hover{
+    box-shadow: 0 4px 8px 0 rgba(96, 137, 226, 0.19), 0 2px 20px 0 rgba(96, 137, 226, 0.19);
+
+}
+
+#cardStation{
+    /* background-color: rgb(237, 236, 236); */
+}
+#selectS{
+    width: 50%;
+    /* float: right !important; */
+    border: solid 2px;
+    border-radius: 30px;
+
+    /* border-bottom: 1px solid black !important; */
+    padding: 10px;
+    font-size: medium;
+}
+#search{
+    padding: 10px;
+    border-radius: 30px;
+    border-color: #602424;
+    width: 50%;
+}
+/* קוד CSS כללי */
+.card {
+    width: 45%; /* רוחב הקלט במצב רגיל */
+  }
+  
+
+  #searchCard{
+    text-align: center;
+    direction: rtl;
+    width: 45%;
+  }
+  /* קוד CSS למצב מסך קטן */
+  @media screen and (max-width: 768px) {
+    #searchCard {
+      width: 100%; /* שינוי רוחב הקלט ל-100% במסך קטן */
+    }
+  }
