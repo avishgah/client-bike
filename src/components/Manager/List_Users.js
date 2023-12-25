@@ -25,7 +25,6 @@ import { Button, IconButton, Tooltip } from '@mui/material';
 import { Switch, switchClasses } from '@mui/joy';
 
 import AddUser from '../AddUser/AddUser';
-import Register from '../Rejister/Register';
 import RegisterAdd from './RegisterAdd';
 export default function AccessibleTable() {
 

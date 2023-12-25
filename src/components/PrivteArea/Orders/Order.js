@@ -194,7 +194,7 @@ function MyComponent() {
       <br></br>
       <br></br>
 
-      <Button variant="contained" style={{width: "21vw"}} startIcon={<SendIcon style={{ marginLeft: "20px" }} />} id="addRC" type="submit">
+      <Button variant="contained" style={{width: "21vw"}} startIcon={<SendIcon style={{ marginLeft: "20px" }} />} id="addR" type="submit">
         הזמן
       </Button>
 

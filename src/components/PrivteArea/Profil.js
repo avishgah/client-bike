@@ -163,7 +163,7 @@ const Profil = () => {
             "readTerms": true
         }
         console.log(currentUser.id)
-        axios.put(`https://localhost:7207/api/User/${currentUser.id}`, user).then(res => {
+        axios.put(`https://localhost:7207/api/User/UpdateUser/${currentUser.id}`, user).then(res => {
 
             console.log(res + "kkkk");
 
@@ -228,7 +228,7 @@ const Profil = () => {
                     {...register("phon", {
                         required: "phon is required",
                         pattern: {
-                            value: /^[1-9]{10}$/,
+                            value: /^[0-9]{10}$/,
                             message: "Invalid phon "
                         },
 
@@ -265,10 +265,11 @@ const Profil = () => {
                 {/* <label>סיסמא</label> */}
                 <br></br>
 
-                {/* 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+
+                <FormControl sx={{ m: 1, width: '39ch',direction:"rtl" }} variant="standard">
                     <InputLabel htmlFor="standard-adornment-password"></InputLabel>
                     <Input
+                        defaultValue={currentUser == null ? ' ' : currentUser.password}
                         id="standard-adornment-password"
                         type={showPassword ? 'text' : 'password'}
                         {...register("password", {
@@ -292,7 +293,7 @@ const Profil = () => {
                     />
                     {errors.password && <p className="errorMsg">{errors.password.message}</p>}
 
-                </FormControl> */}
+                </FormControl>
                 <br></br><br></br>
 
 
@@ -305,7 +306,7 @@ const Profil = () => {
                 <div id="div-pic"   >
 
                     <Button
-                        style={{ backgroundColor: "#905e03",width:"22vw" }}
+                        style={{ backgroundColor: "#905e03", width: "22vw" }}
                         endIcon={<AttachmentIcon />}
                         variant="contained"
                         component="label"

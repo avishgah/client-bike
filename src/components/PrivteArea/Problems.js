@@ -18,6 +18,7 @@ const Problems = () => {
 
     const [typeProblem, settypeProblem] = useState('תחזוקה - בוץ/לכלוך')
     const [placeProblem, setplaceProblem] = useState('תקלה באופניים')
+    const [file, setFile] = useState(null);
 
 
     const [allBikes, setallBikes] = useState([])
@@ -77,7 +78,8 @@ const Problems = () => {
     const submit = (details) => {
         console.log("connect");
         console.log(placeProblem)
-        var task = null;
+        console.log(file)
+        var task=null;
         if (placeProblem == 'תקלה באופניים') {
             task =
             {
@@ -142,7 +144,17 @@ const Problems = () => {
 
             <label className="ShowBike">מספר מזהה של אפניים</label><br></br>
             <TextField className="ShowBike" variant="standard"
-                {...register("bike")}
+            
+                style={errors.name ? { border: "red solid 1px", borderRadius: "5px" } : null}
+
+                defaultValue={currentUser == null ? '' : currentUser.id}
+                {...register("bike", {
+                  required: "id is required",
+                  pattern: {
+                    value: /^\d{9}$/,
+                    message: "Invalid id "
+                  },
+                })}
             />
             <br></br>
 
@@ -155,22 +167,21 @@ const Problems = () => {
             />
 
             <br ></br><br ></br>
-            <div id="div-pic"   >
+          <div id="div-pic"   >
+    
+            <label>כאן ניתן להרחיב על הנושא, ונעשה מאמצים להשיב בהקדם</label><br></br><br></br>
+            <TextField
+                id="outlined-multiline-static"
+                multiline
+                rows={4}
+                defaultValue=""
+                {...register("caption")}
+            />
 
-                <label>כאן ניתן להרחיב על הנושא, ונעשה מאמצים להשיב בהקדם</label><br></br><br></br>
-                <TextField
-                    id="outlined-multiline-static"
-                    multiline
-                    rows={4}
-                    defaultValue=""
-                    {...register("caption")}
-                />
 
-
-                <label id="ll">תמונה של התקלה</label>
-                <br></br>
-                <Button
-                    style={{ backgroundColor: "#905e03", width: "22vw" }}
+            <label id="ll">תמונה של התקלה</label>
+            <br></br>
+              <Button
                     endIcon={<AttachmentIcon />}
                     variant="contained"
                     component="label"
@@ -182,20 +193,16 @@ const Problems = () => {
                         // name="ll"
                         id="k"
                         type="file"
-                        onChange={func}
-
+                        onChange={({ target }) => (setFile(target.value))}
                     />
                 </Button>
                 <p></p>
-
-
-
             </div>
 
 
             <br></br><br></br>
-            <Button variant="contained" style={{ width: "22vw" }} id="addRC" type="submit">
-                שלח
+            <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">
+                עדכון
             </Button>
         </form>
     </>)

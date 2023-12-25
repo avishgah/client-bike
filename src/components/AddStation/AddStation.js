@@ -130,7 +130,6 @@ const AddStation = () => {
 
     //הוספת אפנים עובד - בעיה - הקוד לא ייחודי 
     const submit = async (details) => {
-        console.log(places, "ppppppppppppppppppppp")
         const station = {
             "id": 0,
             "location": city,
@@ -158,7 +157,7 @@ const AddStation = () => {
 
                 id="demo-helper-text-aligned"
                 {...register("bike", {})}
-            /><br></br><br></br>
+            />
 
             <p id="smallP">הכנס מיקום התחנה לבחירתך</p>
             <ReactGoogleAutocomplete
@@ -174,7 +173,7 @@ const AddStation = () => {
                 }
                 }
 
-            /><br></br><br></br>
+            />
 
             {console.log(places + "ll")}
             <Button type="button" id="addMore" onClick={() => (nav('/addStation'))}>
@@ -183,8 +182,6 @@ const AddStation = () => {
             <Button type="button" id="end" onClick={() => (restasrt())}>
                 סיום
             </Button>
-            <br></br><br></br>
-
 
             <Button variant="contained" id="addRB" type="submit">
                 התחבר

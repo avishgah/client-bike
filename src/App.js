@@ -18,10 +18,8 @@ import How from './components/Home/how-work/How';
 import Pay from './components/Home/payds/Pay';
 import Out from './components/Maps/out';
 import Connection from './components/Connection';
-import StepperNav from './components/Rejister/StepperNav';
 import PicId from './components/Rejister/PicId';
 import Payment2 from './components/Rejister/Payment2';
-import Register from './components/Rejister/Register';
 
 import Footer from './Footer';
 
@@ -47,7 +45,6 @@ import CardOpinion from './components/Manager/CardOpinion';
 import { Fragment } from 'react';
 import Private from './Private';
 import Terms from './Terms';
-import Regist from './components/Rejister/Regist';
 import Question from './components/Question/Quastion';
 import Video from './components/Video';
 import ForgetPassword from './components/ForgetPassword/ForgetPass';
@@ -56,6 +53,9 @@ import { useState } from 'react';
 import Sae from './components/Home/Sae';
 import Do from './components/Home/Do';
 import Pae from './components/Home/Pae';
+import RegisterYup from './components/Rejister/RegisterYup';
+import FormInput from './components/Rejister/FormInput/FormInput';
+import Password from './components/Rejister/Password/Password';
 function App() {
 
   const currentUser = useSelector(state => state.ur.user);
@@ -74,9 +74,9 @@ function App() {
 
       {/* <List_Station/> */}
       {/* <ForgetPassword email={mail} setOpen={setOpen} />  */}
-     
-      {/* <List_Bikes /> */}
 
+      {/* <List_Bikes /> */}
+      {/* <RegisterYup /> */}
 
       {/* <List_Opinion /> */}
 
@@ -116,7 +116,6 @@ function App() {
         <Route path='addOption' element={<AddOption />} />
         <Route path='addStation' element={<AddStation />} />
         <Route path='Connection' element={<Connection />} />
-        <Route path='Stepper' element={<StepperNav />} />
         <Route path='Addjj' element={<Jj />} />
         <Route path='How' element={<How />} />
         <Route path='Home/How' element={<How />} />
@@ -132,8 +131,6 @@ function App() {
 
         <Route path='PicId' element={<PicId />} />
         <Route path='Payment2' element={<Payment2 />} />
-        <Route path='Register' element={<Register />} />
-        <Route path='Regist' element={<Regist />} />
 
 
         <Route path='History' element={<History />} />
@@ -158,11 +155,18 @@ function App() {
         <Route path='Private' element={<Private />} />
         <Route path='Terms' element={<Terms />} />
 
+
+
+        <Route path='yup' element={<RegisterYup />} />
+        <Route path='formInput' element={<FormInput />} />
+        <Route path='password' element={<Password />} />
+
+
       </Routes>
     </div>
 
     <Fragment>
-        <Footer />
+      <Footer />
     </Fragment>
 
 

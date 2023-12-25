@@ -214,7 +214,7 @@ const Connection = () => {
                 </FormControl><br></br>
                 <Alert id="alert" severity="error">מייל או סיסמא שגויים</Alert><br></br>
 
-                <Button variant="contained" startIcon={<SendIcon style={{marginLeft:"20px"}} />} id="addRC" type="submit">
+                <Button variant="contained" startIcon={<SendIcon style={{marginLeft:"20px"}} />} id="addR" type="submit">
                     התחבר
                 </Button>
             </CardContent>

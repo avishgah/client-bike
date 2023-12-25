@@ -115,14 +115,7 @@ export default function AccessibleTable() {
 
                             {listStation.map((row) => (
                                 <TableRow key={row.id}>
-                                    {/* <DeleteOutlineIcon id="icon2"/> */}
-                                    {/* 
-                            <TableCell>
-                                <Tooltip title="מחק" placement="left-end">
-                                    <DeleteIcon id="icon" onClick={() => myFunction(row.id)} />
-                                </Tooltip>
-                            </TableCell> */}
-
+                              
                                     <TableCell component="th" scope="row">
                                         {row.id}
                                     </TableCell>
@@ -147,11 +140,6 @@ export default function AccessibleTable() {
 
 
                                     </TableCell>
-
-                                    {/* <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
-                        
-                    </Button>
-              <IconButton >{DeleteIcon}</IconButton> */}
                                 </TableRow>
                             ))}
                         </TableBody>
