@@ -147,7 +147,7 @@ const Connection = () => {
                 if (users[i].isManager == false)
                     nav('/Profil')
                 else
-                    nav('/Manager')
+                    nav('/navM')
             }
         }
         if (flag == 0) {
@@ -219,7 +219,7 @@ const Connection = () => {
                 </Button>
             </CardContent>
 
-            <Link href='Profil' style={{textAlign:"right"}} underline="hover">
+            <Link href='yup' style={{textAlign:"right"}} underline="hover">
                 {'להרשמה - לחץ כאן'}
             </Link>
 

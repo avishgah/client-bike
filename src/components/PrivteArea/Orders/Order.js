@@ -66,7 +66,7 @@ const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
 
 
 function MyComponent() {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(1);
   const [open, setOpen] = React.useState(false);
 
 
@@ -138,7 +138,7 @@ function MyComponent() {
     }
     //send empty
     const IsPay = false;
-    axios.post(`https://localhost:7207/api/Order`, { count, IsPay, id: 0, datePay: null, IdCust: currentUser.id, idStation: selectPoin, dateOrder: new Date() }).then(res => {
+    axios.post(`https://localhost:7207/api/Order`, { count, IsPay, id: 0, datePay: null, IdCust: currentUser.id, idStation: selectPoin, dateOrder: new Date(),code:"web" }).then(res => {
       console.log(res)
       console.log(res.data)
     })

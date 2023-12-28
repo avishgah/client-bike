@@ -33,7 +33,7 @@ const Footer = () => {
                     <Link to="Contect"> צור קשר</Link>
                 </li>
                 <li className='li-footer'>
-                    <Link to="Problems">שאלות ותשובות  </Link>
+                    <Link to="Question">שאלות ותשובות  </Link>
                 </li>
                 <li className='li-footer'>
                     <Link to="Terms">תקנון</Link>

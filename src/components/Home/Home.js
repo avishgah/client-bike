@@ -19,7 +19,7 @@ import Stepper from '../Stepper.js';
 const Home = () => {
     const nav = useNavigate();
     return (<>
-    
+
         <Stepper />
 
         <div className='father' style={{
@@ -28,33 +28,34 @@ const Home = () => {
         }}>
             <div className='son'>
                 <br></br>
-                <div style={{ marginLeft:"30px", backgroundColor: "#602424", borderRadius: "100px" ,height:"100px",width:"100px"}}></div>
+                <div id="photo">
+                    <div style={{ marginLeft: "30px", backgroundColor: "#602424", borderRadius: "100px", height: "100px", width: "100px" }}></div>
 
-                <Card id="div-video" sx={{marginLeft:"100px", width:"13.7vw", height:"14vw", border:"white ",boxShadow:"none" }}>
-                    <video
-                        autoPlay
-                        loop
-                        muted
-                        poster="./Images/גלגל.mp4"
-                    >
-                        <source
-                            src="./Images/גלגל.mp4"
-                            type="video/mp4"
-                        />
-                    </video>
-                </Card>
-                <div style={{ marginLeft:"30px", backgroundColor: "#602424", borderRadius: "150px" ,height:"150px",width:"150px"}}></div>
-
+                    <Card sx={{ marginLeft: "100px", width: "13.7vw", height: "14vw", border: "white ", boxShadow: "none" }}>
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            poster="./Images/גלגל.mp4"
+                        >
+                            <source
+                                src="./Images/גלגל.mp4"
+                                type="video/mp4"
+                            />
+                        </video>
+                    </Card>
+                    <div style={{ marginLeft: "30px", backgroundColor: "#602424", borderRadius: "150px", height: "150px", width: "150px" }}></div>
+                </div>
             </div>
 
             <div className='son' style={{}}>
 
                 {/* img */}
-                <h1 id="l" style={{width:"96vw"}}>כדאי לדעת</h1>
+                <h1 id="l" style={{ width: "96vw" }}>כדאי לדעת</h1>
 
                 <div className='ss' onClick={() => nav('./How')}  >
-                    <CardContent endIcon={<PedalBikeIcon/>}>
-                    {/* {<PedalBikeIcon fontSize='large' />} */}
+                    <CardContent endIcon={<PedalBikeIcon />}>
+                        {/* {<PedalBikeIcon fontSize='large' />} */}
 
                         <Typography variant="h5" fontSize={'20px'} component="div">
                             <b>     ?כיצד פועל השירות </b>

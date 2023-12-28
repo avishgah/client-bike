@@ -151,7 +151,7 @@ const RegisterYup = () => {
             </Button>
             <br /> <br />
             <p className="move">
-                כבר רשום? עבור <span onClick={() => { navigate("/login/" + 0) }} >להתחברות</span>
+                כבר רשום? עבור <span onClick={() => navigate('/Connection')} >להתחברות</span>
             </p>
         </form>
     )

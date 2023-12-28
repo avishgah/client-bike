@@ -63,7 +63,7 @@ export default function AccessibleTable() {
                 }
 
                 console.log(user)
-                axios.put(`https://localhost:7207/api/User/${id}`, user).then(res => {
+                axios.put(`https://localhost:7207/api/User/UpdateUser/${id}`, user).then(res => {
                     console.log("kk");
                 })
                 window.location.reload(true);

@@ -39,11 +39,6 @@ html {
     /* Place the video behind other content */
 }
 
-#div-video {
-    /* width: 10opx;
-    margin-left: 100px; */
-}
-
 video {
     width: 40vw;
     /* width: 200%; */
@@ -69,4 +64,17 @@ video {
     /* רוחב פריטים */
     height: auto;
     /* גובה פריטים */
+}
+
+@media (max-width: 800px) {
+    #photo {
+        display: none; 
+    }
+    .ss {
+        width: 80vw;
+        margin-left:10vw;
+        direction: rtl;
+    }
+    
+
 }
