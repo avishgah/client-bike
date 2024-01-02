@@ -102,81 +102,91 @@ export default function AccessibleTable() {
             console.log("exit")
         }
     }
+    const [open, setOpen] = React.useState(false);
+
+    const showPic = (pic) => {
+        alert(pic);
+    }
     return (
         <div class="flex-container">
-    <div class="flex-item-left">
-        <TableContainer component={Paper}>
-            <Table id="table" aria-label="caption table">
-                <caption>End list of users</caption>
-                <TableHead>
-                    <TableRow>
+            <div class="flex-item-left">
+                <TableContainer component={Paper}>
+                    <Table id="table" aria-label="caption table">
+                        <caption>End list of users</caption>
+                        <TableHead>
+                            <TableRow>
 
-                        {/* <TableCell><b></b></TableCell> */}
-                        <TableCell ><b>קוד</b></TableCell>
+                                {/* <TableCell><b></b></TableCell> */}
+                                {/* <TableCell ><b>קוד</b></TableCell> */}
 
-                        <TableCell align="right"><b>    שם מלא</b></TableCell>
-                        <TableCell align="right"><b>תעודת זהות</b></TableCell>
-                        <TableCell align="right"><b>טלפון</b></TableCell>
-                        <TableCell align="right"><b>מייל</b></TableCell>
-                        <TableCell align="right"><b>סיסמא</b></TableCell>
-                        <TableCell align="right"><b>עיר</b></TableCell>
-                        <TableCell align="right"><b>כתובת</b></TableCell>
-                        <TableCell align="right"><b>תאריך לידה</b></TableCell>
-                        <TableCell align="right"><b> תצלום</b></TableCell>
-                        <TableCell align="right"><b> סטטוס</b></TableCell>
+                                <TableCell align="right"><b>    שם מלא</b></TableCell>
+                                <TableCell align="right"><b>תעודת זהות</b></TableCell>
+                                <TableCell align="right"><b>טלפון</b></TableCell>
+                                <TableCell align="right"><b>מייל</b></TableCell>
+                                <TableCell align="right"><b>סיסמא</b></TableCell>
+                                <TableCell align="right"><b>עיר</b></TableCell>
+                                <TableCell align="right"><b>כתובת</b></TableCell>
+                                <TableCell align="right"><b>תאריך לידה</b></TableCell>
+                                <TableCell align="right"><b> תצלום</b></TableCell>
+                                <TableCell align="right"><b> סטטוס</b></TableCell>
 
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-
-
-                    {listUsers.map((row) => (
-                        <TableRow key={row.id}>
-                            {/* <DeleteOutlineIcon id="icon2"/> */}
-
-                            <TableCell component="th" scope="row">
-                                {row.id}
-                            </TableCell>
-
-                            <TableCell align="right">{row.name}</TableCell>
-                            <TableCell align="right">{row.tz}</TableCell>
-                            <TableCell align="right">{row.phon}</TableCell>
-                            <TableCell align="right">{row.mail}</TableCell>
-                            <TableCell align="right">{row.password}</TableCell>
-                            <TableCell align="right">{row.toun}</TableCell>
-                            <TableCell align="right">{row.addres}</TableCell>
-                            <TableCell align="right">{row.dateBirth}</TableCell>
-                            <TableCell align="right">{row.pic}</TableCell>
-                            <TableCell align="left">
-                                {row.status == true ?
-                                    <Tooltip title="פעיל" placement="left-end">
-                                        <Switch
-                                            checked={row.status}
-                                            onChange={() => change(row.id, row.status)}
-                                            inputProps={{ 'aria-label': 'controlled' }}
-                                        />
-                                    </Tooltip> : <Tooltip title="לא פעיל" placement="left-end">
-                                        <Switch
-                                            checked={row.status}
-                                            onChange={() => change(row.id, row.status)}
-                                            inputProps={{ 'aria-label': 'controlled' }}
-                                        />
-                                    </Tooltip>}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
 
 
-                            </TableCell>
+                            {listUsers.map((row) => (
+                                <TableRow key={row.id}>
+                                    {/* <DeleteOutlineIcon id="icon2"/> */}
 
-                            {/* <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
+                                    {/* <TableCell component="th" scope="row">
+                                        {row.id}
+                                    </TableCell> */}
+
+                                    <TableCell align="right">{row.name}</TableCell>
+                                    <TableCell align="right">{row.tz}</TableCell>
+                                    <TableCell align="right">{row.phon}</TableCell>
+                                    <TableCell align="right">{row.mail}</TableCell>
+                                    <TableCell align="right">{row.password}</TableCell>
+                                    <TableCell align="right">{row.toun}</TableCell>
+                                    <TableCell align="right">{row.addres}</TableCell>
+                                    <TableCell align="right">{row.dateBirth}</TableCell>
+                                    <TableCell align="right">
+                                        <div class="container">
+                                            <img src={row.pic} class="image" />
+                                            <div class="overlay"></div>
+                                        </div>
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {row.status == true ?
+                                            <Tooltip title="פעיל" placement="left-end">
+                                                <Switch
+                                                    checked={row.status}
+                                                    onChange={() => change(row.id, row.status)}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                />
+                                            </Tooltip> : <Tooltip title="לא פעיל" placement="left-end">
+                                                <Switch
+                                                    checked={row.status}
+                                                    onChange={() => change(row.id, row.status)}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                />
+                                            </Tooltip>}
+
+
+                                    </TableCell>
+
+                                    {/* <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
                         
                     </Button>
               <IconButton >{DeleteIcon}</IconButton> */}
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
 
-        </div>
+            </div>
             <div class="flex-item-right">
                 <br></br>
                 <b>  הוסף משתמש </b><br></br><br></br>

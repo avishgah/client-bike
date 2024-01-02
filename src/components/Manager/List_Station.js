@@ -68,7 +68,7 @@ export default function AccessibleTable() {
     const [checked, setChecked] = React.useState(false);
 
     useEffect(() => {
-        axios.get('https://localhost:7207/api/Station')
+        axios.get('https://localhost:7207/api/Station/Get')
             .then(res => {
                 console.log(res.data)
                 setlistStation(res.data)

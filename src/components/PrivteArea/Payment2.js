@@ -10,9 +10,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
-import { Stack } from '@mui/material';
+import { Link, Stack } from '@mui/material';
 
-import Link from '@mui/material/Link';
 
 
 
@@ -22,9 +21,7 @@ import CardContent from '@mui/material/CardContent';
 
 
 
-// import './Payment2.css';
-
-
+import './Payment2.css';
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { LocalizationProvider } from '@mui/x-date-pickers-pro/LocalizationProvider';
 
@@ -56,6 +53,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
+import Stepper from './Stepper'
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -80,7 +78,7 @@ const bull = (
 
 
 
-const Payment2 = () => {
+const Payment2 = ({ onSubmit }) => {
 
   const [value, setValue] = React.useState(null);
 
@@ -115,15 +113,27 @@ const Payment2 = () => {
   };
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch({ type: type.CHANGE_FLAG_TRUE })
+    console.log(currentUser, "currentU");
+    console.log(currentStation, "currentS");
+    console.log(countBikes, "count");
+
+
+    dispatch({
+      type: type.CHANGE_FLAG_TRUE
+    })
 
 
   }, [])
 
   // let currentUser = useSelector(state => state.tr.user);
-  // let arr = useSelector(state => state.tr.drives);
+  // let arr = useSelector(state => state.tr.tasks);
 
   const flag = useSelector(state => state.r.Flag);
+
+  const currentUser = useSelector(state => state.r.user);
+  const currentStation = useSelector(state => state.r.station);
+  const countBikes = useSelector(state => state.r.count);
+
 
   const submit = (details) => {
 
@@ -131,18 +141,14 @@ const Payment2 = () => {
     // alert("פרטיך נקלטו")
     // console.log(details);
     // addbike(details);
-  }
-
-  const addbike = async (details) => {
-    var promise = await axios.post("https://localhost:7075/api/User", details);
-    alert(promise.data);
+    onSubmit(details)
   }
 
   return <>
 
     {/* <Stepper/> */}
     <h1></h1>
-    <form id="formLoginR" onSubmit={() => submit()}>
+    <form id="formLoginR" style={{ width: "85vw", mr: "15vw", direction: "rtl" }} onSubmit={handleSubmit(submit)}>
       <Card sx={{ minWidth: 80 }}>
         <CardContent>
 
@@ -155,14 +161,16 @@ const Payment2 = () => {
           {/* name */}
 
 
-          <TextField fullWidth label="שם מלא" id="fullWidth" {...register("name", { required: "name is required", })} />
-          {errors.name && <p className="errorMsg">{errors.name.message}</p>}
+          <TextField fullWidth label="שם של בעל הכרטיס" id="fullWidth" {...register("name", { required: "name is required", })}
+            style={errors.name ? { border: "red solid 1px", borderRadius: "5px" } : null}
+            defaultValue={currentUser == null ? '' : currentUser.name} />
           <br></br><br></br>
 
           {/* id */}
 
-          <TextField fullWidth id="fullWidth" label="ת.ז" variant="outlined"
-
+          <TextField fullWidth id="fullWidth" label="ת.ז של בעל הכרטיס" variant="outlined"
+            defaultValue={currentUser == null ? '' : currentUser.tz}
+            style={errors.id ? { border: "red solid 1px", borderRadius: "5px" } : null}
             {...register("id", {
               required: "id is required",
               pattern: {
@@ -171,18 +179,21 @@ const Payment2 = () => {
               },
 
             })} />
-          {errors.id && <p className="errorMsg">{errors.id.message}</p>}
           <br></br><br></br>
 
           {/* card */}
 
-          <TextField fullWidth id="fullWidth" label="מספר כרטיס אשראי" variant="outlined"
+          <TextField fullWidth id="fullWidth" variant="outlined"
+            style={errors.card ? { border: "red solid 1px", borderRadius: "5px" } : null}
+            // style={{direction:"rtl"}}
+            defaultValue={currentUser == null ? 'מספר כרטיס אשראי' : currentUser.card}
 
             InputProps={{
-              startAdornment: <><img id="img" src="visa.png" /> <br></br>
+              endAdornment: <>
                 <img id="img" src="israkart.png" />
                 <img id="img" src="אמריקאן.png" />
                 <img id="img" src="מאסאר.png" />
+                <img id="img" src="visa.png" />
               </>
             }}
             {...register("card", {
@@ -198,12 +209,14 @@ const Payment2 = () => {
 
             })}
           />
-          {errors.card && <p className="errorMsg">{errors.card.message}</p>}
           <br></br><br></br>
 
           {/* date */}
 
-          <TextField id="outlined-basic" label="תאריך תפוגה MM/YY" variant="outlined"
+          <TextField id="outlined-basic" label=" תוקף MM/YY" variant="outlined"
+            style={errors.date ? { border: "red solid 1px", borderRadius: "5px" } : null}
+            style={{ width: "20vw" }}
+            defaultValue={currentUser == null ? '' : currentUser.date}
             {...register("date", {
               required: "date is required",
               pattern: {
@@ -214,10 +227,12 @@ const Payment2 = () => {
 
             })}
           />
-          {errors.date && <p className="errorMsg">{errors.date.message}</p>}
 
 
           <TextField id="outlined-basic" label="CVV" variant="outlined"
+            style={errors.cvv ? { border: "red solid 1px", borderRadius: "5px" } : null}
+            style={{ marginRight: "5px", width: "20vw" }}
+            defaultValue={currentUser == null ? '' : currentUser.cvv}
             {...register("cvv", {
               required: "cvv is required",
               pattern: {
@@ -227,16 +242,18 @@ const Payment2 = () => {
 
             })}
           />
-          {errors.cvv && <p className="errorMsg">{errors.cvv.message}</p>}
 
         </CardContent>
-
         {/* save */}
-        <Link href='Register' underline="hover">
-          {'יותר מאוחר'}
-        </Link>
+
         <CardActions>
-          <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">שמור</Button>
+          <Stack direction="row" spacing={5} marginRight="32.5vw">
+
+            <Button color="inherit" style={{ fontSize: "15px", fontWeight: "bold", backgroundColor: "#1976d2", color: "white", width: "125px" }} type="submit" textAlign="right">
+              הבא
+            </Button>
+
+          </Stack><br></br>
         </CardActions>
       </Card>
 

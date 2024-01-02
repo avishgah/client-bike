@@ -48,14 +48,14 @@ margin-left: 20%;
 .flex-item-left {
     border: black 2px solid;
     background-color: #f1f1f1;
-    padding: 10px;
+    /* padding: 10px; */
     flex: 70%;
 }
 
 .flex-item-right {
     border: black 2px solid;
     background-color:  #f1f1f1;
-    padding: 10px;
+    /* padding: 10px; */
     text-align: center;
     flex: 30%;
     font-size: large;
@@ -87,3 +87,65 @@ margin-left: 20%;
     margin-left: 30px;
     color: black;
 }
+
+
+.ulOfPrivateM {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 1px solid rgb(36, 36, 52) ;
+    margin-top: 2%;
+  }
+  
+  .liOfPrivateM {
+    /* float: right ; */
+    margin-left: 30px;
+    font-size: smaller;
+  }
+  
+  .liOfPrivateM a {
+    color: rgb(19, 19, 48);
+    text-align: center;
+    padding: 10px 10px;
+    text-decoration: none;
+  }
+  
+  .liOfPrivateM :hover {
+    border-radius: 2% ;
+    background-color: rgb(236, 235, 242) ;
+  }
+  
+  #out {
+    margin-top: 10%;
+    text-align: center;
+    background-color: white;
+    color: rgb(9, 4, 4);
+    padding: 2%;
+  }
+
+  .container {
+    position: relative;
+    width: 100%; /* או גודל רצוי של התמונה */
+  }
+  
+  .image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* שקיפות אפסית בהתחלה */
+    transition: opacity 0.3s ease; /* אנימציה חלקה במעבר על התמונה */
+    background-color: rgba(0, 0, 0, 0.7); /* צבע שחור שקוף כדי ליצור את האפקט */
+  }
+  
+  .container:hover .overlay {
+    opacity: 1; /* הצגת השכבה כשהעכבר על התמונה */
+  }

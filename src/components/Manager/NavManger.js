@@ -30,23 +30,23 @@ const NavManger = () => {
         {
             <div className='home'>
 
-                <ul>
-                    <li id='1' onClick={() => (changeColor(1))}>
+                <ul className='ulOfPrivateM' >
+                    <li  className='liOfPrivateM' onClick={() => (changeColor(1))}>
                         <Link to="History">  רשימת נסיעות</Link><br></br> <br></br>
                     </li>
-                    <li id='2'onClick={() => (changeColor(2))}>
+                    <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
                         <Link to="lUser">רשימת משתמשים </Link>
                     </li>      
-                         <li id='2'onClick={() => (changeColor(2))}>
+                         <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
                         <Link to="lStation">רשימת תחנות </Link>
                     </li>
-                    <li id='2'onClick={() => (changeColor(2))}>
+                    <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
                         <Link to="lBike">רשימת אפניים </Link>
                     </li>
-                    <li id='2'onClick={() => (changeColor(2))}>
-                        <Link to="Order">רשימת דיווחים </Link>
+                    <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
+                        <Link to="lOpinion">רשימת דיווחים </Link>
                     </li>
-                    <li id='4'onClick={() => (changeColor(4))}>
+                    <li  className='liOfPrivateM' onClick={() => (changeColor(4))}>
                         <Link to="Profil">פרופיל</Link>
                     </li>
                     <li>

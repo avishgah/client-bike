@@ -18,8 +18,6 @@ import How from './components/Home/how-work/How';
 import Pay from './components/Home/payds/Pay';
 import Out from './components/Maps/out';
 import Connection from './components/Connection';
-import PicId from './components/Rejister/PicId';
-import Payment2 from './components/Rejister/Payment2';
 
 import Footer from './Footer';
 
@@ -56,6 +54,8 @@ import Pae from './components/Home/Pae';
 import RegisterYup from './components/Rejister/RegisterYup';
 import FormInput from './components/Rejister/FormInput/FormInput';
 import Password from './components/Rejister/Password/Password';
+
+import PeymentYup from './components/Rejister/PeymentYup';
 function App() {
 
   const currentUser = useSelector(state => state.ur.user);
@@ -68,6 +68,7 @@ function App() {
     <div className='wrapper'>
       {/* <Out/> */}
       <ResponsiveAppBar />
+      {/* <PeymentYup/> */}
 
       {/* <Maps/> */}
       {/* <History /> */}
@@ -96,9 +97,9 @@ function App() {
       {/* <Register/> */}
       {/* <AddUser/> */}
 
-      {currentUser != null ? <Navb /> : null}
-
-
+      {currentUser != null ?
+      (currentUser.isManager ? <NavManger/> : <Navb/>): null }
+      
       <Routes>
         <Route path="" element={<Home />}></Route>
         <Route path='home' element={<Home />} />
@@ -129,8 +130,6 @@ function App() {
         <Route path='Pae' element={<Pae />} />
 
 
-        <Route path='PicId' element={<PicId />} />
-        <Route path='Payment2' element={<Payment2 />} />
 
 
         <Route path='History' element={<History />} />
@@ -147,6 +146,7 @@ function App() {
         <Route path='lBike' element={<List_Bikes />} />
         <Route path='lStation' element={<List_Station />} />
         <Route path='lUser' element={<List_Users />} />
+        <Route path='lOpinion' element={<List_Opinion />} />
         <Route path='navM' element={<NavManger />} />
 
 
@@ -158,6 +158,7 @@ function App() {
 
 
         <Route path='yup' element={<RegisterYup />} />
+        <Route path='PeymentYup' element={<PeymentYup />} />
         <Route path='formInput' element={<FormInput />} />
         <Route path='password' element={<Password />} />
 

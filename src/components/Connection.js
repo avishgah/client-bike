@@ -143,7 +143,6 @@ const Connection = () => {
                     type: type.CURRENT_USER,
                     payload: users[i]
                 })
-                // setCurrentUser(users[i])
                 if (users[i].isManager == false)
                     nav('/Profil')
                 else

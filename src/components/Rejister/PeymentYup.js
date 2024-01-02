@@ -18,16 +18,11 @@ import { Form } from "react-router-dom";
 import * as type from "../../store/actions/actionType";
 
 const arr = [
-    { lableName: "שם משתמש מלא", name: "Name", type: "text" },
-    { lableName: "תעודת זהות", name: "Tz", type: "text" },
-    { name: "DateBirth", type: "date" },
-    // { lableName: "עיר", name: "toun", type: "text" },
-    // { lableName: "כתובת", name: "address", type: "text" },
-    { lableName: "פלאפון", name: "Phon", type: "number" },
-    { lableName: 'דוא"ל', name: "Mail", type: "mail" },
-    { lableName: "סיסמא", name: "Password", type: "text" },
-    { lableName: "תצלום תעודת זהות", name: "img", type: "file" },
-    { name: "ReadTerms", type: "checkbox", defaultValue: false }
+    { lableName: "שם של בעל הכרטיס", name: "Name", type: "text" },
+    { lableName: "ת.ז של בעל הכרטיס", name: "Tz", type: "text" },
+    { lableName: "מספר כרטיס אשראי", name: "Card", type: "text" },
+    { lableName: "CVV", name: "Cvv", type: "text" },
+    { lableName: "תוקף MM/YY", name: "Tokef", type: "text" },
 ];
 
 const schema = yup.object({
@@ -35,26 +30,49 @@ const schema = yup.object({
     Tz: yup.string()
         .matches(/^\d{9}$/, 'יש להזין מספר תעודת זהות חוקי בן 9 ספרות')
         .required('יש להזין מספר תעודת זהות'),
-    Mail: yup.string().email("כתובת מייל אינה תקינה").required("שדה זה חובה"),
-    Phon: yup.string()
-        .matches(/^(0\d|(\+|00)972[\-\s]?)?(([23489]{1}\d{7})|[5]{1}\d{8})$/, 'יש להזין מספר טלפון חוקי')
-        .required('יש להזין מספר טלפון'),
-    Password: yup.string().required("שדה זה חובה")
-        .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/, "הסיסמא חייבת להכיל 6 ספרות. לפחות מספר אחד.ולפחות אות אחת באנגלית."),
-    DateBirth: yup.date()
-        .max(new Date(new Date().setFullYear(new Date().getFullYear() - 16)), 'יש להיות בן 16 ומעלה')
-        .typeError('יש להזין תאריך חוקי')
-        .required('יש להזין תאריך לידה'),
-    ReadTerms: yup.boolean().oneOf([true], 'יש לאשר את תנאי השימוש').required(),
-    img: yup.mixed().test('file-required', 'יש להוסיף קובץ', value => {
-        return (value && value.length) > 0 ? value : null // בדיקה אם הערך הוא לא ריק או undefined
-    })
+
+    Card: yup.string()
+        .matches(/^\d{16}$/, 'מספר כרטיס לא תקין')
+        .required('שדה זה הוא חובה'),
+    Cvv: yup
+        .string()
+        .matches(/^\d{3}$/, 'CVV לא תקין')
+        .required('שדה זה הוא חובה'),
+    Tokef: yup
+        .string()
+        .matches(
+            /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/,
+            'תאריך תוקף לא תקין (MM/YY או MM/YYYY)'
+        )
+        .test('is-date-valid', 'תאריך תוקף אינו תקין', (value) => {
+            if (!value) return false;
+
+            // פירוק תאריך לחלקיו
+            const [month, year] = value.split('/');
+            if (!month || !year) return false;
+
+            // קבלת התאריך הנוכחי
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear() % 100; // לקבלת שנת עשורים אחרונה
+
+            // ודא תקינות התאריך - ייחודיות בהתאם לדרישות שלך
+            if (
+                parseInt(month, 10) < 1 ||
+                parseInt(month, 10) > 12 ||
+                parseInt(year, 10) < currentYear ||
+                (parseInt(year, 10) === currentYear && parseInt(month, 10) < currentDate.getMonth() + 1)
+            ) {
+                return false;
+            }
+
+            return true;
+        })
+        .required('שדה זה הוא חובה')
+})
+    ;
 
 
-}).required();
-
-
-const RegisterYup = () => {
+const PeymentYup = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [flag, setFlag] = React.useState(true);
@@ -66,38 +84,9 @@ const RegisterYup = () => {
 
     const [listUsers, setlistUsers] = useState([]);
 
-    useEffect(() => {
-        axios.get('https://localhost:7207/api/User')
-            .then(res => {
-                console.log(res.data)
-                setlistUsers(res.data)
-                //   console.log(currentStation);
-                // nav('/NavB')
-            }).catch(err => console.log(err))
-    }, [])
+   
 
-    //e.target.files[0].name
-    const axiosServer = async (details, type) => {
-        console.log(details, "details")
-        const x = await axios.post(`https://localhost:7207/api/user`, details).then(res => {
-            console.log(res, "res");
-
-            if (res.data == "") {
-                alert("משתמש רשום במערכת")
-                return null;
-            }
-            else {
-                // alert("נוסף בהצלחה");
-                navigate('/PeymentYup')
-
-            }
-
-        }).catch(error => {
-            console.log("משתמש קיים");
-            console.error(error)
-        })
-
-    }
+    const nav = useNavigate();
 
     // פונקצית הרשמה
     // הפונקציה מתבצעת במידה וכל הנתונים שהוזנו בשדות עונים לדרישות הסכמה
@@ -105,8 +94,8 @@ const RegisterYup = () => {
         try {
 
             await schema.validate(data, { abortEarly: false }); // אימות עם Yup
+            nav('/Profil');
             // פעולות נוספות במידת הצורך לאחר בדיקת תקינות מוצלחת
-            await axiosServer(data, 'IsExist');
         } catch (errors) {
             console.log(errors);
         }
@@ -149,7 +138,7 @@ const RegisterYup = () => {
                 type="submit"
                 id="addR"
             >
-                לשלב הבא
+                הרשם
             </Button>
             <br /> <br />
             <p className="move">
@@ -158,4 +147,4 @@ const RegisterYup = () => {
         </form>
     )
 }
-export default RegisterYup;
+export default PeymentYup;

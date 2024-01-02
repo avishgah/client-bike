@@ -36,7 +36,7 @@ const CardOpinion = ({ props, place }) => {
 
     return (<>
         {props != null ?
-            <Card sx={{ maxWidth: 500, textAlign: 'center', padding: "10px", marginLeft: "50px", marginBottom: "50px" }}>
+            <Card sx={{ maxWidth: 380, textAlign: 'center', padding: "10px", marginLeft: "50px", marginBottom: "50px" }}>
                 <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

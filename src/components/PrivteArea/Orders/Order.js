@@ -90,6 +90,7 @@ function MyComponent() {
         console.log(res)
         console.log(selectPoin)
         setMapers(res.data)
+        setSlectedPoint(res.data[0].id);
         let homePos = {}
         res.data.filter(x => x.count > 0).forEach((element, i) => {
           const google = window.google;
