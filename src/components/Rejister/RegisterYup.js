@@ -16,6 +16,11 @@ import axios from "axios";
 import { Form } from "react-router-dom";
 
 import * as type from "../../store/actions/actionType";
+import { useRef } from "react";
+import { cv } from 'react-opencv';
+import Webcam from 'react-webcam';
+import { TextField } from "@mui/material";
+
 
 const arr = [
     { lableName: "שם משתמש מלא", name: "Name", type: "text" },
@@ -26,7 +31,7 @@ const arr = [
     { lableName: "פלאפון", name: "Phon", type: "number" },
     { lableName: 'דוא"ל', name: "Mail", type: "mail" },
     { lableName: "סיסמא", name: "Password", type: "text" },
-    { lableName: "תצלום תעודת זהות", name: "img", type: "file" },
+    // { lableName: "תצלום תעודת זהות", name: "img", type: "file" },
     { name: "ReadTerms", type: "checkbox", defaultValue: false }
 ];
 
@@ -58,6 +63,8 @@ const RegisterYup = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [flag, setFlag] = React.useState(true);
+    const fileInputRef = useRef(null);
+
     const user = useSelector(state => state.user);
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -65,6 +72,77 @@ const RegisterYup = () => {
     React.useEffect(() => { }, [user])
 
     const [listUsers, setlistUsers] = useState([]);
+    const [isIDCardDetected, setIsIDCardDetected] = useState(false);
+
+    const isIDCard = async () => {
+        try {
+            const cv = window.cv; // Access the OpenCV object
+            if (!cv) {
+                throw new Error('OpenCV library not initialized or loaded.');
+            }
+
+            // ... rest of your OpenCV processing code
+        } catch (error) {
+            console.error('Error processing image:', error);
+        }
+        const cv = window.cv; // Access the OpenCV object
+        const imageElement = document.createElement('img');
+        console.log(fileInputRef);
+        const file = fileInputRef.current.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                imageElement.src = event.target.result;
+
+                imageElement.onload = () => {
+                    const mat = cv.imread(imageElement);
+                    const gray = new cv.Mat();
+                    const edges = new cv.Mat();
+
+                    cv.cvtColor(mat, gray, cv.COLOR_RGBA2GRAY);
+                    cv.Canny(gray, edges, 50, 150, 3);
+
+                    const contours = new cv.MatVector();
+                    const hierarchy = new cv.Mat();
+
+                    cv.findContours(edges, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+
+                    let validContours = 0;
+                    for (let i = 0; i < contours.size(); ++i) {
+                        const approx = new cv.Mat();
+                        const contour = contours.get(i);
+                        const perimeter = cv.arcLength(contour, true);
+                        cv.approxPolyDP(contour, approx, 0.02 * perimeter, true);
+
+                        if (approx.rows === 4) {
+                            const area = cv.contourArea(contour);
+                            if (area > 5000) { // Adjust this area threshold according to your image sizes
+                                validContours++;
+                            }
+                        }
+                        approx.delete();
+                    }
+
+                    mat.delete();
+                    gray.delete();
+                    edges.delete();
+                    hierarchy.delete();
+                    contours.delete();
+
+                    if (validContours === 1) {
+                        setIsIDCardDetected(true)
+                        console.log('The image contains only an ID card.');
+                        // Perform further actions for when the image contains only an ID card
+                    } else {
+                        setIsIDCardDetected(false)
+                        console.log('The image does not contain only an ID card.');
+                    }
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+        // fileInputRef.current.addEventListener('change', isIDCard);
+    };
 
     useEffect(() => {
         axios.get('https://localhost:7207/api/User')
@@ -130,7 +208,9 @@ const RegisterYup = () => {
                                 user={user}
                                 flag={false}
                                 defaultChecked={item.defaultValue}
+
                             />
+
                         </div>
                     ) : (
                         <Password
@@ -143,7 +223,13 @@ const RegisterYup = () => {
                 }
 
             </div>
+
             )}
+            <div>
+                <input type="file" name="img" accept="image/*" ref={fileInputRef} onChange={isIDCard}
+                    style={{ backgroundColor: "#ebedf0", width: "23vw" ,padding:"15px", border:"1px solid #b5b6b8" , borderRadius:"5px"}} />
+                {isIDCardDetected ? <p>The image contains an ID card.</p> : <p>No ID card detected in the image.</p>}
+            </div>
             <Button variant="contained"
                 size="medium"
                 type="submit"

@@ -67,7 +67,12 @@ function App() {
   return (<>
     <div className='wrapper'>
       {/* <Out/> */}
-      <ResponsiveAppBar />
+      {/* <Order/> */}
+      {/* <ForgetPassword/> */}
+      {/* <Connection/> */}
+      {/* <ResponsiveAppBar /> */}
+
+      {/* <Problems/> */}
       {/* <PeymentYup/> */}
 
       {/* <Maps/> */}
@@ -77,7 +82,7 @@ function App() {
       {/* <ForgetPassword email={mail} setOpen={setOpen} />  */}
 
       {/* <List_Bikes /> */}
-      {/* <RegisterYup /> */}
+      <RegisterYup />
 
       {/* <List_Opinion /> */}
 
@@ -101,7 +106,7 @@ function App() {
       (currentUser.isManager ? <NavManger/> : <Navb/>): null }
       
       <Routes>
-        <Route path="" element={<Home />}></Route>
+        {/* <Route path="" element={<Home />}></Route> */}
         <Route path='home' element={<Home />} />
         <Route path='Question' element={<Question />} />
         <Route path='Video' element={<Video />} />

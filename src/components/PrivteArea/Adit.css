@@ -75,7 +75,7 @@
   border: none !important;
 }
 #select {
-  width: 40%;
+  width: 43%;
   float: right !important;
   border: none;
   border-bottom: 1px solid black !important;
@@ -94,7 +94,7 @@ label {
 } */
 
 #outlined-multiline-static{
-  width:250px !important;
+  width:320px !important;
 }
 
 

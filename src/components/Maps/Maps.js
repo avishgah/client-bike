@@ -18,6 +18,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import Grid from '@mui/material/Grid';
 import { Card, Input } from '@material-ui/core';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
+import { useDispatch, useSelector } from 'react-redux';
+import * as type from "../../store/actions/actionType";
 
 const containerStyle = {
   width: '100%',
@@ -68,19 +70,20 @@ const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
   };
 
   return (<>
-
     <Marker position={{
       lat: lat ? lat : 31.772561767303255,
       lng: lng ? lng : 35.16862111683302
     }}
-      // title={text}
-      // label={text}
-      // label={"aaaaaaaaaaaaaaaaaaaaaaaa"}
-      title='bbbbbbbb'
+      title={
+        `${text.name}  ${text.location} 
+       מספר אופניים פנויים : ${text.cun == null ? 0 : text.cun} `
+
+      }
       opacity={opacity}
       className='marker-data' type="button"
       clickable={true}
       onDblClick={selectedPoint}
+      style={{ direction: "rtl" }}
     // onClick={handleClick('top')}
     // style={{ border: "none", }}
     />
@@ -223,17 +226,52 @@ function MyComponent() {
     }
   };
 
+  let dispatch = useDispatch();
   // כאשר משתנה הנקודה הנבחרת ב־Select משתנה, עדכן את הזום
   useEffect(() => {
     zoomToSelectedPoint();
+    let c = null;
+    if (selectedOption != null) {
+      if (typeof selectedOption === 'object') {
+        console.log(selectedOption)
+      }
+      else {
+          for (var i = 0; i < filteredOptions.length; i++) {
+            if (filteredOptions[i].id == selectedOption) {
+              setCurrentPoint(filteredOptions[i])
+              c = filteredOptions[i];
+              setSelectedOption(c);
+            }
+          }
+          console.log(c);
+          console.log(selectedOption)
+        
+      }
+    }
+    console.log(selectedOption, "selected")
+    dispatch({ type: type.CURRENT_STATION, payload: selectedOption })
+
   }, [selectedOption]);
 
   console.log(selectPoin)
+
+  const currentUser = useSelector(state => state.ur.user);
+  let station = useSelector(state => state.ur.station);
+  const [searchCardWidth, setSearchCardWidth] = useState('100%'); // Default width
+
+  useEffect(() => {
+    // Update searchCardWidth when currentUser changes
+    if (currentUser === null) {
+      setSearchCardWidth('48%');
+    } else {
+      setSearchCardWidth('100%'); // Set your desired width here
+    }
+  }, [currentUser]);
+
   return (<>
     <br />
     <div id="map"></div>
-
-    <Card id="searchCard" >
+    <Card id="searchCard" style={{ width: searchCardWidth }}>
       <p style={{ fontWeight: "bold", fontSize: "19px" }}>חיפוש תחנה</p>
 
       <input

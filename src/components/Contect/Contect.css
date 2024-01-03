@@ -102,11 +102,16 @@
   #searchCard{
     text-align: center;
     direction: rtl;
-    width: 45%;
+    /* width: 45%; */
   }
   /* קוד CSS למצב מסך קטן */
   @media screen and (max-width: 768px) {
     #searchCard {
       width: 100%; /* שינוי רוחב הקלט ל-100% במסך קטן */
     }
+  }
+
+  .css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+    color: #602424 !important;
+    border: 1px solid black !important;
   }

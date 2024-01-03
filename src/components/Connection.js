@@ -63,6 +63,8 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 
 import '../components/AddBike/AddBike.css';
+import ForgetPassword from './ForgetPassword/ForgetPass';
+import { connect } from 'formik';
 
 const Connection = () => {
 
@@ -128,30 +130,59 @@ const Connection = () => {
                 // nav('/NavB')
             }).catch(err => console.log(err))
     }, [])
+    const [open, setOpen] = React.useState(false);
+    const [mail, setMail] = React.useState("");
+    const [cust, setCust] = React.useState(null);
+    const openReset = () => {
+        setMail(getValues('Email'))
+        setOpen(true)
+    }
 
 
+    const Connect = async (details) => {
+        console.log("hi")
+        axios.post('https://localhost:7207/api/User/ConnectMail', details)
+            .then(res => {
+                console.log(res.data)
+                // nav('/NavB')
+                if (res.data != '') {
+                    console.log("connect")
+                    alert(res.data.name);
+                    dispatch({
+                        type: type.CURRENT_USER,
+                        payload: res.data
+                    })
+                    setCust(res.data)
+                    if (res.data.isManager == false)
+                        nav('/Profil')
+                    else
+                        nav('/navM')
+                }
+                else {
+                    document.getElementById('alert').style.visibility = "visible";
 
-    const submit = (details) => {
+                }
+            }).catch(err => console.log(err))
+    }
+    const submit = async (details) => {
         let flag = 0;
         console.log("hi")
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].mail == details.email && users[i].password == details.password) {
-                console.log("hellow")
-                flag = 1;
-                alert(users[i].name);
-                dispatch({
-                    type: type.CURRENT_USER,
-                    payload: users[i]
-                })
-                if (users[i].isManager == false)
-                    nav('/Profil')
-                else
-                    nav('/navM')
-            }
-        }
-        if (flag == 0) {
-            document.getElementById('alert').style.visibility = "visible";
-        }
+        // for (var i = 0; i < users.length; i++) {
+        //     if (users[i].mail == details.email && users[i].password == details.password) {
+        //         console.log("hellow")
+        //         flag = 1;
+        //         alert(users[i].name);
+        //         dispatch({
+        //             type: type.CURRENT_USER,
+        //             payload: users[i]
+        //         })
+        //        
+        //     }
+        // }
+        // if (flag == 0) {
+        //     document.getElementById('alert').style.visibility = "visible";
+        // }
+        await Connect(details);
     }
 
     return <>
@@ -170,7 +201,7 @@ const Connection = () => {
                 {/* id */}
                 <label>מייל</label><br></br>
 
-                <TextField id="standard-basic" variant="standard" {...register("email", {
+                <TextField id="standard-basic" variant="standard" {...register("Mail", {
                     required: "email is required",
                     pattern: {
                         value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -189,7 +220,7 @@ const Connection = () => {
                     <Input
                         id="standard-adornment-password"
                         type={showPassword ? 'text' : 'password'}
-                        {...register("password", {
+                        {...register("Password", {
                             required: "Password is required.",
                             minLength: {
                                 value: 6,
@@ -210,15 +241,20 @@ const Connection = () => {
                     />
                     {errors.password && <p className="errorMsg">{errors.password.message}</p>}
 
-                </FormControl><br></br>
+                </FormControl>
+                <p className="move" onClick={openReset}>שכחתי סיסמא</p>
+
+                {open ? <ForgetPassword email={mail} setOpen={setOpen} /> : null}
+
+                <br></br>
                 <Alert id="alert" severity="error">מייל או סיסמא שגויים</Alert><br></br>
 
-                <Button variant="contained" startIcon={<SendIcon style={{marginLeft:"20px"}} />} id="addR" type="submit">
+                <Button variant="contained" startIcon={<SendIcon style={{ marginLeft: "20px" }} />} id="addR" type="submit">
                     התחבר
                 </Button>
             </CardContent>
 
-            <Link href='yup' style={{textAlign:"right"}} underline="hover">
+            <Link href='yup' style={{ textAlign: "right" }} underline="hover">
                 {'להרשמה - לחץ כאן'}
             </Link>
 

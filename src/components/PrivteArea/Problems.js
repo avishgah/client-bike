@@ -47,71 +47,35 @@ const Problems = () => {
 
     const show = (t) => {
 
-        let bike = document.getElementsByClassName("ShowBike");
-        let station = document.getElementsByClassName("showStetion");
-        if (t == 'תקלה באופניים') {
-            for (var x = 0; x < bike.length; x++) {
-                // bike[x].style.visibility = "visible";
-                bike[x].style.display = "block";
-            }
-            for (var x = 0; x < station.length; x++) {
-                // station[x].style.visibility = "hidden";
-                station[x].style.display = "none";
-            }
-        }
+        // let bike = document.getElementsByClassName("ShowBike");
+        // let station = document.getElementsByClassName("showStetion");
+        // if (t == 'תקלה באופניים') {
+        //     for (var x = 0; x < bike.length; x++) {
+        //         // bike[x].style.visibility = "visible";
+        //         bike[x].style.display = "block";
+        //     }
+        //     for (var x = 0; x < station.length; x++) {
+        //         // station[x].style.visibility = "hidden";
+        //         station[x].style.display = "none";
+        //     }
+        // }
 
-        if (t == 'תקלה בתחנה') {
-            for (var x = 0; x < station.length; x++) {
-                // station[x].style.visibility = "visible";
-                station[x].style.display = "block";
+        // if (t == 'תקלה בתחנה') {
+        //     for (var x = 0; x < station.length; x++) {
+        //         // station[x].style.visibility = "visible";
+        //         station[x].style.display = "block";
 
-            }
-            for (var x = 0; x < bike.length; x++) {
-                // bike[x].style.visibility = "hidden";
-                bike[x].style.display = "none";
+        //     }
+        //     for (var x = 0; x < bike.length; x++) {
+        //         // bike[x].style.visibility = "hidden";
+        //         bike[x].style.display = "none";
 
-            }
-        }
+        //     }
+        // }
 
     }
 
-    const submit = (details) => {
-        console.log("connect");
-        console.log(placeProblem)
-        console.log(file)
-        var task=null;
-        if (placeProblem == 'תקלה באופניים') {
-            task =
-            {
-                "id": 0,
-                "idCust": currentUser.id,
-                "idStation": details.station,
-                "caption": details.caption,
-                "satisfactionLeve": 0,
-                "date": new Date(),
-                "place": placeProblem,
-                "typeProblem": typeProblem,
-                "idBike": details.bike,
-                "pic": l
-            }
-        }
-        else {
-            task =
-            {
-                "id": 0,
-                "idCust": currentUser.id,
-                "idStation": details.station,
-                "caption": details.caption,
-                "satisfactionLeve": 0,
-                "date": new Date(),
-                "place": placeProblem,
-                "typeProblem": '',
-                "idBike": 31,
-                "pic": l
-            }
-        }
-
-        console.log(task)
+    const PostTask = (task) => {
         axios.post(`https://localhost:7207/api/Opinion`, task).then(res => {
 
             console.log(res.data + ";;;;;;");
@@ -122,66 +86,133 @@ const Problems = () => {
 
             }
         })
+    }
 
-        console.log(task + "task");
+    const submit = (details) => {
+        console.log("connect");
+        console.log(placeProblem)
+        console.log(file)
+
+        let flagEnter = 0;
+        let task = null;
+        if (placeProblem == 'תקלה באופניים') {
+            axios.get(`https://localhost:7207/api/Bike/${details.bike}`).then(res => {
+                console.log("enter to bike")
+                console.log("res", res.data)
+                if (res.data == '')
+                    alert("קוד אופניים שגוי")
+                else {
+                    console.log("enter tast")
+                    task =
+                    {
+                        "id": 0,
+                        "idCust": 5,
+                        "idStation": res.data.idStation,
+                        "caption": details.caption,
+                        "satisfactionLeve": 0,
+                        "date": new Date(),
+                        "place": placeProblem,
+                        "typeProblem": typeProblem,
+                        "idBike": details.bike,
+                        "pic": l
+                    }
+                    PostTask(task);
+                }
+            })
+
+        }
+        else {
+
+            axios.get(`https://localhost:7207/api/Station/${details.station}`).then(res => {
+                console.log("enter to station")
+                console.log("res", res.data)
+                if (res.data == '')
+                    alert("קוד תחנה שגוי")
+                else {
+                    task =
+                    {
+                        "id": 0,
+                        "idCust": 5,
+                        "idStation": details.station,
+                        "caption": details.caption,
+                        "satisfactionLeve": 0,
+                        "date": new Date(),
+                        "place": placeProblem,
+                        "typeProblem": '',
+                        "idBike": null,
+                        "pic": l
+                    }
+                    PostTask(task)
+                }
+            })
+
+        }
+
+        console.log(task)
+
+
+        if (flagEnter == 1)
+            console.log(task + "task");
     }
     return (<>
-        <form id="formLoginR" onSubmit={handleSubmit(submit)}>
+        <form id="formLoginR" style={{ direction: "rtl" }} onSubmit={handleSubmit(submit)}>
 
-            <h1 id="h1">? תקלה באופניים או בתחנות העגינה </h1>
+            <h1 id="h1">תקלה באופניים או בתחנות העגינה ?</h1>
             <label>היכן התקלה</label><br></br>
             <select id='select'
                 onChange={({ target }) => (setplaceProblem(target.value), show(target.value))}>
                 {PlaceArr.map(marker => <option selected={placeProblem == marker} value={marker}>{marker}</option>)}
             </select><br></br><br></br>
 
-            <select className="ShowBike" id='select'
-                onChange={({ target }) => settypeProblem(target.value)} >
-                {TypeBikeProblem.map(marker => <option selected={typeProblem === marker} value={marker}>{marker}</option>)}
-            </select>
-            <br></br><br></br>
+            {
+                placeProblem == 'תקלה באופניים' ? <>
+
+                    <select className="ShowBike" id='select'
+                        onChange={({ target }) => settypeProblem(target.value)} >
+                        {TypeBikeProblem.map(marker => <option selected={typeProblem === marker} value={marker}>{marker}</option>)}
+                    </select><br></br><br></br>
 
 
-            <label className="ShowBike">מספר מזהה של אפניים</label><br></br>
-            <TextField className="ShowBike" variant="standard"
-            
-                style={errors.name ? { border: "red solid 1px", borderRadius: "5px" } : null}
+                    <label className="ShowBike">מספר מזהה של אפניים</label><br></br>
+                    <TextField className="ShowBike" variant="standard"
 
-                defaultValue={currentUser == null ? '' : currentUser.id}
-                {...register("bike", {
-                  required: "id is required",
-                  pattern: {
-                    value: /^\d{9}$/,
-                    message: "Invalid id "
-                  },
-                })}
-            />
+                        style={errors.name ? { border: "red solid 1px", borderRadius: "5px" } : null}
+
+                        defaultValue={currentUser == null ? '' : currentUser.id}
+                        {...register("bike", {
+                            required: "id is required",
+
+                        })}
+                    />
+
+                </> : <>
+                    <label className="showStetion">מספר תחנה בה ממוקם</label><br></br>
+
+                    <TextField className="showStetion" variant="standard"
+                        {...register("station")}
+                    />
+                </>
+            }
+
+
             <br></br>
-
-            <br></br><br></br>
-
-            <label className="showStetion">מספר תחנה בה ממוקם</label><br></br>
-
-            <TextField className="showStetion" variant="standard"
-                {...register("station")}
-            />
 
             <br ></br><br ></br>
-          <div id="div-pic"   >
-    
-            <label>כאן ניתן להרחיב על הנושא, ונעשה מאמצים להשיב בהקדם</label><br></br><br></br>
-            <TextField
-                id="outlined-multiline-static"
-                multiline
-                rows={4}
-                defaultValue=""
-                {...register("caption")}
-            />
+            <div id="div-pic"   >
+
+                <label>כאן ניתן להרחיב על הנושא, ונעשה מאמצים להשיב בהקדם</label><br></br><br></br>
+                <TextField
+                    id="outlined-multiline-static"
+                    multiline
+                    rows={4}
+                    defaultValue=""
+                    {...register("caption")}
+                /><br></br><br></br>
 
 
-            <label id="ll">תמונה של התקלה</label>
-            <br></br>
-              <Button
+                <label id="ll"> תמונה של התקלה:</label>
+                <br></br>
+                <Button
                     endIcon={<AttachmentIcon />}
                     variant="contained"
                     component="label"
@@ -194,6 +225,7 @@ const Problems = () => {
                         id="k"
                         type="file"
                         onChange={({ target }) => (setFile(target.value))}
+                        style={{ width: "290px" }}
                     />
                 </Button>
                 <p></p>
@@ -201,10 +233,10 @@ const Problems = () => {
 
 
             <br></br><br></br>
-            <Button variant="contained" endIcon={<SendIcon />} id="addR" type="submit">
-                עדכון
+            <Button variant="contained" startIcon={<SendIcon style={{ marginLeft: "15px" }} />} id="addR" type="submit">
+                שלח
             </Button>
         </form>
     </>)
 }
-export default Problems
+export default Problems;

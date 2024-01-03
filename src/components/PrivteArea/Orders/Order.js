@@ -1,6 +1,6 @@
 import React from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
-import { Box, Button, DialogTitle, Fade, IconButton, Paper, Popper, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, DialogTitle, Fade, IconButton, Paper, Popper, Stack, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import InputLabel from '@mui/material/InputLabel';
@@ -20,6 +20,8 @@ import DialogActions from '@mui/material/DialogActions';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import SendIcon from '@mui/icons-material/Send';
+import Maps from '../../Maps/Maps';
+import PedalBikeIcon from '@mui/icons-material/PedalBike';
 
 const containerStyle = {
   width: '100%',
@@ -68,6 +70,7 @@ const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
 function MyComponent() {
   const [count, setCount] = React.useState(1);
   const [open, setOpen] = React.useState(false);
+  const [flagTo, setflagTo] = React.useState(false);
 
 
 
@@ -118,33 +121,28 @@ function MyComponent() {
   // const [placement, setPlacement] = React.useState();
 
   const currentUser = useSelector(state => state.ur.user);
+  const station = useSelector(state => state.ur.station);
 
   const Submit = (e) => {
     e.preventDefault()
     console.log(selectPoin)
     console.log(count, selectPoin)
 
-
-    const order = {
-      "id": 0,
-      "datePay": null,
-      "idStation": selectPoin,
-      "dateOrder": Date.now(),
-      "code": "string",
-      "idCust": 15,
-      "endSum": 0,
-      "isPay": false,
-      "custName": "string",
-      "count": count
+    console.log(station, "tst")
+    if (flagTo) {
+      const IsPay = false;
+      axios.post(`https://localhost:7207/api/Order`, { count, IsPay, id: 0, datePay: null, IdCust: currentUser.id, idStation: station.id, dateOrder: new Date(), code: "web" }).then(res => {
+        console.log(res)
+        console.log(res.data)
+        handleClickOpen();
+      })
+    }
+    else {
+      alert("לא נמצאה הזמנה")
     }
     //send empty
-    const IsPay = false;
-    axios.post(`https://localhost:7207/api/Order`, { count, IsPay, id: 0, datePay: null, IdCust: currentUser.id, idStation: selectPoin, dateOrder: new Date(),code:"web" }).then(res => {
-      console.log(res)
-      console.log(res.data)
-    })
 
-    handleClickOpen();
+
 
   }
 
@@ -155,7 +153,7 @@ function MyComponent() {
     <form id="formLoginRG" style={{ direction: "rtl" }} onSubmit={Submit}>
       <h8 id="h8"><b>הזמנה מראש</b></h8>
       <br></br><br></br>
-      <div id="hazen" style={{textAlign:"center"}}>הזן מספר אפניים ותחנה רצויה</div><br></br>
+      <div id="hazen" style={{ textAlign: "center" }}>הזן מספר אפניים ותחנה רצויה</div><br></br>
       {/* count */}
       <Box style={{ direction: "center", marginRight: "0vw" }}>
         <div>
@@ -188,14 +186,24 @@ function MyComponent() {
 
 
       <br></br>
-      <select id="selected"
-        onChange={({ target }) => setSlectedPoint(target.value)}>
-        {mapers.map(marker => <option selected={selectPoin === marker.id} value={marker.id}>{marker.name} {marker.location}</option>)}
-      </select>
+
+      <Maps />
+      <br></br>
+      <br></br>
+      {
+        station != null ? <>
+          <h8 id="h8"><b>סיכום הזמנה</b></h8><br></br><br></br>
+          {setflagTo(true)}
+          <Card style={{ direction: "rtl", border: "3px dashed", lineHeight: "4ch" }}>
+
+            <b> הזמנה לתחנת :</b> {station.name + ", " + station.location}<br></br>
+            <b> מספר אופניים : </b> {count}  <PedalBikeIcon style={{ fontSize: '20px', verticalAlign: 'text-top', color: "#602424" }} />
+          </Card></> : null
+      }
       <br></br>
       <br></br>
 
-      <Button variant="contained" style={{width: "21vw"}} startIcon={<SendIcon style={{ marginLeft: "20px" }} />} id="addR" type="submit">
+      <Button variant="contained" style={{ width: "21vw" }} startIcon={<SendIcon style={{ marginLeft: "20px" }} />} id="addR" type="submit">
         הזמן
       </Button>
 

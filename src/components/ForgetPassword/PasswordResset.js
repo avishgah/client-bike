@@ -16,7 +16,7 @@ const PasswordReset = ({ email, setOpen }) => {
 
     const changePassword = async (user) => {
         console.log(user)
-        const x = await axios.put(`https://localhost:7207/api/User/ChangePassword/${user}`).then(res => {
+        const x = await axios.put(`https://localhost:7207/api/User/ChangePassword/`,{Mail:user.Email,Password:user.Password}).then(res => {
             console.log(res)
             dispatch({ type: type.CURRENT_USER , payload:user })
             console.log(res.data)
@@ -68,9 +68,9 @@ const PasswordReset = ({ email, setOpen }) => {
             <div onClick={() => { setEye(!eye) }} >
                 {eye ? <HiEyeOff color="grey" /> : <HiEye color="grey" />}
             </div>
-            <span style={{ color: "red" }}>{errorState}</span>  <br /> <br />
+            <span style={{ color: "red" }}>{errorState}</span> 
 
-            {flag && <span style={{ color: "red" }}>יש למלא את כל השדות</span>}
+            {flag && <span style={{ color: "red" }}> יש למלא את כל השדות</span>} <br /> <br />
             <Button variant="contained" color="primary" onClick={()=>resetPassword()}> המשך </Button>
         </form>
     </div>

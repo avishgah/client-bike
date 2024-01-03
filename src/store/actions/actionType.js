@@ -2,6 +2,8 @@
 
 export const CURRENT_USER="CURRENT_USER";
 // export const ADD_USER="ADD_USER";
+export const CURRENT_STATION="CURRENT_STATION";
+
 export const LOG_OUT="LOG_OUT";
 
 

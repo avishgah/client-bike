@@ -45,7 +45,7 @@ export default function ForgetPassword({ email, setOpen }) {
     const resetPassword = async () => {
         await getUserByEmail(mail);
         console.log(user);
-        if (defaultUser != null) {
+        if (defaultUser != '') {
             setIsError(true);
             setFlag(true);
         }
