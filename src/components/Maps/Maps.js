@@ -249,7 +249,7 @@ function MyComponent() {
       }
     }
     console.log(selectedOption, "selected")
-    dispatch({ type: type.CURRENT_STATION, payload: selectedOption })
+    // dispatch({ type: type.CURRENT_STATION, payload: selectedOption })
 
   }, [selectedOption]);
 
@@ -259,14 +259,14 @@ function MyComponent() {
   let station = useSelector(state => state.ur.station);
   const [searchCardWidth, setSearchCardWidth] = useState('100%'); // Default width
 
-  useEffect(() => {
-    // Update searchCardWidth when currentUser changes
-    if (currentUser === null) {
-      setSearchCardWidth('48%');
-    } else {
-      setSearchCardWidth('100%'); // Set your desired width here
-    }
-  }, [currentUser]);
+  // useEffect(() => {
+  //   // Update searchCardWidth when currentUser changes
+  //   if (currentUser === null) {
+  //     setSearchCardWidth('48%');
+  //   } else {
+  //     setSearchCardWidth('100%'); // Set your desired width here
+  //   }
+  // }, [currentUser]);
 
   return (<>
     <br />

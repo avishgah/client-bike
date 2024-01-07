@@ -67,7 +67,7 @@ function App() {
   return (<>
     <div className='wrapper'>
       {/* <Out/> */}
-      {/* <Order/> */}
+      <Order/>
       {/* <ForgetPassword/> */}
       {/* <Connection/> */}
       {/* <ResponsiveAppBar /> */}
@@ -82,7 +82,7 @@ function App() {
       {/* <ForgetPassword email={mail} setOpen={setOpen} />  */}
 
       {/* <List_Bikes /> */}
-      <RegisterYup />
+      {/* <RegisterYup /> */}
 
       {/* <List_Opinion /> */}
 
