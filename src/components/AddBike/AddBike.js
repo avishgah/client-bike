@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import './AddBike.css'
 
 import { useState } from "react";
+import { useEffect } from 'react';
 
 
 
@@ -20,6 +21,8 @@ const AddBike = () => {
 
 
     const [isDisabled, setDisabled] = useState(false);
+
+    const [stations, setStation] = useState([]);
 
     const handleSubmits = () => {
         console.log('Your button was clicked and is now disabled');
@@ -45,46 +48,83 @@ const AddBike = () => {
     }
 
 
+    const [searchText, setSearchText] = useState('');
+    const [selectedOption, setSelectedOption] = useState(null);
+
+    const handleSearch = (e) => {
+        console.log(e.target.value)
+        setSearchText(e.target.value);
+    };
+
+
+    useEffect(() => {
+        axios.get('https://localhost:7207/api/Station/Get').then(res => {
+            console.log(res.data)
+            setStation(res.data);
+            setSelectedOption(res.data[0].id)
+        })
+    }, [])
+
     //הוספת אפנים עובד - בעיה - הקוד לא ייחודי 
     const submit = (details) => {
+        console.log(selectedOption)
         const bike = {
             "id": 0,
-            "code": "hh",
+            "Code": 0,
             "battery": 0,
-            "idStation": details.idStation,
-            "dateStart": new Date()
+            "idStation": selectedOption,
+            "DateStart": new Date(),
+            "status": true
         }
         console.log(details);
-        axios.post(`https://localhost:7207/api/Bike`, bike).then(res => {
+        for (let i = 0; i < details.bike; i++) {
+            axios.post(`https://localhost:7207/api/Bike`, bike).then(res => {
 
-            console.log(res.data + ";;;;;;");
-            document.getElementById("addMore").style.display = "inline";
-            document.getElementById("end").style.display = "inline";
+                console.log(res.data + ";;;;;;");
+                document.getElementById("addMore").style.display = "inline";
+                document.getElementById("end").style.display = "inline";
 
-            if (res.data == null) {
-                alert("error")
-                setDisabled(false);
-                return null;
-            }
-        }).catch(console.log("err"))
+                if (res.data == null) {
+                    alert("error")
+                    setDisabled(false);
+                    return null;
+                }
+            }).catch(console.log("err"))
+        }
+
     }
+    const filteredOptions = stations.filter((option) =>
+        option.location.toLowerCase().includes(searchText.toLowerCase())
+    );
 
     return (<>
 
         <form id="formLoginRBike" onSubmit={handleSubmit(submit)}>
-
-
-
-            <p id="smallP">הכנס מספר תחנה שברצונך להוסיף אליה</p>
+            <p id="smallP">הכנס מספר אופניים שברצונך להוסיף אליה</p>
             <TextField
-                sx={{ backgroundColor: "white",textAlign:"right" }}
+                label="מספר אפנים "
+                sx={{ backgroundColor: "white", textAlign: "right" }}
 
                 id="demo-helper-text-aligned"
-                label="קוד-תחנה"
-                {...register("idStation", {})}
+                {...register("bike", {})}
             />
-            <br></br>
-            <br></br>
+
+            <p id="smallP">בחר תחנה שברצונך להוסיף אליה</p>
+         
+            <input
+                id='searchAdd'
+                type="text"
+                placeholder="חיפוש..."
+                value={searchText}
+                onChange={handleSearch}
+            /><br></br><br></br>
+
+
+            <select id='selectAdd' onClick={({ target }) => (setSelectedOption(target.value))}>
+                {filteredOptions.map(marker => <option selected={selectedOption == marker} value={marker.id}>{marker.name} {marker.location}</option>)}
+            </select><br></br><br></br>
+
+        
             {/* endIcon={<SendIcon />}  */}
             <Button type="button" id="addMore" onClick={() => (nav('/lBike'))}>
                 הוסף עוד אפנים
@@ -93,11 +133,14 @@ const AddBike = () => {
                 סיום
             </Button>
 
-                <Button variant="contained" id="addRB" type="submit">
-                    הוסף
-                </Button>
+            <Button variant="contained" id="addRB" type="submit">
+                הוסף
+            </Button>
 
         </form>
+
+        {/* <input type='text' value="ooooooo" /> */}
+        <br></br>
 
     </>)
 

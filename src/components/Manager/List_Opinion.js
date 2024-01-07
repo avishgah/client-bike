@@ -10,6 +10,8 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
+import * as XLSX from 'xlsx';
+
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -25,6 +27,7 @@ import { Button, IconButton, Tooltip } from '@mui/material';
 import { Switch, switchClasses } from '@mui/joy';
 import AddStation from '../AddStation/AddStation';
 import CardOpinion from './CardOpinion';
+import XL from '../export to xl/XL';
 
 export default function AccessibleTable() {
 
@@ -68,6 +71,8 @@ export default function AccessibleTable() {
 
     const [checked, setChecked] = React.useState(false);
 
+    const data = ["id", "place", "idBike", "idStation", "typeProblem", "date", "idCust"];
+    const dataNmae = ["קוד תקלה", "מקום", "קוד אופניים", "קוד תחנה", "סוג הבעיה", "תאריך תקלה", "קוד לקוח"]
     useEffect(() => {
         axios.get('https://localhost:7207/api/Opinion')
             .then(res => {
@@ -94,11 +99,16 @@ export default function AccessibleTable() {
             console.log("exit")
         }
     }
-    return (<><div id="cardFlex">
-    {listOpinion.map(item => {return <CardOpinion props={item} place={item.place} />})}
-</div>
 
-   
+    return (<>
 
-     </>);
+        <XL data={data} dataName={dataNmae} arr={listOpinion} />
+
+        <div id="cardFlex">
+            {listOpinion.map(item => { return <CardOpinion props={item} place={item.place} /> })}
+        </div>
+
+
+
+    </>);
 }

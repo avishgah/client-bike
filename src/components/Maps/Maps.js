@@ -249,7 +249,8 @@ function MyComponent() {
       }
     }
     console.log(selectedOption, "selected")
-    // dispatch({ type: type.CURRENT_STATION, payload: selectedOption })
+    //err
+    dispatch({ type: type.CURRENT_STATION, payload: selectedOption })
 
   }, [selectedOption]);
 

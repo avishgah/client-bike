@@ -68,7 +68,7 @@ export default function AccessibleTable() {
     const [checked, setChecked] = React.useState(false);
 
     useEffect(() => {
-        axios.get('https://localhost:7207/api/Station/Get')
+        axios.get('https://localhost:7207/api/StationViewControllers')
             .then(res => {
                 console.log(res.data)
                 setlistStation(res.data)
@@ -107,6 +107,7 @@ export default function AccessibleTable() {
                                 <TableCell align="center"><b>עיר</b></TableCell>
                                 <TableCell align="center"><b>שם תחנה</b></TableCell>
                                 <TableCell align="center"><b>סטטוס</b></TableCell>
+                                <TableCell align="center"><b>מספר אופניים בתחנה</b></TableCell>
 
                             </TableRow>
                         </TableHead>
@@ -115,7 +116,7 @@ export default function AccessibleTable() {
 
                             {listStation.map((row) => (
                                 <TableRow key={row.id}>
-                              
+
                                     <TableCell component="th" scope="row">
                                         {row.id}
                                     </TableCell>
@@ -140,6 +141,7 @@ export default function AccessibleTable() {
 
 
                                     </TableCell>
+                                    <TableCell align="center">{row.cun != null ? row.cun : 0}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -150,7 +152,14 @@ export default function AccessibleTable() {
                 <br></br>
                 <b>  הוסף תחנה </b><br></br><br></br>
 
-                <AddStation />
+                <AddStation /><br></br>
+                <div style={{ border: "solid 1px black" }}>
+                    <br></br>
+                    <b>  מיין לפי </b><br></br><br></br>
+                    <Button>תחנות הפעילות הגבוהה ביותר</Button><br></br><br></br>
+                    <Button>תחנות הפעילות הנמוכה ביותר</Button>
+                    {/* <Button>תחנות בעלות מספר אפניים גבוהה</Button> */}
+                </div>
 
 
             </div>

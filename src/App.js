@@ -56,6 +56,7 @@ import FormInput from './components/Rejister/FormInput/FormInput';
 import Password from './components/Rejister/Password/Password';
 
 import PeymentYup from './components/Rejister/PeymentYup';
+import XL from './components/export to xl/XL';
 function App() {
 
   const currentUser = useSelector(state => state.ur.user);
@@ -67,14 +68,14 @@ function App() {
   return (<>
     <div className='wrapper'>
       {/* <Out/> */}
-      <Order/>
+      {/* <Order/> */}
       {/* <ForgetPassword/> */}
       {/* <Connection/> */}
       {/* <ResponsiveAppBar /> */}
 
       {/* <Problems/> */}
       {/* <PeymentYup/> */}
-
+      <NavManger />
       {/* <Maps/> */}
       {/* <History /> */}
 
@@ -103,8 +104,8 @@ function App() {
       {/* <AddUser/> */}
 
       {currentUser != null ?
-      (currentUser.isManager ? <NavManger/> : <Navb/>): null }
-      
+        (currentUser.isManager ? <NavManger /> : <Navb />) : null}
+
       <Routes>
         {/* <Route path="" element={<Home />}></Route> */}
         <Route path='home' element={<Home />} />
@@ -133,6 +134,9 @@ function App() {
         <Route path='Sae' element={<Sae />} />
         <Route path='Do' element={<Do />} />
         <Route path='Pae' element={<Pae />} />
+
+
+        <Route path='xl' element={<XL />} />
 
 
 
@@ -174,10 +178,6 @@ function App() {
     <Fragment>
       <Footer />
     </Fragment>
-
-
-
-
 
   </>
 

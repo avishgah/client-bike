@@ -87,10 +87,11 @@ const AddStation = () => {
                 return null;
             }
         }).catch(console.log("err"))
-
     }
-    const AddBike = async(bike)=>{
-        const o= await axios.post(`https://localhost:7207/api/Bike`, bike).then(res => {
+
+    const AddBike = async (bike) => {
+        console.log("bike",bike)
+        const o = await axios.post(`https://localhost:7207/api/Bike`, bike).then(res => {
             console.log(res.data)
 
             // document.getElementById("addMore").style.display = "inline";
@@ -101,24 +102,24 @@ const AddStation = () => {
                 setDisabled(false);
                 return null;
             }
-        }).catch(console.log("err"))
+        }).catch(console.log(err=>console.log(err)))
     }
 
     const getStation = async (details) => {
         const x = await axios.get('https://localhost:7207/api/Station/Get').then(res => {
             console.log(res.data.length);
             console.log(res.data)
-            var d = res.data[res.data.length-1].id;
-            console.log(details)
+            var d = res.data[res.data.length - 1].id;
+            console.log(d)
             for (var i = 0; i < details.bike; i++) {
                 console.log(d)
                 const bike = {
                     "id": 0,
-                    "code": "hh",
+                    "Code": 0,
                     "battery": 0,
                     "idStation": d,
-                    "dateStart": new Date(),
-                    "status":TRUE
+                    "DateStart": new Date(),
+                    "status": true
                 }
                 console.log(details);
                 AddBike(bike);
@@ -141,7 +142,7 @@ const AddStation = () => {
         console.log(details);
         //add station
 
-        await postStation(station);
+        // await postStation(station);
         await getStation(details);
     }
 
@@ -174,7 +175,7 @@ const AddStation = () => {
                 }
 
             />
-
+            <br></br>
             {console.log(places + "ll")}
             <Button type="button" id="addMore" onClick={() => (nav('/addStation'))}>
                 הוסף עוד תחנה
@@ -183,8 +184,9 @@ const AddStation = () => {
                 סיום
             </Button>
 
+            <br></br>
             <Button variant="contained" id="addRB" type="submit">
-                התחבר
+                הוסף
             </Button>
 
         </form>
