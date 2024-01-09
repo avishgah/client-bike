@@ -25,13 +25,13 @@ import * as type from "../src/store/actions/actionType";
 
 import Connection from './components/Connection';
 import { useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Tabs, Tab, useMediaQuery, useTheme } from '@mui/material';
 import DrawerComponnent from './components/NavBar/DrawerComponnent';
 
 
-const pages = ['סטטיסטיקות ','יצירת קשר', 'שאלות ותשובות', 'סרטון הדרכה', 'מפת תחנות', 'בית'];
+const pages = ['סטטיסטיקות ', 'יצירת קשר', 'שאלות ותשובות', 'סרטון הדרכה', 'מפת תחנות', 'בית'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -73,6 +73,15 @@ function ResponsiveAppBar() {
         setAnchorElUser(null);
     };
 
+    const dispatch = useDispatch();
+    const handeleClickPrivate = () => {
+        dispatch({ type: type.LOG_OUT });
+        nav('/Connection')
+    }
+    const handeleClickAdd = () => {
+        dispatch({ type: type.LOG_OUT });
+        nav('/yup')
+    }
     return (<>
 
 
@@ -96,8 +105,8 @@ function ResponsiveAppBar() {
 
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
-                                <Button onClick={() => nav('/Connection')} startIcon={<PersonIcon />} className='private-area' sx={{ p: 0 }}>איזור אישי</Button>
-                                <Button onClick={() => nav('/yup')} startIcon={<PersonIcon color='orange' />} className='private-area2' sx={{ p: 0, marginLeft: '10px' }}>הצטרפות</Button>
+                                <Button onClick={() => handeleClickPrivate()} startIcon={<PersonIcon />} className='private-area' sx={{ p: 0 }}>איזור אישי</Button>
+                                <Button onClick={() => handeleClickAdd()} startIcon={<PersonIcon color='orange' />} className='private-area2' sx={{ p: 0, marginLeft: '10px' }}>הצטרפות</Button>
                             </Tooltip>
                             <Menu
                                 sx={{ mt: '45px' }}
@@ -191,7 +200,7 @@ function ResponsiveAppBar() {
                         </Box>
 
                         {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-                         <Typography
+                        <Typography
                             variant="h6"
                             noWrap
                             component="a"
@@ -207,7 +216,7 @@ function ResponsiveAppBar() {
                             }}
                         >
 
-                             <Box
+                            <Box
                                 component="img"
                                 sx={{
                                     height: 80,
@@ -217,9 +226,9 @@ function ResponsiveAppBar() {
                                     width: '150px',
                                 }}
                                 // src={logo}
-                            src='/logo2.png'
-                            /> 
-                        </Typography> 
+                                src='/logo2.png'
+                            />
+                        </Typography>
 
                     </>)}
 
@@ -227,7 +236,7 @@ function ResponsiveAppBar() {
             </Container>
         </AppBar>
 
-        
+
         {console.log(currentUser)}
         <br></br><br></br><br></br><br></br>
         <br></br><br></br><br></br>

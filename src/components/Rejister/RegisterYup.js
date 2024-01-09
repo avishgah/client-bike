@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { Form } from "react-router-dom";
 
-import * as type from "../../store/actions/actionType";
+import * as types from "../../store/actions/actionType";
 import { useRef } from "react";
 import { cv } from 'react-opencv';
 import Webcam from 'react-webcam';
@@ -51,9 +51,9 @@ const schema = yup.object({
         .typeError('יש להזין תאריך חוקי')
         .required('יש להזין תאריך לידה'),
     ReadTerms: yup.boolean().oneOf([true], 'יש לאשר את תנאי השימוש').required(),
-    img: yup.mixed().test('file-required', 'יש להוסיף קובץ', value => {
-        return (value && value.length) > 0 ? value : null // בדיקה אם הערך הוא לא ריק או undefined
-    })
+    // img: yup.mixed().test('file-required', 'יש להוסיף קובץ', value => {
+    //     return (value && value.length) > 0 ? value : null // בדיקה אם הערך הוא לא ריק או undefined
+    // })
 
 
 }).required();
@@ -166,8 +166,9 @@ const RegisterYup = () => {
             }
             else {
                 // alert("נוסף בהצלחה");
-                navigate('/PeymentYup')
+                dispatch({ type: types.CURRENT_STATION , payload:res.data })
 
+                navigate('/PeymentYup')
             }
 
         }).catch(error => {

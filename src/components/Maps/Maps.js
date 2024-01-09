@@ -179,85 +179,60 @@ function MyComponent() {
 
   const [searchText, setSearchText] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
-  const [currentPoint, setCurrentPoint] = useState(null);
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
   };
 
-  const handleSelectChange = (e) => {
-    setSelectedOption(e.target);
-  };
 
-  const filteredOptions = stations.filter((option) =>
-    option.location.toLowerCase().includes(searchText.toLowerCase())
-  );
+
+  const filteredOptions = stations.filter((option) => option.location.toLowerCase().includes(searchText.toLowerCase()));
 
 
   const mapRef = useRef(null); // Ref למפה שבה תעשה זום
 
   // פונקציה לזום לנקודה שנבחרה
   const zoomToSelectedPoint = () => {
-    const selectedPoint = selectedOption; // נקודה שנבחרה
     const map = mapRef.current; // מקבל את מפת הגוגל
-    let c = null;
     // אם קיימת מפה ויש נקודה שנבחרה
     console.log(selectedOption, "llll")
     if (selectedOption != null) {
-      if (typeof selectedOption === 'object') {
-        console.log(selectedOption)
-        map.panTo({ lat: selectedOption.lat, lng: selectedOption.lng }); // מעביר את המפה לנקודה שנבחרה
-        map.setZoom(18);
-      }
-      else {
-        if (map && selectedOption) {
-          for (var i = 0; i < filteredOptions.length; i++) {
-            if (filteredOptions[i].id == selectedOption) {
-              setCurrentPoint(filteredOptions[i])
-              c = filteredOptions[i];
-            }
-          }
-          console.log(c);
-          console.log(selectedOption)
-          map.panTo({ lat: c.lat, lng: c.lng }); // מעביר את המפה לנקודה שנבחרה
-          map.setZoom(18);
-        }
-      }
+      // if (typeof selectedOption === 'object') {
+      console.log(selectedOption)
+      map.panTo({ lat: selectedOption.lat, lng: selectedOption.lng }); // מעביר את המפה לנקודה שנבחרה
+      map.setZoom(18);
+      // }
+      // else {
+      //   if (map && selectedOption) {
+      //     const c = filteredOptions.find(x => x.id == selectedOption)
+      //     console.log(c);
+      //     console.log(selectedOption)
+      //     map.panTo({ lat: c.lat, lng: c.lng }); // מעביר את המפה לנקודה שנבחרה
+      //     map.setZoom(18);
+      //   }
+      // }
     }
   };
 
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
   // כאשר משתנה הנקודה הנבחרת ב־Select משתנה, עדכן את הזום
-  useEffect(() => {
-    zoomToSelectedPoint();
-    let c = null;
-    if (selectedOption != null) {
-      if (typeof selectedOption === 'object') {
-        console.log(selectedOption)
-      }
-      else {
-          for (var i = 0; i < filteredOptions.length; i++) {
-            if (filteredOptions[i].id == selectedOption) {
-              setCurrentPoint(filteredOptions[i])
-              c = filteredOptions[i];
-              setSelectedOption(c);
-            }
-          }
-          console.log(c);
-          console.log(selectedOption)
-        
-      }
-    }
+  const SETselectedValueOption = (selectedOption) => {
+    const c = filteredOptions.find(x => x.id == selectedOption)
+    SETselectedOption(c)
+   
+  }
+  const SETselectedOption = (selectedOption) => {
+    console.log('useEFFECT', selectedOption, typeof selectedOption)
+    setSelectedOption(selectedOption);
+    console.log(selectedOption)
     console.log(selectedOption, "selected")
-    //err
     dispatch({ type: type.CURRENT_STATION, payload: selectedOption })
+    zoomToSelectedPoint();
+  }
 
-  }, [selectedOption]);
-
-  console.log(selectPoin)
 
   const currentUser = useSelector(state => state.ur.user);
-  let station = useSelector(state => state.ur.station);
+  const station = useSelector(state => state.ur.station);
   const [searchCardWidth, setSearchCardWidth] = useState('100%'); // Default width
 
   // useEffect(() => {
@@ -284,14 +259,14 @@ function MyComponent() {
       /><br></br><br></br>
 
 
-      <select id='selectS' onClick={({ target }) => (setSelectedOption(target.value))}>
-        {filteredOptions.map(marker => <option selected={selectedOption == marker} value={marker.id}>{marker.name} {marker.location}</option>)}
+      <select id='selectS' value={selectedOption} onClick={({ target }) => SETselectedValueOption(target.value)}>
+        {filteredOptions.map(marker => <option value={marker.id}>{marker.name} {marker.location}</option>)}
       </select><br></br><br></br>
 
 
       <p style={{ fontWeight: "bold", fontSize: "19px" }}> הכי קרובות אלי</p>
       <div style={{ display: "flex", textAlign: "center", lineHeight: "30px" }}>
-        {stationsMostClosde.map(marker => <Card onClick={({ target }) => (setSelectedOption(marker))} id="cardStation" style={{
+        {stationsMostClosde.map(marker => <Card onClick={() => SETselectedOption(marker)} id="cardStation" style={{
           borderRadius: "3px", height: "25%",
           width: "35%", marginLeft: "5px", direction: "rtl", fontSize: "15px"
         }} selected={selectedOption == marker} value={marker}>

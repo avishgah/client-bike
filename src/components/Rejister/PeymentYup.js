@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { Form } from "react-router-dom";
 
-import * as type from "../../store/actions/actionType";
+import * as types from "../../store/actions/actionType";
 
 const arr = [
     { lableName: "שם של בעל הכרטיס", name: "Name", type: "text" },
@@ -84,8 +84,8 @@ const PeymentYup = () => {
 
     const [listUsers, setlistUsers] = useState([]);
 
-   
 
+    const station = useSelector(state => state.ur.station);
     const nav = useNavigate();
 
     // פונקצית הרשמה
@@ -94,6 +94,8 @@ const PeymentYup = () => {
         try {
 
             await schema.validate(data, { abortEarly: false }); // אימות עם Yup
+            dispatch({ type: types.CURRENT_USER, payload: station })
+            dispatch({ type: types.CURRENT_STATION , payload:null})
             nav('/Profil');
             // פעולות נוספות במידת הצורך לאחר בדיקת תקינות מוצלחת
         } catch (errors) {

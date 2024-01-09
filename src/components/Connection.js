@@ -43,10 +43,7 @@ import Stepper from './Stepper'
 
 
 // import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepContent from '@mui/material/StepContent';
-import Paper from '@mui/material/Paper';
+
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 
@@ -132,7 +129,6 @@ const Connection = () => {
     }, [])
     const [open, setOpen] = React.useState(false);
     const [mail, setMail] = React.useState("");
-    const [cust, setCust] = React.useState(null);
     const openReset = () => {
         setMail(getValues('Email'))
         setOpen(true)
@@ -152,11 +148,7 @@ const Connection = () => {
                         type: type.CURRENT_USER,
                         payload: res.data
                     })
-                    setCust(res.data)
-                    if (res.data.isManager == false)
-                        nav('/Profil')
-                    else
-                        nav('/navM')
+                    nav('/Profil')
                 }
                 else {
                     document.getElementById('alert').style.visibility = "visible";

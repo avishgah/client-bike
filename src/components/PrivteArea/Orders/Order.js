@@ -151,8 +151,7 @@ function MyComponent() {
     <br />
 
     <form id="formLoginRG" style={{ direction: "rtl" }} onSubmit={Submit}>
-      <h8 id="h8"><b>הזמנה מראש</b></h8>
-      <br></br><br></br>
+      <h6 id="h8"><b>הזמנה מראש</b></h6>
       <div id="hazen" style={{ textAlign: "center" }}>הזן מספר אפניים ותחנה רצויה</div><br></br>
       {/* count */}
       <Box style={{ direction: "center", marginRight: "0vw" }}>
@@ -174,7 +173,16 @@ function MyComponent() {
             <Button
               aria-label="increase"
               onClick={() => {
-                setCount(count + 1);
+                if(station==null){
+                  alert("לא נבחרה תחנה,")
+                } else{
+                  if (station.cun < count + 1) {
+                    alert("מצטערים ! אין לנו את כמות האופניים בתחנה זו, אנא נסה בתחנות נוספות");
+                  } else {
+                    setCount(count + 1);
+                  }
+                }
+               
               }}
             >
               <AddIcon fontSize="small" />
@@ -193,7 +201,7 @@ function MyComponent() {
       {
         station != null ? <>
           <h8 id="h8"><b>סיכום הזמנה</b></h8><br></br><br></br>
-          {setflagTo(true)}
+          {/* {setflagTo(true)} */}
           <Card style={{ direction: "rtl", border: "3px dashed", lineHeight: "4ch" }}>
 
             <b> הזמנה לתחנת :</b> {station.name + ", " + station.location}<br></br>
