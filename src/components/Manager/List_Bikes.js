@@ -19,7 +19,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close'
-
+import { TableSortLabel } from '@mui/material';
 import './Manager.css';
 import { Button, IconButton, Switch, Tooltip } from '@mui/material';
 import AddBike from '../AddBike/AddBike';
