@@ -91,10 +91,44 @@ export default function AccessibleTable() {
 
 
   const [listBike, setlistBike] = useState([]);
+  const [sortOrder, setsortOrder] = useState('asc');
+  const handleFilter = () => {
+    console.log("enter");
 
+    return listBike.filter(x => {
+      // Convert string dates to Date objects for comparison
+      const startDate = new Date(x.dateStart);
+      const fromDateObj = fromDate ? new Date(fromDate) : null;
+      const toDateObj = toDate ? new Date(toDate) : null;
+      // console.log(startDate, "start");
+      // console.log(fromDateObj, "מ");
+      // console.log(toDateObj, "ל");
+
+      // !fromDate || x.dateStart > fromDate
+      // ) && (!toDate || x.dateStart < toDate)
+      // Check if the date is within the specified range or empty dates
+      const isFromDateValid = !fromDateObj || startDate > fromDateObj;
+      const isToDateValid = !toDateObj || startDate < toDateObj;
+
+      // console.log(isToDateValid);
+      // console.log(isFromDateValid);
+      // Rest of your conditions
+      return (
+
+        (isFromDateValid && isToDateValid)
+        &&
+        ((!inputValue) ||
+          x.battery?.toString().includes(inputValue) ||
+          x.dateStart?.toString().includes(inputValue) ||
+          x.location?.toString().includes(inputValue) ||
+          x.name?.toString().includes(inputValue) ||
+          x.status?.toString().includes(inputValue))
+      );
+    });
+  };
 
   useEffect(() => {
-    axios.get('https://localhost:7207/api/Bike')
+    axios.get('https://localhost:7207/api/StationBikeView')
       .then(res => {
         console.log(res.data)
         setlistBike(res.data)
@@ -122,8 +156,60 @@ export default function AccessibleTable() {
       console.log("exit")
     }
   }
+  const createSortHandler = (key) => {
+    const listCopy = [...listBike];
+    listCopy.sort((a, b) => a[key] > b[key] ? 1 : -1)
+    setlistBike(listCopy);
+  }
+
+  const createSortHandlerForStatus = (key) => {
+    const sortedList = [...listBike]; // Create a copy of the original list
+    sortedList.sort((a, b) => {
+      if (sortOrder == 'asc') {
+        console.log("jj")
+        return b[key] - a[key];
+
+      } else {
+        console.log("jk")
+        return a[key] - b[key];
+
+      }
+    });
+
+    console.log(sortOrder)
+
+    // if (sortOrder == 'asc')
+    //   sortOrder = 'desc'
+    // else
+    //   sortOrder = 'asc'
+
+    setsortOrder(sortOrder == 'asc' ? 'desc' : 'asc'); // Toggle the sortOrder for the next reversal
+    console.log(sortOrder)
+    setlistBike(sortedList);
+
+    // return sortedList;
+
+    // Check if the first item in the list has the same value for the 'status' key
+    // const isSorted = listCopy.every((item, index) => index === 0 || item[key] === listCopy[index - 1][key]);
+
+    // If all values are the same, reverse the list to toggle the sorting order
+    // if (isSorted) {
+    // listCopy.reverse();
+    // }
+
+  }
+
+  const [inputValue, setInputValue] = useState('')
+  const [fromDate, setfromDate] = useState('')
+  const [toDate, settoDate] = useState('')
   return (<div class="flex-container">
-    <div class="flex-item-left">
+    <div class="flex-item-left" style={{ direction: "rtl" }}>
+      <label className='p-dates'>מ:  </label>
+      <input  className='input-dates' type='date' value={fromDate} onChange={({ target }) => setfromDate(target.value)} />
+      <label className='p-dates'> עד:   </label>
+      <input  className='input-dates' type='date' value={toDate} onChange={({ target }) => settoDate(target.value)} />
+      <label className='p-dates'> </label>
+      <input  className='input-dates' style={{height:"30px"}} placeholder="חיפוש חופשי..." value={inputValue} onChange={({ target }) => setInputValue(target.value)} /><br></br>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 100 }} aria-label="caption table">
           <caption>end list of bikes</caption>
@@ -131,57 +217,106 @@ export default function AccessibleTable() {
             <TableRow>
 
               <TableCell><b></b></TableCell>
-              <TableCell ><b>קוד</b></TableCell>
-              <TableCell align="right"><b>מזהה</b></TableCell>
+              <TableCell align="right">
+
+                <TableSortLabel
+
+                  onClick={() => createSortHandler('code')}
+                >
+                  <b>מזהה</b>
+
+
+                </TableSortLabel>
+                <TableSortLabel
+                  direction={'asc'}
+                  onClick={() => createSortHandler('code')}
+                ></TableSortLabel>
+              </TableCell>
               <TableCell align="right"><b>בטריה</b></TableCell>
-              <TableCell align="right"><b>קוד</b> </TableCell>
+              <TableCell align="right">
+
+                <TableSortLabel
+
+                  onClick={() => createSortHandler('location')}
+                >
+                  <b>עיר</b>
+                </TableSortLabel>
+              </TableCell>
+              <TableCell align="right">
+
+                <TableSortLabel
+
+                  onClick={() => createSortHandler('name')}
+                >
+                  <b>מיקום</b>
+                </TableSortLabel>
+              </TableCell>
               <TableCell align="right"><b>תאריך תחילת שימוש</b></TableCell>
-              <TableCell align="center"><b>סטטוס</b></TableCell>
+              <TableCell align="center">
+
+                <TableSortLabel
+
+                  onClick={() => createSortHandlerForStatus('status')}
+                >
+                  <b>סטטוס</b>
+
+                </TableSortLabel>
+
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
 
 
-            {listBike.map((row) => (
-              <TableRow key={row.id}>
-                {/* <DeleteOutlineIcon id="icon2"/> */}
+            {
+              // listBike.filter(x => !inputValue ||
+              // (
 
-                <TableCell>
-                  {/* <Tooltip title="מחק" placement="left-end">
+              //   !fromDate || x.dateStart > fromDate
+              // ) && (!toDate || x.dateStart < toDate) ||
+              // x.battery?.toString().includes(inputValue) ||
+              // x.dateStart?.toString().includes(inputValue) ||
+              // x.status?.toString().includes(inputValue))
+              handleFilter()
+                .map((row) => (
+                  <TableRow key={row.id}>
+                    {/* <DeleteOutlineIcon id="icon2"/> */}
+
+                    <TableCell>
+                      {/* <Tooltip title="מחק" placement="left-end">
                   <DeleteIcon id="icon" onClick={() => myFunction(row.id)} />
                 </Tooltip> */}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.id}
-                </TableCell>
-                <TableCell align="right">{row.code}</TableCell>
-                <TableCell align="right">{row.battery}</TableCell>
-                <TableCell align="right">{row.idStation}</TableCell>
-                <TableCell align="right">{row.dateStart}</TableCell>
-                <TableCell align="center">
-                  {row.status == true ?
-                    <Tooltip title="פעיל" placement="left-end">
-                      <Switch
-                        checked={row.status}
-                        onChange={() => change(row.id, row.status)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                      />
-                    </Tooltip> : <Tooltip title="לא פעיל" placement="left-end">
-                      <Switch
-                        checked={row.status}
-                        onChange={() => change(row.id, row.status)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                      />
-                    </Tooltip>}
+                    </TableCell>
+
+                    <TableCell align="right">{row.code}</TableCell>
+                    <TableCell align="right">{row.battery}</TableCell>
+                    <TableCell align="right">{row.location}</TableCell>
+                    <TableCell align="right">{row.name}</TableCell>
+                    <TableCell align="right">{row.dateStart}</TableCell>
+                    <TableCell align="center">
+                      {row.status == true ?
+                        <Tooltip title="פעיל" placement="left-end">
+                          <Switch
+                            checked={row.status}
+                            onChange={() => change(row.id, row.status)}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                          />
+                        </Tooltip> : <Tooltip title="לא פעיל" placement="left-end">
+                          <Switch
+                            checked={row.status}
+                            onChange={() => change(row.id, row.status)}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                          />
+                        </Tooltip>}
 
 
-                </TableCell>
-                {/* <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
+                    </TableCell>
+                    {/* <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
                         
                     </Button>
               <IconButton >{DeleteIcon}</IconButton> */}
-              </TableRow>
-            ))}
+                  </TableRow>
+                ))}
           </TableBody>
         </Table>
 

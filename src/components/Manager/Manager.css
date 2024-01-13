@@ -149,3 +149,18 @@ margin-left: 20%;
   .container:hover .overlay {
     opacity: 1; /* הצגת השכבה כשהעכבר על התמונה */
   }
+
+  .p-dates{
+    font-size: 15px;
+    color: black;
+  }
+
+  .input-dates{
+    font-size: 15px;
+    color: rgb(84, 84, 84);
+    padding: 3px; 
+    margin-bottom: 1.5vw;
+    margin-top: 1.5vw;
+    margin-left: 20px;
+    border:1px rgb(178, 177, 177) solid;
+  }

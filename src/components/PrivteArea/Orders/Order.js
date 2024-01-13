@@ -206,7 +206,7 @@ function MyComponent() {
 
             <b> הזמנה לתחנת :</b> {station.name + ", " + station.location}<br></br>
             <b> מספר אופניים : </b> {count}  <PedalBikeIcon style={{ fontSize: '20px', verticalAlign: 'text-top', color: "#602424" }} />
-          </Card></> : null
+          </Card></> : <p>לא נמצאה הזמנה</p>
       }
       <br></br>
       <br></br>

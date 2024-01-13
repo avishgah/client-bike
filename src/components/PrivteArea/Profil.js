@@ -90,9 +90,8 @@ const Profil = () => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        // dispatch({ type: type.CHANGE_FLAG_TRUE })
-
-
+        // dispatch({ type: type.CHANGE_FLAG_TRUE })\
+     
     }, [])
 
     const [value, setValue] = React.useState(null);
@@ -266,7 +265,7 @@ const Profil = () => {
                 <br></br>
 
 
-                <FormControl sx={{ m: 1, width: '39ch',direction:"rtl" }} variant="standard">
+                <FormControl sx={{ m: 1, width: '39ch', direction: "rtl" }} variant="standard">
                     <InputLabel htmlFor="standard-adornment-password"></InputLabel>
                     <Input
                         defaultValue={currentUser == null ? ' ' : currentUser.password}

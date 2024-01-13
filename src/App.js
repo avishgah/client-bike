@@ -67,47 +67,17 @@ function App() {
 
   return (<>
     <div className='wrapper'>
-      {/* <Out/> */}
-      {/* <Order/> */}
-      {/* <ForgetPassword/> */}
-      {/* <Connection/> */}
+      
       <ResponsiveAppBar />
 
-      {/* <Problems/> */}
-      {/* <PeymentYup/> */}
-      {/* <NavManger /> */}
-      {/* <Maps/> */}
-      {/* <History /> */}
-
-      {/* <List_Station/> */}
-      {/* <ForgetPassword email={mail} setOpen={setOpen} />  */}
 
       {/* <List_Bikes /> */}
-      {/* <RegisterYup /> */}
-
-      {/* <List_Opinion /> */}
-
-      {/* <CardOpinion/> */}
-
-      {/* <NavManger/> */}
-      {/* <Contect /> */}
-
-      {/* <Problems/> */}
-      {/* <NavBar/> */}
-      {/* <AddStation/> */}
-      {/* <List_Users/> */}
-      {/* <Maps /> */}
-      {/* <Order /> */}
-      {/* <Navb/> */}
-      {/* <RegisterAdd /> */}
-      {/* <Register/> */}
-      {/* <AddUser/> */}
 
       {currentUser != null ?
         (currentUser.isManager ? <NavManger /> : <Navb />) : null}
 
       <Routes>
-        <Route path="" element={<Home />}></Route>
+        {/* <Route path="" element={<Home />}></Route> */}
         <Route path='home' element={<Home />} />
         <Route path='Question' element={<Question />} />
         <Route path='Video' element={<Video />} />
