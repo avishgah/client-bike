@@ -15,6 +15,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box, Button } from '@mui/material';
+import axios from 'axios';
+
+import * as type from "../../store/actions/actionType";
+import { useDispatch } from 'react-redux';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -27,16 +31,48 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const CardOpinion = ({ props, place }) => {
+const CardOpinion = ({ props, place, listOpinion }) => {
     const [expanded, setExpanded] = React.useState(false);
+    const dispatch = useDispatch();
+
+    const updateList = async () => {
+        console.log("enter update")
+        axios.get('https://localhost:7207/api/Opinion')
+        .then(res => {
+            dispatch({
+                type: type.LIST_OPINION,
+                payload: res.data
+            })
+            // nav('/NavB')
+        }).catch(err => console.log(err))
+    }
+
+
+    function deleteItem(id) {
+        var txt;
+        if (window.confirm("האם אתה בטוח שברצונך למחוק")) {
+
+            axios.delete(`https://localhost:7207/api/Opinion/${id}`).then(res => {
+                alert("נמחק בהצלחה")
+            })
+            updateList();
+            console.log("deleted")
+        }
+
+        else {
+            console.log("exit")
+        }
+    }
+
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
+
     return (<>
         {props != null ?
-            <Card sx={{ maxWidth: 380, textAlign: 'center', padding: "10px", marginLeft: "50px", marginBottom: "50px" }}>
+            <Card sx={{ maxWidth: 340, textAlign: 'center', marginLeft: "50px", marginBottom: "50px" }}>
                 <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -66,7 +102,7 @@ const CardOpinion = ({ props, place }) => {
 
                 <CardContent>
                     <Typography variant="body2" fontSize={"large"} color="text.secondary">
-                        <b> {props.typeProblem}</b>
+                        <b> {props.typeProblem ? props.typeProblem : "שגיאה"}</b>
                     </Typography><br></br>
                     {
                         place == 'תקלה באופניים' ? <Typography variant="body2" color="text.secondary" textAlign={'right'}>קוד אופניים:
@@ -81,8 +117,7 @@ const CardOpinion = ({ props, place }) => {
                     </Typography>
 
                 </CardContent>
-                <Button id="opinB">delete</Button>
-                <Button id="opinB">cancele</Button>
+                <Button id="opinB" onClick={() => deleteItem(props.id)}>delete</Button>
 
             </Card> : <Card sx={{ maxWidth: 345 }}>
             </Card>}

@@ -148,7 +148,12 @@ const Connection = () => {
                         type: type.CURRENT_USER,
                         payload: res.data
                     })
-                    nav('/Profil')
+                    if(res.data.isManager){
+                        nav('/lOpinion')
+                    }
+                    else{
+                        nav('/Profil')
+                    }
                 }
                 else {
                     document.getElementById('alert').style.visibility = "visible";
@@ -184,9 +189,10 @@ const Connection = () => {
             <CardContent>
 
                 <h2>ברוכים הבאים-התחברות</h2>
-                <Typography variant="h5" component="div" style={{ textAlign: "right" }}>
-                    היי, אנחנו שמחים לראות אותך!
-                    להתחברות לאיזור האישי, יש להזין כתובת מייל וסיסמא                   </Typography>
+                <Typography variant="h5" component="div" style={{ textAlign: "center",fontSize:"17px" }}>
+                    היי, אנחנו שמחים לראות אותך!<br></br>
+                    להתחברות לאיזור האישי, יש להזין כתובת מייל וסיסמא           
+                            </Typography>
                 <br></br>
 
 

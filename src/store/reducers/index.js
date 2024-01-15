@@ -4,7 +4,7 @@ const initialState = {
     currentUser: null,
     drives: [],
     station: null,
-
+    listOpinion: [],
     user: null,
     Flag: false,
     // users:[]
@@ -23,6 +23,11 @@ const UserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 station: action.payload
+            }
+        case type.LIST_OPINION:
+            return {
+                ...state,
+                listOpinion: action.payload
             }
         case type.SELECT_DRIVES:
             return {
@@ -57,6 +62,7 @@ const UserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: null,
+                station:null
             }
 
         case type.HISTORY_DRIVES:

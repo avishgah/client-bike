@@ -21,9 +21,10 @@ import './Manager.css';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { Button, IconButton, Tooltip } from '@mui/material';
+import { Button, IconButton, TableSortLabel, Tooltip } from '@mui/material';
 import { Switch, switchClasses } from '@mui/joy';
 import AddStation from '../AddStation/AddStation';
+import XL from '../export to xl/XL';
 
 export default function AccessibleTable() {
 
@@ -63,7 +64,9 @@ export default function AccessibleTable() {
 
     }
 
-    const [listStation, setlistStation] = useState([]);
+
+
+    const [sortOrder, setsortOrder] = useState('desc');
 
     const [checked, setChecked] = React.useState(false);
 
@@ -93,9 +96,83 @@ export default function AccessibleTable() {
             console.log("exit")
         }
     }
+    const [listStation, setlistStation] = useState([]);
+    const createSortHandler = (key) => {
+        const listCopy = [...listStation];
+
+        // Toggle between 'asc' and 'desc'
+        const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+
+        listCopy.sort((a, b) => {
+            if (newSortOrder === 'asc') {
+                return a[key].toString().localeCompare(b[key].toString());
+            } else {
+                return b[key].toString().localeCompare(a[key].toString());
+            }
+        });
+
+        setlistStation(listCopy);
+        setsortOrder(newSortOrder);
+    }
+    const createSortHandlerForNumBike = (key) => {
+        const listCopy = [...listStation];
+        // Toggle between 'asc' and 'desc'
+        const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+        if (sortOrder == 'asc') {
+            listCopy.sort((a, b) => a[key] > b[key] ? 1 : -1)
+
+        }
+        else {
+            listCopy.sort((a, b) => a[key] < b[key] ? 1 : -1)
+
+        }
+        setlistStation(listCopy);
+        setsortOrder(newSortOrder);
+    }
+    const createSortHandlerForStatus = (key) => {
+        const sortedList = [...listStation]; // Create a copy of the original list
+        console.log(sortOrder);
+        sortedList.sort((a, b) => {
+            if (sortOrder == 'asc') {
+                console.log("jj")
+                return b[key] - a[key];
+
+            } else {
+                console.log("jk")
+                return a[key] - b[key];
+
+            }
+        });
+        console.log(sortedList);
+
+    }
+    const handleFilter = () => {
+        console.log("enter");
+
+        return listStation.filter(x => {
+
+            return (
+                (x.numOrders >= numberValue) &&
+                ((!inputValue) ||
+                    x.location?.toString().includes(inputValue) ||
+                    x.name?.toString().includes(inputValue) ||
+                    x.status?.toString().includes(inputValue))
+            );
+        });
+    };
+    const [inputValue, setInputValue] = useState('')
+    const [numberValue, setnumberValue] = useState(0)
+
+    const data = ["id", "location", "name", "status", "cun", "numOrders"];
+    const dataNmae = ["קוד תחנה", "עיר", "מיקום", "סטטוס", "מספר אופניים בתחנה", "מספר הזמנות בתחנה"]
     return (
         <div class="flex-container">
             <div class="flex-item-left">
+                {console.log(listStation, "ךןדאאאאאאאאאאאא")}
+                <label className='p-dates'>כמות הזמנות:  </label>
+                <input className='input-dates' type='number' style={{ height: "30px" }} placeholder="הכנס מספר..." value={numberValue} onChange={({ target }) => setnumberValue(target.value)} />
+                <input className='input-dates' style={{ height: "30px" }} placeholder="חיפוש חופשי..." value={inputValue} onChange={({ target }) => setInputValue(target.value)} />
+                <XL data={data} dataName={dataNmae} arr={handleFilter()} />
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 100 }} aria-label="caption table">
                         <caption>A basic table example with a caption</caption>
@@ -103,47 +180,88 @@ export default function AccessibleTable() {
                             <TableRow>
 
                                 {/* <TableCell><b></b></TableCell> */}
-                                <TableCell ><b>קוד</b></TableCell>
-                                <TableCell align="center"><b>עיר</b></TableCell>
-                                <TableCell align="center"><b>שם תחנה</b></TableCell>
-                                <TableCell align="center"><b>סטטוס</b></TableCell>
-                                <TableCell align="center"><b>מספר אופניים בתחנה</b></TableCell>
+                                <TableCell align="center">
 
+                                    <TableSortLabel
+
+                                        onClick={() => createSortHandler('location')}
+                                    >
+                                        <b>עיר</b>
+                                    </TableSortLabel>
+                                </TableCell>
+                                <TableCell align="center">
+
+
+                                    <TableSortLabel
+
+                                        onClick={() => createSortHandler('name')}
+                                    >
+                                        <b>מיקום</b>
+                                    </TableSortLabel>
+                                </TableCell>
+                                <TableCell align="center">
+                                    <TableSortLabel
+
+                                        onClick={() => createSortHandlerForStatus('status')}
+                                    >
+                                        <b>סטטוס</b>
+
+                                    </TableSortLabel>
+                                </TableCell>
+                                <TableCell align="center">
+
+                                    <TableSortLabel
+
+                                        onClick={() => createSortHandlerForNumBike('cun')}
+                                    >
+                                        <b>מספר אופניים בתחנה</b>
+                                    </TableSortLabel>
+
+                                </TableCell>
+                                <TableCell align="center">
+
+                                    <TableSortLabel
+
+                                        onClick={() => createSortHandlerForNumBike('numOrders')}
+                                    >
+                                        <b>מספר הזמנות בתחנה</b>
+                                    </TableSortLabel>
+
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
 
 
-                            {listStation.map((row) => (
-                                <TableRow key={row.id}>
+                            {handleFilter().map((row) => (
+                                <>
 
-                                    <TableCell component="th" scope="row">
-                                        {row.id}
-                                    </TableCell>
+                                    <TableRow key={row.id}>
 
-                                    <TableCell align="center">{row.location}</TableCell>
-                                    <TableCell align="center">{row.name}</TableCell>
-                                    <TableCell align="center">
-                                        {row.status == true ?
-                                            <Tooltip title="פעילה" placement="left-end">
-                                                <Switch
-                                                    checked={row.status}
-                                                    onChange={() => change(row.id, row.status)}
-                                                    inputProps={{ 'aria-label': 'controlled' }}
-                                                />
-                                            </Tooltip> : <Tooltip title="לא פעילה" placement="left-end">
-                                                <Switch
-                                                    checked={row.status}
-                                                    onChange={() => change(row.id, row.status)}
-                                                    inputProps={{ 'aria-label': 'controlled' }}
-                                                />
-                                            </Tooltip>}
+                                        <TableCell align="center">{row.location}</TableCell>
+                                        <TableCell align="center">{row.name}</TableCell>
+                                        <TableCell align="center">
+                                            {row.status == true ?
+                                                <Tooltip title="פעילה" placement="left-end">
+                                                    <Switch
+                                                        checked={row.status}
+                                                        onChange={() => change(row.id, row.status)}
+                                                        inputProps={{ 'aria-label': 'controlled' }}
+                                                    />
+                                                </Tooltip> : <Tooltip title="לא פעילה" placement="left-end">
+                                                    <Switch
+                                                        checked={row.status}
+                                                        onChange={() => change(row.id, row.status)}
+                                                        inputProps={{ 'aria-label': 'controlled' }}
+                                                    />
+                                                </Tooltip>}
 
 
-                                    </TableCell>
-                                    <TableCell align="center">{row.cun != null ? row.cun : 0}</TableCell>
-                                </TableRow>
-                            ))}
+                                        </TableCell>
+                                        <TableCell align="center">{row.cun != null ? row.cun : 0}</TableCell>
+                                        <TableCell align="center">{row.numOrders != null ? row.numOrders : 0}</TableCell>
+                                    </TableRow>
+                                </>))}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -153,13 +271,7 @@ export default function AccessibleTable() {
                 <b>  הוסף תחנה </b><br></br><br></br>
 
                 <AddStation /><br></br>
-                <div style={{ border: "solid 1px black" }}>
-                    <br></br>
-                    <b>  מיין לפי </b><br></br><br></br>
-                    <Button>תחנות הפעילות הגבוהה ביותר</Button><br></br><br></br>
-                    <Button>תחנות הפעילות הנמוכה ביותר</Button>
-                    {/* <Button>תחנות בעלות מספר אפניים גבוהה</Button> */}
-                </div>
+
 
 
             </div>

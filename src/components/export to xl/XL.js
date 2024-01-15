@@ -3,14 +3,14 @@ import React from 'react';
 import * as XLSX from 'xlsx';
 
 
-const XL = ({ data, arr,dataName }) => {
+const XL = ({ data, arr, dataName }) => {
     const exportToExcel = () => {
         // Combining data and arr into a two-dimensional array
         const database = [];
-    
+
         // Push column headers as the first row in the database
         database.push(dataName);
-    
+
         // Push data based on 'arr' contents
         arr.forEach(item => {
             const rowData = [];
@@ -33,9 +33,7 @@ const XL = ({ data, arr,dataName }) => {
     return (<>
         {console.log(data, "data")}
         {console.log(arr, "arr")}
-        <div>
-            <Button onClick={exportToExcel}>Export to Excel</Button>
-        </div>
+        <Button onClick={exportToExcel}>Export to Excel</Button>
     </>)
 }
 

@@ -31,8 +31,9 @@ const NavManger = () => {
             <div className='home'>
 
                 <ul className='ulOfPrivateM' >
-                    <li  className='liOfPrivateM' onClick={() => (changeColor(1))}>
-                        <Link to="History">  רשימת נסיעות</Link><br></br> <br></br>
+              
+                    <li className='liOfPrivateM' onClick={() => Exit()}>
+                        <Link to="home">יציאה מהאיזור האישי</Link>
                     </li>
                     <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
                         <Link to="lUser">רשימת משתמשים </Link>
@@ -46,17 +47,10 @@ const NavManger = () => {
                     <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
                         <Link to="lOpinion">רשימת דיווחים </Link>
                     </li>
-                    <li  className='liOfPrivateM' onClick={() => (changeColor(4))}>
-                        <Link to="Profil">פרופיל</Link>
+                    <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
+                        <Link to="profil">פרופיל</Link>
                     </li>
-                    <li>
-
-                        <Button variant="contained" endIcon={<LogoutIcon />} id="out" type="submit" onClick={() => Exit()} >
-
-                        </Button>
-
-
-                    </li>
+                    
                 </ul>
                 <br></br>
             </div>

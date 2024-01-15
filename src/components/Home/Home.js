@@ -16,8 +16,16 @@ import { RampRight } from '@mui/icons-material';
 
 
 import Stepper from '../Stepper.js';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 const Home = () => {
     const nav = useNavigate();
+    const currentUser = useSelector(state => state.ur.user);
+    const station = useSelector(state => state.ur.station);
+      useEffect(() => {
+        console.log("station",station);
+        console.log("user",currentUser);
+    }, [])
     return (<>
 
         <Stepper />
@@ -28,24 +36,24 @@ const Home = () => {
         }}>
             <div className='son'>
                 <br></br>
-                <div id="photo">
-                    <div style={{ marginLeft: "30px", backgroundColor: "#602424", borderRadius: "100px", height: "100px", width: "100px" }}></div>
+                <div style={{ marginLeft: "30px", backgroundColor: "#602424", borderRadius: "100px", height: "100px", width: "100px" }}></div>
 
-                    <Card sx={{ marginLeft: "100px", width: "13.7vw", height: "14vw", border: "white ", boxShadow: "none" }}>
-                        <video
-                            autoPlay
-                            loop
-                            muted
-                            poster="./Images/גלגל.mp4"
-                        >
-                            <source
-                                src="./Images/גלגל.mp4"
-                                type="video/mp4"
-                            />
-                        </video>
-                    </Card>
-                    <div style={{ marginLeft: "30px", backgroundColor: "#602424", borderRadius: "150px", height: "150px", width: "150px" }}></div>
+                <div style={{ position: "relative", marginLeft: "109px", width: "13.7vw", height: "14vw", overflow: "hidden" }}>
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        poster="./Images/גלגל.mp4"
+
+                        style={{ objectFit: "cover", clip: "rect(0, 50%, 100%, 0)" }}
+                    >
+                        <source
+                            src="./Images/גלגל.mp4"
+                            type="video/mp4"
+                        />
+                    </video>
                 </div>
+                <div style={{ marginLeft: "30px", backgroundColor: "#602424", borderRadius: "150px", height: "150px", width: "150px" }}></div>
             </div>
 
             <div className='son' style={{}}>

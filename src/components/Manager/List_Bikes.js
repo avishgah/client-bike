@@ -23,6 +23,7 @@ import { TableSortLabel } from '@mui/material';
 import './Manager.css';
 import { Button, IconButton, Switch, Tooltip } from '@mui/material';
 import AddBike from '../AddBike/AddBike';
+import XL from '../export to xl/XL';
 export default function AccessibleTable() {
 
   const [checked, setChecked] = React.useState([true, false]);
@@ -202,14 +203,19 @@ export default function AccessibleTable() {
   const [inputValue, setInputValue] = useState('')
   const [fromDate, setfromDate] = useState('')
   const [toDate, settoDate] = useState('')
+  
+  const data = ["id", "code", "battery", "location", "name", "dateStart", "status"];
+  const dataNmae = ["קוד אופניים", "מזהה יפה", "בטריה", "עיר", "מיקום", "תאריך תחילת שימוש","סטטוס"]
+
   return (<div class="flex-container">
     <div class="flex-item-left" style={{ direction: "rtl" }}>
+      <input  className='input-dates' style={{height:"30px"}} placeholder="חיפוש חופשי..." value={inputValue} onChange={({ target }) => setInputValue(target.value)} />
       <label className='p-dates'>מ:  </label>
       <input  className='input-dates' type='date' value={fromDate} onChange={({ target }) => setfromDate(target.value)} />
       <label className='p-dates'> עד:   </label>
       <input  className='input-dates' type='date' value={toDate} onChange={({ target }) => settoDate(target.value)} />
       <label className='p-dates'> </label>
-      <input  className='input-dates' style={{height:"30px"}} placeholder="חיפוש חופשי..." value={inputValue} onChange={({ target }) => setInputValue(target.value)} /><br></br>
+      <XL data={data} dataName={dataNmae} arr={handleFilter()} />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 100 }} aria-label="caption table">
           <caption>end list of bikes</caption>
@@ -241,6 +247,7 @@ export default function AccessibleTable() {
                 >
                   <b>עיר</b>
                 </TableSortLabel>
+
               </TableCell>
               <TableCell align="right">
 

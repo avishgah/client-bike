@@ -235,14 +235,14 @@ function MyComponent() {
   const station = useSelector(state => state.ur.station);
   const [searchCardWidth, setSearchCardWidth] = useState('100%'); // Default width
 
-  // useEffect(() => {
-  //   // Update searchCardWidth when currentUser changes
-  //   if (currentUser === null) {
-  //     setSearchCardWidth('48%');
-  //   } else {
-  //     setSearchCardWidth('100%'); // Set your desired width here
-  //   }
-  // }, [currentUser]);
+  useEffect(() => {
+    // Update searchCardWidth when currentUser changes
+    if (currentUser === null) {
+      setSearchCardWidth('60%');
+    } else {
+      setSearchCardWidth('100%'); // Set your desired width here
+    }
+  }, [currentUser]);
 
   return (<>
     <br />

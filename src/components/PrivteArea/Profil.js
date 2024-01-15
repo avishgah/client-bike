@@ -91,7 +91,7 @@ const Profil = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         // dispatch({ type: type.CHANGE_FLAG_TRUE })\
-     
+  
     }, [])
 
     const [value, setValue] = React.useState(null);

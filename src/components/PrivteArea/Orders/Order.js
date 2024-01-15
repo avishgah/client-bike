@@ -129,13 +129,20 @@ function MyComponent() {
     console.log(count, selectPoin)
 
     console.log(station, "tst")
-    if (flagTo) {
+    if (station != null) {
       const IsPay = false;
       axios.post(`https://localhost:7207/api/Order`, { count, IsPay, id: 0, datePay: null, IdCust: currentUser.id, idStation: station.id, dateOrder: new Date(), code: "web" }).then(res => {
         console.log(res)
         console.log(res.data)
         handleClickOpen();
       })
+
+      var x = `שלום, ${currentUser.name} \n ביצעת הזמנה לתחנת - ${station.location +" "+ station.name}\n \t, מספר האופניים ששמורים לך הם : ${count} , שים לב ❤ ההזמנה שמורה ל30 דקות בלבד! \n נסיעה בטוחה ומהנה 😊`
+      console.log("kkk")
+      var y=",";
+      axios.post(`https://localhost:7207/api/User/SendEmailOnly/${currentUser.mail}/${currentUser.name}/${x}/${y}`).then(res => {
+        console.log("giid")
+      }).catch(err => console.log(err))
     }
     else {
       alert("לא נמצאה הזמנה")
@@ -173,16 +180,16 @@ function MyComponent() {
             <Button
               aria-label="increase"
               onClick={() => {
-                if(station==null){
+                if (station == null) {
                   alert("לא נבחרה תחנה,")
-                } else{
+                } else {
                   if (station.cun < count + 1) {
                     alert("מצטערים ! אין לנו את כמות האופניים בתחנה זו, אנא נסה בתחנות נוספות");
                   } else {
                     setCount(count + 1);
                   }
                 }
-               
+
               }}
             >
               <AddIcon fontSize="small" />
@@ -201,7 +208,6 @@ function MyComponent() {
       {
         station != null ? <>
           <h8 id="h8"><b>סיכום הזמנה</b></h8><br></br><br></br>
-          {/* {setflagTo(true)} */}
           <Card style={{ direction: "rtl", border: "3px dashed", lineHeight: "4ch" }}>
 
             <b> הזמנה לתחנת :</b> {station.name + ", " + station.location}<br></br>

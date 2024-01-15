@@ -29,47 +29,20 @@ import AddStation from '../AddStation/AddStation';
 import CardOpinion from './CardOpinion';
 import XL from '../export to xl/XL';
 
+import * as type from "../../store/actions/actionType";
+import { useDispatch } from 'react-redux';
+
 export default function AccessibleTable() {
 
-    // const change = (id, status) => {
-    //     console.log(id)
 
-    //     if (window.confirm("האם אתה בטוח שברצונך לשנות את סטטוס המשתמש ")) {
-
-    //         console.log(id);
-    //         var u = null;
-    //         axios.get(`https://localhost:7207/api/Station/${id}`).then(res => {
-    //             console.log(res.data)
-    //             u = res.data;
-    //             console.log(u)
-
-    //             const station =
-    //             {
-    //                 "location": u.location,
-    //                 "name": u.name,
-    //                 "status": !status,
-    //                 "lat": u.lat,
-    //                 "lng": u.lng
-
-    //             }
-
-    //             console.log(station)
-    //             axios.put(`https://localhost:7207/api/Station/${id}`, station).then(res => {
-    //                 console.log("kk");
-    //             })
-    //             window.location.reload(true);
-
-    //         }).catch(err => console.log(err))
-    //     }
-    //     else {
-    //         console.log("exit")
-    //     }
-
-    // }
 
     const [listOpinion, setlistOpinion] = useState([]);
-
+    const [fromDate, setfromDate] = useState('');
+    const [toDate, settoDate] = useState('');
+    const PlaceArr = ['הכל', 'תקלה באופניים', 'תקלה בתחנה'];
+    const [placeProblem, setplaceProblem] = useState('הכל')
     const [checked, setChecked] = React.useState(false);
+    const dispatch = useDispatch();
 
     const data = ["id", "place", "idBike", "idStation", "typeProblem", "date", "idCust"];
     const dataNmae = ["קוד תקלה", "מקום", "קוד אופניים", "קוד תחנה", "סוג הבעיה", "תאריך תקלה", "קוד לקוח"]
@@ -78,37 +51,72 @@ export default function AccessibleTable() {
             .then(res => {
                 console.log(res.data)
                 setlistOpinion(res.data)
+                dispatch({
+                    type: type.LIST_OPINION,
+                    payload: res.data
+                })
                 // nav('/NavB')
             }).catch(err => console.log(err))
     }, [])
-    const deleteFunc = (id) => {
-        console.log(id)
-    }
 
-    function myFunction() {
-        var txt;
-        if (window.confirm("האם אתה בטוח שברצונך למחוק")) {
 
-            // axios.delete(`https://localhost:7207/api/Bike/${id}`).then(res => {
-            alert("נמחק בהצלחה")
-            window.location.reload(true);
-            // })
-            console.log("deleted")
-        }
-        else {
-            console.log("exit")
-        }
-    }
+    let filteredOptions = [];
+    
+
+    const handleFilter = () => {
+        console.log("enter");
+
+        filteredOptions = placeProblem != 'הכל' ? listOpinion.filter((option) => option.place.toLowerCase().includes(placeProblem.toLowerCase())) : listOpinion;
+
+        filteredOptions = filteredOptions.filter(x => {
+            // Convert string dates to Date objects for comparison
+            const startDate = new Date(x.date);
+            const fromDateObj = fromDate ? new Date(fromDate) : null;
+            const toDateObj = toDate ? new Date(toDate) : null;
+
+            //   console.log(startDate, "start");
+            //   console.log(fromDateObj, "מ");
+            //   console.log(toDateObj, "ל");
+
+            // !fromDate || x.dateStart > fromDate
+            // ) && (!toDate || x.dateStart < toDate)
+            // Check if the date is within the specified range or empty dates
+            const isFromDateValid = !fromDateObj || startDate > fromDateObj;
+            const isToDateValid = !toDateObj || startDate < toDateObj;
+
+            console.log(isToDateValid);
+            console.log(isFromDateValid);
+            // Rest of your conditions
+            return (
+                (isFromDateValid && isToDateValid)
+            );
+        });
+        dispatch({
+            type: type.LIST_OPINION,
+            payload: filteredOptions
+        })
+        return filteredOptions;
+    };
+
 
     return (<>
 
-        <XL data={data} dataName={dataNmae} arr={listOpinion} />
+        <div id="cardFlex2">
 
-        <div id="cardFlex">
-            {listOpinion.map(item => { return <CardOpinion props={item} place={item.place} /> })}
+            <select id='selectListOpinion'
+                onChange={({ target }) => (setplaceProblem(target.value))}>
+                {PlaceArr.map(marker => <option selected={placeProblem == marker} value={marker}>{marker}</option>)}
+            </select>
+
+            <label className='p-dates'>מ:  </label>
+            <input className='input-dates' type='date' value={fromDate} onChange={({ target }) => setfromDate(target.value)} />
+            <label className='p-dates'> עד:   </label>
+            <input className='input-dates' type='date' value={toDate} onChange={({ target }) => settoDate(target.value)} />
+            <XL data={data} dataName={dataNmae} arr={handleFilter()} />
+
         </div>
-
-
-
+        <div id="cardFlex">
+            {handleFilter().map(item => { return <CardOpinion props={item} place={item.place} listOpinion={filteredOptions} /> })}
+        </div>
     </>);
 }
