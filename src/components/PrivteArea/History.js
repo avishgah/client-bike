@@ -75,19 +75,23 @@ const History = () => {
     }
 
     function formatDate(dateString) {
-        const timeParts = dateString?.split(':');
+        
+        if(dateString){
+            const timeParts = dateString.split(':');
 
-        if (timeParts.length !== 3) {
-            return "Invalid time format";
+            if (timeParts.length !== 3) {
+                return "Invalid time format";
+            }
+    
+            const fixedDate = new Date(1970, 0, 1, parseInt(timeParts[0]), parseInt(timeParts[1]), parseInt(timeParts[2]));
+    
+            const hours = fixedDate.getHours().toString().padStart(2, '0');
+            const minutes = fixedDate.getMinutes().toString().padStart(2, '0');
+            const seconds = fixedDate.getSeconds().toString().padStart(2, '0');
+    
+            return `${hours}:${minutes}:${seconds}`;
         }
-
-        const fixedDate = new Date(1970, 0, 1, parseInt(timeParts[0]), parseInt(timeParts[1]), parseInt(timeParts[2]));
-
-        const hours = fixedDate.getHours().toString().padStart(2, '0');
-        const minutes = fixedDate.getMinutes().toString().padStart(2, '0');
-        const seconds = fixedDate.getSeconds().toString().padStart(2, '0');
-
-        return `${hours}:${minutes}:${seconds}`;
+      
     }
 
     const currentUser = useSelector(state => state.ur.user);

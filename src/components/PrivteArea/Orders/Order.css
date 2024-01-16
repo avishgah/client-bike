@@ -1,41 +1,46 @@
-#formLoginRG{
+#formLoginRG {
     /* border: solid rgb(128, 128, 128) 1px; */
     /* border-radius: 3%;*/
-    width:50%;
+    width: 50%;
     text-align: center;
     line-height: 1.5;
     margin-left: 27%;
-} 
+}
 
-#hazen{
+#hazen {
     font-size: large;
     text-align: right;
 }
 
-#p2{
+#p2 {
     /* padding: 10px; */
     font-size: 20px;
     margin-left: 10px;
     margin-right: 10px;
 }
-.css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-firstButton, .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-middleButton{
+
+.css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-firstButton,
+.css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-middleButton {
     border-right-color: black !important;
     color: bl;
     width: 5vw !important;
     height: 3vw !important;
 
 }
-.css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-lastButton{
+
+.css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-lastButton {
     width: 5vw !important;
     height: 3vw !important;
 }
-#h8{
+
+#h8 {
     font-size: 20px;
-    text-align: right !important;
-margin-right: 40%;
+    text-align: center ;
+    /* margin-right: 30%; */
 }
-#selected{
-    padding:5px;
+
+#selected {
+    padding: 5px;
     font-size: larger;
     /* margin-left: 500px !important; */
 }

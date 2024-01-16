@@ -155,11 +155,9 @@ function MyComponent() {
 
 
   return (<>
-    <br />
-
     <form id="formLoginRG" style={{ direction: "rtl" }} onSubmit={Submit}>
-      <h6 id="h8"><b>הזמנה מראש</b></h6>
-      <div id="hazen" style={{ textAlign: "center" }}>הזן מספר אפניים ותחנה רצויה</div><br></br>
+
+      <div id="hazen" style={{ textAlign: "center",fontWeight:"bold" }}>הזן מספר אפניים ותחנה רצויה</div><br></br>
       {/* count */}
       <Box style={{ direction: "center", marginRight: "0vw" }}>
         <div>
@@ -203,11 +201,12 @@ function MyComponent() {
       <br></br>
 
       <Maps />
-      <br></br>
-      <br></br>
+      {/* <br></br>
+      <br></br> */}
       {
         station != null ? <>
-          <h8 id="h8"><b>סיכום הזמנה</b></h8><br></br><br></br>
+          <p id="h8"><b>סיכום הזמנה</b></p>
+          {/* <br></br><br></br> */}
           <Card style={{ direction: "rtl", border: "3px dashed", lineHeight: "4ch" }}>
 
             <b> הזמנה לתחנת :</b> {station.name + ", " + station.location}<br></br>

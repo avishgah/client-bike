@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import './Adit.css';
-import { Button, TextField } from '@mui/material';
+import { Alert, Button, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
@@ -79,7 +79,7 @@ const Problems = () => {
         axios.post(`https://localhost:7207/api/Opinion`, task).then(res => {
 
             console.log(res.data + ";;;;;;");
-
+            document.getElementById('alertC').style.visibility = "visible";
             if (res.data == null) {
                 alert("error")
                 return null;
@@ -250,7 +250,9 @@ const Problems = () => {
             <br></br><br></br>
             <Button variant="contained" startIcon={<SendIcon style={{ marginLeft: "15px" }} />} id="addR" type="submit">
                 שלח
-            </Button>
+            </Button><br></br><br></br>
+            <Alert id="alertC" style={{width:"300px"}} severity="success">! ההודעה נשלחה בהצלחה </Alert>
+
         </form>
     </>)
 }

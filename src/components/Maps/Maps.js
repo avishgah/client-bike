@@ -202,7 +202,7 @@ function MyComponent() {
   return (<>
     <br />
     <div id="map"></div>
-    <Card id="searchCard" style={{ width: searchCardWidth }}>
+    <Card id="searchCard" style={{ width: searchCardWidth ,boxShadow:"none"}}>
       <p style={{ fontWeight: "bold", fontSize: "19px" }}>חיפוש תחנה</p>
 
       <input
