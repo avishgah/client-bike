@@ -329,21 +329,9 @@ const Profil = () => {
                         <div>
                             <input
                                 type="file"
-                                // accept="image/*"
                                 onChange={handleImageChange}
-                                // style={{ display: 'none' }}
                                 id="imageInput"
                             />
-                            {/* <label htmlFor="imageInput">
-                                <button>בחר תמונה</button>
-                            </label> */}
-{/* 
-                            {selectedImage && (
-                                <div>
-                                    <p>תמונה שנבחרה:</p>
-                                    <img src={selectedImage} alt="Selected" style={{ maxWidth: '100%' }} />
-                                </div>
-                            )} */}
                         </div>
                     </Button>
                     <p></p>

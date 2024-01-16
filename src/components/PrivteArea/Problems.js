@@ -114,7 +114,7 @@ const Problems = () => {
                         "place": placeProblem,
                         "typeProblem": typeProblem,
                         "idBike": details.bike,
-                        "pic": l
+                        "pic": selectedImage
                     }
                     PostTask(task);
                 }
@@ -140,7 +140,7 @@ const Problems = () => {
                         "place": placeProblem,
                         "typeProblem": '',
                         "idBike": null,
-                        "pic": l
+                        "pic": selectedImage
                     }
                     PostTask(task)
                 }
@@ -154,6 +154,22 @@ const Problems = () => {
         if (flagEnter == 1)
             console.log(task + "task");
     }
+
+
+    
+    const [selectedImage, setSelectedImage] = React.useState(null);
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setSelectedImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     return (<>
         <form id="formLoginR" style={{ direction: "rtl" }} onSubmit={handleSubmit(submit)}>
 
@@ -213,21 +229,20 @@ const Problems = () => {
                 <label id="ll"> תמונה של התקלה:</label>
                 <br></br>
                 <Button
-                    endIcon={<AttachmentIcon />}
-                    variant="contained"
-                    component="label"
-                    id="pid-button"
-                    defaultValue={currentUser == null ? 'kk' : currentUser.pic}
-
-                >
-                    <input
-                        // name="ll"
-                        id="k"
-                        type="file"
-                        onChange={({ target }) => (setFile(target.value))}
-                        style={{ width: "290px" }}
-                    />
-                </Button>
+                        style={{ backgroundColor: "#905e03", width: "22vw" }}
+                        endIcon={<AttachmentIcon />}
+                        variant="contained"
+                        component="label"
+                        id="pid-button"
+                    >
+                        <div>
+                            <input
+                                type="file"
+                                onChange={handleImageChange}
+                                id="imageInput"
+                            />
+                        </div>
+                    </Button>
                 <p></p>
             </div>
 
