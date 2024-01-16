@@ -36,40 +36,42 @@ export default function AccessibleTable() {
     const [checked, setChecked] = React.useState(false);
 
     // const [u, setuseru] = useState(null);
-    const change = (id, status) => {
+    const change = (u, status) => {
 
         if (window.confirm("האם אתה בטוח שברצונך לשנות את סטטוס המשתמש ")) {
 
-            console.log(id);
-            var u = null;
-            axios.get(`https://localhost:7207/api/User/${id}`).then(res => {
-                console.log(res.data)
-                u = res.data;
-                console.log(u)
+            console.log(u)
 
-                const user =
-                {
-                    "name": u.name,
-                    "address": u.address,
-                    "mail": u.mail,
-                    "password": u.password,
-                    "toun": u.toun,
-                    "phon": u.phon,
-                    "tz": u.tz,
-                    "dateBirth": u.dateBirth,
-                    "pic": u.pic,
-                    "isManager": false,
-                    "status": !status,
-                    "readTerms": true
-                }
+            const user =
+            {
+                "Name": u.name,
+                "Address": u.address,
+                "Mail": u.mail,
+                "Password": u.password,
+                "Toun": u.toun,
+                "Phon": u.phon,
+                "Tz": u.tz,
+                "dateBirth": u.dateBirth,
+                "Pic": u.pic,
+                "IsManager": false,
+                "Status": !status,
+                "readTerms": true
+            }
 
-                console.log(user)
-                axios.put(`https://localhost:7207/api/User/UpdateUser/${id}`, user).then(res => {
-                    console.log("kk");
-                })
-                window.location.reload(true);
+            console.log(user)
+            axios.put(`https://localhost:7207/api/User/UpdateUser/${u.id}`, user).then(res => {
+                console.log("kk");
 
-            }).catch(err => console.log(err))
+                axios.get('https://localhost:7207/api/CustomerOrdersView')
+                    .then(res => {
+                        console.log(res.data)
+                        var newArray = res.data.slice(1);
+                        setlistUsers(newArray);
+                        // nav('/NavB')
+                    }).catch(err => console.log(err))
+
+            })
+
         }
         else {
             console.log("exit")
@@ -152,10 +154,14 @@ export default function AccessibleTable() {
     const [numberValue, setnumberValue] = useState('');
 
     const [sortOrder, setsortOrder] = useState('desc');
+    let filteredOptions = [];
 
     const handleFilter = () => {
+
+        filteredOptions = placeProblem != 'הכל' ? listUsers.filter((option) => placeProblem=='משתמשים לא פעילים'? !option.status : option.status): listUsers;
+
         console.log("enter");
-        return listUsers.filter(x => {
+        filteredOptions=filteredOptions.filter(x => {
             return (
                 ((!numberValue) ||
                     x.tz?.toString().includes(numberValue) ||
@@ -167,6 +173,7 @@ export default function AccessibleTable() {
                     x.address?.toString().includes(inputValue))
             );
         });
+        return filteredOptions;
     };
     const createSortHandlerForNumBike = (key) => {
         const listCopy = [...listUsers];
@@ -264,10 +271,16 @@ export default function AccessibleTable() {
         // }
 
     }
-
+    const [placeProblem, setplaceProblem] = useState('הכל')
+    const PlaceArr = ['הכל','משתמשים פעילים','משתמשים לא פעילים'];
     return (
         <div class="flex-container">
             <div class="flex-item-left">
+
+                <select id='selectListOpinion' style={{ padding: "5.3px" }}
+                    onChange={({ target }) => (setplaceProblem(target.value))}>
+                    {PlaceArr.map(marker => <option selected={placeProblem == marker} value={marker}>{marker}</option>)}
+                </select>
 
                 <input className='input-dates' style={{ height: "30px" }} placeholder="חיפוש חופשי..." value={inputValue} onChange={({ target }) => setInputValue(target.value)} />
                 <input className='input-dates' style={{ height: "30px" }} placeholder="תעודת זהות / טלפון" value={numberValue} onChange={({ target }) => setnumberValue(target.value)} />
@@ -385,8 +398,8 @@ export default function AccessibleTable() {
                                             </label>
 
                                         </div>
-
-                                        {/* <div>
+                                        {/* 
+                                        <div>
                                             <input
                                                 type="file"
                                                 // accept="image/*"
@@ -406,18 +419,18 @@ export default function AccessibleTable() {
                                             )}
                                         </div> */}
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="center">
                                         {row.status == true ?
                                             <Tooltip title="פעיל" placement="left-end">
                                                 <Switch
                                                     checked={row.status}
-                                                    onChange={() => change(row.id, row.status)}
+                                                    onChange={() => change(row, row.status)}
                                                     inputProps={{ 'aria-label': 'controlled' }}
                                                 />
                                             </Tooltip> : <Tooltip title="לא פעיל" placement="left-end">
                                                 <Switch
                                                     checked={row.status}
-                                                    onChange={() => change(row.id, row.status)}
+                                                    onChange={() => change(row, row.status)}
                                                     inputProps={{ 'aria-label': 'controlled' }}
                                                 />
                                             </Tooltip>}

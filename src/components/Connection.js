@@ -62,6 +62,7 @@ import CardContent from '@mui/material/CardContent';
 import '../components/AddBike/AddBike.css';
 import ForgetPassword from './ForgetPassword/ForgetPass';
 import { connect } from 'formik';
+import Swal from 'sweetalert2';
 
 const Connection = () => {
 
@@ -143,11 +144,18 @@ const Connection = () => {
                 // nav('/NavB')
                 if (res.data != '') {
                     console.log("connect")
-                    alert(res.data.name);
+                    // alert(res.data.name);
                     dispatch({
                         type: type.CURRENT_USER,
                         payload: res.data
                     })
+                    Swal.fire({
+                        title: '!התחברת בהצלחה',
+                        text: `ברוך הבא! ${res.data.name}`,
+                        icon: 'success',
+                        confirmButtonText: 'אישור'
+                      });
+
                     if(res.data.isManager){
                         nav('/lOpinion')
                     }
@@ -244,17 +252,18 @@ const Connection = () => {
 
                 {open ? <ForgetPassword email={mail} setOpen={setOpen} /> : null}
 
-                <br></br>
-                <Alert id="alert" severity="error">מייל או סיסמא שגויים</Alert><br></br>
 
                 <Button variant="contained" startIcon={<SendIcon style={{ marginLeft: "20px" }} />} id="addR" type="submit">
                     התחבר
-                </Button>
-            </CardContent>
-
+                </Button><br></br><br></br>
+                
             <Link href='yup' style={{ textAlign: "right" }} underline="hover">
                 {'להרשמה - לחץ כאן'}
             </Link>
+                <Alert id="alert" severity="error">מייל או סיסמא שגויים</Alert>
+
+            </CardContent>
+
 
             <CardActions>
 

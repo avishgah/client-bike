@@ -80,6 +80,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import CloseIcon from '@mui/icons-material/Close';
+import { PlaceSharp } from '@mui/icons-material';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -162,36 +163,49 @@ const Contect = () => {
     // }
 
     const type = ['דיווח על תקלה', 'בירור בנושאי חיובים', 'בקשה למידע כללי', 'בקשה למחיקת חשבון', 'אחר'];
-    const [placeProblem, setplaceProblem] = useState('דיווח על תקלה')
+    const [placeProblem, setplaceProblem] = useState('דיווח על תקלה');
+
     const submit = (details) => {
         console.log(details);
-        //     console.log(value.$D + "/" + value.$M + "/" + value.$y)
+        if (placeProblem == 'בקשה למחיקת חשבון') {
+            axios.get(`https://localhost:7207/api/user/GetUserByMail/${details.email}`).then(res => {
+                console.log("sum", res.data)
+                if (res.data != '') {
+                    const contact = {
+                        "id": 0,
+                        "name": details.name,
+                        "email": details.email,
+                        "phon": details.phon,
+                        "type": placeProblem,
+                        "cuption": details.caption,
+                        "status": true
+                    }
+                    console.log(contact);
+        
+                    axios.post(`https://localhost:7207/api/Contact`, contact).then(res => {
+        
+                        console.log(res.data + ";;;;;;");
+        
+                        if (res.data == null) {
+                            alert("error")
+                            return null;
+                        }
+                    }).catch(console.log("err"))
+        
+                    console.log(contact);
+        
+                    document.getElementById('alertC').style.visibility = "visible";
+        
+                    handleClickOpen();
+                }
+                else{
+                    alert("משתמש לא רשום")
+                }
+            }).catch(err => console.log(err))
 
-        const contact = {
-            "id": 0,
-            "name": details.name,
-            "email": details.email,
-            "phon": details.phon,
-            "type": placeProblem,
-            "cuption": details.caption,
-            "status": true
         }
+       
 
-        axios.post(`https://localhost:7207/api/Contact`, contact).then(res => {
-
-            console.log(res.data + ";;;;;;");
-
-            if (res.data == null) {
-                alert("error")
-                return null;
-            }
-        }).catch(console.log("err"))
-
-        console.log(contact);
-
-        document.getElementById('alertC').style.visibility = "visible";
-
-        handleClickOpen();
     }
 
 
@@ -237,7 +251,7 @@ const Contect = () => {
                         {...register("phon", {
                             required: "phon is required",
                             pattern: {
-                                value: /^[1-9]{10}$/,
+                                value: /^(0\d|(\+|00)972[\-\s]?)?(([23489]{1}\d{7})|[5]{1}\d{8})$/,
                                 message: "Invalid phon "
                             },
 
@@ -275,7 +289,7 @@ const Contect = () => {
                 defaultValue=""
                 {...register("caption")}
             /><br></br><br></br>
-            <Button variant="contained"  endIcon={<SendIcon />} id="addRC" type="submit">
+            <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
                 שליחה
             </Button>
             <br></br><br></br>
@@ -289,9 +303,9 @@ const Contect = () => {
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
                 open={open}
-                 style={{direction:"rtl"}}
+                style={{ direction: "rtl" }}
             >
-                <DialogTitle sx={{ m: 0, p: 2,color:"rgb(26, 87, 53)" }} id="customized-dialog-title">
+                <DialogTitle sx={{ m: 0, p: 2, color: "rgb(26, 87, 53)" }} id="customized-dialog-title">
                     ההודעה התקבלה בהצלחה
                 </DialogTitle>
                 <IconButton
@@ -300,7 +314,7 @@ const Contect = () => {
                     sx={{
                         position: 'absolute',
                         // right:0,
-                        left:8,
+                        left: 8,
                         top: 8,
                         color: (theme) => theme.palette.grey[500],
                     }}

@@ -41,8 +41,6 @@ export default function AccessibleTable() {
     const [toDate, settoDate] = useState('');
     const PlaceArr = ['הכל', 'תקלה באופניים', 'תקלה בתחנה'];
     const [placeProblem, setplaceProblem] = useState('הכל')
-    const [checked, setChecked] = React.useState(false);
-    const dispatch = useDispatch();
 
     const data = ["id", "place", "idBike", "idStation", "typeProblem", "date", "idCust"];
     const dataNmae = ["קוד תקלה", "מקום", "קוד אופניים", "קוד תחנה", "סוג הבעיה", "תאריך תקלה", "קוד לקוח"]
@@ -51,17 +49,15 @@ export default function AccessibleTable() {
             .then(res => {
                 console.log(res.data)
                 setlistOpinion(res.data)
-                dispatch({
-                    type: type.LIST_OPINION,
-                    payload: res.data
-                })
+
                 // nav('/NavB')
             }).catch(err => console.log(err))
     }, [])
 
 
+
+
     let filteredOptions = [];
-    
 
     const handleFilter = () => {
         console.log("enter");
@@ -91,12 +87,14 @@ export default function AccessibleTable() {
                 (isFromDateValid && isToDateValid)
             );
         });
-        dispatch({
-            type: type.LIST_OPINION,
-            payload: filteredOptions
-        })
+
         return filteredOptions;
     };
+
+    const deleteItem = (item) => {
+        const copy = listOpinion.filter(x => x.id != item.id);
+        setlistOpinion(copy);
+    }
 
 
     return (<>
@@ -116,7 +114,7 @@ export default function AccessibleTable() {
 
         </div>
         <div id="cardFlex">
-            {handleFilter().map(item => { return <CardOpinion props={item} place={item.place} listOpinion={filteredOptions} /> })}
+            {handleFilter().map(item => { return <CardOpinion deleteIt={deleteItem} props={item} place={item.place} listOpinion={filteredOptions} /> })}
         </div>
     </>);
 }

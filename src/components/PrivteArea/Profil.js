@@ -62,6 +62,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 
 import Checkbox from '@mui/material/Checkbox';
+import Swal from 'sweetalert2';
 
 
 // import './Payment2.css';
@@ -91,7 +92,7 @@ const Profil = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         // dispatch({ type: type.CHANGE_FLAG_TRUE })\
-  
+
     }, [])
 
     const [value, setValue] = React.useState(null);
@@ -145,27 +146,29 @@ const Profil = () => {
     // }
     const submit = (details) => {
         console.log(details);
+        console.log(currentUser);
 
         const user =
         {
-            "name": details.name,
-            "address": currentUser.address,
-            "mail": currentUser.mail,
-            "password": currentUser.password,
-            "toun": details.toun,
-            "phon": details.phon,
-            "tz": details.id,
-            "dateBirth": new Date(),
-            "pic": l,
-            "isManager": false,
-            "status": true,
-            "readTerms": true
+            "Name": details.name,
+            "Address": currentUser.address,
+            "Mail": currentUser.mail,
+            "Password": details.password,
+            "Toun": details.toun,
+            "Phon": details.phon,
+            "Tz": currentUser.tz,
+            "DateBirth": currentUser.dateBirth,
+            "Pic": selectedImage,
+            "IsManager": false,
+            "Status": true,
+            "ReadTerms": true
         }
-        console.log(currentUser.id)
+        console.log(currentUser.id);
+        console.log(user);
         axios.put(`https://localhost:7207/api/User/UpdateUser/${currentUser.id}`, user).then(res => {
 
             console.log(res + "kkkk");
-
+           alert("עודכן בהצלחה 👍")
             if (res.data == null) {
                 alert("error")
                 return null;
@@ -174,7 +177,7 @@ const Profil = () => {
 
             else {
             }
-        }).catch(alert("משתמש קיים"))
+        }).catch(err=> console.log("err", err))
         // nav('/Payment2')
     }
 
@@ -184,6 +187,20 @@ const Profil = () => {
         l = document.getElementById("k").value;
         console.log(l)
     }
+
+    
+    const [selectedImage, setSelectedImage] = React.useState(null);
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setSelectedImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
     return <>
 
@@ -206,14 +223,10 @@ const Profil = () => {
                 {/* id */}
                 <label>תעודת זהות</label>
                 <br></br>
-                <TextField id="standard-basic" variant="standard"
+                <TextField disabled id="standard-basic" variant="standard"
                     defaultValue={currentUser == null ? ' ' : currentUser.tz}
                     {...register("id", {
-                        required: "id is required",
-                        pattern: {
-                            value: /^\d{9}$/,
-                            message: "Invalid id "
-                        },
+
 
                     })} />
                 {errors.id && <p className="errorMsg">{errors.id.message}</p>}
@@ -313,14 +326,25 @@ const Profil = () => {
                         defaultValue={currentUser == null ? 'kk' : currentUser.pic}
 
                     >
-                        <input
-                            // name="ll"
-                            id="k"
-                            type="file"
-                            onChange={func}
-
-                        // hidden
-                        />
+                        <div>
+                            <input
+                                type="file"
+                                // accept="image/*"
+                                onChange={handleImageChange}
+                                // style={{ display: 'none' }}
+                                id="imageInput"
+                            />
+                            {/* <label htmlFor="imageInput">
+                                <button>בחר תמונה</button>
+                            </label> */}
+{/* 
+                            {selectedImage && (
+                                <div>
+                                    <p>תמונה שנבחרה:</p>
+                                    <img src={selectedImage} alt="Selected" style={{ maxWidth: '100%' }} />
+                                </div>
+                            )} */}
+                        </div>
                     </Button>
                     <p></p>
                     <a href='/page.txt' download>תקנון שימוש</a>
@@ -339,7 +363,7 @@ const Profil = () => {
                     עדכון פרטים
                 </Button>
 
-                {console.log(checked)}
+                {/* {console.log(checked)} */}
             </CardContent>
 
 

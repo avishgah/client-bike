@@ -18,42 +18,36 @@ const NavManger = () => {
             type: type.LOG_OUT,
 
         })
+    }
 
-        // nav("/App");
-    }
-    let id = 0;
-    const changeColor = (id) => {
-        console.log(id);
-        // document.getElementById(id).style.li.Link.color = "red";
-    }
     return (<>
         {
-            <div className='home'>
 
                 <ul className='ulOfPrivateM' >
-              
+
                     <li className='liOfPrivateM' onClick={() => Exit()}>
                         <Link to="home">יציאה מהאיזור האישי</Link>
                     </li>
-                    <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
+                    <li className='liOfPrivateM'>
+                        <Link to="lContect">רשימת תלונות </Link>
+                    </li>
+                    <li className='liOfPrivateM'>
                         <Link to="lUser">רשימת משתמשים </Link>
-                    </li>      
-                         <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
+                    </li>
+                    <li className='liOfPrivateM'>
                         <Link to="lStation">רשימת תחנות </Link>
                     </li>
-                    <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
+                    <li  className='liOfPrivateM'>
                         <Link to="lBike">רשימת אפניים </Link>
                     </li>
-                    <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
+                    <li  className='liOfPrivateM'>
                         <Link to="lOpinion">רשימת דיווחים </Link>
                     </li>
-                    <li  className='liOfPrivateM'onClick={() => (changeColor(2))}>
+                    <li  className='liOfPrivateM'>
                         <Link to="profil">פרופיל</Link>
                     </li>
-                    
+
                 </ul>
-                <br></br>
-            </div>
         }</>)
 
 

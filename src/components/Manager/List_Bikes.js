@@ -79,10 +79,16 @@ export default function AccessibleTable() {
 
         axios.put(`https://localhost:7207/api/Bike/${id}`, bike).then(res => {
           console.log("kk");
-        })
-        window.location.reload(true);
+          axios.get('https://localhost:7207/api/StationBikeView')
+            .then(res => {
+              console.log(res.data)
+              setlistBike(res.data)
+              // nav('/NavB')
+            }).catch(err => console.log(err))
 
-      }).catch(err => console.log(err))
+        }).catch(err => console.log(err))
+      })
+
     }
     else {
       console.log("exit")
@@ -90,13 +96,17 @@ export default function AccessibleTable() {
 
   }
 
+  let filteredOptions = [];
 
   const [listBike, setlistBike] = useState([]);
-  const [sortOrder, setsortOrder] = useState('asc');
+  const [sortOrder, setsortOrder] = useState('desc');
   const handleFilter = () => {
     console.log("enter");
 
-    return listBike.filter(x => {
+    filteredOptions = placeProblem != 'הכל' ? listBike.filter((option) => placeProblem == 'אופניים לא פעילים' ? !option.status : option.status) : listBike;
+
+
+    filteredOptions = filteredOptions.filter(x => {
       // Convert string dates to Date objects for comparison
       const startDate = new Date(x.dateStart);
       const fromDateObj = fromDate ? new Date(fromDate) : null;
@@ -126,6 +136,7 @@ export default function AccessibleTable() {
           x.status?.toString().includes(inputValue))
       );
     });
+    return filteredOptions;
   };
 
   useEffect(() => {
@@ -136,27 +147,8 @@ export default function AccessibleTable() {
         // nav('/NavB')
       }).catch(err => console.log(err))
   }, [])
-  const deleteFunc = (id) => {
-    console.log(id)
-  }
 
-  const updates = (id) => {
-    console.log(id)
-  }
-  function myFunction() {
-    var txt;
-    if (window.confirm("האם אתה בטוח שברצונך למחוק")) {
 
-      // axios.delete(`https://localhost:7207/api/Bike/${id}`).then(res => {
-      alert("נמחק בהצלחה")
-      window.location.reload(true);
-      // })
-      console.log("deleted")
-    }
-    else {
-      console.log("exit")
-    }
-  }
   const createSortHandler = (key) => {
     const listCopy = [...listBike];
     listCopy.sort((a, b) => a[key] > b[key] ? 1 : -1)
@@ -203,17 +195,25 @@ export default function AccessibleTable() {
   const [inputValue, setInputValue] = useState('')
   const [fromDate, setfromDate] = useState('')
   const [toDate, settoDate] = useState('')
-  
-  const data = ["id", "code", "battery", "location", "name", "dateStart", "status"];
-  const dataNmae = ["קוד אופניים", "מזהה יפה", "בטריה", "עיר", "מיקום", "תאריך תחילת שימוש","סטטוס"]
 
+  const data = ["id", "code", "battery", "location", "name", "dateStart", "status"];
+  const dataNmae = ["קוד אופניים", "מזהה יפה", "בטריה", "עיר", "מיקום", "תאריך תחילת שימוש", "סטטוס"]
+  const [numberValue, setnumberValue] = useState(0)
+  const [placeProblem, setplaceProblem] = useState('הכל')
+  const PlaceArr = ['הכל', 'אופניים פעילים', 'אופניים לא פעילים'];
   return (<div class="flex-container">
     <div class="flex-item-left" style={{ direction: "rtl" }}>
-      <input  className='input-dates' style={{height:"30px"}} placeholder="חיפוש חופשי..." value={inputValue} onChange={({ target }) => setInputValue(target.value)} />
+
+      <select id='selectListOpinion' style={{ padding: "5.3px" }}
+        onChange={({ target }) => (setplaceProblem(target.value))}>
+        {PlaceArr.map(marker => <option selected={placeProblem == marker} value={marker}>{marker}</option>)}
+      </select>
+
+      <input className='input-dates' style={{ height: "30px" }} placeholder="חיפוש חופשי..." value={inputValue} onChange={({ target }) => setInputValue(target.value)} />
       <label className='p-dates'>מ:  </label>
-      <input  className='input-dates' type='date' value={fromDate} onChange={({ target }) => setfromDate(target.value)} />
+      <input className='input-dates' type='date' value={fromDate} onChange={({ target }) => setfromDate(target.value)} />
       <label className='p-dates'> עד:   </label>
-      <input  className='input-dates' type='date' value={toDate} onChange={({ target }) => settoDate(target.value)} />
+      <input className='input-dates' type='date' value={toDate} onChange={({ target }) => settoDate(target.value)} />
       <label className='p-dates'> </label>
       <XL data={data} dataName={dataNmae} arr={handleFilter()} />
       <TableContainer component={Paper}>
@@ -299,7 +299,14 @@ export default function AccessibleTable() {
                     <TableCell align="right">{row.battery}</TableCell>
                     <TableCell align="right">{row.location}</TableCell>
                     <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{row.dateStart}</TableCell>
+                    <TableCell align="right">{new Date(row.dateStart).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'numeric',
+                      day: 'numeric',
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      second: 'numeric',
+                    })}</TableCell>
                     <TableCell align="center">
                       {row.status == true ?
                         <Tooltip title="פעיל" placement="left-end">

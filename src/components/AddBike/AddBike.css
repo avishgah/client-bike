@@ -20,18 +20,19 @@
 }
 
 .private-area {
-    background-color: #602424!important;
+    background-color: #602424 !important;
     padding: 6px !important;
     border-radius: 50px !important;
     color: white !important;
     width: 104px !important;
 }
-.private-area2{
-    background-color:white;
+
+.private-area2 {
+    background-color: white;
     border: solid 2px #602424 !important;
     padding: 6px !important;
     border-radius: 50px !important;
-    color: #602424!important;
+    color: #602424 !important;
     width: 104px !important;
 }
 
@@ -50,7 +51,7 @@
     line-height: 3.5ch;
 }
 
-#standard-basic{
+#standard-basic {
     text-align: right;
     label: right !important;
 }
@@ -60,23 +61,24 @@
     text-align: right !important;
 } */
 
-#alert{
+#alert {
     /* visibility: hidden; */
     visibility: hidden;
-    background-color: rgb(255 199 199);
+    /* background-color: rgb(255 199 199); */
     width: 28vw;
     margin-right: 21%;
-    padding: 10px;
-    font-size: medium
+    /* padding: 10px; */
+    font-size: small
 }
 
-#formLoginRC{
+#formLoginRC {
     width: 50%;
     text-align: center;
     margin-left: 25%;
     direction: rtl;
 }
-#formLoginRBike{
+
+#formLoginRBike {
     /* width: 50%; */
     text-align: center;
     /* margin-left: 50%; */
@@ -84,17 +86,17 @@
     border-radius: 5px;
 }
 
-#smallP{
+#smallP {
     font-size: small;
     text-align: center;
 }
 
-body{
+body {
     /* text-align: center; */
 }
 
 
-#addRB{
+#addRB {
     text-align: center;
     margin-left: 0 !important;
     width: 223px !important;
@@ -102,13 +104,23 @@ body{
 }
 
 
-.css-11b3ww9-MuiPaper-root-MuiAppBar-root{
+.css-11b3ww9-MuiPaper-root-MuiAppBar-root {
     box-shadow: none !important;
-    border-bottom: 1px solid black; 
+    border-bottom: 1px solid black;
 }
 
-#tyQuestion{
-    font-size:"20px" !important;
-    color:"#4c809e" !important;
-    font-weight:"bold" !important;
+#tyQuestion {
+    font-size: "20px" !important;
+    color: "#4c809e" !important;
+    font-weight: "bold" !important;
+}
+
+.swal2-show {
+    margin-top: 14% !important;
+    height: 61% !important;
+    /* direction: rtl !important; */
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+    background-color: #5a3a3a !important;
 }

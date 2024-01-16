@@ -41,33 +41,11 @@ const OpenMe = (marker) => {
 const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
 
   useEffect(() => {
-    console.log({ text } + "use effect");
+    // console.log({ text } + "use effect");
   }, [])
 
 
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
-  const [placement, setPlacement] = React.useState();
-
-  const handleClick = (newPlacement) => (event) => {
-    setAnchorEl(event.currentTarget);
-
-    console.log(open + "befor")
-    console.log(newPlacement);
-    setOpen((prev) => placement !== newPlacement || !prev);
-
-    setPlacement(newPlacement);
-
-    console.log(open + "after")
-
-    const elements = document.getElementsByClassName("css-1ljnme7-MuiPopper-root");
-
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].innerText = "";
-    }
-
-  };
 
   return (<>
     <Marker position={{
@@ -89,27 +67,7 @@ const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
     />
 
 
-    {/* 
-    <div sx={{ maxWidth: 600 }} id="boxStation">
-      <Popper
-        // Note: The following zIndex style is specifically for documentation purposes and may not be necessary in your application.
-        sx={{ zIndex: 1200 }}
-        open={open}
-        anchorEl={anchorEl}
-        placement={placement}
-        transition
-      >
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Paper>
-              <Typography sx={{ p: 2 }}>שם תחנה {text.name}</Typography>
-              <Typography sx={{ p: 2 }}>מספר אופניים פנויים {text.cun == null ? 0 : text.cun}</Typography>
-            </Paper>
-          </Fade>
-        )}
-      </Popper>
-
-    </div> */}
+   
   </>)
 }
 
@@ -141,23 +99,18 @@ function MyComponent() {
         setMapers(res.data)
 
         navigator.geolocation.getCurrentPosition(x => {
-          console.log(x, "x");
           const homePos = { lat: x.coords.latitude, lng: x.coords.longitude };
-          console.log(homePos, "homePos");
 
 
-          const data = res.data.filter(x => x.cun > 0).map((element, i) => {
+          const data = res.data.filter(x => x.cun > 0 && x.status==true).map((element, i) => {
             const markerPos = { lat: element.lat, lng: element.lng };
-            console.log(markerPos)
 
             if (homePos && markerPos) {
               const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(homePos, markerPos);
-              console.log(distanceInMeters, "distanceInMeters");
               element.distanc = distanceInMeters
             }
             return element
           });
-          console.log(data, "ll");
           setStations(data);
           let arr = data
           // console.log(stations.distanc.min(),"min");
@@ -217,7 +170,9 @@ function MyComponent() {
   const dispatch = useDispatch();
   // כאשר משתנה הנקודה הנבחרת ב־Select משתנה, עדכן את הזום
   const SETselectedValueOption = (selectedOption) => {
+    console.log(selectedOption);
     const c = filteredOptions.find(x => x.id == selectedOption)
+    console.log(c);
     SETselectedOption(c)
    
   }
@@ -259,8 +214,8 @@ function MyComponent() {
       /><br></br><br></br>
 
 
-      <select id='selectS' value={selectedOption} onClick={({ target }) => SETselectedValueOption(target.value)}>
-        {filteredOptions.map(marker => <option value={marker.id}>{marker.name} {marker.location}</option>)}
+      <select id='selectS' onClick={({ target }) => SETselectedValueOption(target.value)}>
+        {filteredOptions.map(marker => <option value={marker.id} >{marker.name} {marker.location}</option>)}
       </select><br></br><br></br>
 
 

@@ -46,7 +46,7 @@ body {
 }
 
 .flex-item-left {
-  border: black 2px solid;
+  border: black 0.1px solid;
   background-color: #f1f1f1;
   padding: 10px;
   flex: 70%;
@@ -55,7 +55,7 @@ body {
 }
 
 .flex-item-right {
-  border: black 2px solid;
+  border: black 0.1px solid;
   background-color: #f1f1f1;
   /* padding: 10px; */
   text-align: center;
@@ -117,7 +117,7 @@ body {
 
 .liOfPrivateM {
   /* float: right ; */
-  margin-left: 7%;
+  margin-left: 6%;
   font-size: smaller;
   margin-bottom: 10px;
 }

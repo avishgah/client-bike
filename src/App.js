@@ -57,6 +57,7 @@ import Password from './components/Rejister/Password/Password';
 
 import PeymentYup from './components/Rejister/PeymentYup';
 import XL from './components/export to xl/XL';
+import List_Contect from './components/Manager/List_Contect';
 function App() {
 
   const currentUser = useSelector(state => state.ur.user);
@@ -70,6 +71,7 @@ function App() {
 
       <ResponsiveAppBar />
 
+      {/* <List_Contect /> */}
       {/* <NavManger /> */}
       {/* <List_Bikes /> */}
 
@@ -77,7 +79,7 @@ function App() {
         (currentUser.isManager ? <NavManger /> : <Navb />) : null}
 
       <Routes>
-        <Route path="" element={<Home />}></Route>
+        {/* <Route path="" element={<Home />}></Route> */}
         <Route path='home' element={<Home />} />
         <Route path='Question' element={<Question />} />
         <Route path='Video' element={<Video />} />
@@ -126,6 +128,7 @@ function App() {
         <Route path='lStation' element={<List_Station />} />
         <Route path='lUser' element={<List_Users />} />
         <Route path='lOpinion' element={<List_Opinion />} />
+        <Route path='lContect' element={<List_Contect />} />
         <Route path='navM' element={<NavManger />} />
         {/* <Route path='navM' element={<Pro />} /> */}
 

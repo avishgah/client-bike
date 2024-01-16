@@ -31,7 +31,7 @@ export default function AccessibleTable() {
     const change = (id, status) => {
         console.log(id)
 
-        if (window.confirm("האם אתה בטוח שברצונך לשנות את סטטוס המשתמש ")) {
+        if (window.confirm("האם אתה בטוח שברצונך לשנות את סטטוס התחנה ")) {
 
             console.log(id);
             var u = null;
@@ -54,8 +54,12 @@ export default function AccessibleTable() {
                 axios.put(`https://localhost:7207/api/Station/${id}`, station).then(res => {
                     console.log("kk");
                 })
-                window.location.reload(true);
-
+                axios.get('https://localhost:7207/api/StationViewControllers')
+                .then(res => {
+                    console.log(res.data)
+                    setlistStation(res.data)
+                    // nav('/NavB')
+                }).catch(err => console.log(err))
             }).catch(err => console.log(err))
         }
         else {
@@ -68,7 +72,6 @@ export default function AccessibleTable() {
 
     const [sortOrder, setsortOrder] = useState('desc');
 
-    const [checked, setChecked] = React.useState(false);
 
     useEffect(() => {
         axios.get('https://localhost:7207/api/StationViewControllers')
@@ -78,24 +81,7 @@ export default function AccessibleTable() {
                 // nav('/NavB')
             }).catch(err => console.log(err))
     }, [])
-    const deleteFunc = (id) => {
-        console.log(id)
-    }
-
-    function myFunction() {
-        var txt;
-        if (window.confirm("האם אתה בטוח שברצונך למחוק")) {
-
-            // axios.delete(`https://localhost:7207/api/Bike/${id}`).then(res => {
-            alert("נמחק בהצלחה")
-            window.location.reload(true);
-            // })
-            console.log("deleted")
-        }
-        else {
-            console.log("exit")
-        }
-    }
+  
     const [listStation, setlistStation] = useState([]);
     const createSortHandler = (key) => {
         const listCopy = [...listStation];
@@ -146,10 +132,13 @@ export default function AccessibleTable() {
         console.log(sortedList);
 
     }
+    let filteredOptions = [];
+
     const handleFilter = () => {
         console.log("enter");
+        filteredOptions = placeProblem != 'הכל' ? listStation.filter((option) => placeProblem=='תחנות לא פעילות'? !option.status : option.status): listStation;
 
-        return listStation.filter(x => {
+        filteredOptions= filteredOptions.filter(x => {
 
             return (
                 (x.numOrders >= numberValue) &&
@@ -159,16 +148,24 @@ export default function AccessibleTable() {
                     x.status?.toString().includes(inputValue))
             );
         });
+        return filteredOptions;
     };
     const [inputValue, setInputValue] = useState('')
     const [numberValue, setnumberValue] = useState(0)
-
+    const PlaceArr = ['הכל','תחנות פעילות','תחנות לא פעילות'];
+    const [placeProblem, setplaceProblem] = useState('הכל')
     const data = ["id", "location", "name", "status", "cun", "numOrders"];
     const dataNmae = ["קוד תחנה", "עיר", "מיקום", "סטטוס", "מספר אופניים בתחנה", "מספר הזמנות בתחנה"]
     return (
         <div class="flex-container">
             <div class="flex-item-left">
                 {console.log(listStation, "ךןדאאאאאאאאאאאא")}
+                
+                <select id='selectListOpinion' style={{padding:"5.3px"}}
+                    onChange={({ target }) => (setplaceProblem(target.value))}>
+                    {PlaceArr.map(marker => <option selected={placeProblem == marker} value={marker}>{marker}</option>)}
+                </select>
+
                 <label className='p-dates'>כמות הזמנות:  </label>
                 <input className='input-dates' type='number' style={{ height: "30px" }} placeholder="הכנס מספר..." value={numberValue} onChange={({ target }) => setnumberValue(target.value)} />
                 <input className='input-dates' style={{ height: "30px" }} placeholder="חיפוש חופשי..." value={inputValue} onChange={({ target }) => setInputValue(target.value)} />

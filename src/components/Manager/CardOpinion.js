@@ -31,31 +31,19 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const CardOpinion = ({ props, place, listOpinion }) => {
-    const [expanded, setExpanded] = React.useState(false);
-    const dispatch = useDispatch();
-
-    const updateList = async () => {
-        console.log("enter update")
-        axios.get('https://localhost:7207/api/Opinion')
-        .then(res => {
-            dispatch({
-                type: type.LIST_OPINION,
-                payload: res.data
-            })
-            // nav('/NavB')
-        }).catch(err => console.log(err))
-    }
+const CardOpinion = ({ props, place, deleteIt }) => {
 
 
     function deleteItem(id) {
-        var txt;
+
         if (window.confirm("האם אתה בטוח שברצונך למחוק")) {
 
             axios.delete(`https://localhost:7207/api/Opinion/${id}`).then(res => {
-                alert("נמחק בהצלחה")
+                alert("נמחק בהצלחה") 
+                deleteIt(props)
             })
-            updateList();
+          
+
             console.log("deleted")
         }
 
@@ -64,11 +52,14 @@ const CardOpinion = ({ props, place, listOpinion }) => {
         }
     }
 
-
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
-
+    const formattedDate = new Date(props.date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+      });
 
     return (<>
         {props != null ?
@@ -85,7 +76,7 @@ const CardOpinion = ({ props, place, listOpinion }) => {
                         </IconButton>
                     }
                     title={props.idCust}
-                    subheader={props.date}
+                    subheader={formattedDate}
                 />
                 <Box
                     component="img"

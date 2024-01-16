@@ -77,21 +77,18 @@ const AddBike = () => {
             "status": true
         }
         console.log(details);
-        for (let i = 0; i < details.bike; i++) {
-            axios.post(`https://localhost:7207/api/Bike`, bike).then(res => {
+        axios.post(`https://localhost:7207/api/Bike/${details.bike}`, bike).then(res => {
 
-                console.log(res.data + ";;;;;;");
-                document.getElementById("addMore").style.display = "inline";
-                document.getElementById("end").style.display = "inline";
+            console.log(res.data + ";;;;;;");
+            document.getElementById("addMore").style.display = "inline";
+            document.getElementById("end").style.display = "inline";
 
-                if (res.data == null) {
-                    alert("error")
-                    setDisabled(false);
-                    return null;
-                }
-            }).catch(console.log("err"))
-        }
-
+            if (res.data == null) {
+                alert("error")
+                setDisabled(false);
+                return null;
+            }
+        }).catch(console.log("err"))
     }
     const filteredOptions = stations.filter((option) =>
         option.location.toLowerCase().includes(searchText.toLowerCase())
@@ -110,7 +107,7 @@ const AddBike = () => {
             />
 
             <p id="smallP">בחר תחנה שברצונך להוסיף אליה</p>
-         
+
             <input
                 id='searchAdd'
                 type="text"
@@ -124,7 +121,7 @@ const AddBike = () => {
                 {filteredOptions.map(marker => <option selected={selectedOption == marker} value={marker.id}>{marker.name} {marker.location}</option>)}
             </select><br></br><br></br>
 
-        
+
             {/* endIcon={<SendIcon />}  */}
             <Button type="button" id="addMore" onClick={() => (nav('/lBike'))}>
                 הוסף עוד אפנים
