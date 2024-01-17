@@ -6,55 +6,67 @@ import axios from 'axios';
 
 export default function Statistic() {
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get('https://localhost:7207/api/OrderBike')
-        .then(res => {
-            console.log("orderbikeeeeeeeeeeeeeeeeeeeee")
-            console.log(res.data)
-            
-let cnt=0;
-let arrnum=[]
-let arrmonth=[]
-            for(let i=3;i<res.data.length-1;i++){
-                if(res.data[i]!=null)
-                { 
-                    if(res.data[i].dateEnd!=null  )  
-                    {     
-                       
-                        // const dateEnd = new Date(res.data[i].dateEnd);
-                        //  const month = res.data[i].dateEnd?.toLocaleDateString('en-US', { month: 'numeric' });
-                        let month=res.data[i].dateEnd.slice(1,7)
-                        month=month.slice(4,6)
-                        let month2=res.data[i+1].dateEnd.slice(1,7)
-                        month2=month2.slice(4,6)
-                        console.log("i "+i+" month "+month+" month2 "+month2)
-                        console.log(month);
-                        if(month==month2)
-                        {
-                            
-                            cnt++;
-                        }
-                        else
-                        {
-                        console.log("monthhhhhhhhhhhhh");
-                        arrmonth.push(month);
-                        arrnum.push(cnt);
-                        cnt=0;}
-                    }
-                }
-            }
-        
+            .then(res => {
+                console.log("orderbikeeeeeeeeeeeeeeeeeeeee")
+                console.log(res.data)
 
-            console.log("arrmonth")
-            console.log(arrmonth)
-        }).catch(err => console.log(err))
-    },[])
-  return <>
-    <BarChart
-      xAxis={[{ scaleType: 'band', data: ['11', '12', '01'] }]}
-      series={[{ data: [1,32,11] }]}
-      width={500}
-      height={300}
-    />
-  </>
+                let cnt = 0;
+                let arrnum = []
+                let arrmonth = []
+                for (let i = 3; i < res.data.length - 1; i++) {
+                    if (res.data[i] != null) {
+                        if (res.data[i].dateEnd != null) {
+
+
+                            let endDateString1 = res.data[i].dateEnd;
+                            let endDateString2 = res.data[i + 1].dateEnd;
+
+                            console.log(endDateString1);
+                            console.log(endDateString2);
+                            // Create a Date object from the string
+                            let endDate1 = new Date(endDateString1);
+                            let endDate2 = new Date(endDateString2);
+
+                            // Get the month (0-indexed, where 0 is January and 11 is December)
+                            let month1 = endDate1.getMonth();
+                            let month2 = endDate2.getMonth();
+
+                            // If you want the month number starting from 1, you can add 1
+                            let monthNumber1 = month1 + 1;
+                            let monthNumber2 = month2 + 1;
+
+                            if (monthNumber1 == monthNumber2) {
+                                arrmonth.push(monthNumber1);
+                            }
+                            else {
+                                arrmonth.push(monthNumber1);
+                                arrnum.push(cnt);
+                                cnt = 0;
+                            }
+                        }
+                    }
+                    console.log("arrmonth", arrmonth)
+                    console.log("arrnum", arrnum)
+                }
+
+
+                console.log("arrmonth")
+                console.log(arrmonth)
+            }).catch(err => console.log(err))
+    }, [])
+
+
+    return <>
+        <div style={{ marginLeft: "29%" }}>
+            <BarChart
+                xAxis={[{ scaleType: 'band', data: ['חודש 11', 'חודש 12', 'חודש 01'] }]}
+                series={[{ data: [7, 32, 15] }]}
+                width={500}
+                height={400}
+            />
+        </div>
+
+    </>
 }

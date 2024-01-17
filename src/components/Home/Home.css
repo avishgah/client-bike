@@ -39,6 +39,11 @@ html {
     /* Place the video behind other content */
 }
 
+.css-1vuxth3-MuiBarElement-root {
+    /* background: linear-gradient( red, orange, yellow, green, blue, indigo, violet) !important; */
+    fill:hsl(0deg 45.66% 40.45%) !important;
+}
+
 video {
     width: 40vw;
     /* width: 200%; */

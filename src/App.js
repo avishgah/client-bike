@@ -58,14 +58,15 @@ function App() {
   return (<>
     <div className='wrapper'>
 
-      {/* <ResponsiveAppBar /> */}
-      <Statistic />
+      <ResponsiveAppBar />
+      {/* <Statistic /> */}
       {currentUser != null ?
         (currentUser.isManager ? <NavManger /> : <Navb />) : null}
 
       <Routes>
         <Route path="" element={<Home />}></Route>
         <Route path='home' element={<Home />} />
+        <Route path='statistic' element={<Statistic />} />
         <Route path='Question' element={<Question />} />
         <Route path='Video' element={<Video />} />
         <Route path='app' element={<App />} />

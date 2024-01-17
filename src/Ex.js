@@ -31,7 +31,7 @@ import { Tabs, Tab, useMediaQuery, useTheme } from '@mui/material';
 import DrawerComponnent from './components/NavBar/DrawerComponnent';
 
 
-const pages = ['סטטיסטיקות ', 'יצירת קשר', 'שאלות ותשובות', 'סרטון הדרכה', 'מפת תחנות', 'בית'];
+const pages = ['סטטיסטיקה ', 'יצירת קשר', 'שאלות ותשובות', 'סרטון הדרכה', 'מפת תחנות', 'בית'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -46,7 +46,7 @@ function ResponsiveAppBar() {
 
     const currentUser = useSelector(state => state.ur.user);
 
-  
+
     const handleCloseNavMenu = (page) => {
         console.log(page.target.innerText)
         if (page.target.innerText == 'בית')
@@ -60,6 +60,8 @@ function ResponsiveAppBar() {
             nav('/Question')
         if (page.target.innerText == 'סרטון הדרכה')
             nav('/Video')
+        if (page.target.innerText == 'סטטיסטיקה')
+            nav('/statistic')
         setAnchorElNav(null);
     };
 
