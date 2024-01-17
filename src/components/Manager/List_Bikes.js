@@ -27,7 +27,7 @@ export default function AccessibleTable() {
   const [listBike, setlistBike] = useState([]);
   const [sortOrder, setsortOrder] = useState('desc');
 
-  
+
   const [inputValue, setInputValue] = useState('')
   const [fromDate, setfromDate] = useState('')
   const [toDate, settoDate] = useState('')
@@ -162,7 +162,7 @@ export default function AccessibleTable() {
     const formattedDatex = `${day}.${month}.${year}, ${hours}:${minutes}:${seconds}`;
     return formattedDatex;
 
-}
+  }
 
 
   return (<div class="flex-container">
@@ -186,7 +186,6 @@ export default function AccessibleTable() {
           <TableHead>
             <TableRow>
 
-              <TableCell><b></b></TableCell>
               <TableCell align="right">
 
                 <TableSortLabel
@@ -202,6 +201,7 @@ export default function AccessibleTable() {
                   onClick={() => createSortHandler('code')}
                 ></TableSortLabel>
               </TableCell>
+              
               <TableCell align="right"><b>בטריה</b></TableCell>
               <TableCell align="right">
 
@@ -247,7 +247,7 @@ export default function AccessibleTable() {
                     <TableCell align="right">{row.battery}</TableCell>
                     <TableCell align="right">{row.location}</TableCell>
                     <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right" sx={{direction:"ltr"}}>{formatDateTime(row.dateStart)}</TableCell>
+                    <TableCell align="right" sx={{ direction: "ltr" }}>{formatDateTime(row.dateStart)}</TableCell>
                     <TableCell align="center">
                       {row.status == true ?
                         <Tooltip title="פעיל" placement="left-end">
@@ -266,7 +266,7 @@ export default function AccessibleTable() {
 
 
                     </TableCell>
-                  
+
                   </TableRow>
                 ))}
           </TableBody>

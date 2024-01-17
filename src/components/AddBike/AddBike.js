@@ -101,8 +101,8 @@ const AddBike = () => {
             /><br></br><br></br>
 
 
-            <select id='selectAdd' onClick={({ target }) => (setSelectedOption(target.value))}>
-                {filteredOptions.map(marker => <option selected={selectedOption == marker} value={marker.id}>{marker.name} {marker.location}</option>)}
+            <select id='selectAdd'  onClick={({ target }) => (setSelectedOption(target.value))}>
+                {filteredOptions.map(marker => <option style={{height:"60px",padding:"10px"}} selected={selectedOption == marker} value={marker.id}>{marker.name} {marker.location}</option>)}
             </select>
             <br></br><br></br>
 

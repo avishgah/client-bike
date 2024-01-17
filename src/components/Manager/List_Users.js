@@ -31,7 +31,21 @@ export default function AccessibleTable() {
     const [placeProblem, setplaceProblem] = useState('הכל')
     const PlaceArr = ['הכל', 'משתמשים פעילים', 'משתמשים לא פעילים'];
     let filteredOptions = [];
+    useEffect(() => {
+        axios.get('https://localhost:7207/api/CustomerOrdersView')
+            .then(res => {
+                console.log(res.data)
+                var newArray = res.data.slice(1);
+                setlistUsers(newArray);
+                // nav('/NavB')
+            }).catch(err => console.log(err))
+    }, [])
 
+    useEffect(() => {
+        if (selectedImage2) {
+            openImageInNewTab(selectedImage2.src);
+        }
+    }, [selectedImage2]);
     // const [u, setuseru] = useState(null);
     const change = (u, status) => {
 
@@ -76,21 +90,7 @@ export default function AccessibleTable() {
 
     }
 
-    useEffect(() => {
-        axios.get('https://localhost:7207/api/CustomerOrdersView')
-            .then(res => {
-                console.log(res.data)
-                var newArray = res.data.slice(1);
-                setlistUsers(newArray);
-                // nav('/NavB')
-            }).catch(err => console.log(err))
-    }, [])
-
-    useEffect(() => {
-        if (selectedImage2) {
-            openImageInNewTab(selectedImage2.src);
-        }
-    }, [selectedImage2]);
+  
   
     // קישור לתמונה
     const openImageInNewTab = (src) => {

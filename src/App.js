@@ -48,6 +48,7 @@ import Password from './components/Rejister/Password/Password';
 import PeymentYup from './components/Rejister/PeymentYup';
 import XL from './components/export to xl/XL';
 import List_Contect from './components/Manager/List_Contect';
+import Statistic from './components/Home/statistic/Statistic';
 function App() {
 
   const currentUser = useSelector(state => state.ur.user);
@@ -57,8 +58,8 @@ function App() {
   return (<>
     <div className='wrapper'>
 
-      <ResponsiveAppBar />
-
+      {/* <ResponsiveAppBar /> */}
+      <Statistic />
       {currentUser != null ?
         (currentUser.isManager ? <NavManger /> : <Navb />) : null}
 

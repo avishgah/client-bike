@@ -21,6 +21,9 @@
 
 .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-firstButton{
     border-right-color: black !important;
+    color: bl;
+    width: 5vw !important;
+    height: 3vw !important;
 }
 .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-middleButton {
     border-right-color: black !important;

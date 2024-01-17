@@ -42,6 +42,15 @@ const Profil = () => {
         mode: "all"
     });
 
+    const dispatch=useDispatch();
+    useEffect(() => {
+        axios.get(`https://localhost:7207/api/user/GetUserById/${currentUser.id}`)
+            .then(res => {
+                console.log(res.data)
+                dispatch({type: type.CURRENT_USER, payload:res.data})
+                // nav('/NavB')
+            }).catch(err => console.log(err))
+    }, [])
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
@@ -80,7 +89,7 @@ const Profil = () => {
             "Tz": currentUser.tz,
             "DateBirth": currentUser.dateBirth,
             "Pic": selectedImage,
-            "IsManager": false,
+            "IsManager": currentUser.isManager,
             "Status": true,
             "ReadTerms": true
         }
