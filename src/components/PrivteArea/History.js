@@ -3,22 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as type from "../../store/actions/actionType";
 
-
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import SendIcon from '@mui/icons-material/Send';
-import Stack from '@mui/material/Stack';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import DoneIcon from '@mui/icons-material/Done';
-import { useNavigate } from "react-router-dom";
-import LogoutIcon from '@mui/icons-material/Logout';
-
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -35,6 +20,7 @@ const History = () => {
 
     const [listHistory, setlistHistory] = useState([]);
     const [listDate, setlistCalcDate] = useState([]);
+    const currentUser = useSelector(state => state.ur.user);
 
     useEffect(() => {
         axios.get(`https://localhost:7207/api/orderBike/HistoryDrive/${currentUser.tz}`)
@@ -56,7 +42,7 @@ const History = () => {
 
     }, [])
 
-    const dispatch = useDispatch();
+    // תאריכים
     function formatDateTime(dateTimeString) {
         const dateTime = new Date(dateTimeString);
 
@@ -74,6 +60,7 @@ const History = () => {
         );
     }
 
+    // חישוב זמן-הצגה
     function formatDate(dateString) {
         
         if(dateString){
@@ -94,7 +81,6 @@ const History = () => {
       
     }
 
-    const currentUser = useSelector(state => state.ur.user);
 
     return (<>
         {listHistory.length == 0 ? <h1>אין היסטוריה </h1> : <>

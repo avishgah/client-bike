@@ -1,39 +1,32 @@
 import './Home.css'
 
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
+
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
-import How from './how-work/How';
 import { useNavigate } from 'react-router';
-import Table from '../Tables.js';
 import Maps from '../Maps/Maps';
-import { RampRight } from '@mui/icons-material';
-
+import * as type from '../../store/actions/actionType.js'
 
 import Stepper from '../Stepper.js';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const Home = () => {
     const nav = useNavigate();
+    const dispatch = useDispatch();
     const currentUser = useSelector(state => state.ur.user);
     const station = useSelector(state => state.ur.station);
-      useEffect(() => {
-        console.log("station",station);
-        console.log("user",currentUser);
+    useEffect(() => {
+        console.log("station", station);
+        console.log("user", currentUser);
+        dispatch({ type: type.LOG_OUT })
     }, [])
     return (<>
 
         <Stepper />
 
-        <div className='father' style={{
-            // backgroundImage: `url('./Images/logo2.jpg')`, backgroundRepeat: "no-repeat", backgroundSize: 600, backgroundPosition: '10% 10%',
-            // display:"flex",flexWrap:"wrap"
-        }}>
+        <div className='father'>
             <div className='son'>
                 <br></br>
                 <div style={{ marginLeft: "30px", backgroundColor: "#602424", borderRadius: "100px", height: "100px", width: "100px" }}></div>
@@ -63,7 +56,6 @@ const Home = () => {
 
                 <div className='ss' onClick={() => nav('./How')}  >
                     <CardContent endIcon={<PedalBikeIcon />}>
-                        {/* {<PedalBikeIcon fontSize='large' />} */}
 
                         <Typography variant="h5" fontSize={'20px'} component="div">
                             <b>     ?כיצד פועל השירות </b>
@@ -79,7 +71,6 @@ const Home = () => {
 
 
                 <div className='ss' onClick={() => nav('./Pay')}  >
-                    {/* {<PedalBikeIcon fontSize='large' />} */}
                     <CardContent >
                         <Typography variant="h5" fontSize={'20px'} component="div">
                             <b>תעריפים וחישוב עלויות השכרה</b>
@@ -94,7 +85,6 @@ const Home = () => {
 
 
                 <div className='ss' onClick={() => nav('/Pae')}  >
-                    {/* {<PedalBikeIcon fontSize='large' />} */}
                     <CardContent >
                         <Typography variant="h5" fontSize={'20px'} component="div">
                             <b>רכיבה עם ערך מוסף</b>
@@ -109,7 +99,6 @@ const Home = () => {
 
 
                 <div className='ss' onClick={() => nav('/Sae')}  >
-                    {/* {<PedalBikeIcon fontSize='large' />} */}
                     <CardContent >
                         <Typography variant="h5" fontSize={'20px'} component="div">
                             <b>רכיבה בטוחה</b>
@@ -124,7 +113,6 @@ const Home = () => {
 
 
                 <div className='ss' onClick={() => nav('/Do')}  >
-                    {/* {<PedalBikeIcon fontSize='large' />} */}
                     <CardContent >
                         <Typography variant="h5" fontSize={'20px'} component="div">
                             <b>עשה ואל תעשה</b>

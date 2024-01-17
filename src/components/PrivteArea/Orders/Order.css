@@ -19,7 +19,9 @@
     margin-right: 10px;
 }
 
-.css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-firstButton,
+.css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-firstButton{
+    border-right-color: black !important;
+}
 .css-edsu1d-MuiButtonGroup-root .MuiButtonGroup-middleButton {
     border-right-color: black !important;
     color: bl;

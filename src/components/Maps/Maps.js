@@ -3,19 +3,12 @@ import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { Box, Button, Fade, Paper, Popper, Stack, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+
 import '../Maps/Maps.css';
 
-// count
-import ButtonGroup from '@mui/material/ButtonGroup';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 
 
-import Grid from '@mui/material/Grid';
+
 import { Card, Input } from '@material-ui/core';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,15 +30,8 @@ const OpenMe = (marker) => {
 
   console.log(marker, "clicked");
 }
-
+//  מראה נקודות על המפה
 const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
-
-  useEffect(() => {
-    // console.log({ text } + "use effect");
-  }, [])
-
-
-
 
   return (<>
     <Marker position={{
@@ -62,29 +48,37 @@ const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
       clickable={true}
       onDblClick={selectedPoint}
       style={{ direction: "rtl" }}
-    // onClick={handleClick('top')}
-    // style={{ border: "none", }}
+
     />
 
-
-   
   </>)
 }
 
 
 function MyComponent() {
+  
   const [selectPoin, setSlectedPoint] = useState(null)
   const [maps, setMaps] = useState(null)
   const [mapers, setMapers] = useState([])
   const [stations, setStations] = useState([]);
   const [stationsMostClosde, setstationsMostClosde] = useState([]);
+  const dispatch = useDispatch();
 
+  const [searchText, setSearchText] = useState('');
+  const [selectedOption, setSelectedOption] = useState(null);
+  const filteredOptions = stations.filter((option) => option.location?.toLowerCase().includes(searchText?.toLowerCase()));
+
+  const currentUser = useSelector(state => state.ur.user);
+  const station = useSelector(state => state.ur.station);
+  const [searchCardWidth, setSearchCardWidth] = useState('100%'); // Default width
+
+  const mapRef = useRef(null); // Ref למפה שבה תעשה זום
   const google = window.google;
+
   let map;
   useEffect(() => {
 
     const defaultLocation = { lat: -34.397, lng: 150.644 };
-
     // יצירת אובייקט מפה חדש
     map = new google.maps.Map(document.getElementById("map"), {
       center: defaultLocation, // המיקום המרכזי של המפה בתחילת הטעינה
@@ -92,17 +86,17 @@ function MyComponent() {
     });
     setMaps(maps)
 
-
     axios.get('https://localhost:7207/api/StationViewControllers')
       .then(res => {
         console.log(res)
         setMapers(res.data)
 
+        // מיקום נוכחי
         navigator.geolocation.getCurrentPosition(x => {
           const homePos = { lat: x.coords.latitude, lng: x.coords.longitude };
 
-
-          const data = res.data.filter(x => x.cun > 0 && x.status==true).map((element, i) => {
+          // מיקום נוחכי ומיון נקודות
+          const data = res.data.filter(x => x.cun > 0 && x.status == true).map((element, i) => {
             const markerPos = { lat: element.lat, lng: element.lng };
 
             if (homePos && markerPos) {
@@ -114,6 +108,7 @@ function MyComponent() {
           setStations(data);
           let arr = data
           // console.log(stations.distanc.min(),"min");
+
           // מיון המערך לפי המרחק מהנמוך לגבוה
           arr.sort((a, b) => a.distanc - b.distanc);
 
@@ -125,24 +120,19 @@ function MyComponent() {
       }).catch(err => console.log(err))
   }, [])
 
-  const [place, setplace] = useState('דיווח על תקלה')
+  useEffect(() => {
+    // Update searchCardWidth when currentUser changes
+    if (currentUser === null) {
+      setSearchCardWidth('60%');
+    } else {
+      setSearchCardWidth('100%'); // Set your desired width here
+    }
+  }, [currentUser]);
 
-
-
-
-  const [searchText, setSearchText] = useState('');
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
   };
-
-
-
-  const filteredOptions = stations.filter((option) => option.location.toLowerCase().includes(searchText.toLowerCase()));
-
-
-  const mapRef = useRef(null); // Ref למפה שבה תעשה זום
 
   // פונקציה לזום לנקודה שנבחרה
   const zoomToSelectedPoint = () => {
@@ -154,28 +144,18 @@ function MyComponent() {
       console.log(selectedOption)
       map.panTo({ lat: selectedOption.lat, lng: selectedOption.lng }); // מעביר את המפה לנקודה שנבחרה
       map.setZoom(18);
-      // }
-      // else {
-      //   if (map && selectedOption) {
-      //     const c = filteredOptions.find(x => x.id == selectedOption)
-      //     console.log(c);
-      //     console.log(selectedOption)
-      //     map.panTo({ lat: c.lat, lng: c.lng }); // מעביר את המפה לנקודה שנבחרה
-      //     map.setZoom(18);
-      //   }
-      // }
     }
   };
 
-  const dispatch = useDispatch();
   // כאשר משתנה הנקודה הנבחרת ב־Select משתנה, עדכן את הזום
   const SETselectedValueOption = (selectedOption) => {
     console.log(selectedOption);
     const c = filteredOptions.find(x => x.id == selectedOption)
     console.log(c);
     SETselectedOption(c)
-   
+
   }
+
   const SETselectedOption = (selectedOption) => {
     console.log('useEFFECT', selectedOption, typeof selectedOption)
     setSelectedOption(selectedOption);
@@ -186,23 +166,10 @@ function MyComponent() {
   }
 
 
-  const currentUser = useSelector(state => state.ur.user);
-  const station = useSelector(state => state.ur.station);
-  const [searchCardWidth, setSearchCardWidth] = useState('100%'); // Default width
-
-  useEffect(() => {
-    // Update searchCardWidth when currentUser changes
-    if (currentUser === null) {
-      setSearchCardWidth('60%');
-    } else {
-      setSearchCardWidth('100%'); // Set your desired width here
-    }
-  }, [currentUser]);
-
   return (<>
     <br />
     <div id="map"></div>
-    <Card id="searchCard" style={{ width: searchCardWidth ,boxShadow:"none"}}>
+    <Card id="searchCard" style={{ width: searchCardWidth, boxShadow: "none" }}>
       <p style={{ fontWeight: "bold", fontSize: "19px" }}>חיפוש תחנה</p>
 
       <input
@@ -215,7 +182,7 @@ function MyComponent() {
 
 
       <select id='selectS' onClick={({ target }) => SETselectedValueOption(target.value)}>
-        {filteredOptions.map(marker => <option value={marker.id} >{marker.name} {marker.location}</option>)}
+        {filteredOptions.map(marker => <option value={marker.id} >{marker.name} {marker.location} / {marker.cun} </option>)}
       </select><br></br><br></br>
 
 
@@ -237,17 +204,12 @@ function MyComponent() {
       zoom={10}
       onClick={(e) => console.log(e.latLng.lat(), e.latLng.lng())}
       onLoad={(map) => (mapRef.current = map)} // שימור מפה ב־ref
-    // onLoad={onLoad}
-    // onUnmount={onUnmount}
     >
 
       {
         mapers.map((marker) =>
           <AnyReactComponent
             key={marker.id ? marker.id : 0}
-
-            // key={shouldResetMap ? 'mapResetKey' : 'mapKey'}
-            // opacity={selectPoin === marker.id ? 1 : 0.5}
             selectedPoint={() => setSlectedPoint(marker)}
             onClick={() => OpenMe(marker)}
             text={marker}
@@ -258,7 +220,6 @@ function MyComponent() {
         )
       }
 
-      { /* Child components, such as markers, info windows, etc. */}
       <></>
 
 

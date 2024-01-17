@@ -10,21 +10,15 @@ import Button from '@mui/material/Button';
 const NavBar = () => {
 
     const nav = useNavigate();
-
     const dispatch = useDispatch();
 
     const Exit = () => {
-
         dispatch({
             type: type.LOG_OUT
         })
         nav("/Home");
     }
-    let id = 0;
-    const changeColor = (id) => {
-        console.log(id);
-        // document.getElementById(id).style.li.Link.color = "red";
-    }
+ 
     return (<>
         {
             <div className='home'>
@@ -33,16 +27,16 @@ const NavBar = () => {
                     <li className='liOfPrivate' onClick={() => Exit()}>
                         <Link to="Profil">יציאה מהאיזור האישי</Link>
                     </li>
-                    <li className='liOfPrivate' onClick={() => (changeColor(3))}>
+                    <li className='liOfPrivate'>
                         <Link to="Problems"> דיווח על תקלות </Link>
                     </li>
-                    <li className='liOfPrivate' onClick={() => (changeColor(1))}>
+                    <li className='liOfPrivate'>
                         <Link to="History"> היסטוריית נסיעות</Link><br></br> <br></br>
                     </li>
-                    <li className='liOfPrivate' onClick={() => (changeColor(2))}>
+                    <li className='liOfPrivate'>
                         <Link to="Order"> הזמנה מראש </Link>
                     </li>
-                    <li className='liOfPrivate' onClick={() => (changeColor(4))}>
+                    <li className='liOfPrivate' >
                         <Link to="Profil">פרופיל</Link>
                     </li>
 

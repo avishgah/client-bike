@@ -40,6 +40,8 @@ const PasswordReset = ({ email, setOpen }) => {
         else
             setErrorState("");
     }
+
+    // מכאן נשלחת פעולת השינוי
     const resetPassword = async () => {
         if (errorState.length > 0 || newPassword == '' || confirmPassword == '')
             setFlag(true);

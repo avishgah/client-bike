@@ -20,8 +20,7 @@ const Problems = () => {
     const [placeProblem, setplaceProblem] = useState('תקלה באופניים')
     const [file, setFile] = useState(null);
 
-
-    const [allBikes, setallBikes] = useState([])
+    const [selectedImage, setSelectedImage] = React.useState(null);
 
     const PlaceArr = ['תקלה באופניים', 'תקלה בתחנה'];
     const TypeBikeProblem = ['תחזוקה - בוץ/לכלוך', 'כסא חסר/רופף', 'ידית שחרור מוט אוכף חסרה/תקולה ', 'סל נשיאה שבור/עקום', 'צג שבור/תקול'
@@ -29,51 +28,6 @@ const Problems = () => {
         , 'פנס קדמי תקול', 'פדאלים תקולים', 'פנס אחורי תקול ', 'הילוכים תקולים', 'כנף אחורית שבורה/עקומה', 'בלם אחורי תקול'
         , 'גלגל אחורי חסר/עקום', 'כנף קדמית שבורה/עקומה', 'גלגל קדמי עקום/חסר'];
 
-    // React.useEffect(() => {
-    //     axios.get('https://localhost:7207/api/User')
-    //         .then(res => {
-    //             console.log(res.data)
-    //             // setUsers(res.data)
-    //             // nav('/NavB')
-    //         }).catch(err => console.log(err))
-    // }, [])
-
-
-    var l = '';
-    const func = () => {
-        l = document.getElementById("k").value;
-        console.log(l)
-    }
-
-    const show = (t) => {
-
-        // let bike = document.getElementsByClassName("ShowBike");
-        // let station = document.getElementsByClassName("showStetion");
-        // if (t == 'תקלה באופניים') {
-        //     for (var x = 0; x < bike.length; x++) {
-        //         // bike[x].style.visibility = "visible";
-        //         bike[x].style.display = "block";
-        //     }
-        //     for (var x = 0; x < station.length; x++) {
-        //         // station[x].style.visibility = "hidden";
-        //         station[x].style.display = "none";
-        //     }
-        // }
-
-        // if (t == 'תקלה בתחנה') {
-        //     for (var x = 0; x < station.length; x++) {
-        //         // station[x].style.visibility = "visible";
-        //         station[x].style.display = "block";
-
-        //     }
-        //     for (var x = 0; x < bike.length; x++) {
-        //         // bike[x].style.visibility = "hidden";
-        //         bike[x].style.display = "none";
-
-        //     }
-        // }
-
-    }
 
     const PostTask = (task) => {
         axios.post(`https://localhost:7207/api/Opinion`, task).then(res => {
@@ -155,10 +109,6 @@ const Problems = () => {
             console.log(task + "task");
     }
 
-
-    
-    const [selectedImage, setSelectedImage] = React.useState(null);
-
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -176,7 +126,7 @@ const Problems = () => {
             <h1 id="h1">תקלה באופניים או בתחנות העגינה ?</h1>
             <label>היכן התקלה</label><br></br>
             <select id='select'
-                onChange={({ target }) => (setplaceProblem(target.value), show(target.value))}>
+                onChange={({ target }) => (setplaceProblem(target.value))}>
                 {PlaceArr.map(marker => <option selected={placeProblem == marker} value={marker}>{marker}</option>)}
             </select><br></br><br></br>
 

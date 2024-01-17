@@ -99,6 +99,14 @@ body {
   color: black;
   margin-bottom: 10px;
 }
+#opinB2 {
+  background-color: #f1f1f1;
+  width: 100px;
+  margin-left: 30px;
+  color: black;
+  margin-bottom: 10px;
+}
+
 #selectListOpinion{
   padding: 4.3px;
   border: 1px solid rgb(178, 177, 177);

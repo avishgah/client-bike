@@ -10,24 +10,28 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-
-import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import SendIcon from '@mui/icons-material/Send';
 import './Manager.css';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
 
-import { Button, IconButton, TableSortLabel, Tooltip } from '@mui/material';
-import { Switch, switchClasses } from '@mui/joy';
+import { TableSortLabel, Tooltip } from '@mui/material';
+import { Switch } from '@mui/joy';
 import AddStation from '../AddStation/AddStation';
 import XL from '../export to xl/XL';
 
 export default function AccessibleTable() {
 
+        
+    const [inputValue, setInputValue] = useState('')
+    const [numberValue, setnumberValue] = useState(0)
+    const PlaceArr = ['הכל', 'תחנות פעילות', 'תחנות לא פעילות'];
+    const [placeProblem, setplaceProblem] = useState('הכל');
+
+    const data = ["id", "location", "name", "status", "cun", "numOrders"];
+    const dataNmae = ["קוד תחנה", "עיר", "מיקום", "סטטוס", "מספר אופניים בתחנה", "מספר הזמנות בתחנה"]
+
+    const [sortOrder, setsortOrder] = useState('desc');
+    let filteredOptions = [];
+
+    const [listStation, setlistStation] = useState([]);
     const change = (id, status) => {
         console.log(id)
 
@@ -55,11 +59,11 @@ export default function AccessibleTable() {
                     console.log("kk");
                 })
                 axios.get('https://localhost:7207/api/StationViewControllers')
-                .then(res => {
-                    console.log(res.data)
-                    setlistStation(res.data)
-                    // nav('/NavB')
-                }).catch(err => console.log(err))
+                    .then(res => {
+                        console.log(res.data)
+                        setlistStation(res.data)
+                        // nav('/NavB')
+                    }).catch(err => console.log(err))
             }).catch(err => console.log(err))
         }
         else {
@@ -67,11 +71,6 @@ export default function AccessibleTable() {
         }
 
     }
-
-
-
-    const [sortOrder, setsortOrder] = useState('desc');
-
 
     useEffect(() => {
         axios.get('https://localhost:7207/api/StationViewControllers')
@@ -81,8 +80,7 @@ export default function AccessibleTable() {
                 // nav('/NavB')
             }).catch(err => console.log(err))
     }, [])
-  
-    const [listStation, setlistStation] = useState([]);
+
     const createSortHandler = (key) => {
         const listCopy = [...listStation];
 
@@ -100,6 +98,7 @@ export default function AccessibleTable() {
         setlistStation(listCopy);
         setsortOrder(newSortOrder);
     }
+
     const createSortHandlerForNumBike = (key) => {
         const listCopy = [...listStation];
         // Toggle between 'asc' and 'desc'
@@ -115,6 +114,7 @@ export default function AccessibleTable() {
         setlistStation(listCopy);
         setsortOrder(newSortOrder);
     }
+
     const createSortHandlerForStatus = (key) => {
         const sortedList = [...listStation]; // Create a copy of the original list
         console.log(sortOrder);
@@ -132,13 +132,13 @@ export default function AccessibleTable() {
         console.log(sortedList);
 
     }
-    let filteredOptions = [];
+
 
     const handleFilter = () => {
         console.log("enter");
-        filteredOptions = placeProblem != 'הכל' ? listStation.filter((option) => placeProblem=='תחנות לא פעילות'? !option.status : option.status): listStation;
+        filteredOptions = placeProblem != 'הכל' ? listStation.filter((option) => placeProblem == 'תחנות לא פעילות' ? !option.status : option.status) : listStation;
 
-        filteredOptions= filteredOptions.filter(x => {
+        filteredOptions = filteredOptions.filter(x => {
 
             return (
                 (x.numOrders >= numberValue) &&
@@ -150,18 +150,13 @@ export default function AccessibleTable() {
         });
         return filteredOptions;
     };
-    const [inputValue, setInputValue] = useState('')
-    const [numberValue, setnumberValue] = useState(0)
-    const PlaceArr = ['הכל','תחנות פעילות','תחנות לא פעילות'];
-    const [placeProblem, setplaceProblem] = useState('הכל')
-    const data = ["id", "location", "name", "status", "cun", "numOrders"];
-    const dataNmae = ["קוד תחנה", "עיר", "מיקום", "סטטוס", "מספר אופניים בתחנה", "מספר הזמנות בתחנה"]
+
     return (
         <div class="flex-container">
             <div class="flex-item-left">
                 {console.log(listStation, "ךןדאאאאאאאאאאאא")}
-                
-                <select id='selectListOpinion' style={{padding:"5.3px"}}
+
+                <select id='selectListOpinion' style={{ padding: "5.3px" }}
                     onChange={({ target }) => (setplaceProblem(target.value))}>
                     {PlaceArr.map(marker => <option selected={placeProblem == marker} value={marker}>{marker}</option>)}
                 </select>
@@ -268,9 +263,6 @@ export default function AccessibleTable() {
                 <b>  הוסף תחנה </b><br></br><br></br>
 
                 <AddStation /><br></br>
-
-
-
             </div>
         </div>
     );

@@ -51,6 +51,7 @@
 }
 
 #alertC{
+    
     visibility: hidden;
     width: 30vw;
     text-align: right;
@@ -58,6 +59,13 @@
     font-weight: bolder;
 }
 
+#alertCV{
+    visibility: hidden;
+    width: 16vw;
+    text-align: right;
+    margin-left: 6.5vw;
+    font-weight: bolder;
+}
 
 /* maps */
 
@@ -89,11 +97,7 @@
 }
 #selectAdd{
     width: 55%;
-    /* float: right !important; */
-    /* border: solid 2px; */
-    /* border-radius: 30px; */
 
-    /* border-bottom: 1px solid black !important; */
     padding: 10px;
     font-size: medium;
 }

@@ -9,8 +9,6 @@ import Button from '@mui/material/Button';
 
 const NavManger = () => {
 
-    const nav = useNavigate();
-
     const dispatch = useDispatch();
     const Exit = () => {
 
@@ -22,32 +20,31 @@ const NavManger = () => {
 
     return (<>
         {
+            <ul className='ulOfPrivateM' >
 
-                <ul className='ulOfPrivateM' >
+                <li className='liOfPrivateM' onClick={() => Exit()}>
+                    <Link to="home">יציאה מהאיזור האישי</Link>
+                </li>
+                <li className='liOfPrivateM'>
+                    <Link to="lContect">רשימת תלונות </Link>
+                </li>
+                <li className='liOfPrivateM'>
+                    <Link to="lUser">רשימת משתמשים </Link>
+                </li>
+                <li className='liOfPrivateM'>
+                    <Link to="lStation">רשימת תחנות </Link>
+                </li>
+                <li className='liOfPrivateM'>
+                    <Link to="lBike">רשימת אפניים </Link>
+                </li>
+                <li className='liOfPrivateM'>
+                    <Link to="lOpinion">רשימת דיווחים </Link>
+                </li>
+                <li className='liOfPrivateM'>
+                    <Link to="profil">פרופיל</Link>
+                </li>
 
-                    <li className='liOfPrivateM' onClick={() => Exit()}>
-                        <Link to="home">יציאה מהאיזור האישי</Link>
-                    </li>
-                    <li className='liOfPrivateM'>
-                        <Link to="lContect">רשימת תלונות </Link>
-                    </li>
-                    <li className='liOfPrivateM'>
-                        <Link to="lUser">רשימת משתמשים </Link>
-                    </li>
-                    <li className='liOfPrivateM'>
-                        <Link to="lStation">רשימת תחנות </Link>
-                    </li>
-                    <li  className='liOfPrivateM'>
-                        <Link to="lBike">רשימת אפניים </Link>
-                    </li>
-                    <li  className='liOfPrivateM'>
-                        <Link to="lOpinion">רשימת דיווחים </Link>
-                    </li>
-                    <li  className='liOfPrivateM'>
-                        <Link to="profil">פרופיל</Link>
-                    </li>
-
-                </ul>
+            </ul>
         }</>)
 
 

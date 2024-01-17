@@ -14,95 +14,33 @@ import { Link, Stack } from '@mui/material';
 import AttachmentIcon from '@mui/icons-material/Attachment';
 
 import './Adit.css';
-// count
-import ButtonGroup from '@mui/material/ButtonGroup';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 
 import Input from '@mui/material/Input';
 
 import * as type from "../../store/actions/actionType";
 
 import { useDispatch, useSelector } from "react-redux";
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { LocalizationProvider } from '@mui/x-date-pickers-pro/LocalizationProvider';
-
-
-// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 
 import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-// import { useDispatch, useSelector } from 'react-redux';
-
-import { useNavigate } from 'react-router-dom';
 
 
-// import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepContent from '@mui/material/StepContent';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+
 import axios from 'axios';
 
-
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
-
-
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 
 import Checkbox from '@mui/material/Checkbox';
-import Swal from 'sweetalert2';
-
-
-// import './Payment2.css';
-
-// import './AddUser.scss';
-
-
-// ,, כתובת, , , עיר, , , תאריך לידה, תצלום תעודת זהות, סוג לקוח(לקוח, מנהל), לא פעיל, אישור קריאת תקנון
-
-
-
-
-
 
 const Profil = () => {
     const currentUser = useSelector(state => state.ur.user);
-
-    // count
-    const [count, setCount] = React.useState(1);
-    const [invisible, setInvisible] = React.useState(false);
-
-    const handleBadgeVisibility = () => {
-        setInvisible(!invisible);
-    };
-    ///
-
-    const dispatch = useDispatch();
-    useEffect(() => {
-        // dispatch({ type: type.CHANGE_FLAG_TRUE })\
-
-    }, [])
-
-    const [value, setValue] = React.useState(null);
-
+    const [selectedImage, setSelectedImage] = React.useState(null);
+    const [showPassword, setShowPassword] = React.useState(false);
+    //checkbox
+    const [checked, setChecked] = React.useState(true);
     const { register, handleSubmit, getValues, formState: { isValid, errors, dirtyFields, touchedFields, isDirty } } = useForm({
         mode: "all"
     });
-    const nav = useNavigate();
-
-    const [showPassword, setShowPassword] = React.useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -110,40 +48,23 @@ const Profil = () => {
         event.preventDefault();
     };
 
-    // let dispatch=useDispatch();
 
-    // step
-    const [activeStep, setActiveStep] = React.useState(0);
-
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleReset = () => {
-        setActiveStep(0);
-    };
-
-    //checkbox
-    const [checked, setChecked] = React.useState(true);
 
     const handleChange = (event) => {
         setChecked(event.target.checked);
     };
 
-    // let currentUser = useSelector(state => state.tr.user);
-    // let arr = useSelector(state => state.tr.drives);
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setSelectedImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
-    // const submit = (details) => {
-
-    //   console.log(value.$D + "/" + value.$M + "/" + value.$y)
-    //   alert("פרטיך נקלטו")
-    //   console.log(details);
-    //   // addbike(details);
-    // }
     const submit = (details) => {
         console.log(details);
         console.log(currentUser);
@@ -168,7 +89,7 @@ const Profil = () => {
         axios.put(`https://localhost:7207/api/User/UpdateUser/${currentUser.id}`, user).then(res => {
 
             console.log(res + "kkkk");
-           alert("עודכן בהצלחה 👍")
+            alert("עודכן בהצלחה 👍")
             if (res.data == null) {
                 alert("error")
                 return null;
@@ -177,39 +98,15 @@ const Profil = () => {
 
             else {
             }
-        }).catch(err=> console.log("err", err))
-        // nav('/Payment2')
+        }).catch(err => console.log("err", err))
     }
 
-
-    var l = '';
-    const func = () => {
-        l = document.getElementById("k").value;
-        console.log(l)
-    }
-
-    
-    const [selectedImage, setSelectedImage] = React.useState(null);
-
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                setSelectedImage(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
 
     return <>
 
         <form id="formLoginR" onSubmit={handleSubmit(submit)}>
             <CardContent>
-                {/* 
-          <Typography variant="h5" component="div">
-            פרטים אישיים
-          </Typography> */}
+
                 <br></br>
 
                 {/* name */}
@@ -286,9 +183,9 @@ const Profil = () => {
                         type={showPassword ? 'text' : 'password'}
                         {...register("password", {
                             required: "Password is required.",
-                            minLength: {
-                                value: 6,
-                                message: "Password should be at-least 6 characters."
+                            pattern: {
+                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                                message: "סיסמא חייבת להכיל 6 תווים וכן לפחות אות אחת באנגלית ומספר"
                             }
                         })}
                         endAdornment={
@@ -350,11 +247,7 @@ const Profil = () => {
                 <Button variant="contained" style={{ width: "22vw" }} id="addRC" type="submit">
                     עדכון פרטים
                 </Button>
-
-                {/* {console.log(checked)} */}
             </CardContent>
-
-
 
         </form >
 

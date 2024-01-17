@@ -1,12 +1,8 @@
 import React from 'react'
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
-import { Box, Button, Card, DialogTitle, Fade, IconButton, Paper, Popper, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, DialogTitle, Fade, IconButton, Typography } from '@mui/material';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useEffect } from 'react';
+
 import './Order.css';
 
 // count
@@ -23,17 +19,6 @@ import SendIcon from '@mui/icons-material/Send';
 import Maps from '../../Maps/Maps';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
 
-const containerStyle = {
-  width: '100%',
-  height: '440px',
-  border: "solid",
-  filter: "grayscale(0%) !important"
-};
-
-const center = {
-  lat: 31.77,
-  lng: 35.168
-};
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -45,88 +30,34 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 
-
-const AnyReactComponent = ({ text, lat, lng, opacity, selectedPoint }) => {
-  return (
-    <Marker position={{
-      lat: lat ? lat : 31.772561767303255,
-      lng: lng ? lng : 35.16862111683302
-    }}
-      title={text}
-      label={text}
-      opacity={opacity}
-      className='marker-data' type="button"
-      clickable={true}
-      onDblClick={selectedPoint}
-      style={{ border: "none", }} />
-    /* <img src={'marker.png'} alt="marker" onClick={() => deletePoint()} /> */
-    // {text}
-    // </div>
-  )
-}
-
-
-
 function MyComponent() {
   const [count, setCount] = React.useState(1);
   const [open, setOpen] = React.useState(false);
-  const [flagTo, setflagTo] = React.useState(false);
 
-
-
-
-  const [selectPoin, setSlectedPoint] = useState(null)
-  const [mapers, setMapers] = React.useState([])
-
+  const currentUser = useSelector(state => state.ur.user);
+  const station = useSelector(state => state.ur.station);
 
   const handleClickOpen = () => {
+    setCount(1);
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
-    // nav('/Home');
   };
 
   useEffect(() => {
     axios.get('https://localhost:7207/api/Station/Get')
       .then(res => {
         console.log(res)
-        console.log(selectPoin)
-        setMapers(res.data)
-        setSlectedPoint(res.data[0].id);
-        let homePos = {}
-        res.data.filter(x => x.count > 0).forEach((element, i) => {
-          const google = window.google;
-          console.log(element)
-          const markerPos = { lat: element.lat, lng: element.lng };
-          console.log(markerPos)
-          if (i == 0) {
-
-            homePos = markerPos;
-          }
-          else {
-            if (homePos && markerPos) {
-              const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(homePos, markerPos);
-              console.log(distanceInMeters, "distanceInMeters");
-            }
-          }
-        });
       }).catch(err => console.log(err))
 
   }, [])
 
 
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const [open, setOpen] = React.useState(false);
-  // const [placement, setPlacement] = React.useState();
-
-  const currentUser = useSelector(state => state.ur.user);
-  const station = useSelector(state => state.ur.station);
 
   const Submit = (e) => {
     e.preventDefault()
-    console.log(selectPoin)
-    console.log(count, selectPoin)
+    console.log(count)
 
     console.log(station, "tst")
     if (station != null) {
@@ -137,9 +68,9 @@ function MyComponent() {
         handleClickOpen();
       })
 
-      var x = `שלום, ${currentUser.name} \n ביצעת הזמנה לתחנת - ${station.location +" "+ station.name}\n \t, מספר האופניים ששמורים לך הם : ${count} , שים לב ❤ ההזמנה שמורה ל30 דקות בלבד! \n נסיעה בטוחה ומהנה 😊`
+      var x = `שלום, ${currentUser.name} \n ביצעת הזמנה לתחנת - ${station.location + " " + station.name}\n \t, מספר האופניים ששמורים לך הם : ${count} , שים לב ❤ ההזמנה שמורה ל30 דקות בלבד! \n נסיעה בטוחה ומהנה 😊`
       console.log("kkk")
-      var y=",";
+      var y = ",";
       axios.post(`https://localhost:7207/api/User/SendEmailOnly/${currentUser.mail}/${currentUser.name}/${x}/${y}`).then(res => {
         console.log("giid")
       }).catch(err => console.log(err))
@@ -147,17 +78,13 @@ function MyComponent() {
     else {
       alert("לא נמצאה הזמנה")
     }
-    //send empty
-
-
-
   }
 
 
   return (<>
     <form id="formLoginRG" style={{ direction: "rtl" }} onSubmit={Submit}>
 
-      <div id="hazen" style={{ textAlign: "center",fontWeight:"bold" }}>הזן מספר אפניים ותחנה רצויה</div><br></br>
+      <div id="hazen" style={{ textAlign: "center", fontWeight: "bold" }}>הזן מספר אפניים ותחנה רצויה</div><br></br>
       {/* count */}
       <Box style={{ direction: "center", marginRight: "0vw" }}>
         <div>
@@ -200,6 +127,7 @@ function MyComponent() {
 
       <br></br>
 
+      {/* תחנה */}
       <Maps />
       {/* <br></br>
       <br></br> */}

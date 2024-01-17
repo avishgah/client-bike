@@ -9,31 +9,28 @@ import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
-
-import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-
-import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import SendIcon from '@mui/icons-material/Send';
 import './Manager.css';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
-
 import { Button, IconButton, TableSortLabel, Tooltip } from '@mui/material';
 import { Switch, switchClasses } from '@mui/joy';
 
-import AddUser from '../AddUser/AddUser';
-import RegisterAdd from './RegisterAdd';
 import XL from '../export to xl/XL';
 export default function AccessibleTable() {
 
-
     const [listUsers, setlistUsers] = useState([]);
 
+    const [selectedImage2, setSelectedImage2] = useState(null);
 
-    const [checked, setChecked] = React.useState(false);
+    const [inputValue, setInputValue] = useState('')
+        
+    const [numberValue, setnumberValue] = useState('');
+
+    const [sortOrder, setsortOrder] = useState('desc');
+
+    const data = ["id", "name", "tz", "phon", "mail", "toun", "address", "dateBirth", "status"];
+    const dataName = ["קוד משתמש", "שם", "תעודת זהות", "טלפון", "דוא''ל", "עיר", "כתובת", "תאריך לידה", "סטטוס"]
+    const [placeProblem, setplaceProblem] = useState('הכל')
+    const PlaceArr = ['הכל', 'משתמשים פעילים', 'משתמשים לא פעילים'];
+    let filteredOptions = [];
 
     // const [u, setuseru] = useState(null);
     const change = (u, status) => {
@@ -88,51 +85,14 @@ export default function AccessibleTable() {
                 // nav('/NavB')
             }).catch(err => console.log(err))
     }, [])
-    const deleteFunc = (id) => {
-        console.log(id)
-    }
 
-    function myFunction() {
-        var txt;
-        if (window.confirm("האם אתה בטוח שברצונך למחוק")) {
-
-            // axios.delete(`https://localhost:7207/api/Bike/${id}`).then(res => {
-            alert("נמחק בהצלחה")
-            window.location.reload(true);
-            // })
-            console.log("deleted")
-        }
-        else {
-            console.log("exit")
-        }
-    }
-    const [open, setOpen] = React.useState(false);
-
-    const showPic = (pic) => {
-        alert(pic);
-    }
-
-    const [selectedImage, setSelectedImage] = useState(null);
-
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                setSelectedImage(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-    const [selectedImage2, setSelectedImage2] = useState(null);
     useEffect(() => {
         if (selectedImage2) {
             openImageInNewTab(selectedImage2.src);
         }
     }, [selectedImage2]);
-    const [inputValue, setInputValue] = useState('')
-
-
+  
+    // קישור לתמונה
     const openImageInNewTab = (src) => {
         // Create a Blob from the image source
         fetch(src)
@@ -146,22 +106,18 @@ export default function AccessibleTable() {
             });
     };
 
-
     const openImage = (id, src) => {
         setSelectedImage2({ id, src });
         openImageInNewTab(src);
     };
-    const [numberValue, setnumberValue] = useState('');
 
-    const [sortOrder, setsortOrder] = useState('desc');
-    let filteredOptions = [];
 
     const handleFilter = () => {
 
-        filteredOptions = placeProblem != 'הכל' ? listUsers.filter((option) => placeProblem=='משתמשים לא פעילים'? !option.status : option.status): listUsers;
+        filteredOptions = placeProblem != 'הכל' ? listUsers.filter((option) => placeProblem == 'משתמשים לא פעילים' ? !option.status : option.status) : listUsers;
 
         console.log("enter");
-        filteredOptions=filteredOptions.filter(x => {
+        filteredOptions = filteredOptions.filter(x => {
             return (
                 ((!numberValue) ||
                     x.tz?.toString().includes(numberValue) ||
@@ -175,6 +131,7 @@ export default function AccessibleTable() {
         });
         return filteredOptions;
     };
+
     const createSortHandlerForNumBike = (key) => {
         const listCopy = [...listUsers];
         // Toggle between 'asc' and 'desc'
@@ -191,9 +148,6 @@ export default function AccessibleTable() {
         setsortOrder(newSortOrder);
     }
 
-
-    const data = ["id", "name", "tz", "phon", "mail", "toun", "address", "dateBirth", "status"];
-    const dataName = ["קוד משתמש", "שם", "תעודת זהות", "טלפון", "דוא''ל", "עיר", "כתובת", "תאריך לידה", "סטטוס"]
 
     const createSortOfDate = () => {
         const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
@@ -271,8 +225,7 @@ export default function AccessibleTable() {
         // }
 
     }
-    const [placeProblem, setplaceProblem] = useState('הכל')
-    const PlaceArr = ['הכל','משתמשים פעילים','משתמשים לא פעילים'];
+ 
     return (
         <div class="flex-container">
             <div class="flex-item-left">
@@ -379,10 +332,6 @@ export default function AccessibleTable() {
 
                             {handleFilter().map((row) => (
                                 <TableRow key={row.id}>
-                                    {/* <DeleteOutlineIcon id="icon2"/> */}
-
-
-
                                     <TableCell align="right">{row.name}</TableCell>
                                     <TableCell align="right">{row.tz}</TableCell>
                                     <TableCell align="right">{row.phon}</TableCell>
@@ -398,26 +347,7 @@ export default function AccessibleTable() {
                                             </label>
 
                                         </div>
-                                        {/* 
-                                        <div>
-                                            <input
-                                                type="file"
-                                                // accept="image/*"
-                                                onChange={handleImageChange}
-                                                // style={{ display: 'none' }}
-                                                id="imageInput"
-                                            />
-                                            <label htmlFor="imageInput">
-                                                <button>בחר תמונה</button>
-                                            </label>
-
-                                            {selectedImage && (
-                                                <div>
-                                                    <p>תמונה שנבחרה:</p>
-                                                    <img src={selectedImage} alt="Selected" style={{ maxWidth: '100%' }} />
-                                                </div>
-                                            )}
-                                        </div> */}
+                                   
                                     </TableCell>
                                     <TableCell align="center">
                                         {row.status == true ?
@@ -438,10 +368,6 @@ export default function AccessibleTable() {
 
                                     </TableCell>
                                     <TableCell align="center">{row.numOrders}</TableCell>
-                                    {/* <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
-                        
-                    </Button>
-              <IconButton >{DeleteIcon}</IconButton> */}
                                 </TableRow>
                             ))}
                         </TableBody>

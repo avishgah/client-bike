@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 
 import TextField from '@mui/material/TextField';
-import { Button, Stack } from '@mui/material';
+import { Alert, Button, Stack } from '@mui/material';
 
 import axios from 'axios';
 
@@ -27,15 +27,12 @@ const AddStation = () => {
 
     const [isDisabled, setDisabled] = useState(false);
 
-    const handleSubmits = () => {
-        console.log('Your button was clicked and is now disabled');
 
-    }
-
-    const { register, handleSubmit, getValues, formState: { isValid, errors, dirtyFields, touchedFields, isDirty } } = useForm({
+    const { register, handleSubmit, reset, getValues, formState: { isValid, errors, dirtyFields, touchedFields, isDirty } } = useForm({
         mode: "all"
     });
     const nav = useNavigate();
+
 
 
     const [showPassword, setShowPassword] = React.useState(false);
@@ -52,34 +49,42 @@ const AddStation = () => {
         event.preventDefault();
     };
 
+    const restasrt = (x) => {
+        // window.location.reload(true);
+        if (x == 'end') {
+            document.getElementById("addMore").style.display = "none";
+            document.getElementById("end").style.display = "none";
+        }
 
-    const restasrt = () => {
-        window.location.reload(true);
+        document.getElementById("alertCV").style.visibility = "hidden";
+        reset({ bike: 1});
+        handleReset();
+
+
+
     }
+
     const getDetails = (x, y, z, m) => {
         console.log(x)
-        if (x.address_components.length > 4) {
-            setPlace(x.address_components[0].long_name + " " + x.address_components[1].long_name)
+        if (x.address_components?.length > 4) {
+            setPlace(x.address_components[0]?.long_name + " " + x.address_components[1]?.long_name)
 
         }
         else {
-            setPlace(x.address_components[0].long_name)
+            setPlace(x.address_components[0]?.long_name)
 
         }
 
-        setCity(x.address_components[2].long_name)
+        setCity(x.address_components[2]?.long_name)
         // console.log(y.formatted_address)
         setLat(z.lat)
         setLng(m.lng)
-
-
     }
     const postStation = async (station) => {
         const x = await axios.post(`https://localhost:7207/api/Station`, station).then(res => {
 
             console.log(res.data + ";;;;;;");
-            document.getElementById("addMore").style.display = "inline";
-            document.getElementById("end").style.display = "inline";
+
 
             if (res.data == null) {
                 alert("error")
@@ -99,6 +104,12 @@ const AddStation = () => {
                 setDisabled(false);
                 return null;
             }
+
+
+            document.getElementById("addMore").style.display = "inline";
+            document.getElementById("end").style.display = "inline";
+            document.getElementById("alertCV").style.visibility = "visible";
+
         }).catch(console.log(err => console.log(err)))
     }
 
@@ -141,6 +152,28 @@ const AddStation = () => {
         await getStation(details);
     }
 
+
+    const [selectedPlace, setSelectedPlace] = useState(null);
+
+    const handlePlaceSelected = (place) => {
+        // הפעולה שתבוצע כאשר יבחרו בכתובת
+        getDetails(
+            place,
+            { formatted_address: place.formatted_address.toString() },
+            { lat: place.geometry.location.lat() },
+            { lng: place.geometry.location.lng() }
+        );
+
+        // עדכן את המשתנה במקום לעדכן ישירות את הפרופס
+        setSelectedPlace(place);
+    };
+
+    const handleReset = () => {
+        // הפעולה שתבוצע כאשר יתבצע איפוס
+        // יש להשתמש בפעולה שתחזיר למצב ההתחלתי שלך
+        setSelectedPlace(null);
+    };
+
     return (<>
 
 
@@ -149,40 +182,50 @@ const AddStation = () => {
             <p id="smallP">הכנס מספר אופניים שברצונך להוסיף אליה</p>
             <TextField
                 label="מספר אפנים "
-                sx={{ backgroundColor: "white", textAlign: "right" }}
-
+                sx={{ backgroundColor: "white", textAlign: "right",direction:"rtl" }}
+                defaultValue={1}
+                type="number"
                 id="demo-helper-text-aligned"
                 {...register("bike", {})}
             />
 
             <p id="smallP">הכנס מיקום התחנה לבחירתך</p>
-            <ReactGoogleAutocomplete
-
-                id="demo-helper-text-aligned"
-                style={{ padding: 10, borderInlineEndColor: "grey", borderBottomColor: "grey", borderRadius: 3, width: 220, padding: 17 }}
-                apiKey={"AIzaSyDd2yrRfnh88OiKs8yCiH-8uK5aASNgve8"}
-                onPlaceSelected={(place) => getDetails(place, { formatted_address: place.formatted_address.toString() }, { lat: place.geometry.location.lat() }, { lng: place.geometry.location.lng() })}
-
-                options={{
-                    componentRestrictions: { country: 'ISR' },
-                    types: ["route"],
-                }
-                }
-
-            />
+            <div>
+                <ReactGoogleAutocomplete
+                    id="demo-helper-text-aligned"
+                    style={{
+                        padding: 10,
+                        borderInlineEndColor: "grey",
+                        borderBottomColor: "grey",
+                        borderRadius: 3,
+                        width: 220,
+                        padding: 17
+                    }}
+                    apiKey={"AIzaSyDd2yrRfnh88OiKs8yCiH-8uK5aASNgve8"}
+                    onPlaceSelected={handlePlaceSelected}
+                    options={{
+                        componentRestrictions: { country: 'ISR' },
+                        types: ["route"],
+                    }}
+                />
+            </div>
             <br></br>
-            {console.log(places + "ll")}
-            <Button type="button" id="addMore" onClick={() => (nav('/addStation'))}>
+
+
+            <Button type="button" id="addMore" onClick={() => (restasrt('add'))}>
                 הוסף עוד תחנה
             </Button>
-            <Button type="button" id="end" onClick={() => (restasrt())}>
+            <Button type="button" id="end" onClick={() => (restasrt('end'))}>
                 סיום
             </Button>
-
             <br></br>
+
             <Button variant="contained" id="addRB" type="submit">
                 הוסף
-            </Button>
+            </Button><br></br>
+
+            <Alert id="alertCV" severity="success">! אופניים נוספו בהצלחה</Alert>
+
 
         </form>
     </>)

@@ -46,13 +46,7 @@ function ResponsiveAppBar() {
 
     const currentUser = useSelector(state => state.ur.user);
 
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
+  
     const handleCloseNavMenu = (page) => {
         console.log(page.target.innerText)
         if (page.target.innerText == 'בית')

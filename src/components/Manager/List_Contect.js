@@ -4,10 +4,27 @@ import { Button, Switch, Table, TableBody, TableCell, TableHead, TableRow, Table
 import axios from "axios";
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
-import { types } from "sass";
 
 const List_Contect = () => {
 
+    const data = ["id", "name", "phon", "email", "date", "type", "cuption"];
+    const dataName = ["קוד בעיה", "שם", "טלפון", "מייל", "תאריך תלונה", "סוג", "פירוט"];
+
+    const PlaceArr = ['הכל', 'בעיות שטופלו', 'בעיות שלא טופלו'];
+    const [placeProblem, setplaceProblem] = useState('הכל');
+
+    const TypeArr = ['הכל', 'נושאי חיובים', 'דיווח על תקלה', 'בקשה למחיקת חשבון', 'אחר'];
+    const [TypeProblem, setTypeProblem] = useState('הכל');
+
+    const [fromDate, setfromDate] = useState('')
+    const [toDate, settoDate] = useState('');
+
+    const [listContect, setlistContect] = useState([]);
+
+    const [sortOrder, setsortOrder] = useState('desc');
+
+    const [inputValue, setInputValue] = useState('');
+    let filteredOptions = [];
 
     useEffect(() => {
         axios.get('https://localhost:7207/api/Contact')
@@ -17,12 +34,6 @@ const List_Contect = () => {
                 // nav('/NavB')
             }).catch(err => console.log(err))
     }, [])
-
-
-    const [listContect, setlistContect] = useState([]);
-
-    const [sortOrder, setsortOrder] = useState('desc');
-
 
 
     function deleteItem(id) {
@@ -43,7 +54,6 @@ const List_Contect = () => {
         }
     }
 
-
     const createSortHandler = (key) => {
         const listCopy = [...listContect];
 
@@ -62,43 +72,39 @@ const List_Contect = () => {
         setsortOrder(newSortOrder);
     }
 
-    const [inputValue, setInputValue] = useState('');
-    let filteredOptions = [];
-
     const handleFilter = () => {
         console.log("enter");
 
         // filteredOptions = TypeProblem != 'הכל' || placeProblem != 'הכל'  ? listContect.filter((option) => option.type.toLowerCase().includes(TypeProblem.toLowerCase())) && filteredOptions.filter((option) => placeProblem=='בעיות שטופלו'? !option.status : option.status): listContect;
         filteredOptions = (TypeProblem !== 'הכל' || placeProblem !== 'הכל')
             ? listContect.filter((option) =>
-                (TypeProblem === 'הכל' || option.type.toLowerCase().includes(TypeProblem.toLowerCase())) &&
+                (TypeProblem === 'הכל' || option.type?.toLowerCase().includes(TypeProblem?.toLowerCase())) &&
                 (placeProblem === 'הכל' || (placeProblem === 'בעיות שטופלו' ? !option.status : option.status))
             )
             : listContect;
-        // filteredOptions = ? : listContect;
 
         filteredOptions = filteredOptions.filter(x => {
 
+            const startDate = new Date(x.date);
+            const fromDateObj = fromDate ? new Date(fromDate) : null;
+            const toDateObj = toDate ? new Date(toDate) : null;
+
+            const isFromDateValid = !fromDateObj || startDate >= fromDateObj;
+            const isToDateValid = !toDateObj || startDate <= toDateObj;
+
+
             return (
-                // (x.numOrders >= numberValue) &&
+                (isFromDateValid && isToDateValid)
+                &&
                 ((!inputValue) ||
                     x.email?.toString().includes(inputValue) ||
                     x.name?.toString().includes(inputValue) ||
-                    x.cuption?.toString().includes(inputValue) ||
-                    x.type?.toString().includes(inputValue))
+                    x.cuption?.toString().includes(inputValue))
             );
         });
         return filteredOptions;
     };
 
-
-    const sortProblem = () => {
-
-        const filteredList = listContect.filter(x => x.status !== false);
-
-        setlistContect(filteredList);
-
-    }
     const change = (u, status) => {
 
         if (window.confirm("האם אתה בטוח שברצונך לשנות את סטטוס התלונה? ")) {
@@ -133,14 +139,47 @@ const List_Contect = () => {
 
     }
 
-    const data = ["id", "name", "phon", "email", "type", "cuption"];
-    const dataName = ["קוד בעיה", "שם", "טלפון", "מייל", "סוג", "פירוט"];
+    // תצוגה יפה של תאריך
+    function formatDateTime(dateTimeString) {
+        const dateStart = new Date(dateTimeString); // המשתנה כאן יכול להיות המשתנה שלך props.dateStart
 
-    const PlaceArr = ['הכל', 'בעיות שטופלו', 'בעיות שלא טופלו'];
-    const [placeProblem, setplaceProblem] = useState('הכל');
+        const day = dateStart.getDate();
+        const month = dateStart.getMonth() + 1; // החודשים מתחילים מ־0, לכן נוסיף 1
+        const year = dateStart.getFullYear();
+        const hours = dateStart.getHours();
+        const minutes = dateStart.getMinutes();
+        const seconds = dateStart.getSeconds();
 
-    const TypeArr = ['הכל', 'נושאי חיובים', 'דיווח על תקלה', 'בקשה למחיקת חשבון', 'אחר'];
-    const [TypeProblem, setTypeProblem] = useState('הכל');
+        const formattedDatex = `${day}.${month}.${year}, ${hours}:${minutes}:${seconds}`;
+        return formattedDatex;
+
+
+
+    }
+
+    // מיון של תאריך 
+
+    const createSortOfDate = () => {
+        const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+        performSort('date', newSortOrder);
+        setsortOrder(newSortOrder);
+    };
+    const performSort = (property, order) => {
+        const sortedData = [...listContect].sort((a, b) => {
+            // Parse date strings to compare
+            const dateA = new Date(a[property]);
+            const dateB = new Date(b[property]);
+
+            if (order === 'asc') {
+                return dateA - dateB;
+            } else {
+                return dateB - dateA;
+            }
+        });
+
+        setlistContect(sortedData);
+    };
+
 
     return (
         <div class="flex-container">
@@ -156,13 +195,18 @@ const List_Contect = () => {
                     onChange={({ target }) => (setplaceProblem(target.value))}>
                     {PlaceArr.map(marker => <option selected={placeProblem == marker} value={marker}>{marker}</option>)}
                 </select>
-                {/* <label className='p-dates'>כמות הזמנות:  </label>
-                <input className='input-dates' type='number' style={{ height: "30px" }} placeholder="הכנס מספר..." value={numberValue} onChange={({ target }) => setnumberValue(target.value)} /> */}
+
+                <label className='p-dates'>מ:  </label>
+                <input className='input-dates' type='date' value={fromDate} onChange={({ target }) => setfromDate(target.value)} />
+                <label className='p-dates'> עד:   </label>
+                <input className='input-dates' type='date' value={toDate} onChange={({ target }) => settoDate(target.value)} />
+
                 <input className='input-dates' style={{ height: "30px" }} placeholder="חיפוש חופשי..." value={inputValue} onChange={({ target }) => setInputValue(target.value)} />
+
                 <XL data={data} dataName={dataName} arr={handleFilter()} />
 
                 <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 100 }} aria-label="caption table">
+                    <Table sx={{ minWidth: 50 }} aria-label="caption table">
                         <caption>A basic table example with a caption</caption>
                         <TableHead>
                             <TableRow>
@@ -194,6 +238,17 @@ const List_Contect = () => {
                                     >
                                         <b>דוא"ל</b>
 
+                                    </TableSortLabel>
+                                </TableCell>
+                                <TableCell align="center">
+
+                                    <TableSortLabel
+                                        style={{
+                                            width: '95px'
+                                        }}
+                                        onClick={() => createSortOfDate('data')}
+                                    >
+                                        <b>תאריך  </b>
                                     </TableSortLabel>
                                 </TableCell>
                                 <TableCell align="center">
@@ -249,6 +304,7 @@ const List_Contect = () => {
                                         <TableCell align="center">{row.name}</TableCell>
                                         <TableCell align="center">{row.phon}</TableCell>
                                         <TableCell align="center">{row.email}</TableCell>
+                                        <TableCell align="center" sx={{ direction: "ltr" }}>{formatDateTime(row.date)}</TableCell>
                                         <TableCell align="center">{row.type}</TableCell>
                                         <TableCell align="center">{row.cuption}</TableCell>
                                         <TableCell align="center">
@@ -270,7 +326,7 @@ const List_Contect = () => {
 
                                         </TableCell>
                                         <TableCell align="center">
-                                            <Button id="opinB" onClick={() => deleteItem(row.id)}>delete</Button>
+                                            <Button id="opinB2" onClick={() => deleteItem(row.id)}>delete</Button>
 
                                         </TableCell>
                                     </TableRow>
@@ -279,7 +335,6 @@ const List_Contect = () => {
                     </Table>
                 </TableContainer>
             </div>
-
         </div>)
 }
 

@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-
-import '../AddBike/AddBike.css';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';

@@ -16,6 +16,7 @@ import axios from "axios";
 import { Form } from "react-router-dom";
 
 import * as types from "../../store/actions/actionType";
+import Swal from "sweetalert2";
 
 const arr = [
     { lableName: "שם של בעל הכרטיס", name: "Name", type: "text" },
@@ -96,6 +97,13 @@ const PeymentYup = () => {
             await schema.validate(data, { abortEarly: false }); // אימות עם Yup
             dispatch({ type: types.CURRENT_USER, payload: station })
             dispatch({ type: types.CURRENT_STATION , payload:null})
+            Swal.fire({
+                title: '!התחברת בהצלחה',
+                text: `ברוך הבא! ${station.name}`,
+                icon: 'success',
+                confirmButtonText: 'אישור'
+              });
+
             nav('/Profil');
             // פעולות נוספות במידת הצורך לאחר בדיקת תקינות מוצלחת
         } catch (errors) {

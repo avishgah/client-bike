@@ -14,11 +14,6 @@ import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close'
 import { TableSortLabel } from '@mui/material';
 import './Manager.css';
 import { Button, IconButton, Switch, Tooltip } from '@mui/material';
@@ -26,32 +21,21 @@ import AddBike from '../AddBike/AddBike';
 import XL from '../export to xl/XL';
 export default function AccessibleTable() {
 
-  const [checked, setChecked] = React.useState([true, false]);
 
-  const handleChange1 = (event) => {
-    setChecked([event.target.checked, event.target.checked]);
-  };
+  let filteredOptions = [];
 
-  const handleChange2 = (event) => {
-    setChecked([event.target.checked, checked[1]]);
-  };
+  const [listBike, setlistBike] = useState([]);
+  const [sortOrder, setsortOrder] = useState('desc');
 
-  const handleChange3 = (event) => {
-    setChecked([checked[0], event.target.checked]);
-  };
+  
+  const [inputValue, setInputValue] = useState('')
+  const [fromDate, setfromDate] = useState('')
+  const [toDate, settoDate] = useState('')
 
-  const children = (
-    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-      <FormControlLabel
-        label="Child 1"
-        control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
-      />
-      <FormControlLabel
-        label="Child 2"
-        control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
-      />
-    </Box>
-  );
+  const data = ["id", "code", "battery", "location", "name", "dateStart", "status"];
+  const dataNmae = ["קוד אופניים", "מזהה יפה", "בטריה", "עיר", "מיקום", "תאריך תחילת שימוש", "סטטוס"]
+  const [placeProblem, setplaceProblem] = useState('הכל')
+  const PlaceArr = ['הכל', 'אופניים פעילים', 'אופניים לא פעילים'];
 
 
   const change = (id, status) => {
@@ -96,10 +80,6 @@ export default function AccessibleTable() {
 
   }
 
-  let filteredOptions = [];
-
-  const [listBike, setlistBike] = useState([]);
-  const [sortOrder, setsortOrder] = useState('desc');
   const handleFilter = () => {
     console.log("enter");
 
@@ -111,19 +91,10 @@ export default function AccessibleTable() {
       const startDate = new Date(x.dateStart);
       const fromDateObj = fromDate ? new Date(fromDate) : null;
       const toDateObj = toDate ? new Date(toDate) : null;
-      // console.log(startDate, "start");
-      // console.log(fromDateObj, "מ");
-      // console.log(toDateObj, "ל");
 
-      // !fromDate || x.dateStart > fromDate
-      // ) && (!toDate || x.dateStart < toDate)
-      // Check if the date is within the specified range or empty dates
-      const isFromDateValid = !fromDateObj || startDate > fromDateObj;
-      const isToDateValid = !toDateObj || startDate < toDateObj;
+      const isFromDateValid = !fromDateObj || startDate >= fromDateObj;
+      const isToDateValid = !toDateObj || startDate <= toDateObj;
 
-      // console.log(isToDateValid);
-      // console.log(isFromDateValid);
-      // Rest of your conditions
       return (
 
         (isFromDateValid && isToDateValid)
@@ -171,36 +142,29 @@ export default function AccessibleTable() {
 
     console.log(sortOrder)
 
-    // if (sortOrder == 'asc')
-    //   sortOrder = 'desc'
-    // else
-    //   sortOrder = 'asc'
-
     setsortOrder(sortOrder == 'asc' ? 'desc' : 'asc'); // Toggle the sortOrder for the next reversal
     console.log(sortOrder)
     setlistBike(sortedList);
-
-    // return sortedList;
-
-    // Check if the first item in the list has the same value for the 'status' key
-    // const isSorted = listCopy.every((item, index) => index === 0 || item[key] === listCopy[index - 1][key]);
-
-    // If all values are the same, reverse the list to toggle the sorting order
-    // if (isSorted) {
-    // listCopy.reverse();
-    // }
-
   }
 
-  const [inputValue, setInputValue] = useState('')
-  const [fromDate, setfromDate] = useState('')
-  const [toDate, settoDate] = useState('')
 
-  const data = ["id", "code", "battery", "location", "name", "dateStart", "status"];
-  const dataNmae = ["קוד אופניים", "מזהה יפה", "בטריה", "עיר", "מיקום", "תאריך תחילת שימוש", "סטטוס"]
-  const [numberValue, setnumberValue] = useState(0)
-  const [placeProblem, setplaceProblem] = useState('הכל')
-  const PlaceArr = ['הכל', 'אופניים פעילים', 'אופניים לא פעילים'];
+
+  function formatDateTime(dateTimeString) {
+    const dateStart = new Date(dateTimeString); // המשתנה כאן יכול להיות המשתנה שלך props.dateStart
+
+    const day = dateStart.getDate();
+    const month = dateStart.getMonth() + 1; // החודשים מתחילים מ־0, לכן נוסיף 1
+    const year = dateStart.getFullYear();
+    const hours = dateStart.getHours();
+    const minutes = dateStart.getMinutes();
+    const seconds = dateStart.getSeconds();
+
+    const formattedDatex = `${day}.${month}.${year}, ${hours}:${minutes}:${seconds}`;
+    return formattedDatex;
+
+}
+
+
   return (<div class="flex-container">
     <div class="flex-item-left" style={{ direction: "rtl" }}>
 
@@ -276,37 +240,14 @@ export default function AccessibleTable() {
 
 
             {
-              // listBike.filter(x => !inputValue ||
-              // (
-
-              //   !fromDate || x.dateStart > fromDate
-              // ) && (!toDate || x.dateStart < toDate) ||
-              // x.battery?.toString().includes(inputValue) ||
-              // x.dateStart?.toString().includes(inputValue) ||
-              // x.status?.toString().includes(inputValue))
               handleFilter()
                 .map((row) => (
                   <TableRow key={row.id}>
-                    {/* <DeleteOutlineIcon id="icon2"/> */}
-
-                    <TableCell>
-                      {/* <Tooltip title="מחק" placement="left-end">
-                  <DeleteIcon id="icon" onClick={() => myFunction(row.id)} />
-                </Tooltip> */}
-                    </TableCell>
-
                     <TableCell align="right">{row.code}</TableCell>
                     <TableCell align="right">{row.battery}</TableCell>
                     <TableCell align="right">{row.location}</TableCell>
                     <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{new Date(row.dateStart).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'numeric',
-                      day: 'numeric',
-                      hour: 'numeric',
-                      minute: 'numeric',
-                      second: 'numeric',
-                    })}</TableCell>
+                    <TableCell align="right" sx={{direction:"ltr"}}>{formatDateTime(row.dateStart)}</TableCell>
                     <TableCell align="center">
                       {row.status == true ?
                         <Tooltip title="פעיל" placement="left-end">
@@ -325,10 +266,7 @@ export default function AccessibleTable() {
 
 
                     </TableCell>
-                    {/* <Button variant="contained" endIcon={<SendIcon />} id="addRC" type="submit">
-                        
-                    </Button>
-              <IconButton >{DeleteIcon}</IconButton> */}
+                  
                   </TableRow>
                 ))}
           </TableBody>
@@ -339,10 +277,7 @@ export default function AccessibleTable() {
     <div class="flex-item-right">
       <br></br>
       <b>  הוסף אופניים </b><br></br><br></br>
-
       <AddBike />
-
-
     </div>
   </div>);
 }
